@@ -13,12 +13,12 @@ Here we need to describe how to setup project
 Bug tracking
 ------------
 
-Chedream uses [GitHub issues](https://github.com/geekhub-php/chgk_ck/issues).
+Chgk_ck uses [GitHub issues](https://github.com/geekhub-php/chgk_ck/issues).
 If you have found bug, please create an issue.
 
 Authors
 -------
 
-Chedream was originally created by [Geekhub Project Team](http://geekhub.ck.ua).
+Chgk_ck was originally created by [Geekhub Project Team](http://geekhub.ck.ua).
 
 [1]:  http://geekhub.ck.ua/
