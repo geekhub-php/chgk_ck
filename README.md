@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/geekhub-php/chgk_ck.svg)](https://travis-ci.org/geekhub-php/chgk_ck)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/geekhub-php/chgk_ck/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/geekhub-php/chgk_ck/?branch=master)
 
 #Cherkassy Club of intellectual games
 ##Life is but a game...
