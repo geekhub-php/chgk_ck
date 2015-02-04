@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/geekhub-php/chgk_ck.svg)](https://travis-ci.org/geekhub-php/chgk_ck)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/geekhub-php/chgk_ck/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/geekhub-php/chgk_ck/?branch=master)
 
 #Cherkassy Club of intellectual games
 ##Life is but a game...
@@ -13,12 +15,12 @@ Here we need to describe how to setup project
 Bug tracking
 ------------
 
-Chedream uses [GitHub issues](https://github.com/geekhub-php/chgk_ck/issues).
+Chgk_ck uses [GitHub issues](https://github.com/geekhub-php/chgk_ck/issues).
 If you have found bug, please create an issue.
 
 Authors
 -------
 
-Chedream was originally created by [Geekhub Project Team](http://geekhub.ck.ua).
+Chgk_ck was originally created by [Geekhub Project Team](http://geekhub.ck.ua).
 
 [1]:  http://geekhub.ck.ua/
