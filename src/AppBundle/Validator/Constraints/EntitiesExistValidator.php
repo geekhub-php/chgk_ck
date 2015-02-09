@@ -17,6 +17,10 @@ class EntitiesExistValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
+        if (!$value || ($value instanceof ArrayCollection && $value->isEmpty())) {
+            return;
+        }
+
         $assignedEntitiesIds = $this->getEntitiesIds($value);
 
         $entityRepository = $this->doctrine->getRepository("AppBundle:".$constraint->associatedEntity);
