@@ -28,7 +28,8 @@
         "jms/serializer-bundle": "0.13.*",
         "nelmio/api-doc-bundle": "~2.7",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "symfony/event-dispatcher": "~2.6"
+        "symfony/event-dispatcher": "~2.6",
+        "friendsofsymfony/rest-bundle": "~1.5"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
