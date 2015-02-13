@@ -47,25 +47,22 @@ class Player
     private $dob;
 
     /**
+     * @ORM\OneToMany(targetEntity="TeamPlayerAssociation", mappedBy="player")
+     */
+    private $teamPlayerAssociations;
+
+    /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity="TeamRole")
-     * @ORM\JoinColumn(name="teamRole_id", referencedColumnName="id", nullable=false)
-     * @Assert\NotNull()
-     * @CustomAssert\EntitiesExist(associatedEntity="TeamRole", message="team role with id %ids% is non-exist")
+     * Constructor
      */
-    private $teamRole;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="MembershipType")
-     * @ORM\JoinColumn(name="membershipType_id", referencedColumnName="id", nullable=false)
-     * @Assert\NotNull()
-     * @CustomAssert\EntitiesExist(associatedEntity="MembershipType", message="membership type with id %ids% is non-exist")
-     */
-    private $membershipType;
+    public function __construct()
+    {
+        $this->teamPlayerAssociations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -193,48 +190,35 @@ class Player
     }
 
     /**
-     * Set teamRole
+     * Add teamPlayerAssociations
      *
-     * @param  \AppBundle\Entity\TeamRole $teamRole
+     * @param  \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      * @return Player
      */
-    public function setTeamRole(\AppBundle\Entity\TeamRole $teamRole)
+    public function addTeamPlayerAssociation(\AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations)
     {
-        $this->teamRole = $teamRole;
+        $this->teamPlayerAssociations[] = $teamPlayerAssociations;
 
         return $this;
     }
 
     /**
-     * Get teamRole
+     * Remove teamPlayerAssociations
      *
-     * @return \AppBundle\Entity\TeamRole
+     * @param \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      */
-    public function getTeamRole()
+    public function removeTeamPlayerAssociation(\AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations)
     {
-        return $this->teamRole;
+        $this->teamPlayerAssociations->removeElement($teamPlayerAssociations);
     }
 
     /**
-     * Set membershipType
+     * Get teamPlayerAssociations
      *
-     * @param  \AppBundle\Entity\MembershipType $membershipType
-     * @return Player
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function setMembershipType(\AppBundle\Entity\MembershipType $membershipType)
+    public function getTeamPlayerAssociations()
     {
-        $this->membershipType = $membershipType;
-
-        return $this;
-    }
-
-    /**
-     * Get membershipType
-     *
-     * @return \AppBundle\Entity\MembershipType
-     */
-    public function getMembershipType()
-    {
-        return $this->membershipType;
+        return $this->teamPlayerAssociations;
     }
 }

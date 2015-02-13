@@ -44,9 +44,9 @@ class Team
     private $city;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Player")
+     * @ORM\OneToMany(targetEntity="TeamPlayerAssociation", mappedBy="team")
      */
-    private $players;
+    private $teamPlayerAssociations;
 
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=false)
@@ -58,7 +58,7 @@ class Team
      */
     public function __construct()
     {
-        $this->players = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->teamPlayerAssociations = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -187,35 +187,35 @@ class Team
     }
 
     /**
-     * Add players
+     * Add teamPlayerAssociations
      *
-     * @param  \AppBundle\Entity\Player $players
+     * @param  \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      * @return Team
      */
-    public function addPlayer(\AppBundle\Entity\Player $players)
+    public function addTeamPlayerAssociation(\AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations)
     {
-        $this->players[] = $players;
+        $this->teamPlayerAssociations[] = $teamPlayerAssociations;
 
         return $this;
     }
 
     /**
-     * Remove players
+     * Remove teamPlayerAssociations
      *
-     * @param \AppBundle\Entity\Player $players
+     * @param \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      */
-    public function removePlayer(\AppBundle\Entity\Player $players)
+    public function removeTeamPlayerAssociation(\AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations)
     {
-        $this->players->removeElement($players);
+        $this->teamPlayerAssociations->removeElement($teamPlayerAssociations);
     }
 
     /**
-     * Get players
+     * Get teamPlayerAssociations
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPlayers()
+    public function getTeamPlayerAssociations()
     {
-        return $this->players;
+        return $this->teamPlayerAssociations;
     }
 }
