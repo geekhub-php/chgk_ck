@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as CustomAssert;
 
 /**
  * @ORM\Entity
@@ -52,6 +53,13 @@ class Team
      * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AgeCategory")
+     * @ORM\JoinColumn(name="age_category_id", referencedColumnName="id", nullable=false)
+     * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
+     */
+    private $ageCategory;
 
     /**
      * Constructor
@@ -217,5 +225,28 @@ class Team
     public function getTeamPlayerAssociations()
     {
         return $this->teamPlayerAssociations;
+    }
+
+    /**
+     * Set ageCategory
+     *
+     * @param  \AppBundle\Entity\AgeCategory $ageCategory
+     * @return Team
+     */
+    public function setAgeCategory(\AppBundle\Entity\AgeCategory $ageCategory)
+    {
+        $this->ageCategory = $ageCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get ageCategory
+     *
+     * @return \AppBundle\Entity\AgeCategory
+     */
+    public function getAgeCategory()
+    {
+        return $this->ageCategory;
     }
 }
