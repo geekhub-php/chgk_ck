@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -53,7 +54,8 @@ class Event
     private $deletedAt;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @Gedmo\Slug(fields={"title"})
+	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
 

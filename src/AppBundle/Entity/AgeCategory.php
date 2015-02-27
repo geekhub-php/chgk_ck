@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -33,7 +34,8 @@ class AgeCategory
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @Gedmo\Slug(fields={"name"})
+	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
 

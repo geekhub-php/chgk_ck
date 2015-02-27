@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity
@@ -37,7 +38,8 @@ class User
     private $assignedPlayer;
 
     /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @Gedmo\Slug(fields={"email"})
+	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
 
