@@ -49,22 +49,22 @@ class Game
     /**
      * @ORM\Column(type="boolean", nullable=false)
      */
-    private $isLocallyRated = false;
+    private $isLocallyRated;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
      */
-    private $isGloballyRated = false;
+    private $isGloballyRated;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
      */
-    private $isHome = false;
+    private $isHome;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
      */
-    private $isComplete = false;
+    private $isComplete;
 
     /**
      * @ORM\ManyToOne(targetEntity="AgeCategory")
