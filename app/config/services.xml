@@ -23,5 +23,12 @@
 			<argument>AppBundle\Entity\GameEvent</argument>
 			<argument />
 		</service>
+
+		<service id="sonata.admin.comment" class="AppBundle\Admin\CommentAdmin">
+			<tag name="sonata.admin" manager_type="orm" group="Entities" label="Comment"/>
+			<argument />
+			<argument>AppBundle\Entity\Comment</argument>
+			<argument />
+		</service>
     </services>
 </container>
