@@ -9,5 +9,12 @@
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="entities_exist_validator" />
         </service>
+
+		<service id="sonata.admin.playerEvent" class="AppBundle\Admin\PlayerEventAdmin">
+			<tag name="sonata.admin" manager_type="orm" group="Entities" label="PlayerEvent"/>
+			<argument />
+			<argument>AppBundle\Entity\PlayerEvent</argument>
+			<argument />
+		</service>
     </services>
 </container>
