@@ -4,7 +4,7 @@ namespace AppBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Constraint;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 class EntitiesExistValidator extends ConstraintValidator
 {
@@ -17,7 +17,7 @@ class EntitiesExistValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$value || ($value instanceof ArrayCollection && $value->isEmpty())) {
+        if (!$value || ($value instanceof Collection && $value->isEmpty())) {
             return;
         }
 
@@ -43,7 +43,7 @@ class EntitiesExistValidator extends ConstraintValidator
     private function getEntitiesIds($value)
     {
         $ids = [];
-        if ($value instanceof ArrayCollection || is_array($value)) {
+        if ($value instanceof Collection || is_array($value)) {
             foreach ($value as $entity) {
                 $ids[] = $entity->getId();
             }
