@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="opinionOn", type="string")
- * @ORM\DiscriminatorMap({"comment" = "CommentOpinion", "event" = "EventOpinion"})
+ * @ORM\DiscriminatorMap({"comment" = "CommentOpinion", "event" = "EventOpinion", "gameResult" = "GameResultOpinion"})
  */
 abstract class Opinion
 {
