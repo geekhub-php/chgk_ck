@@ -70,6 +70,14 @@ class Event
      */
     private $comments;
 
+	/**
+	 * @ORM\Column(type="array")
+	 * @Assert\All({
+     *     @Assert\Regex("/^[A-zА-яіїє']+$/")
+     * })
+	 */
+	private $tags;
+
     /**
      * Constructor
      */
@@ -77,6 +85,7 @@ class Event
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
         $this->createdAt = time();
+        $this->tags = array();
     }
 
     /**
@@ -282,4 +291,17 @@ class Event
     {
         return $this->comments;
     }
+
+    public function setTags(array $tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
 }

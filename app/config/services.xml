@@ -9,5 +9,10 @@
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="entities_exist_validator" />
         </service>
+
+	    <service id="app.form.type.tags" class="AppBundle\Form\Type\TagsType">
+		    <tag name="form.type" alias="tags" />
+		</service>
+
     </services>
 </container>
