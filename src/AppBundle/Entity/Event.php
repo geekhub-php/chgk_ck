@@ -39,6 +39,7 @@ class Event
      * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
+	 * @Assert\NotNull()
      */
     private $author;
 
