@@ -16,7 +16,7 @@ class GameAdmin extends Admin
     {
         $formMapper
 			->add('name', 'text')
-			->add('playDate', 'integer')
+			->add('playDate', 'timestamp_date')
 			->add('playPlace', 'text')
 			->add('season', 'entity', array(
 				'class' => 'AppBundle:Season',
@@ -39,7 +39,7 @@ class GameAdmin extends Admin
     {
         $datagridMapper
         	->add('name', null, array(), 'text')
-			->add('playDate', null, array(), 'integer')
+			->add('playDate', null, array(), 'timestamp_date')
 			->add('playPlace', null, array(), 'text')
 			->add('season', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any season'))
 			->add('isLocallyRated', null, array(), 'checkbox')
@@ -55,7 +55,9 @@ class GameAdmin extends Admin
         $listMapper
             ->add('id')
 			->addIdentifier('name', 'text')
-			->add('playDate', 'text')
+			->add('playDate', 'date', array(
+			    'pattern' => 'dd.MM.yyyy'
+			))
 			->add('playPlace', 'text')
             ->add('season', null, array('associated_property' => 'name'))
 			->add('isLocallyRated', 'boolean')

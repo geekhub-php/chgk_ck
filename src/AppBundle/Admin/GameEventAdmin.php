@@ -21,7 +21,7 @@ class GameEventAdmin extends Admin
                 'class' => 'AppBundle:User',
                 'property' => 'email',
             ))
-            ->add('eventDate', 'integer')
+            ->add('eventDate', 'timestamp_date')
             ->add('games', 'entity', array(
                 'class' => 'AppBundle:Game',
                 'property' => 'name',
@@ -35,7 +35,7 @@ class GameEventAdmin extends Admin
         $datagridMapper
             ->add('title')
             ->add('author', null, array(), 'entity', array('property' => 'email', 'placeholder' => 'any author'))
-            ->add('eventDate', null, array(), 'integer')
+            ->add('eventDate', null, array(), 'timestamp_date')
             ->add('games', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any game'))
         ;
     }
@@ -46,9 +46,15 @@ class GameEventAdmin extends Admin
             ->add('id')
             ->addIdentifier('title')
             ->add('author', null, array('associated_property' => 'email'))
-            ->add('createdAt', 'text')
-            ->add('deletedAt', 'text')
-            ->add('eventDate', 'text')
+            ->add('createdAt', 'date', array(
+			    'pattern' => 'dd.MM.yyyy'
+			))
+            ->add('deletedAt', 'date', array(
+			    'pattern' => 'dd.MM.yyyy'
+			))
+            ->add('eventDate', 'date', array(
+			    'pattern' => 'dd.MM.yyyy'
+			))
             ->add('games', null, array('associated_property' => 'name'))
         ;
     }
