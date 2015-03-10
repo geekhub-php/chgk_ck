@@ -1,0 +1,12 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block javascripts %}
+	{{ parent() }}
+	
+	<script src="{{ asset('bundles/app/js/jquery-ui.min.js') }}"></script>
+	<script>
+		$(document).ready(function() {
+			$(".timestamp-date").datepicker({dateFormat:"dd.mm.yy"});
+		});
+	</script>
+{% endblock %}

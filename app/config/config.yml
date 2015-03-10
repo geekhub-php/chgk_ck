@@ -109,3 +109,7 @@ sonata_media:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
             create:     false
+
+sonata_admin:
+    templates:
+        layout: AppBundle:Sonata:layout.html.twig
