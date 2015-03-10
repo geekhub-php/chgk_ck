@@ -52,5 +52,9 @@
 			<argument />
 		</service>
 
+		<service id="app.type.timestamp_date" class="AppBundle\Form\Type\TimestampDateType">
+		    <tag name="form.type" alias="timestamp_date" />
+		</service>
+
     </services>
 </container>
