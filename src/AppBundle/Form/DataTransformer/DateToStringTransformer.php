@@ -3,6 +3,7 @@
 namespace AppBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 class DateToStringTransformer implements DataTransformerInterface
 {
@@ -23,6 +24,13 @@ class DateToStringTransformer implements DataTransformerInterface
     		return null;	
     	}
 		
-        return \DateTime::createFromFormat(self::DATE_FORMAT, $string);
+		$date = \DateTime::createFromFormat(self::DATE_FORMAT, $string);
+		
+		if ($date) {
+			$date->setTime(0, 0, 0);
+			return $date;
+		} else {
+			throw new TransformationFailedException('invalid date');
+		}
     }
 }
