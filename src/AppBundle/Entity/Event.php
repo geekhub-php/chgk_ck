@@ -46,17 +46,6 @@ class Event
     private $author;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
-     * @Assert\NotNull()
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $deletedAt;
-
-    /**
      * @Gedmo\Slug(fields={"title"})
 	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
@@ -79,7 +68,6 @@ class Event
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->createdAt = time();
     }
 
     /**
@@ -90,6 +78,16 @@ class Event
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
     }
 
     /**
@@ -106,13 +104,13 @@ class Event
     }
 
     /**
-     * Get title
+     * Get text
      *
      * @return string
      */
-    public function getTitle()
+    public function getText()
     {
-        return $this->title;
+        return $this->text;
     }
 
     /**
@@ -129,59 +127,13 @@ class Event
     }
 
     /**
-     * Get text
+     * Get slug
      *
      * @return string
      */
-    public function getText()
+    public function getSlug()
     {
-        return $this->text;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param  integer $createdAt
-     * @return Event
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return integer
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set deletedAt
-     *
-     * @param  integer $deletedAt
-     * @return Event
-     */
-    public function setDeletedAt($deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get deletedAt
-     *
-     * @return integer
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
+        return $this->slug;
     }
 
     /**
@@ -198,13 +150,13 @@ class Event
     }
 
     /**
-     * Get slug
+     * Get eventDate
      *
-     * @return string
+     * @return integer
      */
-    public function getSlug()
+    public function getEventDate()
     {
-        return $this->slug;
+        return $this->eventDate;
     }
 
     /**
@@ -221,13 +173,13 @@ class Event
     }
 
     /**
-     * Get eventDate
+     * Get author
      *
-     * @return integer
+     * @return \AppBundle\Entity\User
      */
-    public function getEventDate()
+    public function getAuthor()
     {
-        return $this->eventDate;
+        return $this->author;
     }
 
     /**
@@ -241,16 +193,6 @@ class Event
         $this->author = $author;
 
         return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \AppBundle\Entity\User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**

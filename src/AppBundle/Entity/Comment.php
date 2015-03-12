@@ -44,17 +44,6 @@ class Comment
     private $text;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
-     * @Assert\NotNull()
-     */
-    private $createdAt;
-
-    public function __construct()
-    {
-        $this->createdAt = time();
-    }
-
-    /**
      * Get id
      *
      * @return integer
@@ -62,19 +51,6 @@ class Comment
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set text
-     *
-     * @param  string  $text
-     * @return Comment
-     */
-    public function setText($text)
-    {
-        $this->text = $text;
-
-        return $this;
     }
 
     /**
@@ -88,26 +64,26 @@ class Comment
     }
 
     /**
-     * Set createdAt
+     * Set text
      *
-     * @param  integer $createdAt
+     * @param  string $text
      * @return Comment
      */
-    public function setCreatedAt($createdAt)
+    public function setText($text)
     {
-        $this->createdAt = $createdAt;
+        $this->text = $text;
 
         return $this;
     }
 
     /**
-     * Get createdAt
+     * Get event
      *
-     * @return integer
+     * @return \AppBundle\Entity\Event
      */
-    public function getCreatedAt()
+    public function getEvent()
     {
-        return $this->createdAt;
+        return $this->event;
     }
 
     /**
@@ -124,13 +100,13 @@ class Comment
     }
 
     /**
-     * Get event
+     * Get author
      *
-     * @return \AppBundle\Entity\Event
+     * @return \AppBundle\Entity\User
      */
-    public function getEvent()
+    public function getAuthor()
     {
-        return $this->event;
+        return $this->author;
     }
 
     /**
@@ -144,15 +120,5 @@ class Comment
         $this->author = $author;
 
         return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \AppBundle\Entity\User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 }
