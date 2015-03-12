@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity
@@ -13,6 +14,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class User
 {
+    use TimestampableTrait;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id

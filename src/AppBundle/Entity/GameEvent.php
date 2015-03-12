@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Validator\Constraints as CustomAssert;
+use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity

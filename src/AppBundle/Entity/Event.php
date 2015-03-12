@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity
@@ -15,6 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Event
 {
+    use TimestampableTrait;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
