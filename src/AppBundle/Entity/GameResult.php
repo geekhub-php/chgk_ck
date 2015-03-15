@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
+use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity
@@ -14,6 +15,8 @@ use AppBundle\Validator\Constraints as CustomAssert;
  */
 abstract class GameResult
 {
+    use TimestampableTrait;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
