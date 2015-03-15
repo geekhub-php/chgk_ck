@@ -27,7 +27,7 @@ class Comment
     private $event;
 
     /**
-     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
      * @Assert\NotNull(message="comment should have author")
