@@ -52,6 +52,13 @@
 			<argument />
 		</service>
 
+		<service id="sonata.admin.User" class="AppBundle\Admin\UserAdmin">
+			<tag name="sonata.admin" manager_type="orm" group="Entities" label="User"/>
+			<argument />
+			<argument>AppBundle\Entity\User</argument>
+			<argument />
+		</service>
+
 		<service id="app.type.timestamp_date" class="AppBundle\Form\Type\TimestampDateType">
 		    <tag name="form.type" alias="timestamp_date" />
 		</service>
