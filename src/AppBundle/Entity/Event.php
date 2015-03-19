@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -19,6 +20,7 @@ class Event
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+	 * @JMS\Groups({"eventFull", "short"})
      */
     private $id;
 
@@ -26,12 +28,14 @@ class Event
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 2, max = 255)
+	 * @JMS\Groups({"eventFull"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
+	 * @JMS\Groups({"eventFull"})
      */
     private $text;
 
@@ -40,34 +44,40 @@ class Event
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
 	 * @Assert\NotNull()
+	 * @JMS\Groups({"eventFull"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
+	 * @JMS\Groups({"eventFull"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+	 * @JMS\Groups({"eventFull"})
      */
     private $deletedAt;
 
     /**
      * @Gedmo\Slug(fields={"title"})
 	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+	 * @JMS\Groups({"eventFull"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
+	 * @JMS\Groups({"eventFull"})
      */
     private $eventDate;
 
     /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
+	 * @JMS\Groups({"eventFull"})
      */
     private $comments;
 
@@ -76,6 +86,7 @@ class Event
 	 * @Assert\All({
      *     @Assert\Regex("/^[A-zА-яіїє']+$/")
      * })
+	 * @JMS\Groups({"eventFull"})
 	 */
 	private $tags;
 
