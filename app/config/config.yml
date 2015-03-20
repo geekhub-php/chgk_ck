@@ -112,8 +112,8 @@ sonata_media:
             create:     false
 
 sonata_admin:
-    title:      %sonata_admin.title%
-    title_logo: %sonata_admin.logo_title%
+    title:      Chgk_ck
+    title_logo: Chgk_ck_project
 
     security:
         handler: sonata.admin.security.handler.role
