@@ -45,6 +45,11 @@ class Comment
      * @Assert\NotNull()
      */
     private $createdAt;
+    
+    /**
+	 * @ORM\ManyToMany(targetEntity="Opinion")
+	 */
+    private $opinions;
 
     public function __construct()
     {
@@ -151,5 +156,38 @@ class Comment
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Add opinions
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     * @return Comment
+     */
+    public function addOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions[] = $opinions;
+
+        return $this;
+    }
+
+    /**
+     * Remove opinions
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     */
+    public function removeOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions->removeElement($opinions);
+    }
+
+    /**
+     * Get opinions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOpinions()
+    {
+        return $this->opinions;
     }
 }

@@ -1,18 +1,13 @@
 <?php
 
-namespace AppBundle\Entity\Opinion;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Validator\Constraints as CustomAssert;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="opinionOn", type="string")
- * @ORM\DiscriminatorMap({"comment" = "CommentOpinion", "event" = "EventOpinion", "gameResult" = "GameResultOpinion"})
  */
-abstract class Opinion
+class Opinion
 {
 	/**
      * @ORM\Column(type="integer")
@@ -24,8 +19,6 @@ abstract class Opinion
 	/**
 	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
 	 * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
-     * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
-	 * @Assert\NotNull(message="opinion should have author")
 	 */
 	private $author;
 	

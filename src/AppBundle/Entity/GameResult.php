@@ -42,6 +42,11 @@ abstract class GameResult
      * @Assert\Range(min=0)
      */
     private $score;
+	
+	/**
+	 * @ORM\ManyToMany(targetEntity="Opinion")
+	 */
+    private $opinions;
 
     /**
      * Get id
@@ -120,5 +125,45 @@ abstract class GameResult
     public function getGame()
     {
         return $this->game;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->opinions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add opinions
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     * @return GameResult
+     */
+    public function addOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions[] = $opinions;
+
+        return $this;
+    }
+
+    /**
+     * Remove opinions
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     */
+    public function removeOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions->removeElement($opinions);
+    }
+
+    /**
+     * Get opinions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOpinions()
+    {
+        return $this->opinions;
     }
 }

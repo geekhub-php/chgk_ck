@@ -89,6 +89,11 @@ class Event
 	 * @JMS\Groups({"eventFull"})
 	 */
 	private $tags;
+	
+	/**
+	 * @ORM\ManyToMany(targetEntity="Opinion")
+	 */
+    private $opinions;
 
     /**
      * Constructor
@@ -316,4 +321,37 @@ class Event
         return $this->tags;
     }
 
+
+    /**
+     * Add opinions
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     * @return Event
+     */
+    public function addOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions[] = $opinions;
+
+        return $this;
+    }
+
+    /**
+     * Remove opinions
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     */
+    public function removeOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions->removeElement($opinions);
+    }
+
+    /**
+     * Get opinions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOpinions()
+    {
+        return $this->opinions;
+    }
 }
