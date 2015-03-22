@@ -38,3 +38,7 @@ seasons:
 teams:
     type:     rest
     resource: AppBundle\Controller\API\TeamsController
+    
+team_role:
+    type:     rest
+    resource: AppBundle\Controller\API\TeamRolesController
