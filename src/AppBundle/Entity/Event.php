@@ -76,7 +76,7 @@ class Event
     private $eventDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
+     * @ORM\ManyToMany(targetEntity="Comment")
 	 * @JMS\Groups({"eventFull"})
      */
     private $comments;

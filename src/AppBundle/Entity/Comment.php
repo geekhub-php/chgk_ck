@@ -19,14 +19,6 @@ class Comment
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="comments")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", nullable=false)
-     * @CustomAssert\EntitiesExist(associatedEntity="Event", message="event with id %ids% is non-exist")
-     * @Assert\NotNull(message="comment should have author")
-     */
-    private $event;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
@@ -110,29 +102,6 @@ class Comment
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Set event
-     *
-     * @param  \AppBundle\Entity\Event $event
-     * @return Comment
-     */
-    public function setEvent(\AppBundle\Entity\Event $event)
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * Get event
-     *
-     * @return \AppBundle\Entity\Event
-     */
-    public function getEvent()
-    {
-        return $this->event;
     }
 
     /**
