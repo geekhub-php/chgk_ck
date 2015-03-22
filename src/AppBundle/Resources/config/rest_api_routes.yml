@@ -5,3 +5,8 @@ event:
 opinions:
     type:     rest
     resource: AppBundle\Controller\API\OpinionsController
+    
+comments:
+    type:     rest
+    parent:   event
+    resource: AppBundle\Controller\API\CommentsController

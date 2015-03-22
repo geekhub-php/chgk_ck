@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -15,38 +16,47 @@ class Comment
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+	 * @JMS\Groups({"commentFull", "short"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
-     * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
-     * @Assert\NotNull(message="comment should have author")
+	 * @JMS\Groups({"commentFull"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
+	 * @JMS\Groups({"commentFull"})
      */
     private $text;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
+	 * @JMS\Groups({"commentFull"})
      */
     private $createdAt;
     
     /**
 	 * @ORM\ManyToMany(targetEntity="Opinion")
+	 * @JMS\Groups({"commentFull"})
 	 */
     private $opinions;
 
     public function __construct()
     {
-        $this->createdAt = time();
     }
+	
+	public function setId($id)
+	{
+		$this->id = $id;
+		
+		return $this;
+	}
 
     /**
      * Get id
