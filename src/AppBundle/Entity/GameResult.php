@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -18,6 +19,7 @@ abstract class GameResult
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+	 * @JMS\Groups({"gameResultFull", "short"})
      */
     private $id;
 
@@ -26,6 +28,7 @@ abstract class GameResult
      * @ORM\JoinColumn(name="game_id", referencedColumnName="id", nullable=false)
      * @Assert\NotNull(message="game result should have game")
      * @CustomAssert\EntitiesExist(associatedEntity="Game", message="game with id %ids% is non-exist")
+	 * @JMS\Groups({"gameResultFull"})
      */
     private $game;
 
@@ -33,6 +36,7 @@ abstract class GameResult
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
      * @Assert\Range(min=1)
+	 * @JMS\Groups({"gameResultFull"})
      */
     private $place;
 
@@ -40,11 +44,13 @@ abstract class GameResult
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
      * @Assert\Range(min=0)
+	 * @JMS\Groups({"gameResultFull"})
      */
     private $score;
 	
 	/**
 	 * @ORM\ManyToMany(targetEntity="Opinion")
+	 * @JMS\Groups({"gameResultFull"})
 	 */
     private $opinions;
 

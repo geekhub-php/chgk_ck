@@ -18,3 +18,7 @@ age_categories:
 games:
     type:     rest
     resource: AppBundle\Controller\API\GamesController
+    
+game_results:
+    type:     rest
+    resource: AppBundle\Controller\API\GameResultsController
