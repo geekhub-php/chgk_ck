@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Validator\Constraints as CustomAssert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -13,6 +14,7 @@ class GameEvent extends Event
     /**
      * @ORM\ManyToMany(targetEntity="Game")
      * @CustomAssert\EntitiesExist(associatedEntity="Game", message="games with ids %ids% are non-exist")
+	 * @JMS\Groups({"eventFull"})
      */
     private $games;
 
