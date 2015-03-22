@@ -89,6 +89,30 @@ class OpinionsController extends FOSRestController
 		return $view;
 	}
 	
+	/**
+	 * @REST\Delete("{opType}/{opParentId}/opinions/{opId}")
+	 * @REST\View(statusCode=204)
+	 */
+	public function deleteOpinionAction($opType, $opParentId, $opId)
+	{
+		$opParent = $this->fetchOpinionParent($opParentId, $opType);
+		
+		if (!$opParent) {
+			return;
+		}
+		
+		$opinion = $opParent->getOpinions()->filter(function ($opinion) use ($opId) {
+			return $opinion->getId() == $opId;	
+		})->first();
+		
+		if (!$opinion) {
+			return;
+		}
+		
+		$this->getDoctrine()->getManager()->remove($opinion);
+		$this->getDoctrine()->getManager()->flush();
+	}
+	
 	private function fetchOpinionParent($id, $opType)
 	{
 		switch ($opType) {
