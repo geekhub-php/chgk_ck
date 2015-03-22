@@ -26,3 +26,7 @@ game_results:
 membership_types:
     type:     rest
     resource: AppBundle\Controller\API\MembershipTypesController
+    
+players:
+    type:     rest
+    resource: AppBundle\Controller\API\PlayersController
