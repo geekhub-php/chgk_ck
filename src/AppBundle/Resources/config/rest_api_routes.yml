@@ -22,3 +22,7 @@ games:
 game_results:
     type:     rest
     resource: AppBundle\Controller\API\GameResultsController
+    
+membership_types:
+    type:     rest
+    resource: AppBundle\Controller\API\MembershipTypesController
