@@ -1,3 +1,7 @@
 event:
     type:     rest
     resource: AppBundle\Controller\API\EventsController
+
+opinions:
+    type:     rest
+    resource: AppBundle\Controller\API\OpinionsController
