@@ -10,3 +10,7 @@ comments:
     type:     rest
     parent:   event
     resource: AppBundle\Controller\API\CommentsController
+    
+age_categories:
+    type:     rest
+    resource: AppBundle\Controller\API\AgeCategoriesController
