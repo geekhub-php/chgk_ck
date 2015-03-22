@@ -30,3 +30,7 @@ membership_types:
 players:
     type:     rest
     resource: AppBundle\Controller\API\PlayersController
+    
+seasons:
+    type:     rest
+    resource: AppBundle\Controller\API\SeasonsController
