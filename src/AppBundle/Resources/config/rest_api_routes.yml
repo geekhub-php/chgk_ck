@@ -34,3 +34,7 @@ players:
 seasons:
     type:     rest
     resource: AppBundle\Controller\API\SeasonsController
+    
+teams:
+    type:     rest
+    resource: AppBundle\Controller\API\TeamsController
