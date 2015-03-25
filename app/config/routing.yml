@@ -23,3 +23,7 @@ rest_api_routes:
     type: rest
     resource: "@AppBundle/Resources/config/rest_api_routes.yml"
     prefix: /api
+    
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
