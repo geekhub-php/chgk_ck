@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use JMS\Serializer\Annotation as JMS;
+use AppBundle\Interfaces\Opinionable;
 
 /**
  * @ORM\Entity
@@ -13,7 +14,7 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\DiscriminatorColumn(name="resultType", type="string")
  * @ORM\DiscriminatorMap({"team" = "TeamGameResult", "player" = "PlayerGameResult"})
  */
-abstract class GameResult
+abstract class GameResult implements Opinionable
 {
     /**
      * @ORM\Column(type="integer")
@@ -24,7 +25,7 @@ abstract class GameResult
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Game")
+     * @ORM\ManyToOne(targetEntity="Game", inversedBy="gameResults")
      * @ORM\JoinColumn(name="game_id", referencedColumnName="id", nullable=false)
      * @Assert\NotNull(message="game result should have game")
      * @CustomAssert\EntitiesExist(associatedEntity="Game", message="game with id %ids% is non-exist")
@@ -172,4 +173,11 @@ abstract class GameResult
     {
         return $this->opinions;
     }
+	
+	public function getOpinion($id)
+	{
+		return $this->opinions->filter(function ($opinion) use ($id) {
+			return $opinion->getId() == $id; 
+		})->first();
+	}
 }

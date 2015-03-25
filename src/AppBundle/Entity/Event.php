@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
+use AppBundle\Interfaces\Opinionable;
 
 /**
  * @ORM\Entity
@@ -14,7 +15,7 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\DiscriminatorColumn(name="eventType", type="string")
  * @ORM\DiscriminatorMap({"event" = "Event", "gameEvent" = "GameEvent", "playerEvent" = "PlayerEvent"})
  */
-class Event
+class Event implements Opinionable
 {
     /**
      * @ORM\Column(type="integer")
@@ -308,6 +309,13 @@ class Event
     {
         return $this->comments;
     }
+	
+	public function getComment($id)
+	{
+		return $this->comments->filter(function ($comment) use ($id) {
+			return $comment->getId() == $id; 
+		})->first();
+	}
 
     public function setTags(array $tags)
     {
@@ -354,4 +362,11 @@ class Event
     {
         return $this->opinions;
     }
+	
+	public function getOpinion($id)
+	{
+		return $this->opinions->filter(function ($opinion) use ($id) {
+			return $opinion->getId() == $id; 
+		})->first();
+	}
 }

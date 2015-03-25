@@ -6,11 +6,12 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use JMS\Serializer\Annotation as JMS;
+use AppBundle\Interfaces\Opinionable;
 
 /**
  * @ORM\Entity
  */
-class Comment
+class Comment implements Opinionable
 {
     /**
      * @ORM\Column(type="integer")
@@ -169,4 +170,11 @@ class Comment
     {
         return $this->opinions;
     }
+	
+	public function getOpinion($id)
+	{
+		return $this->opinions->filter(function ($opinion) use ($id) {
+			return $opinion->getId() == $id; 
+		})->first();
+	}
 }

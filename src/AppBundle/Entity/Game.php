@@ -98,6 +98,11 @@ class Game
 	 * @JMS\Groups({"gameFull"})
      */
     private $slug;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="GameResult", mappedBy="game")
+	 */
+	private $gameResults;
 
     /**
      * Get id
@@ -361,4 +366,51 @@ class Game
     {
         return $this->ageCategory;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->gameResults = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add gameResults
+     *
+     * @param \AppBundle\Entity\GameResult $gameResults
+     * @return Game
+     */
+    public function addGameResult(\AppBundle\Entity\GameResult $gameResults)
+    {
+        $this->gameResults[] = $gameResults;
+
+        return $this;
+    }
+
+    /**
+     * Remove gameResults
+     *
+     * @param \AppBundle\Entity\GameResult $gameResults
+     */
+    public function removeGameResult(\AppBundle\Entity\GameResult $gameResults)
+    {
+        $this->gameResults->removeElement($gameResults);
+    }
+
+    /**
+     * Get gameResults
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGameResults()
+    {
+        return $this->gameResults;
+    }
+	
+	public function getGameResult($id)
+	{
+		return $this->gameResults->filter(function ($res) use ($id) {
+			return $res->getId() == $id; 
+		})->first();
+	}
 }
