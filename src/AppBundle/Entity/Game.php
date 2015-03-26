@@ -73,12 +73,13 @@ class Game
      * @ORM\ManyToOne(targetEntity="AgeCategory")
      * @ORM\JoinColumn(name="age_category_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
+	 * @Assert\NotNull()
      */
     private $ageCategory;
 
     /**
      * @ORM\Column(type="text", nullable=false)
-     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $description;
 

@@ -6,34 +6,19 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
- * @UniqueEntity("email", message="email is already used")
  */
-class User
+class User extends BaseUser
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @ORM\Column(type="string", length=32, nullable=false)
-     */
-    private $passwordHash; //TODO: add validation
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
-     * @Assert\Email()
-     * @Assert\NotBlank()
-     */
-    private $email;
+    protected $id;
 
     /**
      * @ORM\OneToOne(targetEntity="Player")
@@ -54,52 +39,6 @@ class User
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set passwordHash
-     *
-     * @param  string $passwordHash
-     * @return User
-     */
-    public function setPasswordHash($passwordHash)
-    {
-        $this->passwordHash = $passwordHash;
-
-        return $this;
-    }
-
-    /**
-     * Get passwordHash
-     *
-     * @return string
-     */
-    public function getPasswordHash()
-    {
-        return $this->passwordHash;
-    }
-
-    /**
-     * Set email
-     *
-     * @param  string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
     }
 
     /**

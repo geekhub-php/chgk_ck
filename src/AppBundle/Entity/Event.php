@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity
@@ -16,8 +15,6 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class Event
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -42,8 +39,20 @@ class Event
      * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
+	 * @Assert\NotNull()
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @Assert\NotNull()
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $deletedAt;
 
     /**
      * @Gedmo\Slug(fields={"title"})
@@ -62,12 +71,22 @@ class Event
      */
     private $comments;
 
+	/**
+	 * @ORM\Column(type="array")
+	 * @Assert\All({
+     *     @Assert\Regex("/^[A-zА-яіїє']+$/")
+     * })
+	 */
+	private $tags;
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = time();
+        $this->tags = array();
     }
 
     /**
@@ -78,16 +97,6 @@ class Event
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
     }
 
     /**
@@ -104,13 +113,13 @@ class Event
     }
 
     /**
-     * Get text
+     * Get title
      *
      * @return string
      */
-    public function getText()
+    public function getTitle()
     {
-        return $this->text;
+        return $this->title;
     }
 
     /**
@@ -127,13 +136,59 @@ class Event
     }
 
     /**
-     * Get slug
+     * Get text
      *
      * @return string
      */
-    public function getSlug()
+    public function getText()
     {
-        return $this->slug;
+        return $this->text;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param  integer $createdAt
+     * @return Event
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return integer
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set deletedAt
+     *
+     * @param  integer $deletedAt
+     * @return Event
+     */
+    public function setDeletedAt($deletedAt)
+    {
+        $this->deletedAt = $deletedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get deletedAt
+     *
+     * @return integer
+     */
+    public function getDeletedAt()
+    {
+        return $this->deletedAt;
     }
 
     /**
@@ -150,13 +205,13 @@ class Event
     }
 
     /**
-     * Get eventDate
+     * Get slug
      *
-     * @return integer
+     * @return string
      */
-    public function getEventDate()
+    public function getSlug()
     {
-        return $this->eventDate;
+        return $this->slug;
     }
 
     /**
@@ -173,13 +228,13 @@ class Event
     }
 
     /**
-     * Get author
+     * Get eventDate
      *
-     * @return \AppBundle\Entity\User
+     * @return integer
      */
-    public function getAuthor()
+    public function getEventDate()
     {
-        return $this->author;
+        return $this->eventDate;
     }
 
     /**
@@ -193,6 +248,16 @@ class Event
         $this->author = $author;
 
         return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
     }
 
     /**
@@ -227,4 +292,17 @@ class Event
     {
         return $this->comments;
     }
+
+    public function setTags(array $tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
 }

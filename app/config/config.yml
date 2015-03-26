@@ -53,6 +53,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -81,6 +83,11 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
+    profile:
+        form:
+            type:               user_profile
+            name:               user_profile_form
+            validation_groups:  [Profile, Default]
 
 sonata_block:
     default_contexts: [cms]
@@ -88,71 +95,22 @@ sonata_block:
         # Enable the SonataAdminBundle block
         sonata.admin.block.admin_list:
             contexts:   [admin]
-
 sonata_media:
     db_driver: doctrine_orm
     default_context: default
     contexts:
        default:
            providers:
-               - sonata.media.provider.dailymotion
                - sonata.media.provider.youtube
                - sonata.media.provider.image
-               - sonata.media.provider.file
 
            formats:
                small: { width: 100 , quality: 70}
                big:   { width: 500 , quality: 70}
     cdn:
         server:
-            path: /uploads/media
+            path: /media
     filesystem:
         local:
-            directory:  %kernel.root_dir%/../web/uploads/media
+            directory:  %kernel.root_dir%/../web/media
             create:     false
-
-sonata_admin:
-    title:      Chgk_ck
-    title_logo: Chgk_ck_project
-
-    security:
-        handler: sonata.admin.security.handler.role
-        
-    templates:
-        edit: ::SonataAdmin/CRUD/edit.html.twig
-
-    dashboard:
-        groups:
-            CheTheatre:
-                label: Main.Panel
-                label_catalogue: AppBundle
-            sonata_media:
-                label: Media.Library
-                label_catalogue: AppBundle
-       
-        blocks:
-            -
-                position: left
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: [CheTheatre]
-            -
-                position: right
-                type: sonata.admin.block.admin_list
-                settings:
-                    groups: [sonata_media, Hidden]
-    assets:
-        javascripts: # changed order of js assets loading
-            - js/jquery-2.1.0.min.js
-            - bundles/sonataadmin/vendor/jquery.scrollTo/jquery.scrollTo.min.js
-            - bundles/sonatacore/vendor/moment/min/moment.min.js
-            - bundles/sonataadmin/vendor/bootstrap/dist/js/bootstrap.min.js
-            - bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js
-            - bundles/sonataadmin/vendor/jqueryui/ui/minified/jquery-ui.min.js
-            - bundles/sonataadmin/vendor/jqueryui/ui/minified/i18n/jquery-ui-i18n.min.js
-            - bundles/sonataadmin/jquery/jquery.form.js
-            - bundles/sonataadmin/jquery/jquery.confirmExit.js
-            - bundles/sonataadmin/vendor/x-editable/dist/bootstrap3-editable/js/bootstrap-editable.min.js
-            - bundles/sonataadmin/vendor/select2/select2.min.js
-            - bundles/sonataadmin/App.js
-            - bundles/sonataadmin/Admin.js
