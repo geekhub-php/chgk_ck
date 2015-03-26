@@ -13,12 +13,22 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class EventOpinion extends Opinion
 {
-	/**
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event")
-	 * @CustomAssert\EntitiesExist(associatedEntity="Event", message="user with id %ids% is non-exist")
-	 * @Assert\NotNull(message="opinion on event should have event")
-	 */
-	private $event; 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Event")
+     * @CustomAssert\EntitiesExist(associatedEntity="Event", message="user with id %ids% is non-exist")
+     * @Assert\NotNull(message="opinion on event should have event")
+     */
+    private $event;
+
+    /**
+     * Get event
+     *
+     * @return \AppBundle\Entity\Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
 
     /**
      * Set event
@@ -31,15 +41,5 @@ class EventOpinion extends Opinion
         $this->event = $event;
 
         return $this;
-    }
-
-    /**
-     * Get event
-     *
-     * @return \AppBundle\Entity\Event 
-     */
-    public function getEvent()
-    {
-        return $this->event;
     }
 }

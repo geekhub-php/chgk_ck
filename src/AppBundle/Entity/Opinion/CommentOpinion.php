@@ -13,12 +13,22 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class CommentOpinion extends Opinion
 {
-	/**
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Comment")
-	 * @CustomAssert\EntitiesExist(associatedEntity="Comment", message="user with id %ids% is non-exist")
-	 * @Assert\NotNull(message="opinion on comment should have comment")
-	 */
-	private $comment; 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Comment")
+     * @CustomAssert\EntitiesExist(associatedEntity="Comment", message="user with id %ids% is non-exist")
+     * @Assert\NotNull(message="opinion on comment should have comment")
+     */
+    private $comment;
+
+    /**
+     * Get comment
+     *
+     * @return \AppBundle\Entity\Comment
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
 
     /**
      * Set comment
@@ -31,15 +41,5 @@ class CommentOpinion extends Opinion
         $this->comment = $comment;
 
         return $this;
-    }
-
-    /**
-     * Get comment
-     *
-     * @return \AppBundle\Entity\Comment 
-     */
-    public function getComment()
-    {
-        return $this->comment;
     }
 }

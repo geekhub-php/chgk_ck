@@ -26,8 +26,7 @@ class GameEventAdmin extends Admin
                 'class' => 'AppBundle:Game',
                 'property' => 'name',
                 'multiple' => true,
-            ))
-        ;
+            ));
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -36,8 +35,7 @@ class GameEventAdmin extends Admin
             ->add('title')
             ->add('author', null, array(), 'entity', array('property' => 'email', 'placeholder' => 'any author'))
             ->add('eventDate', null, array(), 'timestamp_date')
-            ->add('games', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any game'))
-        ;
+            ->add('games', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any game'));
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -47,15 +45,14 @@ class GameEventAdmin extends Admin
             ->addIdentifier('title')
             ->add('author', null, array('associated_property' => 'email'))
             ->add('createdAt', 'date', array(
-			    'pattern' => 'dd.MM.yyyy'
-			))
+                'pattern' => 'dd.MM.yyyy'
+            ))
             ->add('deletedAt', 'date', array(
-			    'pattern' => 'dd.MM.yyyy'
-			))
+                'pattern' => 'dd.MM.yyyy'
+            ))
             ->add('eventDate', 'date', array(
-			    'pattern' => 'dd.MM.yyyy'
-			))
-            ->add('games', null, array('associated_property' => 'name'))
-        ;
+                'pattern' => 'dd.MM.yyyy'
+            ))
+            ->add('games', null, array('associated_property' => 'name'));
     }
 }

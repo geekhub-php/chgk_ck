@@ -39,7 +39,7 @@ class Event
      * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
-	 * @Assert\NotNull()
+     * @Assert\NotNull()
      */
     private $author;
 
@@ -71,13 +71,13 @@ class Event
      */
     private $comments;
 
-	/**
-	 * @ORM\Column(type="array")
-	 * @Assert\All({
+    /**
+     * @ORM\Column(type="array")
+     * @Assert\All({
      *     @Assert\Regex("/^[A-zА-яіїє']+$/")
      * })
-	 */
-	private $tags;
+     */
+    private $tags;
 
     /**
      * Constructor
@@ -100,6 +100,16 @@ class Event
     }
 
     /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set title
      *
      * @param  string $title
@@ -113,13 +123,13 @@ class Event
     }
 
     /**
-     * Get title
+     * Get text
      *
      * @return string
      */
-    public function getTitle()
+    public function getText()
     {
-        return $this->title;
+        return $this->text;
     }
 
     /**
@@ -136,13 +146,13 @@ class Event
     }
 
     /**
-     * Get text
+     * Get createdAt
      *
-     * @return string
+     * @return integer
      */
-    public function getText()
+    public function getCreatedAt()
     {
-        return $this->text;
+        return $this->createdAt;
     }
 
     /**
@@ -159,13 +169,13 @@ class Event
     }
 
     /**
-     * Get createdAt
+     * Get deletedAt
      *
      * @return integer
      */
-    public function getCreatedAt()
+    public function getDeletedAt()
     {
-        return $this->createdAt;
+        return $this->deletedAt;
     }
 
     /**
@@ -182,13 +192,13 @@ class Event
     }
 
     /**
-     * Get deletedAt
+     * Get slug
      *
-     * @return integer
+     * @return string
      */
-    public function getDeletedAt()
+    public function getSlug()
     {
-        return $this->deletedAt;
+        return $this->slug;
     }
 
     /**
@@ -205,13 +215,13 @@ class Event
     }
 
     /**
-     * Get slug
+     * Get eventDate
      *
-     * @return string
+     * @return integer
      */
-    public function getSlug()
+    public function getEventDate()
     {
-        return $this->slug;
+        return $this->eventDate;
     }
 
     /**
@@ -228,13 +238,13 @@ class Event
     }
 
     /**
-     * Get eventDate
+     * Get author
      *
-     * @return integer
+     * @return \AppBundle\Entity\User
      */
-    public function getEventDate()
+    public function getAuthor()
     {
-        return $this->eventDate;
+        return $this->author;
     }
 
     /**
@@ -248,16 +258,6 @@ class Event
         $this->author = $author;
 
         return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \AppBundle\Entity\User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -293,16 +293,16 @@ class Event
         return $this->comments;
     }
 
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
     public function setTags(array $tags)
     {
         $this->tags = $tags;
 
         return $this;
-    }
-
-    public function getTags()
-    {
-        return $this->tags;
     }
 
 }

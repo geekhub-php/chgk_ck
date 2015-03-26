@@ -13,12 +13,22 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  */
 class GameResultOpinion extends Opinion
 {
-	/**
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\GameResult")
-	 * @CustomAssert\EntitiesExist(associatedEntity="GameResult", message="user with id %ids% is non-exist")
-	 * @Assert\NotNull(message="opinion on game result should have game result")
-	 */
-	private $gameResult; 
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\GameResult")
+     * @CustomAssert\EntitiesExist(associatedEntity="GameResult", message="user with id %ids% is non-exist")
+     * @Assert\NotNull(message="opinion on game result should have game result")
+     */
+    private $gameResult;
+
+    /**
+     * Get gameResult
+     *
+     * @return \AppBundle\Entity\GameResult
+     */
+    public function getGameResult()
+    {
+        return $this->gameResult;
+    }
 
     /**
      * Set gameResult
@@ -31,15 +41,5 @@ class GameResultOpinion extends Opinion
         $this->gameResult = $gameResult;
 
         return $this;
-    }
-
-    /**
-     * Get gameResult
-     *
-     * @return \AppBundle\Entity\GameResult 
-     */
-    public function getGameResult()
-    {
-        return $this->gameResult;
     }
 }

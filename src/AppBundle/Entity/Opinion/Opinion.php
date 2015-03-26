@@ -14,39 +14,49 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 abstract class Opinion
 {
-	/**
+    /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;	
-	
-	/**
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-	 * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
-	 * @Assert\NotNull(message="opinion should have author")
-	 */
-	private $author;
-	
-	/**
-	 * @ORM\Column(type="boolean")
-	 */
-	private $isPositive;
-	
-	public function __construct()
-	{
-		$this->isPositive = false;
-	}
+     * @Assert\NotNull(message="opinion should have author")
+     */
+    private $author;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isPositive;
+
+    public function __construct()
+    {
+        $this->isPositive = false;
+    }
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get isPositive
+     *
+     * @return boolean
+     */
+    public function getIsPositive()
+    {
+        return $this->isPositive;
     }
 
     /**
@@ -63,13 +73,13 @@ abstract class Opinion
     }
 
     /**
-     * Get isPositive
+     * Get author
      *
-     * @return boolean 
+     * @return \AppBundle\Entity\User
      */
-    public function getIsPositive()
+    public function getAuthor()
     {
-        return $this->isPositive;
+        return $this->author;
     }
 
     /**
@@ -83,15 +93,5 @@ abstract class Opinion
         $this->author = $author;
 
         return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \AppBundle\Entity\User 
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 }

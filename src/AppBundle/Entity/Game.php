@@ -73,7 +73,7 @@ class Game
      * @ORM\ManyToOne(targetEntity="AgeCategory")
      * @ORM\JoinColumn(name="age_category_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
-	 * @Assert\NotNull()
+     * @Assert\NotNull()
      */
     private $ageCategory;
 
@@ -100,6 +100,16 @@ class Game
     }
 
     /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set name
      *
      * @param  string $name
@@ -113,13 +123,13 @@ class Game
     }
 
     /**
-     * Get name
+     * Get playDate
      *
-     * @return string
+     * @return integer
      */
-    public function getName()
+    public function getPlayDate()
     {
-        return $this->name;
+        return $this->playDate;
     }
 
     /**
@@ -136,13 +146,13 @@ class Game
     }
 
     /**
-     * Get playDate
+     * Get playPlace
      *
-     * @return integer
+     * @return string
      */
-    public function getPlayDate()
+    public function getPlayPlace()
     {
-        return $this->playDate;
+        return $this->playPlace;
     }
 
     /**
@@ -159,13 +169,13 @@ class Game
     }
 
     /**
-     * Get playPlace
+     * Get isLocallyRated
      *
-     * @return string
+     * @return boolean
      */
-    public function getPlayPlace()
+    public function getIsLocallyRated()
     {
-        return $this->playPlace;
+        return $this->isLocallyRated;
     }
 
     /**
@@ -182,13 +192,13 @@ class Game
     }
 
     /**
-     * Get isLocallyRated
+     * Get isGloballyRated
      *
      * @return boolean
      */
-    public function getIsLocallyRated()
+    public function getIsGloballyRated()
     {
-        return $this->isLocallyRated;
+        return $this->isGloballyRated;
     }
 
     /**
@@ -205,13 +215,13 @@ class Game
     }
 
     /**
-     * Get isGloballyRated
+     * Get isHome
      *
      * @return boolean
      */
-    public function getIsGloballyRated()
+    public function getIsHome()
     {
-        return $this->isGloballyRated;
+        return $this->isHome;
     }
 
     /**
@@ -228,13 +238,13 @@ class Game
     }
 
     /**
-     * Get isHome
+     * Get isComplete
      *
      * @return boolean
      */
-    public function getIsHome()
+    public function getIsComplete()
     {
-        return $this->isHome;
+        return $this->isComplete;
     }
 
     /**
@@ -251,13 +261,13 @@ class Game
     }
 
     /**
-     * Get isComplete
+     * Get description
      *
-     * @return boolean
+     * @return string
      */
-    public function getIsComplete()
+    public function getDescription()
     {
-        return $this->isComplete;
+        return $this->description;
     }
 
     /**
@@ -274,13 +284,13 @@ class Game
     }
 
     /**
-     * Get description
+     * Get slug
      *
      * @return string
      */
-    public function getDescription()
+    public function getSlug()
     {
-        return $this->description;
+        return $this->slug;
     }
 
     /**
@@ -297,13 +307,13 @@ class Game
     }
 
     /**
-     * Get slug
+     * Get season
      *
-     * @return string
+     * @return \AppBundle\Entity\Season
      */
-    public function getSlug()
+    public function getSeason()
     {
-        return $this->slug;
+        return $this->season;
     }
 
     /**
@@ -320,13 +330,13 @@ class Game
     }
 
     /**
-     * Get season
+     * Get ageCategory
      *
-     * @return \AppBundle\Entity\Season
+     * @return \AppBundle\Entity\AgeCategory
      */
-    public function getSeason()
+    public function getAgeCategory()
     {
-        return $this->season;
+        return $this->ageCategory;
     }
 
     /**
@@ -340,15 +350,5 @@ class Game
         $this->ageCategory = $ageCategory;
 
         return $this;
-    }
-
-    /**
-     * Get ageCategory
-     *
-     * @return \AppBundle\Entity\AgeCategory
-     */
-    public function getAgeCategory()
-    {
-        return $this->ageCategory;
     }
 }

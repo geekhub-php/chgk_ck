@@ -63,7 +63,7 @@ class Team
      * @ORM\ManyToOne(targetEntity="AgeCategory")
      * @ORM\JoinColumn(name="age_category_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
-	 * @Assert\NotNull()
+     * @Assert\NotNull()
      */
     private $ageCategory;
 
@@ -86,6 +86,16 @@ class Team
     }
 
     /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set name
      *
      * @param  string $name
@@ -99,13 +109,13 @@ class Team
     }
 
     /**
-     * Get name
+     * Get description
      *
      * @return string
      */
-    public function getName()
+    public function getDescription()
     {
-        return $this->name;
+        return $this->description;
     }
 
     /**
@@ -122,13 +132,13 @@ class Team
     }
 
     /**
-     * Get description
+     * Get rating
      *
-     * @return string
+     * @return integer
      */
-    public function getDescription()
+    public function getRating()
     {
-        return $this->description;
+        return $this->rating;
     }
 
     /**
@@ -145,13 +155,13 @@ class Team
     }
 
     /**
-     * Get rating
+     * Get city
      *
-     * @return integer
+     * @return string
      */
-    public function getRating()
+    public function getCity()
     {
-        return $this->rating;
+        return $this->city;
     }
 
     /**
@@ -168,13 +178,13 @@ class Team
     }
 
     /**
-     * Get city
+     * Get slug
      *
      * @return string
      */
-    public function getCity()
+    public function getSlug()
     {
-        return $this->city;
+        return $this->slug;
     }
 
     /**
@@ -188,16 +198,6 @@ class Team
         $this->slug = $slug;
 
         return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -234,6 +234,16 @@ class Team
     }
 
     /**
+     * Get ageCategory
+     *
+     * @return \AppBundle\Entity\AgeCategory
+     */
+    public function getAgeCategory()
+    {
+        return $this->ageCategory;
+    }
+
+    /**
      * Set ageCategory
      *
      * @param  \AppBundle\Entity\AgeCategory $ageCategory
@@ -244,15 +254,5 @@ class Team
         $this->ageCategory = $ageCategory;
 
         return $this;
-    }
-
-    /**
-     * Get ageCategory
-     *
-     * @return \AppBundle\Entity\AgeCategory
-     */
-    public function getAgeCategory()
-    {
-        return $this->ageCategory;
     }
 }
