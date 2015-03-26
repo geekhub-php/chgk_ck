@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity
@@ -12,6 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class MembershipType
 {
+    use TimestampableTrait;
+
+    const NAME_MAIN = 'Основной игрок';
+    const NAME_LEGIONNAIRE = 'Легионер';
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -26,6 +32,14 @@ class MembershipType
      */
     private $name;
 
+    public static function getNames()
+    {
+        return [
+            membershipType:: NAME_MAIN => 'Основной игрок',
+            membershipType:: NAME_LEGIONNAIRE => 'Легионер',
+        ];
+    }
+
     /**
      * Get id
      *
@@ -37,19 +51,6 @@ class MembershipType
     }
 
     /**
-     * Set name
-     *
-     * @param  string         $name
-     * @return MembershipType
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
      * Get name
      *
      * @return string
@@ -57,5 +58,18 @@ class MembershipType
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set name
+     *
+     * @param  string $name
+     * @return MembershipType
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }
