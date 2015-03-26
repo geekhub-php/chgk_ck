@@ -15,6 +15,9 @@ class MembershipType
 {
     use TimestampableTrait;
 
+    const NAME_MAIN = 'Основной игрок';
+    const NAME_LEGIONNAIRE = 'Легионер';
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -29,6 +32,14 @@ class MembershipType
      */
     private $name;
 
+    public static function getNames()
+    {
+        return [
+            membershipType:: NAME_MAIN => 'Основной игрок',
+            membershipType:: NAME_LEGIONNAIRE => 'Легионер',
+        ];
+    }
+
     /**
      * Get id
      *
@@ -40,19 +51,6 @@ class MembershipType
     }
 
     /**
-     * Set name
-     *
-     * @param  string         $name
-     * @return MembershipType
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
      * Get name
      *
      * @return string
@@ -60,5 +58,18 @@ class MembershipType
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set name
+     *
+     * @param  string $name
+     * @return MembershipType
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
     }
 }

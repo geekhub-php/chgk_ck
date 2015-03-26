@@ -16,6 +16,10 @@ class AgeCategory
 {
     use TimestampableTrait;
 
+    const NAME_SCHOOL = 'Школьная';
+    const NAME_YOUTH = 'Молодежная';
+    const NAME_ADULT = 'Взрослая';
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -42,6 +46,16 @@ class AgeCategory
      */
     private $slug;
 
+    public static function getNames()
+    {
+        return [
+            ageCategory::NAME_SCHOOL => 'Школьная',
+            ageCategory::NAME_YOUTH => 'Молодежная',
+            ageCategory::NAME_ADULT => 'Взрослая',
+        ];
+
+    }
+
     /**
      * Get id
      *
@@ -50,19 +64,6 @@ class AgeCategory
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param  string      $name
-     * @return AgeCategory
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -76,14 +77,14 @@ class AgeCategory
     }
 
     /**
-     * Set description
+     * Set name
      *
-     * @param  string      $description
+     * @param  string $name
      * @return AgeCategory
      */
-    public function setDescription($description)
+    public function setName($name)
     {
-        $this->description = $description;
+        $this->name = $name;
 
         return $this;
     }
@@ -99,14 +100,14 @@ class AgeCategory
     }
 
     /**
-     * Set slug
+     * Set description
      *
-     * @param  string      $slug
+     * @param  string $description
      * @return AgeCategory
      */
-    public function setSlug($slug)
+    public function setDescription($description)
     {
-        $this->slug = $slug;
+        $this->description = $description;
 
         return $this;
     }
@@ -119,5 +120,18 @@ class AgeCategory
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param  string $slug
+     * @return AgeCategory
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }

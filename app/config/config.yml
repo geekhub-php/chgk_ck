@@ -5,7 +5,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -109,3 +109,11 @@ sonata_media:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
             create:     false
+
+sonata_admin:
+    templates:
+        layout: AppBundle:Sonata:layout.html.twig
+
+sonata_doctrine_orm_admin:
+    templates:
+        form: [:SonataAdmin:form_admin_fields.html.twig]
