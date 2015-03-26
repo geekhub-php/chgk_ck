@@ -83,6 +83,11 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
+    profile:
+        form:
+            type:               user_profile
+            name:               user_profile_form
+            validation_groups:  [Profile, Default]
 
 sonata_block:
     default_contexts: [cms]
