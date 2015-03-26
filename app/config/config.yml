@@ -53,8 +53,6 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
-        types:
-            json: Sonata\Doctrine\Types\JsonType
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -83,11 +81,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
-    profile:
-        form:
-            type:               user_profile
-            name:               user_profile_form
-            validation_groups:  [Profile, Default]
 
 sonata_block:
     default_contexts: [cms]
@@ -101,16 +94,22 @@ sonata_media:
     contexts:
        default:
            providers:
+               - sonata.media.provider.dailymotion
                - sonata.media.provider.youtube
                - sonata.media.provider.image
+               - sonata.media.provider.file
 
            formats:
                small: { width: 100 , quality: 70}
                big:   { width: 500 , quality: 70}
     cdn:
         server:
-            path: /media
+            path: /uploads/media 
     filesystem:
         local:
-            directory:  %kernel.root_dir%/../web/media
+            directory:  %kernel.root_dir%/../web/uploads/media
             create:     false
+
+sonata_admin:
+    templates:
+        layout: AppBundle:Sonata:layout.html.twig

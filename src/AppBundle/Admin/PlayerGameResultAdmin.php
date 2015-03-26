@@ -15,34 +15,37 @@ class PlayerGameResultAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('game', 'entity', array(
+       		->add('game', 'entity', array(
                 'class' => 'AppBundle:Game',
                 'property' => 'name'
             ))
-            ->add('place', 'integer')
-            ->add('score', 'integer')
-            ->add('player', 'entity', array(
-                'class' => 'AppBundle:Player',
-                'property' => 'slug'
-            ));
+			->add('place', 'integer')
+			->add('score', 'integer')
+			->add('player', 'entity', array(
+				'class' => 'AppBundle:Player',
+				'property' => 'slug'
+			))
+        ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('game', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any game'))
-            ->add('score', null, array(), 'integer')
-            ->add('place', null, array(), 'integer')
-            ->add('player', null, array(), 'entity', array('property' => 'slug', 'placeholder' => 'any player'));
+        	->add('game', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any game'))
+			->add('score', null, array(), 'integer')
+			->add('place', null, array(), 'integer')
+            ->add('player', null, array(), 'entity', array('property' => 'slug', 'placeholder' => 'any player'))
+        ;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('id')
-            ->add('game', null, array('associated_property' => 'name'))
-            ->add('place', 'integer')
-            ->add('score', 'integer')
-            ->add('player', null, array('associated_property' => 'slug'));
+			->add('game', null, array('associated_property' => 'name'))
+			->add('place', 'integer')
+			->add('score', 'integer')
+            ->add('player', null, array('associated_property' => 'slug'))
+        ;
     }
 }
