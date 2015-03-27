@@ -62,6 +62,10 @@
 		<service id="app.type.timestamp_date" class="AppBundle\Form\Type\TimestampDateType">
 		    <tag name="form.type" alias="timestamp_date" />
 		</service>
+		
+		<service id="security.access.comment_voter" class="AppBundle\Security\Authorization\Voter\CommentVoter" public="false">
+            <tag name="security.voter" />
+        </service>
 
     </services>
 </container>
