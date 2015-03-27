@@ -66,6 +66,10 @@
 		<service id="security.access.comment_voter" class="AppBundle\Security\Authorization\Voter\CommentVoter" public="false">
             <tag name="security.voter" />
         </service>
+        
+        <service id="security.access.opinion_voter" class="AppBundle\Security\Authorization\Voter\OpinionVoter" public="false">
+            <tag name="security.voter" />
+        </service>
 
     </services>
 </container>

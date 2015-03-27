@@ -10,6 +10,7 @@ use FOS\RestBundle\View\View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use JMS\Serializer\SerializationContext;
 use AppBundle\Interfaces\Opinionable;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class OpinionsController extends FOSRestController
 {
@@ -32,7 +33,11 @@ class OpinionsController extends FOSRestController
 	
 	protected function handlePostOpinion(Opinionable $opinionParent, Opinion $opinion)
 	{
-		$author = $this->getDoctrine()->getRepository('AppBundle:User')->find(1);//TODO get user from session
+		if (!$this->get('security.authorization_checker')->isGranted('add', $opinion)) {
+			throw new AccessDeniedException();
+		}
+		
+		$author = $this->get('security.token_storage')->getToken()->getUser();
 		$opinion->setAuthor($author);
 		
 		$validationErrors = $this->get('validator')->validate($opinion);
@@ -54,10 +59,16 @@ class OpinionsController extends FOSRestController
 	{
 		$opinion = $opinionParent->getOpinion($opinionId);
 		
-		if ($opinion) {
-			$this->getDoctrine()->getManager()->remove($opinion);
-			$this->getDoctrine()->getManager()->flush();
+		if (!$opinion) {
+			return;
 		}
+		
+		if (!$this->get('security.authorization_checker')->isGranted('delete', $opinion)) {
+			throw new AccessDeniedException();
+		}
+			
+		$this->getDoctrine()->getManager()->remove($opinion);
+		$this->getDoctrine()->getManager()->flush();
 	}
 	
 }
