@@ -7,6 +7,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -19,6 +20,7 @@ class Game
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+	 * @JMS\Groups({"gameFull", "short"})
      */
     private $id;
 
@@ -26,6 +28,7 @@ class Game
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 2, max = 255)
+	 * @JMS\Groups({"gameFull"})
      */
     private $name;
 
@@ -33,6 +36,7 @@ class Game
      * @ORM\Column(type="integer", nullable=false)
      * @CustomAssert\FutureTimestamp(groups={"creating"})
      * @Assert\NotNull()
+	 * @JMS\Groups({"gameFull"})
      */
     private $playDate;
 
@@ -40,32 +44,38 @@ class Game
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 2, max = 255)
+	 * @JMS\Groups({"gameFull"})
      */
     private $playPlace;
 
     /**
      * @ORM\ManyToOne(targetEntity="Season")
      * @CustomAssert\EntitiesExist(associatedEntity="Season", message="season with id %ids% is non-exist")
+	 * @JMS\Groups({"gameFull"})
      */
     private $season;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+	 * @JMS\Groups({"gameFull"})
      */
     private $isLocallyRated;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+	 * @JMS\Groups({"gameFull"})
      */
     private $isGloballyRated;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+	 * @JMS\Groups({"gameFull"})
      */
     private $isHome;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+	 * @JMS\Groups({"gameFull"})
      */
     private $isComplete;
 
@@ -74,20 +84,28 @@ class Game
      * @ORM\JoinColumn(name="age_category_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
 	 * @Assert\NotNull()
+	 * @JMS\Groups({"gameFull"})
      */
     private $ageCategory;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
+	 * @JMS\Groups({"gameFull"})
      */
     private $description;
 
     /**
      * @Gedmo\Slug(fields={"name"})
 	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+	 * @JMS\Groups({"gameFull"})
      */
     private $slug;
+	
+	/**
+	 * @ORM\OneToMany(targetEntity="GameResult", mappedBy="game")
+	 */
+	private $gameResults;
 
     /**
      * Get id
@@ -351,4 +369,51 @@ class Game
     {
         return $this->ageCategory;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->gameResults = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add gameResults
+     *
+     * @param \AppBundle\Entity\GameResult $gameResults
+     * @return Game
+     */
+    public function addGameResult(\AppBundle\Entity\GameResult $gameResults)
+    {
+        $this->gameResults[] = $gameResults;
+
+        return $this;
+    }
+
+    /**
+     * Remove gameResults
+     *
+     * @param \AppBundle\Entity\GameResult $gameResults
+     */
+    public function removeGameResult(\AppBundle\Entity\GameResult $gameResults)
+    {
+        $this->gameResults->removeElement($gameResults);
+    }
+
+    /**
+     * Get gameResults
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getGameResults()
+    {
+        return $this->gameResults;
+    }
+	
+	public function getGameResult($id)
+	{
+		return $this->gameResults->filter(function ($res) use ($id) {
+			return $res->getId() == $id; 
+		})->first();
+	}
 }

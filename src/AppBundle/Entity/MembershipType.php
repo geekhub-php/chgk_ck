@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -22,6 +23,7 @@ class MembershipType
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+	 * @JMS\Groups({"membershipTypesFull", "short"})
      */
     private $id;
 
@@ -29,6 +31,7 @@ class MembershipType
      * @ORM\Column(type="string", length=50, unique=true, nullable=false)
      * @Assert\Regex("/^[A-zА-я іїє]{2,50}$/", message="name is not valid")
      * @Assert\NotBlank()
+	 * @JMS\Groups({"membershipTypesFull"})
      */
     private $name;
 

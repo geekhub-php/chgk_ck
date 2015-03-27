@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -15,6 +16,7 @@ class TeamGameResult extends GameResult
      * @ORM\ManyToOne(targetEntity="Team")
      * @Assert\NotNull()
      * @CustomAssert\EntitiesExist(associatedEntity="Team", message="team with id %ids% is non-exist")
+	 * @JMS\Groups({"gameResultFull"})
      */
     private $team;
 

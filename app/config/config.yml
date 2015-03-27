@@ -115,3 +115,37 @@ sonata_media:
 sonata_admin:
     templates:
         layout: AppBundle:Sonata:layout.html.twig
+
+sensio_framework_extra:
+    request: { converters: true }
+
+fos_rest:
+    view:
+        formats:
+            json: true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+        view_response_listener: force
+    body_listener:
+        decoders:
+            json: fos_rest.decoder.json
+    body_converter:
+        enabled: true
+        validate: true
+        validation_errors_argument: validationErrors
+    access_denied_listener:
+        json: true
+    exception:
+        enabled: true
+    routing_loader:
+        include_format: false
+    format_listener:
+        rules:
+          - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
+          - { path: '^/', priorities: ['html'], fallback_format: html, prefer_extension: false }
+
+nelmio_api_doc: ~

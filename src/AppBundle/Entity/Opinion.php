@@ -1,36 +1,33 @@
 <?php
 
-namespace AppBundle\Entity\Opinion;
+namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use AppBundle\Validator\Constraints as CustomAssert;
-use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="opinionOn", type="string")
- * @ORM\DiscriminatorMap({"comment" = "CommentOpinion", "event" = "EventOpinion", "gameResult" = "GameResultOpinion"})
  */
-abstract class Opinion
+class Opinion
 {
 	/**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+	 * @JMS\Groups({"opinionFull", "short"})
      */
     private $id;	
 	
 	/**
 	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
 	 * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
-     * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
-	 * @Assert\NotNull(message="opinion should have author")
+	 * @JMS\Groups({"opinionFull"})
 	 */
 	private $author;
 	
 	/**
 	 * @ORM\Column(type="boolean")
+	 * @JMS\Groups({"opinionFull"})
 	 */
 	private $isPositive;
 	

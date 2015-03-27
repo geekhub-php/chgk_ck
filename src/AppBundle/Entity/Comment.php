@@ -6,11 +6,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
+use AppBundle\Interfaces\Opinionable;
 
 /**
  * @ORM\Entity
  */
-class Comment
+class Comment implements Opinionable
 {
     use TimestampableTrait;
 
@@ -18,30 +20,40 @@ class Comment
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+	 * @JMS\Groups({"commentFull", "short"})
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="comments")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", nullable=false)
-     * @CustomAssert\EntitiesExist(associatedEntity="Event", message="event with id %ids% is non-exist")
-     * @Assert\NotNull(message="comment should have author")
-     */
-    private $event;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
-     * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
-     * @Assert\NotNull(message="comment should have author")
+	 * @JMS\Groups({"commentFull"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
+	 * @JMS\Groups({"commentFull"})
      */
     private $text;
+
+    /**
+	 * @ORM\ManyToMany(targetEntity="Opinion")
+	 * @JMS\Groups({"commentFull"})
+	 */
+    private $opinions;
+
+    public function __construct()
+    {
+    }
+	
+	public function setId($id)
+	{
+		$this->id = $id;
+		
+		return $this;
+	}
 
     /**
      * Get id
@@ -87,14 +99,14 @@ class Comment
     }
 
     /**
-     * Set event
+     * Set author
      *
-     * @param  \AppBundle\Entity\Event $event
+     * @param  \AppBundle\Entity\User $author
      * @return Comment
      */
-    public function setEvent(\AppBundle\Entity\Event $event)
+    public function setAuthor(\AppBundle\Entity\User $author)
     {
-        $this->event = $event;
+        $this->author = $author;
 
         return $this;
     }
@@ -110,15 +122,42 @@ class Comment
     }
 
     /**
-     * Set author
+     * Add opinions
      *
-     * @param  \AppBundle\Entity\User $author
+     * @param \AppBundle\Entity\Opinion $opinions
      * @return Comment
      */
-    public function setAuthor(\AppBundle\Entity\User $author)
+    public function addOpinion(\AppBundle\Entity\Opinion $opinions)
     {
-        $this->author = $author;
+        $this->opinions[] = $opinions;
 
         return $this;
     }
+
+    /**
+     * Remove opinions
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     */
+    public function removeOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions->removeElement($opinions);
+    }
+
+    /**
+     * Get opinions
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getOpinions()
+    {
+        return $this->opinions;
+    }
+	
+	public function getOpinion($id)
+	{
+		return $this->opinions->filter(function ($opinion) use ($id) {
+			return $opinion->getId() == $id; 
+		})->first();
+	}
 }
