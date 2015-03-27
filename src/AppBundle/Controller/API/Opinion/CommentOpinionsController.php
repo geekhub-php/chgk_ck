@@ -82,7 +82,8 @@ class CommentOpinionsController extends OpinionsController
      *  },
 	 * 	statusCodes={
 	 * 		201="created",
-	 * 		400="opinion already created"
+	 * 		400="opinion already created",
+	 * 		403="access denied"
 	 * 	},
 	 * 	output="AppBundle\Entity\Opinion",
 	 * 	input="AppBundle\Entity\Opinion"
@@ -112,7 +113,8 @@ class CommentOpinionsController extends OpinionsController
      *  },
 	 * 	statusCodes={
 	 * 		204="deleted",
-	 * 		404="event or comment was not found"
+	 * 		404="event or comment was not found",
+	 * 		403="access denied"
 	 * 	}
 	 * )
 	 */
