@@ -15,7 +15,17 @@ class TeamRoleAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'sonata_type_translatable_choice', array('choices' => teamRole::getNames()))
+            ->add('name', array('choices' => array(
+                'CAPTAIN' => 'Капитан',
+                'SPARROW' => 'Ласточка',
+                'IDEAGEN' => 'Генератор идей',
+                'LOGICIAN' => 'Логик',
+                'INTUITIONIST' => 'Интуит',
+                'ERUDITE' => 'Эрудит',
+                'CRITICIST' => 'Критик',
+                'LIFE_OF_THE_TEAM' => 'Душа команды',
+                'USSR' => 'Совок',
+            )))
             ->add('description', 'text');
     }
 

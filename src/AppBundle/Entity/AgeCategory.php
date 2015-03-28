@@ -16,10 +16,6 @@ class AgeCategory
 {
     use TimestampableTrait;
 
-    const NAME_SCHOOL = 'Школьная';
-    const NAME_YOUTH = 'Молодежная';
-    const NAME_ADULT = 'Взрослая';
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -45,16 +41,6 @@ class AgeCategory
 	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
-
-    public static function getNames()
-    {
-        return [
-            ageCategory::NAME_SCHOOL => 'Школьная',
-            ageCategory::NAME_YOUTH => 'Молодежная',
-            ageCategory::NAME_ADULT => 'Взрослая',
-        ];
-
-    }
 
     /**
      * Get id

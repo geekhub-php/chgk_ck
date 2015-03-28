@@ -15,7 +15,11 @@ class AgeCategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'sonata_type_translatable_choice', array('choices' => ageCategory::getNames()))
+            ->add('name', array('choices' => array(
+                'SCHOOL' => 'Школьная',
+                'YOUTH' => 'Молодежная',
+                'ADULT' => 'Взрослая',
+            )))
             ->add('description', 'text');
     }
 

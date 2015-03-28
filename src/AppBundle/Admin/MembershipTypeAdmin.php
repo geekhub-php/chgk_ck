@@ -15,7 +15,10 @@ class MembershipTypeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', 'sonata_type_translatable_choice', array('choices' => membershipType::getNames()))
+            ->add('name', array('choices' => array(
+                'MAIN' => 'Основной игрок',
+                'LEGIONNAIRE' => 'Легионер',
+            )))
             ->add('description', 'text');
     }
 
