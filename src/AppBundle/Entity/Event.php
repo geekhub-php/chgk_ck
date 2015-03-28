@@ -79,6 +79,7 @@ class Event implements Opinionable
     /**
      * @ORM\ManyToMany(targetEntity="Comment")
 	 * @JMS\Groups({"eventFull"})
+	 * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     private $comments;
 
