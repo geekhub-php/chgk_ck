@@ -9,8 +9,8 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class TeamGameResultAdmin extends Admin
 {
-    protected $baseRouteName = "admin_player_game_result";
-    protected $baseRoutePattern = "playerGameResults";
+    protected $baseRouteName = "admin_team_game_result";
+    protected $baseRoutePattern = "teamGameResults";
 
     protected function configureFormFields(FormMapper $formMapper)
     {
