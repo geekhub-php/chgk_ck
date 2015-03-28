@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use JMS\Serializer\SerializationContext;
 use AppBundle\Interfaces\Opinionable;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OpinionsController extends FOSRestController
 {
@@ -40,17 +41,17 @@ class OpinionsController extends FOSRestController
 		$author = $this->get('security.token_storage')->getToken()->getUser();
 		$opinion->setAuthor($author);
 		
-		$validationErrors = $this->get('validator')->validate($opinion);
-		$view = View::create($validationErrors, 400);
-		if (count($validationErrors) == 0) {
-			$opinionParent->addOpinion($opinion);
-			$this->getDoctrine()->getManager()->persist($opinion);
-			$this->getDoctrine()->getManager()->flush();
-			
-			$view->setStatusCode(201);
-			$view->setData($opinion);
-			$view->setSerializationContext(SerializationContext::create()->setGroups(array('opinionFull', 'short')));
+		if (!$this->isOpinionUnique($opinionParent, $opinion)) {
+			throw new HttpException(409, 'opinion by curret user is already created');
 		}
+		
+		$opinionParent->addOpinion($opinion);
+		
+		$this->getDoctrine()->getManager()->persist($opinion);
+		$this->getDoctrine()->getManager()->flush();
+		
+		$view = View::create($opinion, 201);
+		$view->setSerializationContext(SerializationContext::create()->setGroups(array('opinionFull', 'short')));
 		
 		return $view;
 	}
@@ -69,6 +70,13 @@ class OpinionsController extends FOSRestController
 			
 		$this->getDoctrine()->getManager()->remove($opinion);
 		$this->getDoctrine()->getManager()->flush();
+	}
+	
+	private function isOpinionUnique(Opinionable $opinionParent, Opinion $chekingOpinion)
+	{
+		return !$opinionParent->getOpinions()->filter(function ($opinion) use ($chekingOpinion) {
+			return $opinion->getAuthor()->getId() == $chekingOpinion->getAuthor()->getId();
+		})->first();
 	}
 	
 }

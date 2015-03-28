@@ -82,7 +82,7 @@ class GameResultOpinionsController extends OpinionsController
      *  },
 	 * 	statusCodes={
 	 * 		201="created",
-	 * 		400="opinion is already created",
+	 * 		409="opinion by curret user is already created",
 	 * 		403="access denied"
 	 * 	},
 	 * 	output="AppBundle\Entity\Opinion",

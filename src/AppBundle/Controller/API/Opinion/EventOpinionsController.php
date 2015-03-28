@@ -71,7 +71,7 @@ class EventOpinionsController extends OpinionsController
      *  },
 	 * 	statusCodes={
 	 * 		201="ok",
-	 * 		400="opinion already created",
+	 * 		409="opinion by curret user is already created",
 	 * 		403="access denied"
 	 * 	},
 	 * 	output="AppBundle\Entity\Opinion",
