@@ -52,8 +52,57 @@
             <argument/>
         </service>
 
-        <service id="sonata.admin.User" class="AppBundle\Admin\UserAdmin">
+        <service id="sonata.admin.users" class="AppBundle\Admin\UserAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Entities" label="User"/>
+            <argument/>
+            <argument>AppBundle\Entity\User</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.ageCategory" class="AppBundle\Admin\AgeCategoryAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="AgeCategory"/>
+            <argument/>
+            <argument>AppBundle\Entity\User</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.membershipType" class="AppBundle\Admin\MembershipTypeAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="MembershipType"/>
+            <argument/>
+            <argument>AppBundle\Entity\User</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.players" class="AppBundle\Admin\PlayerAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Player"/>
+            <argument/>
+            <argument>AppBundle\Entity\User</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.seasons" class="AppBundle\Admin\SeasonAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Season"/>
+            <argument/>
+            <argument>AppBundle\Entity\User</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.teams" class="AppBundle\Admin\TeamAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Team"/>
+            <argument/>
+            <argument>AppBundle\Entity\User</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.teamRole" class="AppBundle\Admin\TeamRoleAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamRole"/>
+            <argument/>
+            <argument>AppBundle\Entity\User</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.teamPlayerAssociation" class="AppBundle\Admin\TeamPlayerAssociationAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamPlayerAssociation"/>
             <argument/>
             <argument>AppBundle\Entity\User</argument>
             <argument/>
