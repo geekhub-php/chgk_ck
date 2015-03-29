@@ -13,8 +13,6 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class Season
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
