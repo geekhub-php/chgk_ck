@@ -1,25 +1,21 @@
 <?php
 namespace AppBundle\Traits;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
 
 /**
  * @ExclusionPolicy("all")
  */
-
 trait TimestampableTrait
 {
     /**
-     * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="integer", name="createdAt")
      * @Expose
      */
     protected $createdAt;
 
     /**
-     * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="integer", nullable=true, name="updatedAt")
      * @Expose
      */
