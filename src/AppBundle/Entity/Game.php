@@ -13,8 +13,6 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class Game
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
