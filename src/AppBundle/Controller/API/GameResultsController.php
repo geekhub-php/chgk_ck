@@ -14,6 +14,10 @@ class GameResultsController extends FOSRestController
 	/**
 	 * @REST\View(serializerGroups={"gameResultFull", "short"})
 	 * @REST\Get("games/{game}/gameResults")
+	 * @REST\QueryParam(name="place", requirements="\d+", default="")
+	 * @REST\QueryParam(name="score", requirements="\d+", default="")
+	 * @REST\QueryParam(name="team", requirements="\d+", default="")
+	 * @REST\QueryParam(name="player", requirements="\d+", default="")
 	 * @ApiDoc(
 	 * 	description="returns game results",
 	 * 	parameters={
@@ -26,12 +30,36 @@ class GameResultsController extends FOSRestController
 	 * 		200="ok",
 	 * 		404="game result was not found"
 	 * 	},
+	 * 	filters={
+     *      {"name"="place", "dataType"="integer"},
+	 * 		{"name"="score", "dataType"="integer"},
+	 * 		{"name"="team", "dataType"="integer"},
+	 * 		{"name"="player", "dataType"="integer"},
+     *  },
 	 * 	output="AppBundle\Entity\GameResult"
 	 * )
 	 */
-    public function getGameresultsAction(Game $game)
+    public function getGameresultsAction(Game $game, $place, $score, $team, $player)
     {
-    	return $game->getGameResults();
+    	$criteria = [];
+		if ($place) {
+			$criteria['place'] = $place;
+		}
+		if ($score) {
+			$criteria['score'] = $score;
+		}
+		if ($team) {
+			$criteria['team'] = $team;
+			$mng = $this->getDoctrine()->getRepository('AppBundle:TeamGameResult');
+		} elseif ($player) {
+			$criteria['player'] = $player;
+			$mng = $this->getDoctrine()->getRepository('AppBundle:PlayerGameResult');
+		} else {
+			$mng = $this->getDoctrine()->getRepository('AppBundle:GameResult');
+		}
+		$criteria['game'] = $game->getId();
+		
+		return $mng->findBy($criteria);		
     }
 	
 	/**
