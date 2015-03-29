@@ -11,17 +11,41 @@ class TeamsController extends FOSRestController
 {
 	/**
 	 * @REST\View(serializerGroups={"teamFull", "short"})
+	 * @REST\QueryParam(name="name", default="")
+	 * @REST\QueryParam(name="rating", requirements="\d+", default="")
+	 * @REST\QueryParam(name="city", default="")
+	 * @REST\QueryParam(name="ageCategory", requirements="\d+", default="")
 	 * @ApiDoc(
 	 * 	description="returns teams",
 	 * 	statusCodes={
 	 * 		200="ok",
 	 * 	},
+	 * 	filters={
+     *      {"name"="name", "dataType"="string"},
+	 * 		{"name"="rating", "dataType"="integer"},
+	 * 		{"name"="city", "dataType"="string"},
+	 * 		{"name"="ageCategory", "dataType"="intger"}
+     *  },
 	 * 	output="AppBundle\Entity\Team"
 	 * )
 	 */
-    public function getTeamsAction()
+    public function getTeamsAction($name, $rating, $city, $ageCategory)
     {
-    	return $this->getDoctrine()->getRepository('AppBundle:Team')->findAll();
+    	$criteria = [];
+		if ($name) {
+			$criteria['name'] = $name;
+		}
+		if ($rating) {
+			$criteria['rating'] = $rating;
+		}
+		if ($city) {
+			$criteria['city'] = $city;
+		}
+		if ($ageCategory) {
+			$criteria['ageCategory'] = $ageCategory;
+		}
+		
+    	return $this->getDoctrine()->getRepository('AppBundle:Team')->findBy($criteria);
     }
 	
 	/**
