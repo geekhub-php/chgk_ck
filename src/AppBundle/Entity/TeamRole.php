@@ -14,18 +14,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 class TeamRole
 {
-    use TimestampableTrait;
-
-    const NAME_CAPTAIN = 'Капитан';
-    const NAME_SPARROW = 'Ласточка';
-    const NAME_IDEAGEN = 'Генератор идей';
-    const NAME_LOGICIAN = 'Логик';
-    const NAME_INTUITIONIST = 'Интуит';
-    const NAME_ERUDITE = 'Эрудит';
-    const NAME_CRITICIST = 'Критик';
-    const NAME_LIFE_OF_THE_TEAM = 'Душа команды';
-    const NAME_USSR = 'Совок';
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -41,21 +29,6 @@ class TeamRole
 	 * @JMS\Groups({"teamRoleFull"})
      */
     private $name;
-
-    public static function getNames()
-    {
-        return [
-            teamRole:: NAME_CAPTAIN => 'Капитан',
-            teamRole:: NAME_SPARROW => 'Ласточка',
-            teamRole:: NAME_IDEAGEN => 'Генератор идей',
-            teamRole:: NAME_LOGICIAN => 'Логик',
-            teamRole:: NAME_INTUITIONIST => 'Интуит',
-            teamRole:: NAME_ERUDITE => 'Эрудит',
-            teamRole:: NAME_CRITICIST => 'Критик',
-            teamRole:: NAME_LIFE_OF_THE_TEAM => 'Душа команды',
-            teamRole:: NAME_USSR => 'Совок',
-        ];
-    }
 
     /**
      * Get id

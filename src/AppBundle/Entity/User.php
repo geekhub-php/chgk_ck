@@ -42,6 +42,16 @@ class User extends BaseUser
     }
 
     /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
      * Set slug
      *
      * @param  string $slug
@@ -55,13 +65,13 @@ class User extends BaseUser
     }
 
     /**
-     * Get slug
+     * Get assignedPlayer
      *
-     * @return string
+     * @return \AppBundle\Entity\Player
      */
-    public function getSlug()
+    public function getAssignedPlayer()
     {
-        return $this->slug;
+        return $this->assignedPlayer;
     }
 
     /**
@@ -75,15 +85,5 @@ class User extends BaseUser
         $this->assignedPlayer = $assignedPlayer;
 
         return $this;
-    }
-
-    /**
-     * Get assignedPlayer
-     *
-     * @return \AppBundle\Entity\Player
-     */
-    public function getAssignedPlayer()
-    {
-        return $this->assignedPlayer;
     }
 }

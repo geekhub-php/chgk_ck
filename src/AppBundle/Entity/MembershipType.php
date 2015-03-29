@@ -14,11 +14,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 class MembershipType
 {
-    use TimestampableTrait;
-
-    const NAME_MAIN = 'Основной игрок';
-    const NAME_LEGIONNAIRE = 'Легионер';
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -34,14 +29,6 @@ class MembershipType
 	 * @JMS\Groups({"membershipTypesFull"})
      */
     private $name;
-
-    public static function getNames()
-    {
-        return [
-            membershipType:: NAME_MAIN => 'Основной игрок',
-            membershipType:: NAME_LEGIONNAIRE => 'Легионер',
-        ];
-    }
 
     /**
      * Get id

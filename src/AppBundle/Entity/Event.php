@@ -8,6 +8,7 @@ use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as JMS;
 use AppBundle\Interfaces\Opinionable;
+use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity
@@ -17,6 +18,8 @@ use AppBundle\Interfaces\Opinionable;
  */
 class Event implements Opinionable
 {
+	use TimestampableTrait;
+	
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -50,19 +53,6 @@ class Event implements Opinionable
     private $author;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
-     * @Assert\NotNull()
-	 * @JMS\Groups({"eventFull"})
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-	 * @JMS\Groups({"eventFull"})
-     */
-    private $deletedAt;
-
-    /**
      * @Gedmo\Slug(fields={"title"})
 	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
 	 * @JMS\Groups({"eventFull"})
@@ -82,9 +72,9 @@ class Event implements Opinionable
      */
     private $comments;
 
-	/**
-	 * @ORM\Column(type="array")
-	 * @Assert\All({
+    /**
+     * @ORM\Column(type="array")
+     * @Assert\All({
      *     @Assert\Regex("/^[A-zА-яіїє']+$/")
      * })
 	 * @JMS\Groups({"eventFull"})
@@ -117,6 +107,16 @@ class Event implements Opinionable
     }
 
     /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
      * Set title
      *
      * @param  string $title
@@ -130,13 +130,13 @@ class Event implements Opinionable
     }
 
     /**
-     * Get title
+     * Get text
      *
      * @return string
      */
-    public function getTitle()
+    public function getText()
     {
-        return $this->title;
+        return $this->text;
     }
 
     /**
@@ -153,59 +153,13 @@ class Event implements Opinionable
     }
 
     /**
-     * Get text
+     * Get slug
      *
      * @return string
      */
-    public function getText()
+    public function getSlug()
     {
-        return $this->text;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param  integer $createdAt
-     * @return Event
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return integer
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set deletedAt
-     *
-     * @param  integer $deletedAt
-     * @return Event
-     */
-    public function setDeletedAt($deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get deletedAt
-     *
-     * @return integer
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
+        return $this->slug;
     }
 
     /**
@@ -222,13 +176,13 @@ class Event implements Opinionable
     }
 
     /**
-     * Get slug
+     * Get eventDate
      *
-     * @return string
+     * @return integer
      */
-    public function getSlug()
+    public function getEventDate()
     {
-        return $this->slug;
+        return $this->eventDate;
     }
 
     /**
@@ -245,13 +199,13 @@ class Event implements Opinionable
     }
 
     /**
-     * Get eventDate
+     * Get author
      *
-     * @return integer
+     * @return \AppBundle\Entity\User
      */
-    public function getEventDate()
+    public function getAuthor()
     {
-        return $this->eventDate;
+        return $this->author;
     }
 
     /**
@@ -265,16 +219,6 @@ class Event implements Opinionable
         $this->author = $author;
 
         return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \AppBundle\Entity\User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 
     /**
@@ -317,18 +261,17 @@ class Event implements Opinionable
 		})->first();
 	}
 
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
     public function setTags(array $tags)
     {
         $this->tags = $tags;
 
         return $this;
     }
-
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
 
     /**
      * Add opinions
@@ -369,4 +312,5 @@ class Event implements Opinionable
 			return $opinion->getId() == $id; 
 		})->first();
 	}
+
 }

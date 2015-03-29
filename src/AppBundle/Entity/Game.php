@@ -14,8 +14,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Game
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -106,6 +104,15 @@ class Game
 	 * @ORM\OneToMany(targetEntity="GameResult", mappedBy="game")
 	 */
 	private $gameResults;
+	
+	/**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->gameResults = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+	
 
     /**
      * Get id
@@ -115,6 +122,16 @@ class Game
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -131,13 +148,13 @@ class Game
     }
 
     /**
-     * Get name
+     * Get playDate
      *
-     * @return string
+     * @return integer
      */
-    public function getName()
+    public function getPlayDate()
     {
-        return $this->name;
+        return $this->playDate;
     }
 
     /**
@@ -154,13 +171,13 @@ class Game
     }
 
     /**
-     * Get playDate
+     * Get playPlace
      *
-     * @return integer
+     * @return string
      */
-    public function getPlayDate()
+    public function getPlayPlace()
     {
-        return $this->playDate;
+        return $this->playPlace;
     }
 
     /**
@@ -177,13 +194,13 @@ class Game
     }
 
     /**
-     * Get playPlace
+     * Get isLocallyRated
      *
-     * @return string
+     * @return boolean
      */
-    public function getPlayPlace()
+    public function getIsLocallyRated()
     {
-        return $this->playPlace;
+        return $this->isLocallyRated;
     }
 
     /**
@@ -200,13 +217,13 @@ class Game
     }
 
     /**
-     * Get isLocallyRated
+     * Get isGloballyRated
      *
      * @return boolean
      */
-    public function getIsLocallyRated()
+    public function getIsGloballyRated()
     {
-        return $this->isLocallyRated;
+        return $this->isGloballyRated;
     }
 
     /**
@@ -223,13 +240,13 @@ class Game
     }
 
     /**
-     * Get isGloballyRated
+     * Get isHome
      *
      * @return boolean
      */
-    public function getIsGloballyRated()
+    public function getIsHome()
     {
-        return $this->isGloballyRated;
+        return $this->isHome;
     }
 
     /**
@@ -246,13 +263,13 @@ class Game
     }
 
     /**
-     * Get isHome
+     * Get isComplete
      *
      * @return boolean
      */
-    public function getIsHome()
+    public function getIsComplete()
     {
-        return $this->isHome;
+        return $this->isComplete;
     }
 
     /**
@@ -269,13 +286,13 @@ class Game
     }
 
     /**
-     * Get isComplete
+     * Get description
      *
-     * @return boolean
+     * @return string
      */
-    public function getIsComplete()
+    public function getDescription()
     {
-        return $this->isComplete;
+        return $this->description;
     }
 
     /**
@@ -292,13 +309,13 @@ class Game
     }
 
     /**
-     * Get description
+     * Get slug
      *
      * @return string
      */
-    public function getDescription()
+    public function getSlug()
     {
-        return $this->description;
+        return $this->slug;
     }
 
     /**
@@ -315,13 +332,13 @@ class Game
     }
 
     /**
-     * Get slug
+     * Get season
      *
-     * @return string
+     * @return \AppBundle\Entity\Season
      */
-    public function getSlug()
+    public function getSeason()
     {
-        return $this->slug;
+        return $this->season;
     }
 
     /**
@@ -335,16 +352,6 @@ class Game
         $this->season = $season;
 
         return $this;
-    }
-
-    /**
-     * Get season
-     *
-     * @return \AppBundle\Entity\Season
-     */
-    public function getSeason()
-    {
-        return $this->season;
     }
 
     /**
@@ -369,14 +376,7 @@ class Game
     {
         return $this->ageCategory;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->gameResults = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
+	
     /**
      * Add gameResults
      *

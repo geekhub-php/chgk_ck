@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
     xsi:schemaLocation="http://symfony.com/schema/dic/services
         http://symfony.com/schema/dic/services/services-1.0.xsd"
 >
@@ -10,58 +10,107 @@
             <tag name="validator.constraint_validator" alias="entities_exist_validator" />
         </service>
 
-		<service id="sonata.admin.playerEvent" class="AppBundle\Admin\PlayerEventAdmin">
-			<tag name="sonata.admin" manager_type="orm" group="Entities" label="PlayerEvent"/>
-			<argument />
-			<argument>AppBundle\Entity\PlayerEvent</argument>
-			<argument />
+        <service id="sonata.admin.playerEvent" class="AppBundle\Admin\PlayerEventAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="PlayerEvent"/>
+            <argument/>
+            <argument>AppBundle\Entity\PlayerEvent</argument>
+            <argument/>
 		</service>
 
-		<service id="sonata.admin.gameEvent" class="AppBundle\Admin\GameEventAdmin">
-			<tag name="sonata.admin" manager_type="orm" group="Entities" label="GameEvent"/>
-			<argument />
-			<argument>AppBundle\Entity\GameEvent</argument>
-			<argument />
-		</service>
+        <service id="sonata.admin.gameEvent" class="AppBundle\Admin\GameEventAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="GameEvent"/>
+            <argument/>
+            <argument>AppBundle\Entity\GameEvent</argument>
+            <argument/>
+        </service>
 
-		<service id="sonata.admin.comment" class="AppBundle\Admin\CommentAdmin">
-			<tag name="sonata.admin" manager_type="orm" group="Entities" label="Comment"/>
-			<argument />
-			<argument>AppBundle\Entity\Comment</argument>
-			<argument />
-		</service>
+        <service id="sonata.admin.comment" class="AppBundle\Admin\CommentAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Comment"/>
+            <argument/>
+            <argument>AppBundle\Entity\Comment</argument>
+            <argument/>
+        </service>
 
-		<service id="sonata.admin.game" class="AppBundle\Admin\GameAdmin">
-			<tag name="sonata.admin" manager_type="orm" group="Entities" label="Game"/>
-			<argument />
-			<argument>AppBundle\Entity\Game</argument>
-			<argument />
-		</service>
+        <service id="sonata.admin.game" class="AppBundle\Admin\GameAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Game"/>
+            <argument/>
+            <argument>AppBundle\Entity\Game</argument>
+            <argument/>
+        </service>
 
-		<service id="sonata.admin.playerGameResult" class="AppBundle\Admin\PlayerGameResultAdmin">
-			<tag name="sonata.admin" manager_type="orm" group="Entities" label="PlayerGameResult"/>
-			<argument />
-			<argument>AppBundle\Entity\PlayerGameResult</argument>
-			<argument />
-		</service>
+        <service id="sonata.admin.playerGameResult" class="AppBundle\Admin\PlayerGameResultAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="PlayerGameResult"/>
+            <argument/>
+            <argument>AppBundle\Entity\PlayerGameResult</argument>
+            <argument/>
+        </service>
 
-		<service id="sonata.admin.teamGameResult" class="AppBundle\Admin\TeamGameResultAdmin">
-			<tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamGameResult"/>
-			<argument />
-			<argument>AppBundle\Entity\TeamGameResult</argument>
-			<argument />
-		</service>
+        <service id="sonata.admin.teamGameResult" class="AppBundle\Admin\TeamGameResultAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamGameResult"/>
+            <argument/>
+            <argument>AppBundle\Entity\TeamGameResult</argument>
+            <argument/>
+        </service>
 
-		<service id="sonata.admin.User" class="AppBundle\Admin\UserAdmin">
-			<tag name="sonata.admin" manager_type="orm" group="Entities" label="User"/>
-			<argument />
-			<argument>AppBundle\Entity\User</argument>
-			<argument />
-		</service>
+        <service id="sonata.admin.users" class="AppBundle\Admin\UserAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="User"/>
+            <argument/>
+            <argument>AppBundle\Entity\User</argument>
+            <argument/>
+        </service>
 
-		<service id="app.type.timestamp_date" class="AppBundle\Form\Type\TimestampDateType">
-		    <tag name="form.type" alias="timestamp_date" />
-		</service>
+        <service id="sonata.admin.ageCategory" class="AppBundle\Admin\AgeCategoryAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="AgeCategory"/>
+            <argument/>
+            <argument>AppBundle\Entity\AgeCategory</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.membershipType" class="AppBundle\Admin\MembershipTypeAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="MembershipType"/>
+            <argument/>
+            <argument>AppBundle\Entity\MembershipType</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.players" class="AppBundle\Admin\PlayerAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Player"/>
+            <argument/>
+            <argument>AppBundle\Entity\Player</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.seasons" class="AppBundle\Admin\SeasonAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Season"/>
+            <argument/>
+            <argument>AppBundle\Entity\Season</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.teams" class="AppBundle\Admin\TeamAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Team"/>
+            <argument/>
+            <argument>AppBundle\Entity\Team</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.teamRole" class="AppBundle\Admin\TeamRoleAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamRole"/>
+            <argument/>
+            <argument>AppBundle\Entity\TeamRole</argument>
+            <argument/>
+        </service>
+
+        <service id="sonata.admin.teamPlayerAssociation" class="AppBundle\Admin\TeamPlayerAssociationAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamPlayerAssociation"/>
+            <argument/>
+            <argument>AppBundle\Entity\TeamPlayerAssociation</argument>
+            <argument/>
+        </service>
+
+        <service id="app.type.timestamp_date" class="AppBundle\Form\Type\TimestampDateType">
+            <tag name="form.type" alias="timestamp_date"/>
+        </service>
 
     </services>
 </container>

@@ -11,25 +11,25 @@ use AppBundle\Form\DataTransformer\TimestampToDateTransformer;
 
 class TimestampDateType extends AbstractType
 {
-	public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-    	$builder->addViewTransformer(new DateToStringTransformer());
-		$builder->addModelTransformer(new TimestampToDateTransformer());
+        $builder->addViewTransformer(new DateToStringTransformer());
+        $builder->addModelTransformer(new TimestampToDateTransformer());
     }
-	
-	public function setDefaultOptions(OptionsResolverInterface $resolver)
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-        	'attr' => array('class' => 'timestamp-date')
+            'attr' => array('class' => 'timestamp-date')
         ));
     }
-	
-	public function getParent()
+
+    public function getParent()
     {
         return 'text';
     }
-	
-	public function getName()
+
+    public function getName()
     {
         return 'timestamp_date';
     }

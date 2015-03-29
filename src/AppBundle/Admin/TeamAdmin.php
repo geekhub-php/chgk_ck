@@ -42,7 +42,6 @@ class TeamAdmin extends Admin
             ->add('description', 'text')
             ->add('rating', 'integer')
             ->add('city', 'text')
-            ->add('ageCategory', null, array('associated_property' => 'name'))
-            ->add(' teamPlayerAssociations');
+            ->add('ageCategory', null, array('associated_property' => 'name'));
     }
 }

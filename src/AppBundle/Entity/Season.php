@@ -14,8 +14,6 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Season
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id

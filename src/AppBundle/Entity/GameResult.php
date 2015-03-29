@@ -142,6 +142,7 @@ abstract class GameResult implements Opinionable
     public function __construct()
     {
         $this->opinions = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->createdAt = time();
     }
 
     /**

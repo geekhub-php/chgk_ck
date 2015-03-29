@@ -29,7 +29,7 @@ class PlayerAdmin extends Admin
             ->add('firstName', null, array(), 'text')
             ->add('middleName', null, array(), 'text')
             ->add('lastName', null, array(), 'text')
-            ->add('dob', 'timestamp_date');
+            ->add('dob', null, array(), 'timestamp_date');
     }
 
     protected function configureListFields(ListMapper $listMapper)
@@ -38,7 +38,9 @@ class PlayerAdmin extends Admin
             ->addIdentifier('lastName', 'text')
             ->add('firstName', 'text')
             ->add('middleName', 'text')
-            ->add('dob', 'timestamp_date')
-            ->add(' teamPlayerAssociations');
+            ->add('dob', 'date', array(
+                'pattern' => 'dd.MM.yyyy'
+            ))
+			;
     }
 }

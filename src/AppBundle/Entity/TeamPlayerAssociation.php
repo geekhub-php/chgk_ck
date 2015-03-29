@@ -12,8 +12,6 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class TeamPlayerAssociation
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id

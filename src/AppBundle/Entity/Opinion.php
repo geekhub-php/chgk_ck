@@ -10,7 +10,7 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Opinion
 {
-	/**
+    /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -39,11 +39,21 @@ class Opinion
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get isPositive
+     *
+     * @return boolean
+     */
+    public function getIsPositive()
+    {
+        return $this->isPositive;
     }
 
     /**
@@ -60,13 +70,13 @@ class Opinion
     }
 
     /**
-     * Get isPositive
+     * Get author
      *
-     * @return boolean 
+     * @return \AppBundle\Entity\User
      */
-    public function getIsPositive()
+    public function getAuthor()
     {
-        return $this->isPositive;
+        return $this->author;
     }
 
     /**
@@ -80,15 +90,5 @@ class Opinion
         $this->author = $author;
 
         return $this;
-    }
-
-    /**
-     * Get author
-     *
-     * @return \AppBundle\Entity\User 
-     */
-    public function getAuthor()
-    {
-        return $this->author;
     }
 }
