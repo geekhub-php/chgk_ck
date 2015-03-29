@@ -5,7 +5,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use AppBundle\Entity\ TeamPlayerAssociation;
+use AppBundle\Entity\TeamPlayerAssociation;
 
 class TeamPlayerAssociationAdmin extends Admin
 {
@@ -24,7 +24,7 @@ class TeamPlayerAssociationAdmin extends Admin
                 'property' => 'name',
             ))
             ->add('membershipType', 'entity', array(
-                'class' => 'AppBundle: MembershipType',
+                'class' => 'AppBundle:MembershipType',
                 'property' => 'name',
             ))
             ->add('roles', 'entity', array(

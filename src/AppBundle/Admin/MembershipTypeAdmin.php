@@ -5,7 +5,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use AppBundle\Entity\ MembershipType;
+use AppBundle\Entity\MembershipType;
 
 class MembershipTypeAdmin extends Admin
 {
@@ -15,24 +15,22 @@ class MembershipTypeAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', array('choices' => array(
-                'MAIN' => 'Основной игрок',
-                'LEGIONNAIRE' => 'Легионер',
-            )))
-            ->add('description', 'text');
+            // ->add('name', array('choices' => array(
+                // 'MAIN' => 'Основной игрок',
+                // 'LEGIONNAIRE' => 'Легионер',
+            // )))
+            ->add('name', 'text');
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name')
-            ->add('description', 'text');
+            ->add('name');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
-            ->add('description', 'text');
+            ->addIdentifier('name');
     }
 }

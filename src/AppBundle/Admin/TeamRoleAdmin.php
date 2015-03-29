@@ -14,32 +14,32 @@ class TeamRoleAdmin extends Admin
 
     protected function configureFormFields(FormMapper $formMapper)
     {
-        $formMapper
-            ->add('name', array('choices' => array(
-                'CAPTAIN' => 'Капитан',
-                'SPARROW' => 'Ласточка',
-                'IDEAGEN' => 'Генератор идей',
-                'LOGICIAN' => 'Логик',
-                'INTUITIONIST' => 'Интуит',
-                'ERUDITE' => 'Эрудит',
-                'CRITICIST' => 'Критик',
-                'LIFE_OF_THE_TEAM' => 'Душа команды',
-                'USSR' => 'Совок',
-            )))
-            ->add('description', 'text');
+        $formMapper->add('name', 'text')
+            // ->add('name', array('choices' => array(
+                // 'CAPTAIN' => 'Капитан',
+                // 'SPARROW' => 'Ласточка',
+                // 'IDEAGEN' => 'Генератор идей',
+                // 'LOGICIAN' => 'Логик',
+                // 'INTUITIONIST' => 'Интуит',
+                // 'ERUDITE' => 'Эрудит',
+                // 'CRITICIST' => 'Критик',
+                // 'LIFE_OF_THE_TEAM' => 'Душа команды',
+                // 'USSR' => 'Совок',
+            // )))
+            ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
             ->add('name')
-            ->add('description', 'text');
+			;
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
             ->addIdentifier('name')
-            ->add('description', 'text');
+			;
     }
 }

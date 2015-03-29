@@ -15,11 +15,11 @@ class AgeCategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('name', array('choices' => array(
-                'SCHOOL' => 'Школьная',
-                'YOUTH' => 'Молодежная',
-                'ADULT' => 'Взрослая',
-            )))
+            // ->add('name', array('choices' => array(
+                // 'SCHOOL' => 'Школьная',
+                // 'YOUTH' => 'Молодежная',
+                // 'ADULT' => 'Взрослая',
+            // )))
             ->add('description', 'text');
     }
 
