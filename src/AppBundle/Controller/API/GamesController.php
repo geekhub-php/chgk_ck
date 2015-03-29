@@ -11,17 +11,66 @@ class GamesController extends FOSRestController
 {
 	/**
 	 * @REST\View(serializerGroups={"gameFull", "short"})
+	 * @REST\QueryParam(name="name", default="")
+	 * @REST\QueryParam(name="date", requirements="\d+", default="")
+	 * @REST\QueryParam(name="place", default="")
+	 * @REST\QueryParam(name="season", requirements="(\d+|null)", default="")
+	 * @REST\QueryParam(name="isLocallyRated", requirements="(true|false)", default="")
+	 * @REST\QueryParam(name="isGloballyRated", requirements="(true|false)", default="")
+	 * @REST\QueryParam(name="isHome", requirements="(true|false)", default="")
+	 * @REST\QueryParam(name="isComplete", requirements="(true|false)", default="")
+	 * @REST\QueryParam(name="ageCategory", requirements="\d+", default="")
 	 * @ApiDoc(
 	 * 	description="returns games",
 	 * 	statusCodes={
 	 * 		200="ok"
 	 * 	},
-	 * 	output="AppBundle\Entity\Game"
+	 * 	output="AppBundle\Entity\Game",
+	 * 	filters={
+     *      {"name"="name", "dataType"="string"},
+	 * 		{"name"="date", "dataType"="integer"},
+	 * 		{"name"="place", "dataType"="string"},
+	 * 		{"name"="season", "dataType"="integer"},
+	 * 		{"name"="isLocallyRated", "dataType"="boolean"},
+	 * 		{"name"="isGloballyRated", "dataType"="boolean"},
+	 * 		{"name"="isHome", "dataType"="boolean"},
+	 * 		{"name"="isComplete", "dataType"="boolean"},
+	 * 		{"name"="ageCategory", "dataType"="integer"}
+     *  }
 	 * )
 	 */
-    public function getGamesAction()
+    public function getGamesAction($name, $date, $place, $season, $isLocallyRated, $isGloballyRated, $isHome, $isComplete, $ageCategory)
     {
-    	return $this->getDoctrine()->getRepository('AppBundle:Game')->findAll();
+    	$criteria = [];
+		if ($name) {
+			$criteria['name'] = $name;
+		}
+		if ($date) {
+			$criteria['playDate'] = $date;
+		}
+		if ($place) {
+			$criteria['playPlace'] = $place;
+		}
+		if ($season) {
+			$criteria['season'] = $season === 'null' ? null : $season;
+		}
+		if ($isLocallyRated) {
+			$criteria['isLocallyRated'] = filter_var($isLocallyRated, FILTER_VALIDATE_BOOLEAN);
+		}
+		if ($isGloballyRated) {
+			$criteria['isGloballyRated'] = filter_var($isGloballyRated, FILTER_VALIDATE_BOOLEAN);
+		}
+		if ($isHome) {
+			$criteria['isHome'] = filter_var($isHome, FILTER_VALIDATE_BOOLEAN);
+		}
+		if ($isComplete) {
+			$criteria['isComplete'] = filter_var($isComplete, FILTER_VALIDATE_BOOLEAN);
+		}
+		if ($ageCategory) {
+			$criteria['ageCategory'] = $ageCategory;
+		}
+
+		return $this->getDoctrine()->getRepository('AppBundle:Game')->findBy($criteria);
     }
 	
 	/**

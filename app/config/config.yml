@@ -120,6 +120,7 @@ sensio_framework_extra:
     request: { converters: true }
 
 fos_rest:
+    param_fetcher_listener: force
     view:
         formats:
             json: true
