@@ -9,8 +9,8 @@ use AppBundle\Entity\TeamPlayerAssociation;
 
 class TeamPlayerAssociationAdmin extends Admin
 {
-    protected $baseRouteName = "admin_ team_player_association";
-    protected $baseRoutePattern = " teamPlayerAssociation";
+    protected $baseRouteName = "admin_team_player_association";
+    protected $baseRoutePattern = "teamPlayerAssociation";
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -33,13 +33,21 @@ class TeamPlayerAssociationAdmin extends Admin
                 'multiple' => true,
             ));
     }
+	
+	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+    	 $datagridMapper
+            ->add('player', null, array(), 'entity', array('property' => 'lastName', 'placeholder' => 'any player'))
+			->add('team', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any team'))
+		;
+    }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('player', null, array('associated_property' => 'email'))
+            ->add('player', null, array('associated_property' => 'lastName'))
             ->add('team', null, array('associated_property' => 'name'))
-            ->add('membershipType', null, array('associated_property' => 'email'))
+            ->add('membershipType', null, array('associated_property' => 'name'))
             ->add('roles', null, array('associated_property' => 'name'));
     }
 }
