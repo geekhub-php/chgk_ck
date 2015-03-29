@@ -10,7 +10,17 @@ Here you can check the list of teams, players and tournaments, get acquainted wi
 Installation
 ------------
 
-Here we need to describe how to setup project
+
+1. Clone the repo 
+`git clone https://github.com/geekhub-php/chgk_ck.git <directory_name>` 
+2. cd to your project root and 
+`git checkout origin/develop`
+`git pull origin develop`
+3. run reload script 
+`php bin/reload`
+
+In case you get an error "Could not create database for connection named `symfony`"
+Setup database password in your parameters.yml and run reload again 
 
 Bug tracking
 ------------
