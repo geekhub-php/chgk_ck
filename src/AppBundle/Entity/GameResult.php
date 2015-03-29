@@ -45,6 +45,11 @@ abstract class GameResult
      * @Assert\Range(min=0)
      */
     private $score;
+	
+	public function __construct()
+	{
+		$this->createdAt = time();
+	}
 
     /**
      * Get id
