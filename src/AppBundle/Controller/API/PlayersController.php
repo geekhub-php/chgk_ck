@@ -11,17 +11,31 @@ class PlayersController extends FOSRestController
 {
 	/**
 	 * @REST\View(serializerGroups={"playerFull", "short"})
+	 * @REST\QueryParam(name="lastName", default="")
+	 * @REST\QueryParam(name="dob", requirements="\d+", default="")
 	 * @ApiDoc(
 	 * 	description="returns players",
 	 * 	statusCodes={
 	 * 		200="ok",
 	 * 	},
+	 * 	filters={
+     *      {"name"="lastName", "dataType"="string"},
+	 * 		{"name"="dob", "dataType"="integer"}
+     *  },
 	 * 	output="AppBundle\Entity\Player"
 	 * )
 	 */
-    public function getPlayersAction()
+    public function getPlayersAction($lastName, $dob)
     {
-    	return $this->getDoctrine()->getRepository('AppBundle:Player')->findAll();
+    	$criteria = [];
+    	if ($lastName) {
+    		$criteria['lastName'] = $lastName;
+    	}
+		if ($dob) {
+			$criteria['dob'] = $dob;
+		}
+		
+    	return $this->getDoctrine()->getRepository('AppBundle:Player')->findBy($criteria);
     }
 	
 	/**
