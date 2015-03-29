@@ -82,7 +82,8 @@ class GameResultOpinionsController extends OpinionsController
      *  },
 	 * 	statusCodes={
 	 * 		201="created",
-	 * 		400="opinion is already created"
+	 * 		409="opinion by curret user is already created",
+	 * 		403="access denied"
 	 * 	},
 	 * 	output="AppBundle\Entity\Opinion",
 	 * 	input="AppBundle\Entity\Opinion"
@@ -112,7 +113,8 @@ class GameResultOpinionsController extends OpinionsController
      *  },
 	 * 	statusCodes={
 	 * 		204="deleted",
-	 * 		404="game or game result was not found"
+	 * 		404="game or game result was not found",
+	 * 		403="access denied"
 	 * 	}
 	 * )
 	 */

@@ -11,6 +11,7 @@ use AppBundle\Entity\Event;
 use FOS\RestBundle\View\View;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class CommentsController extends FOSRestController
 {
@@ -76,7 +77,8 @@ class CommentsController extends FOSRestController
 	 * 	statusCodes={
 	 * 		201="created",
 	 * 		404="event was not found",
-	 * 		400="comment is not valid"
+	 * 		400="comment is not valid",
+	 * 		403="access denied"
 	 * 	},
 	 * 	output="AppBundle\Entity\Comment",
 	 * 	input="AppBundle\Entity\Comment"
@@ -84,10 +86,14 @@ class CommentsController extends FOSRestController
 	 */
 	public function postCommentAction(Event $event, Comment $comment)
 	{
-		$author = $this->getDoctrine()->getRepository('AppBundle:User')->find(1);//TODO get user from session
+		if (!$this->get('security.authorization_checker')->isGranted('add', $comment)) {
+			throw new AccessDeniedException();
+		}
+		
+		$author = $this->get('security.token_storage')->getToken()->getUser();
 		$comment->setAuthor($author);
 		$comment->setCreatedAt(time());
-		
+				
 		$validationErrors = $this->get('validator')->validate($comment);
 		$view = View::create($validationErrors, 400);
 		if (count($validationErrors) == 0) {
@@ -97,10 +103,6 @@ class CommentsController extends FOSRestController
 			
 			$view->setStatusCode(201);
 			$view->setData($comment);
-			$view->setHeader('Location', $this->generateUrl('get_event_comment', array(
-				'eventId' => 0,
-				'comment' => $comment->getId()
-			)));
 			$view->setSerializationContext(SerializationContext::create()->setGroups(array('commentFull', 'short')));
 		}
 		
@@ -119,22 +121,29 @@ class CommentsController extends FOSRestController
      *      {"name"="commentId","dataType"="integer","requirement"="\d+", "description"="comment id"}
      *  },
 	 * 	statusCodes={
-	 * 		204="deleted"
+	 * 		204="deleted",
+	 * 		403="access denied"
 	 * 	}
 	 * )
 	 */
 	public function deleteCommentAction($commentId)
 	{
 		$comment = $this->getDoctrine()->getRepository('AppBundle:Comment')->find($commentId);
-		if ($comment) {
-			$this->getDoctrine()->getManager()->remove($comment);
-			$this->getDoctrine()->getManager()->flush();
+
+		if (!$comment) {
+			return;
 		}
+		
+		if (!$this->get('security.authorization_checker')->isGranted('delete', $comment)) {
+			throw new AccessDeniedException();
+		}
+		$this->getDoctrine()->getManager()->remove($comment);
+		$this->getDoctrine()->getManager()->flush();
 	}
 	
 	/**
 	 * @REST\Put("comments/{commentId}")
-	 * @ParamConverter("comment", converter="fos_rest.request_body")
+	 * @ParamConverter("updatedComment", converter="fos_rest.request_body")
 	 * @ApiDoc(
 	 * 	description="updates commnent",
 	 * 	parameters={
@@ -145,19 +154,27 @@ class CommentsController extends FOSRestController
      *  },
 	 * 	statusCodes={
 	 * 		201="updated",
-	 * 		400="comment is not valid"
+	 * 		400="comment is not valid",
+	 * 		404="comment was not found",
+	 * 		403="access denied"
 	 * 	},
 	 * 	output="AppBundle\Entity\Comment",
 	 * 	input="AppBundle\Entity\Comment"
 	 * )
 	 */
-	public function putCommentAction(Comment $comment, $commentId)
+	public function putCommentAction(Comment $updatedComment, $commentId)
 	{
-		$comment->setId($commentId);
-		$comment->setCreatedAt(time());
-		$author = $this->getDoctrine()->getRepository('AppBundle:User')->find(1);//TODO get user from session
-		$comment->setAuthor($author);
-		$comment = $this->getDoctrine()->getManager()->merge($comment);
+		$comment = $this->getDoctrine()->getRepository('AppBundle:Comment')->find($commentId);
+		
+		if (!$comment) {
+			throw new NotFoundHttpException();
+		}
+		
+		if (!$this->get('security.authorization_checker')->isGranted('edit', $comment)) {
+			throw new AccessDeniedException();
+		}
+		
+		$comment->setText($updatedComment->getText());
 		
 		$validationErrors = $this->get('validator')->validate($comment);
 		$view = View::create($validationErrors, 400);

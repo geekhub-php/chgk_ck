@@ -44,10 +44,6 @@ class Comment implements Opinionable
 	 */
     private $opinions;
 
-    public function __construct()
-    {
-    }
-	
 	public function setId($id)
 	{
 		$this->id = $id;

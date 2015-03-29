@@ -71,7 +71,8 @@ class EventOpinionsController extends OpinionsController
      *  },
 	 * 	statusCodes={
 	 * 		201="ok",
-	 * 		400="opinion already created"
+	 * 		409="opinion by curret user is already created",
+	 * 		403="access denied"
 	 * 	},
 	 * 	output="AppBundle\Entity\Opinion",
 	 * 	input="AppBundle\Entity\Opinion"
@@ -97,7 +98,8 @@ class EventOpinionsController extends OpinionsController
      *  },
 	 * 	statusCodes={
 	 * 		204="deleted",
-	 * 		404="event was not found"
+	 * 		404="event was not found",
+	 * 		403="access denied"
 	 * 	}
 	 * )
 	 */
