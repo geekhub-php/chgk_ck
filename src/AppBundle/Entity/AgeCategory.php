@@ -14,8 +14,6 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class AgeCategory
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -41,7 +39,7 @@ class AgeCategory
 	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
-
+	
     /**
      * Get id
      *

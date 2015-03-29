@@ -15,11 +15,7 @@ class AgeCategoryAdmin extends Admin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            // ->add('name', array('choices' => array(
-                // 'SCHOOL' => 'Школьная',
-                // 'YOUTH' => 'Молодежная',
-                // 'ADULT' => 'Взрослая',
-            // )))
+            ->add('name', 'text')
             ->add('description', 'text');
     }
 
@@ -27,13 +23,14 @@ class AgeCategoryAdmin extends Admin
     {
         $datagridMapper
             ->add('name')
-            ->add('description', 'text');
+            ->add('description');
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('name')
-            ->add('description', 'text');
+			->addIdentifier('id')
+            ->add('name')
+            ->add('description');
     }
 }
