@@ -10,14 +10,14 @@
             <tag name="validator.constraint_validator" alias="entities_exist_validator" />
         </service>
 
-        <service id="sonata.admin.playerEvent" class="AppBundle\Admin\PlayerEventAdmin">
+        <service id="sonata.admin.player.events" class="AppBundle\Admin\PlayerEventAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Entities" label="PlayerEvent"/>
             <argument/>
             <argument>AppBundle\Entity\PlayerEvent</argument>
             <argument/>
 		</service>
 
-        <service id="sonata.admin.gameEvent" class="AppBundle\Admin\GameEventAdmin">
+        <service id="sonata.admin.game.events" class="AppBundle\Admin\GameEventAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Entities" label="GameEvent"/>
             <argument/>
             <argument>AppBundle\Entity\GameEvent</argument>
@@ -38,14 +38,14 @@
             <argument/>
         </service>
 
-        <service id="sonata.admin.playerGameResult" class="AppBundle\Admin\PlayerGameResultAdmin">
+        <service id="sonata.admin.player.game.result" class="AppBundle\Admin\PlayerGameResultAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Entities" label="PlayerGameResult"/>
             <argument/>
             <argument>AppBundle\Entity\PlayerGameResult</argument>
             <argument/>
         </service>
 
-        <service id="sonata.admin.teamGameResult" class="AppBundle\Admin\TeamGameResultAdmin">
+        <service id="sonata.admin.team.game.result" class="AppBundle\Admin\TeamGameResultAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamGameResult"/>
             <argument/>
             <argument>AppBundle\Entity\TeamGameResult</argument>
@@ -59,14 +59,14 @@
             <argument/>
         </service>
 
-        <service id="sonata.admin.ageCategory" class="AppBundle\Admin\AgeCategoryAdmin">
+        <service id="sonata.admin.age.category" class="AppBundle\Admin\AgeCategoryAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Entities" label="AgeCategory"/>
             <argument/>
             <argument>AppBundle\Entity\AgeCategory</argument>
             <argument/>
         </service>
 
-        <service id="sonata.admin.membershipType" class="AppBundle\Admin\MembershipTypeAdmin">
+        <service id="sonata.admin.membership.type" class="AppBundle\Admin\MembershipTypeAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Entities" label="MembershipType"/>
             <argument/>
             <argument>AppBundle\Entity\MembershipType</argument>
@@ -94,14 +94,14 @@
             <argument/>
         </service>
 
-        <service id="sonata.admin.teamRole" class="AppBundle\Admin\TeamRoleAdmin">
+        <service id="sonata.admin.team.role" class="AppBundle\Admin\TeamRoleAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamRole"/>
             <argument/>
             <argument>AppBundle\Entity\TeamRole</argument>
             <argument/>
         </service>
 
-        <service id="sonata.admin.teamPlayerAssociation" class="AppBundle\Admin\TeamPlayerAssociationAdmin">
+        <service id="sonata.admin.team.player.association" class="AppBundle\Admin\TeamPlayerAssociationAdmin">
             <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamPlayerAssociation"/>
             <argument/>
             <argument>AppBundle\Entity\TeamPlayerAssociation</argument>
