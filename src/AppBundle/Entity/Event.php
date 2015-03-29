@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use AppBundle\Traits\TimestampableTrait;
 
 /**
  * @ORM\Entity
@@ -15,6 +16,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class Event
 {
+	use TimestampableTrait;
+	
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -42,17 +45,6 @@ class Event
      * @Assert\NotNull()
      */
     private $author;
-
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     * @Assert\NotNull()
-     */
-    private $createdAt;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $deletedAt;
 
     /**
      * @Gedmo\Slug(fields={"title"})
@@ -141,52 +133,6 @@ class Event
     public function setText($text)
     {
         $this->text = $text;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return integer
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param  integer $createdAt
-     * @return Event
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get deletedAt
-     *
-     * @return integer
-     */
-    public function getDeletedAt()
-    {
-        return $this->deletedAt;
-    }
-
-    /**
-     * Set deletedAt
-     *
-     * @param  integer $deletedAt
-     * @return Event
-     */
-    public function setDeletedAt($deletedAt)
-    {
-        $this->deletedAt = $deletedAt;
 
         return $this;
     }
