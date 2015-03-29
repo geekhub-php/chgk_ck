@@ -11,17 +11,36 @@ class SeasonsController extends FOSRestController
 {
 	/**
 	 * @REST\View(serializerGroups={"seasonFull", "short"})
+	 * @REST\QueryParam(name="startDate", requirements="\d+", default="")
+	 * @REST\QueryParam(name="endDate", requirements="\d+", default="")
+	 * @REST\QueryParam(name="name", default="")
 	 * @ApiDoc(
 	 * 	description="returns seasons",
 	 * 	statusCodes={
 	 * 		200="ok",
 	 * 	},
+	 * 	filters={
+     *      {"name"="startDate", "dataType"="integer"},
+	 * 		{"name"="endDate", "dataType"="integer"},
+	 * 		{"name"="name", "dataType"="string"}
+     *  },
 	 * 	output="AppBundle\Entity\Season"
 	 * )
 	 */
-    public function getSeasonsAction()
+    public function getSeasonsAction($startDate, $endDate, $name)
     {
-    	return $this->getDoctrine()->getRepository('AppBundle:Season')->findAll();
+    	$criteria = [];
+		if ($startDate) {
+			$criteria['startDate'] = $startDate;
+		}
+		if ($endDate) {
+			$criteria['endDate'] = $endDate;
+		}
+		if ($name) {
+			$criteria['name'] = $name;
+		}
+		
+    	return $this->getDoctrine()->getRepository('AppBundle:Season')->findBy($criteria);
     }
 	
 	/**
