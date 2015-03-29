@@ -13,8 +13,6 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class MembershipType
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
