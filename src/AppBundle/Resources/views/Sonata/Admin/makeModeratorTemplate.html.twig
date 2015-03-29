@@ -1,0 +1,3 @@
+{% if not object.hasRole('ROLE_MODERATOR') %}
+	<a class="btn btn-sm" href="{{ admin.generateObjectUrl('makeModerator', object) }}">make moderator</a>
+{% endif %}
