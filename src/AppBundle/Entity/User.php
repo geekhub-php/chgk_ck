@@ -30,6 +30,11 @@ class User extends BaseUser
 	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
+	
+	/**
+	 * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+	 */
+	private $image;
 
     /**
      * Get id
@@ -85,5 +90,28 @@ class User extends BaseUser
         $this->assignedPlayer = $assignedPlayer;
 
         return $this;
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return User
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

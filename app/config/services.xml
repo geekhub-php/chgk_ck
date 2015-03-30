@@ -130,6 +130,10 @@
 		<service id="app.form.type.tags" class="AppBundle\Form\Type\TagsType">
 		    <tag name="form.type" alias="tags" />
 		</service>
+		
+		<service id="app.registration.form.type" class="AppBundle\Form\Type\ProfileFormType">
+            <tag name="form.type" alias="user_profile" />
+        </service>
 
     </services>
 </container>

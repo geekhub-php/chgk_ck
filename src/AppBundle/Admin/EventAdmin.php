@@ -23,6 +23,11 @@ class EventAdmin extends Admin
             ))
             ->add('eventDate', 'timestamp_date')
 			->add('tags', 'tags', array('required' => false))
+			->add('image', 'sonata_media_type', array(
+			     'provider' => 'sonata.media.provider.image',
+			     'context'  => 'default',
+			     'required' => false
+			))
 			;
     }
 
