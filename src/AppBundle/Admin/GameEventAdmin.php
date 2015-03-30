@@ -41,7 +41,9 @@ class GameEventAdmin extends EventAdmin
 	{
 	    $query = parent::createQuery($context);
 				
-		$query->select('pe')->from('AppBundle:GameEvent', 'pe');
+		$query->select('ge')
+			->from('AppBundle:GameEvent', 'ge')
+			->where('ge INSTANCE OF AppBundle:GameEvent');
 			
 		return $query;
 	}
