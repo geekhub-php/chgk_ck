@@ -126,6 +126,10 @@
             <argument>AppBundle\Entity\Event</argument>
             <argument/>
 		</service>
+		
+		<service id="app.form.type.tags" class="AppBundle\Form\Type\TagsType">
+		    <tag name="form.type" alias="tags" />
+		</service>
 
     </services>
 </container>

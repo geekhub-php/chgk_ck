@@ -21,7 +21,9 @@ class EventAdmin extends Admin
                 'class' => 'AppBundle:User',
                 'property' => 'email',
             ))
-            ->add('eventDate', 'timestamp_date');
+            ->add('eventDate', 'timestamp_date')
+			->add('tags', 'tags', array('required' => false))
+			;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -46,7 +48,9 @@ class EventAdmin extends Admin
             ))
             ->add('eventDate', 'date', array(
                 'pattern' => 'dd.MM.yyyy'
-            ));
+            ))
+			->add('tags', 'array')
+			;
     }
 	
 	public function createQuery($context = 'list')
