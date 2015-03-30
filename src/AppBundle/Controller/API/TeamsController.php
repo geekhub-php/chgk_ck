@@ -50,6 +50,9 @@ class TeamsController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"teamFull", "short"})
+	 * @REST\Get("teams/{team}", requirements={
+	 * 		"team" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns team",
 	 * 	parameters={

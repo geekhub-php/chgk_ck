@@ -48,6 +48,9 @@ class EventsController extends FOSRestController
 	
 	/**
 	 * @RestAnnotations\View(serializerGroups={"eventFull", "short"})
+	 * @REST\Get("events/{event}", requirements={
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns event",
 	 * 	parameters={

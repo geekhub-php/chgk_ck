@@ -45,6 +45,9 @@ class SeasonsController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"seasonFull", "short"})
+	 * @REST\Get("seasons/{season}", requirements={
+	 * 		"season" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns season",
 	 * 	parameters={

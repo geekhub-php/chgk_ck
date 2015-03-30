@@ -27,7 +27,9 @@ class MembershipTypesController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"membershipTypesFull", "short"})
-	 * @REST\Get("membershipTypes/{membershipType}")
+	 * @REST\Get("membershipTypes/{membershipType}", requirements={
+	 * 		"membershipType" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns membership type",
 	 * 	parameters={

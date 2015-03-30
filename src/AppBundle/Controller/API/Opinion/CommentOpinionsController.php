@@ -14,7 +14,11 @@ class CommentOpinionsController extends OpinionsController
 {
 	/**
 	 * @REST\View(serializerGroups={"opinionFull", "short"})
-	 * @REST\Get("events/{event}/comments/{commentId}/opinions/{opinionId}")
+	 * @REST\Get("events/{event}/comments/{commentId}/opinions/{opinionId}", requirements={
+	 * 		"opinionId" = "\d+",
+	 * 		"commentId" = "\d+",
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns commnents opinion",
 	 * 	parameters={
@@ -43,7 +47,10 @@ class CommentOpinionsController extends OpinionsController
 	
 	/**
 	 * @REST\View(serializerGroups={"opinionFull", "short"})
-	 * @REST\Get("events/{event}/comments/{commentId}/opinions")
+	 * @REST\Get("events/{event}/comments/{commentId}/opinions", requirements={
+	 * 		"commentId" = "\d+",
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns commnents opinions",
 	 * 	parameters={
@@ -69,7 +76,10 @@ class CommentOpinionsController extends OpinionsController
 	
 	/**
 	 * @ParamConverter("opinion", converter="fos_rest.request_body")
-	 * @REST\Post("events/{event}/comments/{commentId}/opinions")
+	 * @REST\Post("events/{event}/comments/{commentId}/opinions", requirements={
+	 * 		"commentId" = "\d+",
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="creates new opinion",
 	 * 	parameters={
@@ -98,7 +108,11 @@ class CommentOpinionsController extends OpinionsController
 	
 	/**
 	 * @REST\View(statusCode=204)
-	 * @REST\Delete("events/{event}/comments/{commentId}/opinions/{opinionId}")
+	 * @REST\Delete("events/{event}/comments/{commentId}/opinions/{opinionId}", requirements={
+	 * 		"opinionId" = "\d+",
+	 * 		"commentId" = "\d+",
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="deletes opinion",
 	 * 	parameters={

@@ -75,6 +75,9 @@ class GamesController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"gameFull", "short"})
+	 * @REST\Get("games/{game}", requirements={
+	 * 		"game" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns game",
 	 * 	parameters={

@@ -27,7 +27,9 @@ class TeamRolesController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"teamRoleFull", "short"})
-	 * @REST\Get("teamRoles/{teamRole}")
+	 * @REST\Get("teamRoles/{teamRole}", requirements={
+	 * 		"teamRole" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns team role",
 	 * 	parameters={

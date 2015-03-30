@@ -27,7 +27,9 @@ class AgeCategoriesController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"ageCategoryFull", "short"})
-	 * @REST\Get("ageCategories/{ageCategory}")
+	 * @REST\Get("ageCategories/{ageCategory}", requirements={
+	 * 		"ageCategory" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns age category",
 	 * 	parameters={
