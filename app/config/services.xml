@@ -120,8 +120,8 @@
             <tag name="security.voter" />
         </service>
 
-        <service id="chgk.oauth.user_provider" class="AppBundle\Services\ChgkOAuthUserProvider">
-            <tag name="user.provider" />
+        <service id="chgk.oauth.user_provider" class="AppBundle\Security\User\ChgkOAuthUserProvider">
+            <!--<tag name="user.provider" />-->
             <argument>%fos_user.model_manager_name%</argument>
         </service>
 

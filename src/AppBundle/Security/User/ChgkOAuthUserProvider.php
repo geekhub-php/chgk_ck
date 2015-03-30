@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Security\User ;
+namespace AppBundle\Security\User;
 
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider;
 
