@@ -31,7 +31,7 @@
         "symfony/event-dispatcher": "~2.6",
         "friendsofsymfony/rest-bundle": "~1.5",
         "knplabs/knp-paginator-bundle": "~2.4",
-        "hwi/oauth-bundle": "0.3.*"
+        "hwi/oauth-bundle": "0.4.x-dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

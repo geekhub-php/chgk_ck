@@ -46,6 +46,7 @@ class ChgkOAuthUserProvider extends BaseClass
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
         $username = $response->getUsername();
+        $email = $response->getEmail();
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
         //when the user is registrating
         if (null === $user) {
@@ -57,11 +58,9 @@ class ChgkOAuthUserProvider extends BaseClass
             $user = $this->userManager->createUser();
             $user->$setter_id($username);
             $user->$setter_token($response->getAccessToken());
-            //I have set all requested data with the user's username
-            //modify here with relevant data
             $user->setUsername($username);
-            $user->setEmail($username);
-            $user->setPassword($username);
+            $user->setEmail($email);
+//            $user->setPassword($password);
             $user->setEnabled(true);
             $this->userManager->updateUser($user);
             return $user;
