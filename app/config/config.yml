@@ -150,3 +150,42 @@ fos_rest:
           - { path: '^/', priorities: ['html'], fallback_format: html, prefer_extension: false }
 
 nelmio_api_doc: ~
+
+hwi_oauth:
+    firewall_name: main
+    resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           799515710133554
+            client_secret:       3e07081ecb403f3370c671c805a73eb1
+            scope:
+            options:
+                display: popup #dialog is optimized for popup window
+
+##        google:
+##            type:                google
+##            client_id:           <client_id>
+##            client_secret:       <client_secret>
+##            scope:               "email profile"
+##        vkontakte:
+##            type:                vkontakte
+##            client_id:           <client_id>
+##            client_secret:       <client_secret>
+##            scope:
+
+    # an optional setting to configure a query string parameter which can be used to redirect
+    # the user after authentication, e.g. /connect/facebook?_destination=/my/destination will
+    # redirect the user to /my/destination after facebook authenticates them.  If this is not
+    # set then the user will be redirected to the original resource that they requested, or
+    # the base address if no resource was requested.  This is similar to the behaviour of
+    # [target_path_parameter for form login](http://symfony.com/doc/2.0/cookbook/security/form_login.html).
+    # target_path_parameter: _destination
+
+    # an optional setting to use the HTTP REFERER header to be used in case no
+    # previous URL was stored in the session (i.e. no resource was requested).
+    # This is similar to the behaviour of
+    # [using the referring URL for form login](http://symfony.com/doc/2.0/cookbook/security/form_login.html#using-the-referring-url).
+    # use_referer: true
+
+    # here you will add one (or more) configurations for resource owners
+    # and other settings you want to adjust in this bundle, just checkout the list below!
