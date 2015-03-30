@@ -119,6 +119,13 @@
         <service id="security.access.opinion_voter" class="AppBundle\Security\Authorization\Voter\OpinionVoter" public="false">
             <tag name="security.voter" />
         </service>
+        
+        <service id="sonata.admin.event" class="AppBundle\Admin\EventAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Event"/>
+            <argument/>
+            <argument>AppBundle\Entity\Event</argument>
+            <argument/>
+		</service>
 
     </services>
 </container>
