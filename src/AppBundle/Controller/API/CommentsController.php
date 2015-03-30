@@ -18,7 +18,9 @@ class CommentsController extends FOSRestController
 	/**
 	 * @ParamConverter("comment", class="AppBundle:Comment")
 	 * @REST\View(serializerGroups={"commentFull", "short"})
-	 * @REST\Get("comments/{comment}") 
+	 * @REST\Get("comments/{comment}", requirements={
+	 * 		"comment" = "\d+"
+	 * }) 
 	 * @ApiDoc(
 	 * 	description="returns commnent",
 	 * 	parameters={
@@ -42,6 +44,9 @@ class CommentsController extends FOSRestController
 	/**
 	 * @ParamConverter("event", class="AppBundle:Event")
 	 * @REST\View(serializerGroups={"commentFull", "short"})
+	 * @REST\Get("events/{event}/comments", requirements={
+	 * 		"event" = "\d+"
+	 * }) 
 	 * @ApiDoc(
 	 * 	description="returns events commnents",
 	 * 	parameters={
@@ -54,7 +59,7 @@ class CommentsController extends FOSRestController
 	 * 		200="ok",
 	 * 		404="event was not found"
 	 * 	},
-	 * 	output="AppBundle\Entity\Comment"
+	 * 	output="array<AppBundle\Entity\Comment>"
 	 * )
 	 */
 	public function getCommentsAction(Event $event)
@@ -63,7 +68,9 @@ class CommentsController extends FOSRestController
 	}
 	
 	/**
-	 * @REST\Post("events/{event}/comments")
+	 * @REST\Post("events/{event}/comments", requirements={
+	 * 		"event" = "\d+"
+	 * })
 	 * @ParamConverter("event", class="AppBundle:Event")
 	 * @ParamConverter("comment", converter="fos_rest.request_body")
 	 * @ApiDoc(
@@ -110,7 +117,9 @@ class CommentsController extends FOSRestController
 	}
 	
 	/**
-	 * @REST\Delete("comments/{commentId}")
+	 * @REST\Delete("comments/{commentId}", requirements={
+	 * 		"commentId" = "\d+"
+	 * })
 	 * @REST\View(statusCode=204)
 	 * @ApiDoc(
 	 * 	description="deletes commnent",
@@ -142,7 +151,9 @@ class CommentsController extends FOSRestController
 	}
 	
 	/**
-	 * @REST\Put("comments/{commentId}")
+	 * @REST\Put("comments/{commentId}", requirements={
+	 * 		"commentId" = "\d+"
+	 * })
 	 * @ParamConverter("updatedComment", converter="fos_rest.request_body")
 	 * @ApiDoc(
 	 * 	description="updates commnent",

@@ -12,7 +12,10 @@ class EventOpinionsController extends OpinionsController
 {
 	/**
 	 * @REST\View(serializerGroups={"opinionFull", "short"})
-	 * @REST\Get("events/{event}/opinions/{opinionId}")
+	 * @REST\Get("events/{event}/opinions/{opinionId}", requirements={
+	 * 		"opinionId" = "\d+",
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns events opinion",
 	 * 	parameters={
@@ -37,7 +40,9 @@ class EventOpinionsController extends OpinionsController
 	
 	/**
 	 * @REST\View(serializerGroups={"opinionFull", "short"})
-	 * @REST\Get("events/{event}/opinions")
+	 * @REST\Get("events/{event}/opinions", requirements={
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns events opinions",
 	 * 	parameters={
@@ -50,7 +55,7 @@ class EventOpinionsController extends OpinionsController
 	 * 		200="ok",
 	 * 		404="event was not found"
 	 * 	},
-	 * 	output="AppBundle\Entity\Opinion"
+	 * 	output="array<AppBundle\Entity\Opinion>"
 	 * )
 	 */
 	public function getOpinionsAction(Event $event)
@@ -60,7 +65,9 @@ class EventOpinionsController extends OpinionsController
 	
 	/**
 	 * @ParamConverter("opinion", converter="fos_rest.request_body")
-	 * @REST\Post("events/{event}/opinions")
+	 * @REST\Post("events/{event}/opinions", requirements={
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="creates new event opinion",
 	 * 	parameters={
@@ -85,7 +92,10 @@ class EventOpinionsController extends OpinionsController
 	
 	/**
 	 * @REST\View(statusCode=204)
-	 * @REST\Delete("events/{event}/opinions/{opinionId}")
+	 * @REST\Delete("events/{event}/opinions/{opinionId}", requirements={
+	 * 		"opinionId" = "\d+",
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="deletes event opinion",
 	 * 	parameters={

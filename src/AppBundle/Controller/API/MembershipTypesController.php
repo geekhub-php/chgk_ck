@@ -17,7 +17,7 @@ class MembershipTypesController extends FOSRestController
 	 * 	statusCodes={
 	 * 		200="ok",
 	 * 	},
-	 * 	output="AppBundle\Entity\MembershipType"
+	 * 	output="array<AppBundle\Entity\MembershipType>"
 	 * )
 	 */
     public function getMembershipTypesAction()
@@ -27,7 +27,9 @@ class MembershipTypesController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"membershipTypesFull", "short"})
-	 * @REST\Get("membershipTypes/{membershipType}")
+	 * @REST\Get("membershipTypes/{membershipType}", requirements={
+	 * 		"membershipType" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns membership type",
 	 * 	parameters={

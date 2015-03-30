@@ -13,7 +13,11 @@ class GameResultOpinionsController extends OpinionsController
 {
 	/**
 	 * @REST\View(serializerGroups={"opinionFull", "short"})
-	 * @REST\Get("games/{game}/gameResults/{gameResultId}/opinions/{opinionId}")
+	 * @REST\Get("games/{game}/gameResults/{gameResultId}/opinions/{opinionId}", requirements={
+	 * 		"gameResultId" = "\d+",
+	 * 		"opinionId" = "\d+",
+	 * 		"game" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns game results opinion",
 	 * 	parameters={
@@ -42,7 +46,10 @@ class GameResultOpinionsController extends OpinionsController
 	
 	/**
 	 * @REST\View(serializerGroups={"opinionFull", "short"})
-	 * @REST\Get("games/{game}/gameResults/{gameResultId}/opinions")
+	 * @REST\Get("games/{game}/gameResults/{gameResultId}/opinions", requirements={
+	 * 		"gameResultId" = "\d+",
+	 * 		"game" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns game results opinions",
 	 * 	parameters={
@@ -57,7 +64,7 @@ class GameResultOpinionsController extends OpinionsController
 	 * 		200="ok",
 	 * 		404="game or game result was not found"
 	 * 	},
-	 * 	output="AppBundle\Entity\Opinion"
+	 * 	output="array<AppBundle\Entity\Opinion>"
 	 * )
 	 */
 	public function getOpinionsAction(Game $game, $gameResultId)
@@ -69,7 +76,10 @@ class GameResultOpinionsController extends OpinionsController
 	
 	/**
 	 * @ParamConverter("opinion", converter="fos_rest.request_body")
-	 * @REST\Post("games/{game}/gameResults/{gameResultId}/opinions")
+	 * @REST\Post("games/{game}/gameResults/{gameResultId}/opinions", requirements={
+	 * 		"gameResultId" = "\d+",
+	 * 		"game" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="creates new game results opinion",
 	 * 	parameters={
@@ -98,7 +108,11 @@ class GameResultOpinionsController extends OpinionsController
 	
 	/**
 	 * @REST\View(statusCode=204)
-	 * @REST\Delete("games/{game}/gameResults/{gameResultId}/opinions/{opinionId}")
+	 * @REST\Delete("games/{game}/gameResults/{gameResultId}/opinions/{opinionId}", requirements={
+	 * 		"gameResultId" = "\d+",
+	 * 		"opinionId" = "\d+",
+	 * 		"game" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="deletes game results opinion",
 	 * 	parameters={

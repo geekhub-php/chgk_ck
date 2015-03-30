@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class CommentAdmin extends Admin
 {
@@ -34,5 +35,12 @@ class CommentAdmin extends Admin
             ->addIdentifier('id')
             ->add('author', null, array('associated_property' => 'email'))
             ->add('text', 'text');
+    }
+	
+	protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection
+        	->remove('create')
+			->remove('edit');
     }
 }

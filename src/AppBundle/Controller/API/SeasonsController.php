@@ -24,7 +24,7 @@ class SeasonsController extends FOSRestController
 	 * 		{"name"="endDate", "dataType"="integer"},
 	 * 		{"name"="name", "dataType"="string"}
      *  },
-	 * 	output="AppBundle\Entity\Season"
+	 * 	output="array<AppBundle\Entity\Season>"
 	 * )
 	 */
     public function getSeasonsAction($startDate, $endDate, $name)
@@ -45,6 +45,9 @@ class SeasonsController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"seasonFull", "short"})
+	 * @REST\Get("seasons/{season}", requirements={
+	 * 		"season" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns season",
 	 * 	parameters={

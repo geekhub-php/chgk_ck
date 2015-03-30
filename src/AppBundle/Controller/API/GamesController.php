@@ -25,7 +25,7 @@ class GamesController extends FOSRestController
 	 * 	statusCodes={
 	 * 		200="ok"
 	 * 	},
-	 * 	output="AppBundle\Entity\Game",
+	 * 	output="array<AppBundle\Entity\Game>",
 	 * 	filters={
      *      {"name"="name", "dataType"="string"},
 	 * 		{"name"="date", "dataType"="integer"},
@@ -75,6 +75,9 @@ class GamesController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"gameFull", "short"})
+	 * @REST\Get("games/{game}", requirements={
+	 * 		"game" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns game",
 	 * 	parameters={

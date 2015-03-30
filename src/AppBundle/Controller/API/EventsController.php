@@ -27,7 +27,7 @@ class EventsController extends FOSRestController
 	 * 		{"name"="authorId", "dataType"="integer"},
 	 * 		{"name"="date", "dataType"="integer"}
      *  },
-	 * 	output="AppBundle\Entity\Event"
+	 * 	output="array<AppBundle\Entity\Event>"
 	 * )
 	 */
     public function getEventsAction($title, $authorId, $date)
@@ -48,6 +48,9 @@ class EventsController extends FOSRestController
 	
 	/**
 	 * @RestAnnotations\View(serializerGroups={"eventFull", "short"})
+	 * @REST\Get("events/{event}", requirements={
+	 * 		"event" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns event",
 	 * 	parameters={

@@ -26,7 +26,7 @@ class TeamsController extends FOSRestController
 	 * 		{"name"="city", "dataType"="string"},
 	 * 		{"name"="ageCategory", "dataType"="intger"}
      *  },
-	 * 	output="AppBundle\Entity\Team"
+	 * 	output="array<AppBundle\Entity\Team>"
 	 * )
 	 */
     public function getTeamsAction($name, $rating, $city, $ageCategory)
@@ -50,6 +50,9 @@ class TeamsController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"teamFull", "short"})
+	 * @REST\Get("teams/{team}", requirements={
+	 * 		"team" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns team",
 	 * 	parameters={

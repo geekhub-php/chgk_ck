@@ -22,7 +22,7 @@ class PlayersController extends FOSRestController
      *      {"name"="lastName", "dataType"="string"},
 	 * 		{"name"="dob", "dataType"="integer"}
      *  },
-	 * 	output="AppBundle\Entity\Player"
+	 * 	output="array<AppBundle\Entity\Player>"
 	 * )
 	 */
     public function getPlayersAction($lastName, $dob)
@@ -40,6 +40,9 @@ class PlayersController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"playerFull", "short"})
+	 * @REST\Get("players/{player}", requirements={
+	 * 		"player" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns player",
 	 * 	parameters={

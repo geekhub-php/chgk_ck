@@ -17,7 +17,7 @@ class AgeCategoriesController extends FOSRestController
 	 * 	statusCodes={
 	 * 		200="ok"
 	 * 	},
-	 * 	output="AppBundle\Entity\AgeCategory"
+	 * 	output="array<AppBundle\Entity\AgeCategory>"
 	 * )
 	 */
     public function getAgeCategoriesAction()
@@ -27,7 +27,9 @@ class AgeCategoriesController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"ageCategoryFull", "short"})
-	 * @REST\Get("ageCategories/{ageCategory}")
+	 * @REST\Get("ageCategories/{ageCategory}", requirements={
+	 * 		"ageCategory" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns age category",
 	 * 	parameters={

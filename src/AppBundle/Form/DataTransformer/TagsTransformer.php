@@ -8,11 +8,12 @@ class TagsTransformer implements DataTransformerInterface
 {
     public function transform($tags)
     {
-        return implode(' ', $tags);
+        return $tags ? implode(' ', $tags) : "";
     }
 
     public function reverseTransform($tagsString)
     {
-        return explode(' ', trim($tagsString));
+    	$tagsString = preg_replace('/\s+/', ' ', trim($tagsString));
+        return explode(' ', $tagsString);
     }
 }

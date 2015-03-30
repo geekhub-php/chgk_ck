@@ -13,7 +13,9 @@ class GameResultsController extends FOSRestController
 {
 	/**
 	 * @REST\View(serializerGroups={"gameResultFull", "short"})
-	 * @REST\Get("games/{game}/gameResults")
+	 * @REST\Get("games/{game}/gameResults", requirements={
+	 * 		"game" = "\d+"
+	 * })
 	 * @REST\QueryParam(name="place", requirements="\d+", default="")
 	 * @REST\QueryParam(name="score", requirements="\d+", default="")
 	 * @REST\QueryParam(name="team", requirements="\d+", default="")
@@ -36,7 +38,7 @@ class GameResultsController extends FOSRestController
 	 * 		{"name"="team", "dataType"="integer"},
 	 * 		{"name"="player", "dataType"="integer"},
      *  },
-	 * 	output="AppBundle\Entity\GameResult"
+	 * 	output="array<AppBundle\Entity\GameResult>"
 	 * )
 	 */
     public function getGameresultsAction(Game $game, $place, $score, $team, $player)
@@ -64,7 +66,10 @@ class GameResultsController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"gameResultFull", "short"})
-	 * @REST\Get("games/{game}/gameResults/{gameResultId}")
+	 * @REST\Get("games/{game}/gameResults/{gameResultId}", requirements={
+	 * 		"game" = "\d+",
+	 * 		"gameResultId" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns game result",
 	 * 	parameters={

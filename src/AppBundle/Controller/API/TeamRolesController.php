@@ -17,7 +17,7 @@ class TeamRolesController extends FOSRestController
 	 * 	statusCodes={
 	 * 		200="ok",
 	 * 	},
-	 * 	output="AppBundle\Entity\TeamRole"
+	 * 	output="array<AppBundle\Entity\TeamRole>"
 	 * )
 	 */
     public function getTeamRolesAction()
@@ -27,7 +27,9 @@ class TeamRolesController extends FOSRestController
 	
 	/**
 	 * @REST\View(serializerGroups={"teamRoleFull", "short"})
-	 * @REST\Get("teamRoles/{teamRole}")
+	 * @REST\Get("teamRoles/{teamRole}", requirements={
+	 * 		"teamRole" = "\d+"
+	 * })
 	 * @ApiDoc(
 	 * 	description="returns team role",
 	 * 	parameters={
