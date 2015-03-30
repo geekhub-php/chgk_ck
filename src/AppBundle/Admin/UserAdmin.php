@@ -27,13 +27,15 @@ class UserAdmin extends Admin
     {
         $datagridMapper
             //->add('roles', null, array(), 'tags')
+            ->add('username')
             ->add('assignedPlayer', null, array(), 'entity', array('property' => 'lastName', 'placeholder' => 'any player'));
     }
 
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->addIdentifier('id')
+            ->add('id')
+			->addIdentifier('username')
             //->add('roles', 'array')
             ->add('assignedPlayer', null, array('associated_property' => 'lastName'));
 			if ($this->isGranted('MAKE_MODER')) {
