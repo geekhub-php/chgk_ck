@@ -115,6 +115,8 @@ sonata_media:
 sonata_admin:
     templates:
         layout: AppBundle:Sonata:layout.html.twig
+    security:
+        handler: sonata.admin.security.handler.role
 
 sensio_framework_extra:
     request: { converters: true }
