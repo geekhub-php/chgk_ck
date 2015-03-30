@@ -50,7 +50,7 @@ class EventOpinionsController extends OpinionsController
 	 * 		200="ok",
 	 * 		404="event was not found"
 	 * 	},
-	 * 	output="AppBundle\Entity\Opinion"
+	 * 	output="array<AppBundle\Entity\Opinion>"
 	 * )
 	 */
 	public function getOpinionsAction(Event $event)

@@ -17,7 +17,7 @@ class AgeCategoriesController extends FOSRestController
 	 * 	statusCodes={
 	 * 		200="ok"
 	 * 	},
-	 * 	output="AppBundle\Entity\AgeCategory"
+	 * 	output="array<AppBundle\Entity\AgeCategory>"
 	 * )
 	 */
     public function getAgeCategoriesAction()

@@ -17,7 +17,7 @@ class TeamRolesController extends FOSRestController
 	 * 	statusCodes={
 	 * 		200="ok",
 	 * 	},
-	 * 	output="AppBundle\Entity\TeamRole"
+	 * 	output="array<AppBundle\Entity\TeamRole>"
 	 * )
 	 */
     public function getTeamRolesAction()

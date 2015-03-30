@@ -36,7 +36,7 @@ class GameResultsController extends FOSRestController
 	 * 		{"name"="team", "dataType"="integer"},
 	 * 		{"name"="player", "dataType"="integer"},
      *  },
-	 * 	output="AppBundle\Entity\GameResult"
+	 * 	output="array<AppBundle\Entity\GameResult>"
 	 * )
 	 */
     public function getGameresultsAction(Game $game, $place, $score, $team, $player)

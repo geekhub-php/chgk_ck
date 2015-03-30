@@ -26,7 +26,7 @@ class TeamsController extends FOSRestController
 	 * 		{"name"="city", "dataType"="string"},
 	 * 		{"name"="ageCategory", "dataType"="intger"}
      *  },
-	 * 	output="AppBundle\Entity\Team"
+	 * 	output="array<AppBundle\Entity\Team>"
 	 * )
 	 */
     public function getTeamsAction($name, $rating, $city, $ageCategory)

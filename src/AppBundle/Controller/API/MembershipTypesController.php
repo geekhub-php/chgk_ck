@@ -17,7 +17,7 @@ class MembershipTypesController extends FOSRestController
 	 * 	statusCodes={
 	 * 		200="ok",
 	 * 	},
-	 * 	output="AppBundle\Entity\MembershipType"
+	 * 	output="array<AppBundle\Entity\MembershipType>"
 	 * )
 	 */
     public function getMembershipTypesAction()

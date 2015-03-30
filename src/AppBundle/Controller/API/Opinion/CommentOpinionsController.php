@@ -57,7 +57,7 @@ class CommentOpinionsController extends OpinionsController
 	 * 	statusCodes={
 	 * 		200="ok",
 	 * 	},
-	 * 	output="AppBundle\Entity\Opinion"
+	 * 	output="array<AppBundle\Entity\Opinion>"
 	 * )
 	 */
 	public function getOpinionsAction(Event $event, $commentId)

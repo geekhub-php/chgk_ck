@@ -57,7 +57,7 @@ class GameResultOpinionsController extends OpinionsController
 	 * 		200="ok",
 	 * 		404="game or game result was not found"
 	 * 	},
-	 * 	output="AppBundle\Entity\Opinion"
+	 * 	output="array<AppBundle\Entity\Opinion>"
 	 * )
 	 */
 	public function getOpinionsAction(Game $game, $gameResultId)

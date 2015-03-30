@@ -24,7 +24,7 @@ class SeasonsController extends FOSRestController
 	 * 		{"name"="endDate", "dataType"="integer"},
 	 * 		{"name"="name", "dataType"="string"}
      *  },
-	 * 	output="AppBundle\Entity\Season"
+	 * 	output="array<AppBundle\Entity\Season>"
 	 * )
 	 */
     public function getSeasonsAction($startDate, $endDate, $name)

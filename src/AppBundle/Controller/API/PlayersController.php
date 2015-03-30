@@ -22,7 +22,7 @@ class PlayersController extends FOSRestController
      *      {"name"="lastName", "dataType"="string"},
 	 * 		{"name"="dob", "dataType"="integer"}
      *  },
-	 * 	output="AppBundle\Entity\Player"
+	 * 	output="array<AppBundle\Entity\Player>"
 	 * )
 	 */
     public function getPlayersAction($lastName, $dob)

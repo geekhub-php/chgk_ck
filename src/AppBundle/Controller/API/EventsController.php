@@ -27,7 +27,7 @@ class EventsController extends FOSRestController
 	 * 		{"name"="authorId", "dataType"="integer"},
 	 * 		{"name"="date", "dataType"="integer"}
      *  },
-	 * 	output="AppBundle\Entity\Event"
+	 * 	output="array<AppBundle\Entity\Event>"
 	 * )
 	 */
     public function getEventsAction($title, $authorId, $date)

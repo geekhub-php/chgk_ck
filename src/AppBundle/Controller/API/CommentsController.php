@@ -54,7 +54,7 @@ class CommentsController extends FOSRestController
 	 * 		200="ok",
 	 * 		404="event was not found"
 	 * 	},
-	 * 	output="AppBundle\Entity\Comment"
+	 * 	output="array<AppBundle\Entity\Comment>"
 	 * )
 	 */
 	public function getCommentsAction(Event $event)
