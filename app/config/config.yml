@@ -154,13 +154,22 @@ fos_rest:
 nelmio_api_doc: ~
 
 hwi_oauth:
+    connect:
+        account_connector: chgk.oauth.user_provider
     firewall_name: main
+    fosub:
+        username_iterations: 30
+        properties:
+            # these properties will be used/redefined later in the custom FOSUBUserProvider service.
+            facebook: facebook_id
+#            google: google_id
+#            vkontakte: vkontakte_id
     resource_owners:
         facebook:
             type:                facebook
             client_id:           799515710133554
             client_secret:       3e07081ecb403f3370c671c805a73eb1
-            scope:
+            scope:               "email"
             options:
                 display: popup #dialog is optimized for popup window
 
