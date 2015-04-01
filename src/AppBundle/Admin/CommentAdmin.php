@@ -36,11 +36,11 @@ class CommentAdmin extends Admin
             ->add('author', null, array('associated_property' => 'email'))
             ->add('text', 'text');
     }
-	
-	protected function configureRoutes(RouteCollection $collection)
+
+    protected function configureRoutes(RouteCollection $collection)
     {
         $collection
-        	->remove('create')
-			->remove('edit');
+            ->remove('create')
+            ->remove('edit');
     }
 }

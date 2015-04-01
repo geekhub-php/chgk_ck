@@ -33,13 +33,13 @@ class TeamPlayerAssociationAdmin extends Admin
                 'multiple' => true,
             ));
     }
-	
-	protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
-    	 $datagridMapper
+        $datagridMapper
             ->add('player', null, array(), 'entity', array('property' => 'lastName', 'placeholder' => 'any player'))
-			->add('team', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any team'))
-		;
+            ->add('team', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any team'))
+        ;
     }
 
     protected function configureListFields(ListMapper $listMapper)

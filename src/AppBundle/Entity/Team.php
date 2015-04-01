@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -18,7 +17,7 @@ class Team
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"teamFull", "short"})
+     * @JMS\Groups({"teamFull", "short"})
      */
     private $id;
 
@@ -26,21 +25,21 @@ class Team
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotNull()
      * @Assert\Regex("/^[A-zА-я іїє'-]{2,255}$/", message="name is not valid")
-	 * @JMS\Groups({"teamFull"})
+     * @JMS\Groups({"teamFull"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
-	 * @JMS\Groups({"teamFull"})
+     * @JMS\Groups({"teamFull"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\Range(min = 0)
-	 * @JMS\Groups({"teamFull"})
+     * @JMS\Groups({"teamFull"})
      */
     private $rating = 0;
 
@@ -48,20 +47,20 @@ class Team
      * @ORM\Column(type="string", length=100, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 2, max = 100)
-	 * @JMS\Groups({"teamFull"})
+     * @JMS\Groups({"teamFull"})
      */
     private $city;
 
     /**
      * @ORM\OneToMany(targetEntity="TeamPlayerAssociation", mappedBy="team")
-	 * @JMS\Groups({"teamFull"})
+     * @JMS\Groups({"teamFull"})
      */
     private $teamPlayerAssociations;
 
     /**
      * @Gedmo\Slug(fields={"name"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-	 * @JMS\Groups({"teamFull"})
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"teamFull"})
      */
     private $slug;
 
@@ -69,8 +68,8 @@ class Team
      * @ORM\ManyToOne(targetEntity="AgeCategory")
      * @ORM\JoinColumn(name="age_category_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
-	 * @Assert\NotNull()
-	 * @JMS\Groups({"teamFull"})
+     * @Assert\NotNull()
+     * @JMS\Groups({"teamFull"})
      * @Assert\NotNull()
      */
     private $ageCategory;

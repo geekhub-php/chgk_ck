@@ -8,7 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use AppBundle\Form\DataTransformer\DateToStringTransformer;
 use AppBundle\Form\DataTransformer\TimestampToDateTransformer;
 
-
 class TimestampDateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -20,7 +19,7 @@ class TimestampDateType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'attr' => array('class' => 'timestamp-date')
+            'attr' => array('class' => 'timestamp-date'),
         ));
     }
 

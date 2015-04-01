@@ -24,7 +24,7 @@ class TeamRoleAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-        	->addIdentifier('id')
-			->add('name');
+            ->addIdentifier('id')
+            ->add('name');
     }
 }

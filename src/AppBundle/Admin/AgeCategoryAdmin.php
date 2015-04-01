@@ -29,7 +29,7 @@ class AgeCategoryAdmin extends Admin
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-			->addIdentifier('id')
+            ->addIdentifier('id')
             ->add('name')
             ->add('description');
     }

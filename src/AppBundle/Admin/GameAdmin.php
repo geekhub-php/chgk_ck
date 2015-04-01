@@ -21,7 +21,7 @@ class GameAdmin extends Admin
             ->add('season', 'entity', array(
                 'class' => 'AppBundle:Season',
                 'property' => 'name',
-                'required' => false
+                'required' => false,
             ))
             ->add('isLocallyRated', 'checkbox', array('required' => false))
             ->add('isGloballyRated', 'checkbox', array('required' => false))
@@ -29,7 +29,7 @@ class GameAdmin extends Admin
             ->add('isComplete', 'checkbox', array('required' => false))
             ->add('ageCategory', 'entity', array(
                 'class' => 'AppBundle:AgeCategory',
-                'property' => 'name'
+                'property' => 'name',
             ))
             ->add('description', 'text');
     }
@@ -54,7 +54,7 @@ class GameAdmin extends Admin
             ->add('id')
             ->addIdentifier('name', 'text')
             ->add('playDate', 'date', array(
-                'pattern' => 'dd.MM.yyyy'
+                'pattern' => 'dd.MM.yyyy',
             ))
             ->add('playPlace', 'text')
             ->add('season', null, array('associated_property' => 'name'))

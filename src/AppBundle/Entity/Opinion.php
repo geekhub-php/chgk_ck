@@ -14,27 +14,27 @@ class Opinion
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"opinionFull", "short"})
+     * @JMS\Groups({"opinionFull", "short"})
      */
-    private $id;	
-	
-	/**
-	 * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
-	 * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
-	 * @JMS\Groups({"opinionFull"})
-	 */
-	private $author;
-	
-	/**
-	 * @ORM\Column(type="boolean")
-	 * @JMS\Groups({"opinionFull"})
-	 */
-	private $isPositive;
-	
-	public function __construct()
-	{
-		$this->isPositive = false;
-	}
+    private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
+     * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
+     * @JMS\Groups({"opinionFull"})
+     */
+    private $author;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @JMS\Groups({"opinionFull"})
+     */
+    private $isPositive;
+
+    public function __construct()
+    {
+        $this->isPositive = false;
+    }
 
     /**
      * Get id
@@ -59,7 +59,7 @@ class Opinion
     /**
      * Set isPositive
      *
-     * @param boolean $isPositive
+     * @param  boolean $isPositive
      * @return Opinion
      */
     public function setIsPositive($isPositive)
@@ -82,7 +82,7 @@ class Opinion
     /**
      * Set author
      *
-     * @param \AppBundle\Entity\User $author
+     * @param  \AppBundle\Entity\User $author
      * @return Opinion
      */
     public function setAuthor(\AppBundle\Entity\User $author)

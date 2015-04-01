@@ -6,10 +6,8 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use AppBundle\Entity\Player;
 
 class PlayerAdmin extends Admin
-
 {
     protected $baseRouteName = "admin_players";
     protected $baseRoutePattern = "players";
@@ -39,8 +37,8 @@ class PlayerAdmin extends Admin
             ->add('firstName', 'text')
             ->add('middleName', 'text')
             ->add('dob', 'date', array(
-                'pattern' => 'dd.MM.yyyy'
+                'pattern' => 'dd.MM.yyyy',
             ))
-			;
+            ;
     }
 }

@@ -9,10 +9,10 @@ use Sonata\AdminBundle\Form\FormMapper;
 
 class EventAdmin extends Admin
 {
-	protected $baseRouteName = "admin_event";
+    protected $baseRouteName = "admin_event";
     protected $baseRoutePattern = "event";
-	
-	protected function configureFormFields(FormMapper $formMapper)
+
+    protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
             ->add('title', 'text')
@@ -22,13 +22,13 @@ class EventAdmin extends Admin
                 'property' => 'email',
             ))
             ->add('eventDate', 'timestamp_date')
-			->add('tags', 'tags', array('required' => false))
-			->add('image', 'sonata_media_type', array(
-			     'provider' => 'sonata.media.provider.image',
-			     'context'  => 'default',
-			     'required' => false
-			))
-			;
+            ->add('tags', 'tags', array('required' => false))
+            ->add('image', 'sonata_media_type', array(
+                 'provider' => 'sonata.media.provider.image',
+                 'context'  => 'default',
+                 'required' => false,
+            ))
+            ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
@@ -46,26 +46,26 @@ class EventAdmin extends Admin
             ->addIdentifier('title')
             ->add('author', null, array('associated_property' => 'email'))
             ->add('createdAt', 'date', array(
-                'pattern' => 'dd.MM.yyyy'
+                'pattern' => 'dd.MM.yyyy',
             ))
             ->add('deletedAt', 'date', array(
-                'pattern' => 'dd.MM.yyyy'
+                'pattern' => 'dd.MM.yyyy',
             ))
             ->add('eventDate', 'date', array(
-                'pattern' => 'dd.MM.yyyy'
+                'pattern' => 'dd.MM.yyyy',
             ))
-			->add('tags', 'array')
-			;
+            ->add('tags', 'array')
+            ;
     }
-	
-	public function createQuery($context = 'list')
-	{
-	    $query = parent::createQuery($context);
-				
-		$query->select('e')
-			->from('AppBundle:Event', 'e')
-			->where('e INSTANCE OF AppBundle:Event');
-			
-		return $query;
-	}
+
+    public function createQuery($context = 'list')
+    {
+        $query = parent::createQuery($context);
+
+        $query->select('e')
+            ->from('AppBundle:Event', 'e')
+            ->where('e INSTANCE OF AppBundle:Event');
+
+        return $query;
+    }
 }

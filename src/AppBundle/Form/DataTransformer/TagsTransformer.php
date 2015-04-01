@@ -13,7 +13,8 @@ class TagsTransformer implements DataTransformerInterface
 
     public function reverseTransform($tagsString)
     {
-    	$tagsString = preg_replace('/\s+/', ' ', trim($tagsString));
+        $tagsString = preg_replace('/\s+/', ' ', trim($tagsString));
+
         return explode(' ', $tagsString);
     }
 }

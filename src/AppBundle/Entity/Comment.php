@@ -4,7 +4,6 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Validator\Constraints as CustomAssert;
 use AppBundle\Traits\TimestampableTrait;
 use JMS\Serializer\Annotation as JMS;
 use AppBundle\Interfaces\Opinionable;
@@ -20,36 +19,36 @@ class Comment implements Opinionable
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"commentFull", "short"})
+     * @JMS\Groups({"commentFull", "short"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
-	 * @JMS\Groups({"commentFull"})
+     * @JMS\Groups({"commentFull"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
-	 * @JMS\Groups({"commentFull"})
+     * @JMS\Groups({"commentFull"})
      */
     private $text;
 
     /**
-	 * @ORM\ManyToMany(targetEntity="Opinion")
-	 * @JMS\Groups({"commentFull"})
-	 */
+     * @ORM\ManyToMany(targetEntity="Opinion")
+     * @JMS\Groups({"commentFull"})
+     */
     private $opinions;
 
-	public function setId($id)
-	{
-		$this->id = $id;
-		
-		return $this;
-	}
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     /**
      * Get id
@@ -74,7 +73,7 @@ class Comment implements Opinionable
     /**
      * Set text
      *
-     * @param  string $text
+     * @param  string  $text
      * @return Comment
      */
     public function setText($text)
@@ -120,7 +119,7 @@ class Comment implements Opinionable
     /**
      * Add opinions
      *
-     * @param \AppBundle\Entity\Opinion $opinions
+     * @param  \AppBundle\Entity\Opinion $opinions
      * @return Comment
      */
     public function addOpinion(\AppBundle\Entity\Opinion $opinions)
@@ -143,17 +142,17 @@ class Comment implements Opinionable
     /**
      * Get opinions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOpinions()
     {
         return $this->opinions;
     }
-	
-	public function getOpinion($id)
-	{
-		return $this->opinions->filter(function ($opinion) use ($id) {
-			return $opinion->getId() == $id; 
-		})->first();
-	}
+
+    public function getOpinion($id)
+    {
+        return $this->opinions->filter(function ($opinion) use ($id) {
+            return $opinion->getId() == $id;
+        })->first();
+    }
 }

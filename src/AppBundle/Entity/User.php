@@ -3,8 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use FOS\UserBundle\Model\User as BaseUser;
 use JMS\Serializer\Annotation as JMS;
@@ -18,27 +16,27 @@ class User extends BaseUser
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"userFull", "short"})
+     * @JMS\Groups({"userFull", "short"})
      */
     protected $id;
 
     /**
      * @ORM\OneToOne(targetEntity="Player")
-	 * @JMS\Groups({"userFull"})
+     * @JMS\Groups({"userFull"})
      */
     private $assignedPlayer;
 
     /**
      * @Gedmo\Slug(fields={"email"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-	 * @JMS\Groups({"userFull"})
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"userFull"})
      */
     private $slug;
-	
-	/**
-	 * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
-	 */
-	private $image;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     */
+    private $image;
 
     /**
      * Get id
@@ -99,7 +97,7 @@ class User extends BaseUser
     /**
      * Set image
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
      * @return User
      */
     public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
@@ -112,7 +110,7 @@ class User extends BaseUser
     /**
      * Get image
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media 
+     * @return \Application\Sonata\MediaBundle\Entity\Media
      */
     public function getImage()
     {

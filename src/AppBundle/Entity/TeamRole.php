@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Traits\TimestampableTrait;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -18,7 +17,7 @@ class TeamRole
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"teamRoleFull", "short"})
+     * @JMS\Groups({"teamRoleFull", "short"})
      */
     private $id;
 
@@ -26,7 +25,7 @@ class TeamRole
      * @ORM\Column(type="string", length=30, unique=true, nullable=false)
      * @Assert\Regex("/^[A-zА-я іїє]{2,30}$/", message="name is not valid")
      * @Assert\NotBlank()
-	 * @JMS\Groups({"teamRoleFull"})
+     * @JMS\Groups({"teamRoleFull"})
      */
     private $name;
 
@@ -53,7 +52,7 @@ class TeamRole
     /**
      * Set name
      *
-     * @param  string $name
+     * @param  string   $name
      * @return TeamRole
      */
     public function setName($name)

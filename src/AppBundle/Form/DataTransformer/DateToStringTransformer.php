@@ -21,13 +21,14 @@ class DateToStringTransformer implements DataTransformerInterface
     public function reverseTransform($string)
     {
         if ($string === "") {
-            return null;
+            return;
         }
 
         $date = \DateTime::createFromFormat(self::DATE_FORMAT, $string);
 
         if ($date) {
             $date->setTime(0, 0, 0);
+
             return $date;
         } else {
             throw new TransformationFailedException('invalid date');

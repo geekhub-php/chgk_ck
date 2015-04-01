@@ -5,10 +5,8 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use AppBundle\Entity\Team;
 
 class TeamAdmin extends Admin
-
 {
     protected $baseRouteName = "admin_teams";
     protected $baseRoutePattern = "teams";
@@ -22,7 +20,7 @@ class TeamAdmin extends Admin
             ->add('city', 'text')
             ->add('ageCategory', 'entity', array(
                 'class' => 'AppBundle:AgeCategory',
-                'property' => 'name'
+                'property' => 'name',
             ));
     }
 

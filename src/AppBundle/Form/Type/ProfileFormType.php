@@ -23,11 +23,11 @@ class ProfileFormType extends FOSProfileFormType
     {
         $builder
             ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-			->add('image', 'sonata_media_type', array(
-			     'provider' => 'sonata.media.provider.image',
-			     'context'  => 'default',
-			     'required' => false
-			))
-			;
+            ->add('image', 'sonata_media_type', array(
+                 'provider' => 'sonata.media.provider.image',
+                 'context'  => 'default',
+                 'required' => false,
+            ))
+            ;
     }
-} 
+}
