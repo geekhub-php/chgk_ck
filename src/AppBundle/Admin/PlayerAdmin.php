@@ -18,7 +18,13 @@ class PlayerAdmin extends Admin
             ->add('firstName', 'text')
             ->add('middleName', 'text')
             ->add('lastName', 'text')
-            ->add('dob', 'timestamp_date');
+            ->add('dob', 'timestamp_date')
+			->add('image', 'sonata_media_type', array(
+                 'provider' => 'sonata.media.provider.image',
+                 'context'  => 'default',
+                 'required' => false,
+            ))
+			;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

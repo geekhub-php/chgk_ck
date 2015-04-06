@@ -67,6 +67,11 @@ class Player
     private $slug;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     */
+    private $image;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -230,5 +235,28 @@ class Player
     public function getTeamPlayerAssociations()
     {
         return $this->teamPlayerAssociations;
+    }
+
+    /**
+     * Set image
+     *
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return Player
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
