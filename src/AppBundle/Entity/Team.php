@@ -24,7 +24,7 @@ class Team
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotNull()
-     * @Assert\Regex("/^[A-zА-я іїє'-]{2,255}$/", message="name is not valid")
+     * @Assert\Length(min = 2, max = 255)
      * @JMS\Groups({"teamFull"})
      */
     private $name;
@@ -46,7 +46,7 @@ class Team
     /**
      * @ORM\Column(type="string", length=100, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(min = 2, max = 100)
+     * @Assert\Regex("/^[A-zА-я іїє\-]{2,255}$/", message="city is not valid")
      * @JMS\Groups({"teamFull"})
      */
     private $city;
@@ -70,7 +70,6 @@ class Team
      * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
      * @Assert\NotNull()
      * @JMS\Groups({"teamFull"})
-     * @Assert\NotNull()
      */
     private $ageCategory;
 

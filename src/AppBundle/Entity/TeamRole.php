@@ -23,7 +23,7 @@ class TeamRole
 
     /**
      * @ORM\Column(type="string", length=30, unique=true, nullable=false)
-     * @Assert\Regex("/^[A-zА-я іїє]{2,30}$/", message="name is not valid")
+     * @Assert\Length(min = 2, max = 30)
      * @Assert\NotBlank()
      * @JMS\Groups({"teamRoleFull"})
      */

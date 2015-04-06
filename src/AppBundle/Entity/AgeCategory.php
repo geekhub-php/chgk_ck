@@ -24,8 +24,8 @@ class AgeCategory
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\Regex("/^[A-zА-я іїє]{2,255}$/", message="name is not valid")
      * @Assert\NotBlank(message="should not be blank")
+     * @Assert\Length(min = 2, max = 255)
      * @JMS\Groups({"ageCategoryFull"})
      */
     private $name;

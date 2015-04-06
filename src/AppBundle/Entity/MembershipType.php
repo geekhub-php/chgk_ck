@@ -23,7 +23,7 @@ class MembershipType
 
     /**
      * @ORM\Column(type="string", length=50, unique=true, nullable=false)
-     * @Assert\Regex("/^[A-zА-я іїє]{2,50}$/", message="name is not valid")
+     * @Assert\Length(min = 2, max = 255)
      * @Assert\NotBlank()
      * @JMS\Groups({"membershipTypesFull"})
      */
