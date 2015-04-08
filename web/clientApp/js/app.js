@@ -1,1 +1,1 @@
-angular.module('chgk.app', ['ngRoute']);
+angular.module('app', ['ngRoute', 'ngResource', 'team']);

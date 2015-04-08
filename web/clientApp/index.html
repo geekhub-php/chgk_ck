@@ -1,14 +1,16 @@
 <!DOCTYPE html>
-<html ng-app="chgk.app">
+<html ng-app="app">
 	<head>
+		<meta charset="utf-8">
 		<script type="text/javascript" src="clientApp/js/deps/angular/angular.min.js"></script>
 		<script type="text/javascript" src="clientApp/js/deps/angular-route/angular-route.min.js"></script>
 		<script type="text/javascript" src="clientApp/js/deps/angular-resource/angular-resource.min.js"></script>
 		<script type="text/javascript" src="clientApp/js/app.js"></script>
 		<script type="text/javascript" src="clientApp/js/routing.js"></script>
+		<script type="text/javascript" src="clientApp/js/components/team.js"></script>
 	</head>
 	<body>
-		
-		Homepage
+		<a href="#/teams">команди</a>
+		<div ng-view></div>
 	</body>
 </html>
