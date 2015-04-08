@@ -6,5 +6,10 @@ angular.module('app')
 		templateUrl: 'clientApp/templates/teams.html',
 		controller:  'TeamController'
 	})
+	.when('/news', 
+	{
+		templateUrl: 'clientApp/templates/events.html',
+		controller:  'EventsController'
+	})
 	;
 });

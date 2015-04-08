@@ -84,6 +84,7 @@ class Event implements Opinionable
 
     /**
      * @ORM\ManyToMany(targetEntity="Opinion")
+	 * @JMS\Groups({"eventFull"})
      */
     private $opinions;
 

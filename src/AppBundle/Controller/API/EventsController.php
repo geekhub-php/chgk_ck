@@ -11,7 +11,7 @@ use FOS\RestBundle\Controller\Annotations as REST;
 class EventsController extends FOSRestController
 {
     /**
-     * @RestAnnotations\View(serializerGroups={"eventFull", "short"})
+     * @RestAnnotations\View(serializerGroups={"eventFull", "opinionFull", "userFull", "short"})
      * @REST\Get("events")
      * @REST\QueryParam(name="title", default="")
      * @REST\QueryParam(name="authorId", requirements="\d+", default="")
@@ -46,7 +46,7 @@ class EventsController extends FOSRestController
     }
 
     /**
-     * @RestAnnotations\View(serializerGroups={"eventFull", "short"})
+     * @RestAnnotations\View(serializerGroups={"eventFull", "opinionFull", "userFull", "short"})
      * @REST\Get("events/{event}", requirements={
      * 		"event" = "\d+"
      * })
