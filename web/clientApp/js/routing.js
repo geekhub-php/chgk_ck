@@ -3,7 +3,7 @@ angular.module('app')
 	$routeProvider
 	.when('/teams', 
 	{
-		templateUrl: 'clientApp/templates/team/teams.html',
+		templateUrl: 'clientApp/templates/teams.html',
 		controller:  'TeamController'
 	})
 	;
