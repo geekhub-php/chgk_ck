@@ -10,11 +10,12 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class TeamsController extends FOSRestController
 {
     /**
-     * @REST\View(serializerGroups={"teamFull", "short"})
+     * @REST\View(serializerGroups={"teamFull", "ageCategoryFull", "short"})
      * @REST\QueryParam(name="name", default="")
      * @REST\QueryParam(name="rating", requirements="\d+", default="")
      * @REST\QueryParam(name="city", default="")
      * @REST\QueryParam(name="ageCategory", requirements="\d+", default="")
+     * @REST\QueryParam(name="orderByRating", requirements="(asc|desc)", default="")
      * @ApiDoc(
      * 	description="returns teams",
      * 	statusCodes={
@@ -24,19 +25,23 @@ class TeamsController extends FOSRestController
      *      {"name"="name", "dataType"="string"},
      * 		{"name"="rating", "dataType"="integer"},
      * 		{"name"="city", "dataType"="string"},
-     * 		{"name"="ageCategory", "dataType"="intger"}
+     * 		{"name"="ageCategory", "dataType"="integer"},
+     * 		{"name"="orderByRating", "dataType"="string"}
      *  },
      * 	output="array<AppBundle\Entity\Team>"
      * )
      */
-    public function getTeamsAction($name, $rating, $city, $ageCategory)
+    public function getTeamsAction($name, $rating, $city, $ageCategory, $orderByRating)
     {
-        $criteria = [];
+        $criteria = array();
+        $orderBy = array();
         if ($name) {
             $criteria['name'] = $name;
         }
         if ($rating) {
             $criteria['rating'] = $rating;
+        } elseif ($orderByRating) {
+            $orderBy['rating'] = $orderByRating;
         }
         if ($city) {
             $criteria['city'] = $city;
@@ -45,11 +50,11 @@ class TeamsController extends FOSRestController
             $criteria['ageCategory'] = $ageCategory;
         }
 
-        return $this->getDoctrine()->getRepository('AppBundle:Team')->findBy($criteria);
+        return $this->getDoctrine()->getRepository('AppBundle:Team')->findBy($criteria, $orderBy);
     }
 
     /**
-     * @REST\View(serializerGroups={"teamFull", "short"})
+     * @REST\View(serializerGroups={"teamFull", "ageCategoryFull", "short"})
      * @REST\Get("teams/{team}", requirements={
      * 		"team" = "\d+"
      * })
