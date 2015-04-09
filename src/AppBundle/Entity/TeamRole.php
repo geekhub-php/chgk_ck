@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Traits\TimestampableTrait;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -14,48 +13,21 @@ use JMS\Serializer\Annotation as JMS;
  */
 class TeamRole
 {
-    use TimestampableTrait;
-
-    const NAME_CAPTAIN = 'Капитан';
-    const NAME_SPARROW = 'Ласточка';
-    const NAME_IDEAGEN = 'Генератор идей';
-    const NAME_LOGICIAN = 'Логик';
-    const NAME_INTUITIONIST = 'Интуит';
-    const NAME_ERUDITE = 'Эрудит';
-    const NAME_CRITICIST = 'Критик';
-    const NAME_LIFE_OF_THE_TEAM = 'Душа команды';
-    const NAME_USSR = 'Совок';
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"teamRoleFull", "short"})
+     * @JMS\Groups({"teamRoleFull", "short"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=30, unique=true, nullable=false)
-     * @Assert\Regex("/^[A-zА-я іїє]{2,30}$/", message="name is not valid")
+     * @Assert\Length(min = 2, max = 30)
      * @Assert\NotBlank()
-	 * @JMS\Groups({"teamRoleFull"})
+     * @JMS\Groups({"teamRoleFull"})
      */
     private $name;
-
-    public static function getNames()
-    {
-        return [
-            teamRole:: NAME_CAPTAIN => 'Капитан',
-            teamRole:: NAME_SPARROW => 'Ласточка',
-            teamRole:: NAME_IDEAGEN => 'Генератор идей',
-            teamRole:: NAME_LOGICIAN => 'Логик',
-            teamRole:: NAME_INTUITIONIST => 'Интуит',
-            teamRole:: NAME_ERUDITE => 'Эрудит',
-            teamRole:: NAME_CRITICIST => 'Критик',
-            teamRole:: NAME_LIFE_OF_THE_TEAM => 'Душа команды',
-            teamRole:: NAME_USSR => 'Совок',
-        ];
-    }
 
     /**
      * Get id
@@ -80,7 +52,7 @@ class TeamRole
     /**
      * Set name
      *
-     * @param  string $name
+     * @param  string   $name
      * @return TeamRole
      */
     public function setName($name)

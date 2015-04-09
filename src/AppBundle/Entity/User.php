@@ -3,10 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use FOS\UserBundle\Model\User as BaseUser;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -17,19 +16,27 @@ class User extends BaseUser
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"userFull", "short"})
      */
     protected $id;
 
     /**
      * @ORM\OneToOne(targetEntity="Player")
+     * @JMS\Groups({"userFull"})
      */
     private $assignedPlayer;
 
     /**
      * @Gedmo\Slug(fields={"email"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"userFull"})
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     */
+    private $image;
 
     /**
      * Get id
@@ -39,6 +46,16 @@ class User extends BaseUser
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
@@ -55,13 +72,13 @@ class User extends BaseUser
     }
 
     /**
-     * Get slug
+     * Get assignedPlayer
      *
-     * @return string
+     * @return \AppBundle\Entity\Player
      */
-    public function getSlug()
+    public function getAssignedPlayer()
     {
-        return $this->slug;
+        return $this->assignedPlayer;
     }
 
     /**
@@ -78,12 +95,25 @@ class User extends BaseUser
     }
 
     /**
-     * Get assignedPlayer
+     * Set image
      *
-     * @return \AppBundle\Entity\Player
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return User
      */
-    public function getAssignedPlayer()
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
     {
-        return $this->assignedPlayer;
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

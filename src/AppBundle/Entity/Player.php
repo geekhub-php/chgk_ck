@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -14,13 +13,11 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Player
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"playerFull", "short"})
+     * @JMS\Groups({"playerFull", "short"})
      */
     private $id;
 
@@ -28,7 +25,7 @@ class Player
      * @ORM\Column(type="string", length=50, nullable=false)
      * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/")
      * @Assert\NotBlank()
-	 * @JMS\Groups({"playerFull"})
+     * @JMS\Groups({"playerFull"})
      */
     private $firstName;
 
@@ -36,7 +33,7 @@ class Player
      * @ORM\Column(type="string", length=50, nullable=false)
      * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/")
      * @Assert\NotBlank()
-	 * @JMS\Groups({"playerFull"})
+     * @JMS\Groups({"playerFull"})
      */
     private $lastName;
 
@@ -44,7 +41,7 @@ class Player
      * @ORM\Column(type="string", length=50, nullable=false)
      * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/")
      * @Assert\NotBlank()
-	 * @JMS\Groups({"playerFull"})
+     * @JMS\Groups({"playerFull"})
      */
     private $middleName;
 
@@ -52,22 +49,27 @@ class Player
      * @ORM\Column(type="integer", nullable=false)
      * @CustomAssert\PastTimestamp()
      * @Assert\NotNull()
-	 * @JMS\Groups({"playerFull"})
+     * @JMS\Groups({"playerFull"})
      */
     private $dob;
 
     /**
      * @ORM\OneToMany(targetEntity="TeamPlayerAssociation", mappedBy="player")
-	 * @JMS\Groups({"playerFull"})
+     * @JMS\Groups({"playerFull"})
      */
     private $teamPlayerAssociations;
 
     /**
      * @Gedmo\Slug(fields={"lastName"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-	 * @JMS\Groups({"playerFull"})
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"playerFull"})
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     */
+    private $image;
 
     /**
      * Constructor
@@ -233,5 +235,28 @@ class Player
     public function getTeamPlayerAssociations()
     {
         return $this->teamPlayerAssociations;
+    }
+
+    /**
+     * Set image
+     *
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return Player
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }

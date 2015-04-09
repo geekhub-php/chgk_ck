@@ -7,22 +7,27 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 class ProfileFormType extends FOSProfileFormType
 {
-	const DATA_CLASS = 'AppBundle\Entity\User';
-	
-	public function __construct()
+    const DATA_CLASS = 'AppBundle\Entity\User';
+
+    public function __construct()
     {
         parent::__construct(self::DATA_CLASS);
     }
-	
-	protected function buildUserForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
-        ;
-    }
-	
-	public function getName()
+
+    public function getName()
     {
         return 'user_profile';
     }
-} 
+
+    protected function buildUserForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('email', 'email', array('label' => 'form.email', 'translation_domain' => 'FOSUserBundle'))
+            ->add('image', 'sonata_media_type', array(
+                 'provider' => 'sonata.media.provider.image',
+                 'context'  => 'default',
+                 'required' => false,
+            ))
+            ;
+    }
+}

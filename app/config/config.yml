@@ -29,6 +29,9 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - 'AppBundle:Sonata:media_widgets.html.twig'
 
 # Assetic Configuration
 assetic:
@@ -83,6 +86,11 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
+    profile:
+        form:
+            type:               user_profile
+            name:               user_profile_form
+            validation_groups:  [Profile, Default]
 
 sonata_block:
     default_contexts: [cms]
@@ -96,10 +104,8 @@ sonata_media:
     contexts:
        default:
            providers:
-               - sonata.media.provider.dailymotion
                - sonata.media.provider.youtube
                - sonata.media.provider.image
-               - sonata.media.provider.file
 
            formats:
                small: { width: 100 , quality: 70}
@@ -115,11 +121,14 @@ sonata_media:
 sonata_admin:
     templates:
         layout: AppBundle:Sonata:layout.html.twig
+    security:
+        handler: sonata.admin.security.handler.role
 
 sensio_framework_extra:
     request: { converters: true }
 
 fos_rest:
+    param_fetcher_listener: force
     view:
         formats:
             json: true

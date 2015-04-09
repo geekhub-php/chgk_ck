@@ -5,7 +5,6 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use AppBundle\Entity\Season;
 
 class SeasonAdmin extends Admin
 {
@@ -33,10 +32,10 @@ class SeasonAdmin extends Admin
         $listMapper
             ->addIdentifier('name', 'text')
             ->add('startDate', 'date', array(
-                'pattern' => 'dd.MM.yyyy'
+                'pattern' => 'dd.MM.yyyy',
             ))
             ->add('endDate', 'date', array(
-                'pattern' => 'dd.MM.yyyy'
+                'pattern' => 'dd.MM.yyyy',
             ));
     }
 }

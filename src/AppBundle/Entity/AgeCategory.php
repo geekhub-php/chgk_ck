@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -15,51 +14,35 @@ use JMS\Serializer\Annotation as JMS;
  */
 class AgeCategory
 {
-    use TimestampableTrait;
-
-    const NAME_SCHOOL = 'Школьная';
-    const NAME_YOUTH = 'Молодежная';
-    const NAME_ADULT = 'Взрослая';
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"ageCategoryFull", "short"})
+     * @JMS\Groups({"ageCategoryFull", "short"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\Regex("/^[A-zА-я іїє]{2,255}$/", message="name is not valid")
      * @Assert\NotBlank(message="should not be blank")
-	 * @JMS\Groups({"ageCategoryFull"})
+     * @Assert\Length(min = 2, max = 255)
+     * @JMS\Groups({"ageCategoryFull"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank(message="should not be blank")
-	 * @JMS\Groups({"ageCategoryFull"})
+     * @JMS\Groups({"ageCategoryFull"})
      */
     private $description;
 
     /**
      * @Gedmo\Slug(fields={"name"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-	 * @JMS\Groups({"ageCategoryFull"})
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"ageCategoryFull"})
      */
     private $slug;
-
-    public static function getNames()
-    {
-        return [
-            ageCategory::NAME_SCHOOL => 'Школьная',
-            ageCategory::NAME_YOUTH => 'Молодежная',
-            ageCategory::NAME_ADULT => 'Взрослая',
-        ];
-
-    }
 
     /**
      * Get id
@@ -84,7 +67,7 @@ class AgeCategory
     /**
      * Set name
      *
-     * @param  string $name
+     * @param  string      $name
      * @return AgeCategory
      */
     public function setName($name)
@@ -107,7 +90,7 @@ class AgeCategory
     /**
      * Set description
      *
-     * @param  string $description
+     * @param  string      $description
      * @return AgeCategory
      */
     public function setDescription($description)
@@ -130,7 +113,7 @@ class AgeCategory
     /**
      * Set slug
      *
-     * @param  string $slug
+     * @param  string      $slug
      * @return AgeCategory
      */
     public function setSlug($slug)

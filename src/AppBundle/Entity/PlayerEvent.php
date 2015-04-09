@@ -14,7 +14,7 @@ class PlayerEvent extends Event
     /**
      * @ORM\ManyToMany(targetEntity="Player")
      * @CustomAssert\EntitiesExist(associatedEntity="Player", message="players with ids %ids% are non-exist")
-	 * @JMS\Groups({"eventFull"})
+     * @JMS\Groups({"eventFull"})
      */
     private $players;
 

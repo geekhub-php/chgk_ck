@@ -5,12 +5,12 @@ use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use AppBundle\Entity\ TeamPlayerAssociation;
+use AppBundle\Entity\TeamPlayerAssociation;
 
 class TeamPlayerAssociationAdmin extends Admin
 {
-    protected $baseRouteName = "admin_ team_player_association";
-    protected $baseRoutePattern = " teamPlayerAssociation";
+    protected $baseRouteName = "admin_team_player_association";
+    protected $baseRoutePattern = "teamPlayerAssociation";
 
     protected function configureFormFields(FormMapper $formMapper)
     {
@@ -24,7 +24,7 @@ class TeamPlayerAssociationAdmin extends Admin
                 'property' => 'name',
             ))
             ->add('membershipType', 'entity', array(
-                'class' => 'AppBundle: MembershipType',
+                'class' => 'AppBundle:MembershipType',
                 'property' => 'name',
             ))
             ->add('roles', 'entity', array(
@@ -34,12 +34,20 @@ class TeamPlayerAssociationAdmin extends Admin
             ));
     }
 
+    protected function configureDatagridFilters(DatagridMapper $datagridMapper)
+    {
+        $datagridMapper
+            ->add('player', null, array(), 'entity', array('property' => 'lastName', 'placeholder' => 'any player'))
+            ->add('team', null, array(), 'entity', array('property' => 'name', 'placeholder' => 'any team'))
+        ;
+    }
+
     protected function configureListFields(ListMapper $listMapper)
     {
         $listMapper
-            ->add('player', null, array('associated_property' => 'email'))
+            ->add('player', null, array('associated_property' => 'lastName'))
             ->add('team', null, array('associated_property' => 'name'))
-            ->add('membershipType', null, array('associated_property' => 'email'))
+            ->add('membershipType', null, array('associated_property' => 'name'))
             ->add('roles', null, array('associated_property' => 'name'));
     }
 }

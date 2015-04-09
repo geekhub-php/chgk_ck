@@ -6,7 +6,7 @@ event_opinions:
     type:     rest
     parent:   event
     resource: AppBundle\Controller\API\Opinion\EventOpinionsController
-    
+
 comments:
     type:     rest
     parent:   event
@@ -16,41 +16,41 @@ comment_opinions:
     type:     rest
     parent:   comments
     resource: AppBundle\Controller\API\Opinion\CommentOpinionsController
-    
+
 age_categories:
     type:     rest
     resource: AppBundle\Controller\API\AgeCategoriesController
-    
+
 games:
     type:     rest
     resource: AppBundle\Controller\API\GamesController
-    
+
 game_results:
     type:     rest
     parent:   games
     resource: AppBundle\Controller\API\GameResultsController
-    
+
 game_result_opinions:
     type:     rest
     parent:   game_results
     resource: AppBundle\Controller\API\Opinion\GameResultOpinionsController
-    
+
 membership_types:
     type:     rest
     resource: AppBundle\Controller\API\MembershipTypesController
-    
+
 players:
     type:     rest
     resource: AppBundle\Controller\API\PlayersController
-    
+
 seasons:
     type:     rest
     resource: AppBundle\Controller\API\SeasonsController
-    
+
 teams:
     type:     rest
     resource: AppBundle\Controller\API\TeamsController
-    
+
 team_role:
     type:     rest
     resource: AppBundle\Controller\API\TeamRolesController

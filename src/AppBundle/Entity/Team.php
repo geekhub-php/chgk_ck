@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -14,56 +13,54 @@ use JMS\Serializer\Annotation as JMS;
  */
 class Team
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"teamFull", "short"})
+     * @JMS\Groups({"teamFull", "short"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotNull()
-     * @Assert\Regex("/^[A-zА-я іїє'-]{2,255}$/", message="name is not valid")
-	 * @JMS\Groups({"teamFull"})
+     * @Assert\Length(min = 2, max = 255)
+     * @JMS\Groups({"teamFull"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
-	 * @JMS\Groups({"teamFull"})
+     * @JMS\Groups({"teamFull"})
      */
     private $description;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\Range(min = 0)
-	 * @JMS\Groups({"teamFull"})
+     * @JMS\Groups({"teamFull"})
      */
     private $rating = 0;
 
     /**
      * @ORM\Column(type="string", length=100, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(min = 2, max = 100)
-	 * @JMS\Groups({"teamFull"})
+     * @Assert\Regex("/^[A-zА-я іїє\-]{2,255}$/", message="city is not valid")
+     * @JMS\Groups({"teamFull"})
      */
     private $city;
 
     /**
      * @ORM\OneToMany(targetEntity="TeamPlayerAssociation", mappedBy="team")
-	 * @JMS\Groups({"teamFull"})
+     * @JMS\Groups({"teamFull"})
      */
     private $teamPlayerAssociations;
 
     /**
      * @Gedmo\Slug(fields={"name"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-	 * @JMS\Groups({"teamFull"})
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"teamFull"})
      */
     private $slug;
 
@@ -71,10 +68,15 @@ class Team
      * @ORM\ManyToOne(targetEntity="AgeCategory")
      * @ORM\JoinColumn(name="age_category_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
-	 * @Assert\NotNull()
-	 * @JMS\Groups({"teamFull"})
+     * @Assert\NotNull()
+     * @JMS\Groups({"teamFull"})
      */
     private $ageCategory;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     */
+    private $image;
 
     /**
      * Constructor
@@ -95,6 +97,16 @@ class Team
     }
 
     /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
      * Set name
      *
      * @param  string $name
@@ -108,13 +120,13 @@ class Team
     }
 
     /**
-     * Get name
+     * Get description
      *
      * @return string
      */
-    public function getName()
+    public function getDescription()
     {
-        return $this->name;
+        return $this->description;
     }
 
     /**
@@ -131,13 +143,13 @@ class Team
     }
 
     /**
-     * Get description
+     * Get rating
      *
-     * @return string
+     * @return integer
      */
-    public function getDescription()
+    public function getRating()
     {
-        return $this->description;
+        return $this->rating;
     }
 
     /**
@@ -154,13 +166,13 @@ class Team
     }
 
     /**
-     * Get rating
+     * Get city
      *
-     * @return integer
+     * @return string
      */
-    public function getRating()
+    public function getCity()
     {
-        return $this->rating;
+        return $this->city;
     }
 
     /**
@@ -177,13 +189,13 @@ class Team
     }
 
     /**
-     * Get city
+     * Get slug
      *
      * @return string
      */
-    public function getCity()
+    public function getSlug()
     {
-        return $this->city;
+        return $this->slug;
     }
 
     /**
@@ -197,16 +209,6 @@ class Team
         $this->slug = $slug;
 
         return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 
     /**
@@ -243,6 +245,16 @@ class Team
     }
 
     /**
+     * Get ageCategory
+     *
+     * @return \AppBundle\Entity\AgeCategory
+     */
+    public function getAgeCategory()
+    {
+        return $this->ageCategory;
+    }
+
+    /**
      * Set ageCategory
      *
      * @param  \AppBundle\Entity\AgeCategory $ageCategory
@@ -256,12 +268,25 @@ class Team
     }
 
     /**
-     * Get ageCategory
+     * Set image
      *
-     * @return \AppBundle\Entity\AgeCategory
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return Team
      */
-    public function getAgeCategory()
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
     {
-        return $this->ageCategory;
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
