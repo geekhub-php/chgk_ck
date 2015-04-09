@@ -21,12 +21,18 @@ class OpinionsController extends FOSRestController
             throw new NotFoundHttpException();
         }
 
+        $this->get('user_creatable_marker')->mark(array($opinion));
+
         return $opinion;
     }
 
     protected function handleGetOpinions(Opinionable $opinionsParent)
     {
-        return $opinionsParent->getOpinions();
+        $opinions = $opinionsParent->getOpinions()->toArray();
+
+        $this->get('user_creatable_marker')->mark($opinions);
+
+        return $opinions;
     }
 
     protected function handlePostOpinion(Opinionable $opinionParent, Opinion $opinion)

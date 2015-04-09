@@ -42,7 +42,13 @@ class EventsController extends FOSRestController
             $criteria['eventDate'] = $date;
         }
 
-        return $this->getDoctrine()->getRepository('AppBundle:Event')->findBy($criteria);
+        $events = $this->getDoctrine()->getRepository('AppBundle:Event')->findBy($criteria);
+
+        foreach ($events as $event) {
+            $this->get('user_creatable_marker')->mark($event->getOpinions()->toArray());
+        }
+
+        return $events;
     }
 
     /**
@@ -67,6 +73,8 @@ class EventsController extends FOSRestController
      */
     public function getEventAction(Event $event)
     {
+        $this->get('user_creatable_marker')->mark($event->getOpinions()->toArray());
+
         return $event;
     }
 }
