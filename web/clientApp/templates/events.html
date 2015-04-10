@@ -9,7 +9,9 @@
 		<td>tags</td>
 		<td>likes</td>
 		<td>dislikes</td>
-		<td>comments</td>
+		<td>current user opinion</td>
+		<td>like</td>
+		<td>dislike</td>
 	</tr>
 	<tr ng-repeat=" event in events">
 		<td>{{ event.title }}</td>	
@@ -19,6 +21,9 @@
 		<td>{{ event.tags.join(', ') }}</td>
 		<td>{{ event.likesCount }}</td>
 		<td>{{ event.dislikesCount }}</td>
+		<td>{{ event.currentUserOpinion.is_positive }}</td>
+		<td><button ng-click="likeEvent(event, true)" >like</button></td>
+		<td><button ng-click="likeEvent(event, false)" >dislike</button></td>
 	</tr>
 </table>
 </body>
