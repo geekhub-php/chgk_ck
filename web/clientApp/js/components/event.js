@@ -1,16 +1,16 @@
 angular.module('event', [])
 .controller('EventsController', ['$scope', 'eventModel', function ($scope, eventModel) {
 	$scope.events = eventModel.getEvents();
-	$scope.likeEvent = eventModel.likeEvent;
+	$scope.makeOpinion = eventModel.makeOpinion;
 }])
 .controller('EventController', ['$scope', 'eventModel', '$routeParams', function ($scope, eventModel, $routeParams) {
 	$scope.event = eventModel.getEvent($routeParams.newsId);
-	$scope.likeEvent = eventModel.likeEvent;
+	$scope.makeOpinion = eventModel.makeOpinion;
 	$scope.putComment = eventModel.putComment;
 	$scope.deleteComment = eventModel.deleteComment;
 	$scope.postComment = eventModel.postComment;
 }])
-.factory('eventModel', ['$resource', 'opinionModel', '$q', 'commentAPI', function ($resource, opinionModel, $q, commentAPI) {
+.factory('eventModel', ['$resource', 'opinionAPI', '$q', 'commentAPI', function ($resource, opinionAPI, $q, commentAPI) {
 	var eventResUrl = '/api/events/:eventId';
 	var eventRes = $resource(eventResUrl);
 	
@@ -60,28 +60,13 @@ angular.module('event', [])
 		},
 		
 		getOpinions: function(eventId){
-			var opinionRes = $resource('/api/events/:eventId/opinions/:opinionId', {eventId: eventId});
-			opinionModel.setModelRes(opinionRes);
-			return opinionModel.getOpinions();
+			opinionAPI.setParentUrl(eventResUrl, {eventId: eventId});
+			return opinionAPI.getOpinions();
 		},
 		
-		likeEvent: function(event, is_positive){
-			var opinionRes = $resource('/api/events/:eventId/opinions/:opinionId', {eventId: event.id});
-			opinionModel.setModelRes(opinionRes);
-			
-			var deletePromise = null;
-			for(var i = 0; i < event.opinions.length; i++) {
-				var opinion = event.opinions[i];
-				if (opinion.made_by_current_user) {
-					deletePromise = opinionModel.deleteOpinion(opinion.id).$promise;
-					break;					
-				}			
-			}
-			$q.when(deletePromise)
-			.then(function(){
-				opinionModel.postOpinion(is_positive);				
-			});
-				
+		makeOpinion: function(eventId, is_positive){
+			opinionAPI.setParentUrl(eventResUrl, {eventId: eventId});
+			return opinionAPI.makeOpinion(is_positive);
 		},
 		
 		putComment: function(comment){
