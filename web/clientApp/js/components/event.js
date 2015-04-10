@@ -10,8 +10,9 @@ angular.module('event', [])
 	$scope.deleteComment = eventModel.deleteComment;
 	$scope.postComment = eventModel.postComment;
 }])
-.factory('eventModel', ['$resource', 'opinionModel', '$q', 'commentModel', function ($resource, opinionModel, $q, commentModel) {
-	var eventRes = $resource('/api/events/:id');
+.factory('eventModel', ['$resource', 'opinionModel', '$q', 'commentAPI', function ($resource, opinionModel, $q, commentAPI) {
+	var eventResUrl = '/api/events/:eventId';
+	var eventRes = $resource(eventResUrl);
 	
 	function fillEventStats(event){
 		event.dislikesCount = 0;
@@ -43,7 +44,7 @@ angular.module('event', [])
 		},
 		
 		getEvent: function(eventId){
-			var event = eventRes.get({id: eventId});	
+			var event = eventRes.get({eventId: eventId});	
 			event.$promise.then(function(){
 				event.opinions = eventModel.getOpinions(event.id);
 				event.opinions.$promise.then(function(){
@@ -51,9 +52,8 @@ angular.module('event', [])
 				});
 			});
 			event.$promise.then(function(){
-				var commentRes = $resource('/api/events/:eventId/comments', {eventId: eventId});
-				commentModel.setModelResource(commentRes);
-				event.comments = commentModel.getComments();		
+				commentAPI.setParentUrl(eventResUrl, {eventId: eventId});
+				event.comments = commentAPI.getComments();		
 			});
 
 			return event;
@@ -85,25 +85,16 @@ angular.module('event', [])
 		},
 		
 		putComment: function(comment){
-			var commentRes = $resource('/api/comments/:commentId', null, {
-				'put': {method: 'PUT'},			
-			});
-			commentModel.setModelResource(commentRes);	
-			return commentModel.putComment(comment);
+			return commentAPI.putComment(comment);
 		},
 		
-		deleteComment: function(comment){
-			var commentRes = $resource('/api/comments/:commentId', null, {
-				'delete': {method: 'DELETE'},			
-			});
-			commentModel.setModelResource(commentRes);
-			return commentModel.deleteComment(comment);			
+		deleteComment: function(commentId){
+			return commentAPI.deleteComment(commentId);			
 		},
 		
 		postComment: function(eventId, text){
-			var commentRes = $resource('/api/events/:eventId/comments', {eventId: eventId})
-			commentModel.setModelResource(commentRes);	
-			return commentModel.postComment(text);	
+			commentAPI.setParentUrl(eventResUrl, {eventId: eventId});
+			return commentAPI.postComment(text);	
 		}
 	};
 	

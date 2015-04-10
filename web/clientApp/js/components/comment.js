@@ -1,10 +1,11 @@
 angular.module('comment', [])
-.factory('commentModel', [function(){
-	var commentRes;
+.factory('commentAPI', ['$resource', function($resource){
+	var commentRes, commentResUrl, commentResUrlShort = '/api/comments/:commentId';
 	
 	return {
-		setModelResource: function(modelResource){
-			commentRes = modelResource;		
+		setParentUrl: function(parentUrl, parentUrlParams){
+			commentResUrl = parentUrl + '/comments/:commentId';
+			commentRes = $resource(commentResUrl, parentUrlParams);
 		},		
 		
 		getComments: function(){
@@ -16,11 +17,15 @@ angular.module('comment', [])
 		},
 		
 		putComment: function(comment){
-			return commentRes.put({commentId: comment.id}, comment);
+			return $resource(commentResUrlShort, null, {
+				'put': {method: 'PUT'}			
+			}).put({commentId: comment.id}, comment);
 		},
 		
-		deleteComment: function(comment){
-			return commentRes.delete({commentId: comment.id}, comment);
+		deleteComment: function(commentId){
+			return $resource(commentResUrlShort, null, {
+				'delete': {method: 'DELETE'}			
+			}).delete({commentId: commentId});
 		}	
 	};
 }]);

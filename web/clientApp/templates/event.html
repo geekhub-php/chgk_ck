@@ -37,7 +37,7 @@
 					<td ng-show="comment.made_by_current_user">
 						<input ng-model="comment.text"/>
 						<button ng-click="putComment(comment)">ok</button>
-						<button ng-click="deleteComment(comment)">del</button>
+						<button ng-click="deleteComment(comment.id)">del</button>
 					</td>				
 				</tr>
 				<tr>
