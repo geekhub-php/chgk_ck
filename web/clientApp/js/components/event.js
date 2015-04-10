@@ -3,8 +3,12 @@ angular.module('event', [])
 	$scope.events = eventModel.getEvents();
 	$scope.likeEvent = eventModel.likeEvent;
 }])
+.controller('EventController', ['$scope', 'eventModel', '$routeParams', function ($scope, eventModel, $routeParams) {
+	$scope.event = eventModel.getEvent($routeParams.newsId);
+	$scope.likeEvent = eventModel.likeEvent;
+}])
 .factory('eventModel', ['$resource', 'opinionModel', '$q', function ($resource, opinionModel, $q) {
-	var eventRes = $resource('/api/events');
+	var eventRes = $resource('/api/events/:id');
 	
 	function fillEventStats(event){
 		event.dislikesCount = 0;
@@ -33,6 +37,17 @@ angular.module('event', [])
 			});
 
 			return events;
+		},
+		
+		getEvent: function(eventId){
+			var event = eventRes.get({id: eventId});	
+			event.$promise.then(function(){
+				event.opinions = eventModel.getOpinions(event.id);
+				event.opinions.$promise.then(function(){
+					fillEventStats(event);					
+				});
+			});	
+			return event;
 		},
 		
 		getOpinions: function(eventId){

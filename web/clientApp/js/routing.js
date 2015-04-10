@@ -11,5 +11,10 @@ angular.module('app')
 		templateUrl: 'clientApp/templates/events.html',
 		controller:  'EventsController'
 	})
+	.when('/news/:newsId',
+	{
+		templateUrl: 'clientApp/templates/event.html',
+		controller:  'EventController'	
+	})
 	;
 });
