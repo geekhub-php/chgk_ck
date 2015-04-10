@@ -6,8 +6,11 @@ angular.module('event', [])
 .controller('EventController', ['$scope', 'eventModel', '$routeParams', function ($scope, eventModel, $routeParams) {
 	$scope.event = eventModel.getEvent($routeParams.newsId);
 	$scope.likeEvent = eventModel.likeEvent;
+	$scope.putComment = eventModel.putComment;
+	$scope.deleteComment = eventModel.deleteComment;
+	$scope.postComment = eventModel.postComment;
 }])
-.factory('eventModel', ['$resource', 'opinionModel', '$q', function ($resource, opinionModel, $q) {
+.factory('eventModel', ['$resource', 'opinionModel', '$q', 'commentModel', function ($resource, opinionModel, $q, commentModel) {
 	var eventRes = $resource('/api/events/:id');
 	
 	function fillEventStats(event){
@@ -46,7 +49,13 @@ angular.module('event', [])
 				event.opinions.$promise.then(function(){
 					fillEventStats(event);					
 				});
-			});	
+			});
+			event.$promise.then(function(){
+				var commentRes = $resource('/api/events/:eventId/comments', {eventId: eventId});
+				commentModel.setModelResource(commentRes);
+				event.comments = commentModel.getComments();		
+			});
+
 			return event;
 		},
 		
@@ -73,6 +82,28 @@ angular.module('event', [])
 				opinionModel.postOpinion(is_positive);				
 			});
 				
+		},
+		
+		putComment: function(comment){
+			var commentRes = $resource('/api/comments/:commentId', null, {
+				'put': {method: 'PUT'},			
+			});
+			commentModel.setModelResource(commentRes);	
+			return commentModel.putComment(comment);
+		},
+		
+		deleteComment: function(comment){
+			var commentRes = $resource('/api/comments/:commentId', null, {
+				'delete': {method: 'DELETE'},			
+			});
+			commentModel.setModelResource(commentRes);
+			return commentModel.deleteComment(comment);			
+		},
+		
+		postComment: function(eventId, text){
+			var commentRes = $resource('/api/events/:eventId/comments', {eventId: eventId})
+			commentModel.setModelResource(commentRes);	
+			return commentModel.postComment(text);	
 		}
 	};
 	

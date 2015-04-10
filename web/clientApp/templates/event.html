@@ -12,6 +12,7 @@
 		<td>current user opinion</td>
 		<td>like</td>
 		<td>dislike</td>
+		<td>comments</td>
 	</tr>
 	<tr>
 		<td>{{ event.title }}</td>	
@@ -24,6 +25,29 @@
 		<td>{{ event.currentUserOpinion.is_positive }}</td>
 		<td><button ng-click="likeEvent(event, true)" >like</button></td>
 		<td><button ng-click="likeEvent(event, false)" >dislike</button></td>
+		<td>
+			<table>
+				<tr>
+					<td>author</td>
+					<td>text</td>				
+				</tr>	
+				<tr ng-repeat="comment in event.comments">
+					<td>{{ comment.author.username }}</td>
+					<td ng-hide="comment.made_by_current_user">{{ comment.text }}</td>
+					<td ng-show="comment.made_by_current_user">
+						<input ng-model="comment.text"/>
+						<button ng-click="putComment(comment)">ok</button>
+						<button ng-click="deleteComment(comment)">del</button>
+					</td>				
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input ng-model="text"/>
+						<button ng-click="postComment(event.id, text)">ok</button>					
+					</td>				
+				</tr>	
+			</table>		
+		</td>
 	</tr>
 </table>
 </body>
