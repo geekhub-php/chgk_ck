@@ -7,11 +7,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Traits\TimestampableTrait;
 use JMS\Serializer\Annotation as JMS;
 use AppBundle\Interfaces\Opinionable;
+use AppBundle\Interfaces\UserCreatable;
 
 /**
  * @ORM\Entity
  */
-class Comment implements Opinionable
+class Comment implements Opinionable, UserCreatable
 {
     use TimestampableTrait;
 
@@ -42,6 +43,12 @@ class Comment implements Opinionable
      * @JMS\Groups({"commentFull"})
      */
     private $opinions;
+
+    /**
+     * @JMS\Groups({"commentFull"})
+     * @JMS\Type("boolean")
+     */
+    private $madeByCurrentUser;
 
     public function setId($id)
     {
@@ -154,5 +161,17 @@ class Comment implements Opinionable
         return $this->opinions->filter(function ($opinion) use ($id) {
             return $opinion->getId() == $id;
         })->first();
+    }
+
+    public function markAsMadeByCurrentUser()
+    {
+        $this->madeByCurrentUser = true;
+
+        return $this;
+    }
+
+    public function isMadeByCurrentUser()
+    {
+        return $this->madeByCurrentUser;
     }
 }
