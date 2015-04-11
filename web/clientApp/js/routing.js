@@ -31,5 +31,15 @@ angular.module('app')
 		templateUrl: 'clientApp/templates/team.html',
 		controller:  'TeamController'	
 	})
+	.when('/players',
+	{
+		templateUrl: 'clientApp/templates/players.html',
+		controller:  'PlayersController'	
+	})
+	.when('/players/:playerId',
+	{
+		templateUrl: 'clientApp/templates/player.html',
+		controller:  'PlayerController'	
+	})
 	;
 });
