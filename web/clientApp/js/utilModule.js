@@ -9,4 +9,16 @@ angular.module('util', [])
 	return function(value){
 		return value ? 'да' : 'не';
 	} 
+}])
+.filter('teamRolesToString', [function(){
+	return function(value, separator){
+		var result = '';		
+		for(var i = 0; i < value.length; i++){
+			result += value[i].name;
+			if(i + 1 < value.length) {
+				result += separator;			
+			}		
+		}
+		return result;	
+	}
 }]);
