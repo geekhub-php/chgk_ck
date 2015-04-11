@@ -1,4 +1,12 @@
 <html>
+<head>
+	<style>
+		table td {
+			border:solid 1px;		
+		}
+		table {border-collapse: collapse;}
+	</style>
+</head>
 <body>
 <table>
 	<tr>
@@ -12,6 +20,7 @@
 		<td>current user opinion</td>
 		<td>like</td>
 		<td>dislike</td>
+		<td>link to event</td>
 	</tr>
 	<tr ng-repeat=" event in events">
 		<td>{{ event.title }}</td>	
@@ -24,6 +33,7 @@
 		<td>{{ event.currentUserOpinion.is_positive }}</td>
 		<td><button ng-click="makeOpinion(event.id, true)" >like</button></td>
 		<td><button ng-click="makeOpinion(event.id, false)" >dislike</button></td>
+		<td><a href="#/news/{{ event.id }}">click</a></td>
 	</tr>
 </table>
 </body>
