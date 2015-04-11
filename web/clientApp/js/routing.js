@@ -41,5 +41,9 @@ angular.module('app')
 		templateUrl: 'clientApp/templates/player.html',
 		controller:  'PlayerController'	
 	})
+	.when('/about',
+	{
+		templateUrl: 'clientApp/templates/about.html'
+	})
 	;
 });
