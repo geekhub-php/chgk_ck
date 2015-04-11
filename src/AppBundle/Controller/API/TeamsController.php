@@ -6,15 +6,17 @@ use FOS\RestBundle\Controller\FOSRestController;
 use AppBundle\Entity\Team;
 use FOS\RestBundle\Controller\Annotations as REST;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use AppBundle\Entity\Player;
 
 class TeamsController extends FOSRestController
 {
     /**
-     * @REST\View(serializerGroups={"teamFull", "short"})
+     * @REST\View(serializerGroups={"teamFull", "ageCategoryFull", "short"})
      * @REST\QueryParam(name="name", default="")
      * @REST\QueryParam(name="rating", requirements="\d+", default="")
      * @REST\QueryParam(name="city", default="")
      * @REST\QueryParam(name="ageCategory", requirements="\d+", default="")
+     * @REST\QueryParam(name="orderByRating", requirements="(asc|desc)", default="")
      * @ApiDoc(
      * 	description="returns teams",
      * 	statusCodes={
@@ -24,19 +26,23 @@ class TeamsController extends FOSRestController
      *      {"name"="name", "dataType"="string"},
      * 		{"name"="rating", "dataType"="integer"},
      * 		{"name"="city", "dataType"="string"},
-     * 		{"name"="ageCategory", "dataType"="intger"}
+     * 		{"name"="ageCategory", "dataType"="integer"},
+     * 		{"name"="orderByRating", "dataType"="string"}
      *  },
      * 	output="array<AppBundle\Entity\Team>"
      * )
      */
-    public function getTeamsAction($name, $rating, $city, $ageCategory)
+    public function getTeamsAction($name, $rating, $city, $ageCategory, $orderByRating)
     {
-        $criteria = [];
+        $criteria = array();
+        $orderBy = array();
         if ($name) {
             $criteria['name'] = $name;
         }
         if ($rating) {
             $criteria['rating'] = $rating;
+        } elseif ($orderByRating) {
+            $orderBy['rating'] = $orderByRating;
         }
         if ($city) {
             $criteria['city'] = $city;
@@ -45,11 +51,11 @@ class TeamsController extends FOSRestController
             $criteria['ageCategory'] = $ageCategory;
         }
 
-        return $this->getDoctrine()->getRepository('AppBundle:Team')->findBy($criteria);
+        return $this->getDoctrine()->getRepository('AppBundle:Team')->findBy($criteria, $orderBy);
     }
 
     /**
-     * @REST\View(serializerGroups={"teamFull", "short"})
+     * @REST\View(serializerGroups={"teamFull", "ageCategoryFull", "short"})
      * @REST\Get("teams/{team}", requirements={
      * 		"team" = "\d+"
      * })
@@ -71,5 +77,33 @@ class TeamsController extends FOSRestController
     public function getTeamAction(Team $team)
     {
         return $team;
+    }
+
+    /**
+     * @REST\Get("teams/{team}/players", name="_teams")
+     * @REST\View(serializerGroups={"playerFull", "associationFull", "membershipTypesFull", "teamRoleFull", "short"})
+     * @ApiDoc(
+     * 	description="returns team's players",
+     * 	parameters={
+     * 		{"name"="team", "dataType"="integer", "required"="true", "description"="team's id"},
+     * 	},
+     * 	requirements={
+     *      {"name"="team","dataType"="integer","requirement"="\d+", "description"="team's id"},
+     *  },
+     * 	statusCodes={
+     * 		200="ok",
+     * 		404="team was not found"
+     * 	},
+     * 	output="array<AppBundle\Entity\Player>"
+     * )
+     */
+    public function getPlayersAction(Team $team)
+    {
+        $query = $this->getDoctrine()->getManager()->createQuery('SELECT p, ta
+		FROM AppBundle:Player p
+		JOIN p.teamPlayerAssociations ta WITH ta.team = :teamId');
+        $query->setParameter('teamId', $team->getId());
+
+        return $query->getResult();
     }
 }

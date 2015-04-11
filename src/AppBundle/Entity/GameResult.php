@@ -54,7 +54,6 @@ abstract class GameResult implements Opinionable
 
     /**
      * @ORM\ManyToMany(targetEntity="Opinion")
-     * @JMS\Groups({"gameResultFull"})
      */
     private $opinions;
 

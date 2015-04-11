@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html ng-app="app">
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="clientApp/js/deps/angular/angular.min.js"></script>
+		<script type="text/javascript" src="clientApp/js/deps/angular-route/angular-route.min.js"></script>
+		<script type="text/javascript" src="clientApp/js/deps/angular-resource/angular-resource.min.js"></script>
+		<script type="text/javascript" src="clientApp/js/app.js"></script>
+		<script type="text/javascript" src="clientApp/js/routing.js"></script>
+		<script type="text/javascript" src="clientApp/js/components/team.js"></script>
+		<script type="text/javascript" src="clientApp/js/components/event.js"></script>
+		<script type="text/javascript" src="clientApp/js/utilModule.js"></script>
+		<script type="text/javascript" src="clientApp/js/components/opinion.js"></script>
+		<script type="text/javascript" src="clientApp/js/components/comment.js"></script>
+		<script type="text/javascript" src="clientApp/js/components/game.js"></script>
+		<script type="text/javascript" src="clientApp/js/components/gameResult.js"></script>
+		<script type="text/javascript" src="clientApp/js/components/player.js"></script>
+	</head>
+	<body>
+		<a href="#/teams">команди</a>
+		<a href="#/news">новости</a>
+		<a href="#/games">games</a>
+		<a href="#/players">players</a>
+		<a href="#/about">about</a>
+		<div ng-view></div>
+	</body>
+</html>

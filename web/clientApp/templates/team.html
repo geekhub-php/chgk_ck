@@ -1,0 +1,42 @@
+<html>
+<head>
+	<style>
+		table td {
+			border:solid 1px;		
+		}
+		table {border-collapse: collapse;}
+	</style>
+</head>
+	<body>
+		<table>
+			<tr>
+				<td>название</td>
+				<td>рейтинг</td>	
+				<td>категория</td>
+				<td>description</td>	
+				<td>players</td>		
+			</tr>
+			<tr>
+				<td>{{ team.name }}</td>
+				<td>{{ team.rating }}</td>	
+				<td>{{ team.age_category.name }}</td>
+				<td>{{ team.description }}</td>
+				<td>
+					<table>
+						<tr>
+							<td>lastname</td>
+							<td>roles</td>
+							<td>membership type</td>
+						</tr>
+						<tr ng-repeat="player in players">
+							<td>{{ player.last_name }}</td>
+							<td>{{ player.team_player_associations[0].roles | teamRolesToString:", " }}</td>
+							<td>{{ player.team_player_associations[0].membership_type.name }}</td>
+						</tr>
+
+					</table>				
+				</td>
+			</tr>	
+		</table>	
+	</body>
+</html>

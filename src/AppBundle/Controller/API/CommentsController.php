@@ -17,7 +17,7 @@ class CommentsController extends FOSRestController
 {
     /**
      * @ParamConverter("comment", class="AppBundle:Comment")
-     * @REST\View(serializerGroups={"commentFull", "short"})
+     * @REST\View(serializerGroups={"commentFull", "userFull", "short"})
      * @REST\Get("comments/{comment}", requirements={
      * 		"comment" = "\d+"
      * })
@@ -38,12 +38,14 @@ class CommentsController extends FOSRestController
      */
     public function getCommentAction(Comment $comment)
     {
+        $this->get('user_creatable_marker')->mark(array($comment));
+
         return $comment;
     }
 
     /**
      * @ParamConverter("event", class="AppBundle:Event")
-     * @REST\View(serializerGroups={"commentFull", "short"})
+     * @REST\View(serializerGroups={"commentFull", "userFull", "short"})
      * @REST\Get("events/{event}/comments", requirements={
      * 		"event" = "\d+"
      * })
@@ -64,7 +66,10 @@ class CommentsController extends FOSRestController
      */
     public function getCommentsAction(Event $event)
     {
-        return $event->getComments();
+        $comments = $event->getComments()->toArray();
+        $this->get('user_creatable_marker')->mark($comments);
+
+        return $comments;
     }
 
     /**

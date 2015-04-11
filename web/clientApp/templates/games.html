@@ -1,0 +1,40 @@
+<html>
+<head>
+	<style>
+		table td {
+			border:solid 1px;		
+		}
+		table {border-collapse: collapse;}
+	</style>
+</head>
+	<body>
+		<table summary="" >
+			<tr>
+				<td>name</td>	
+				<td>play date</td>
+				<td>place</td>
+				<td>season</td>
+				<td>is localy rated</td>
+				<td>is globaly rated</td>
+				<td>is home</td>
+				<td>is complete</td>
+				<td>age category</td>
+				<td>description</td>
+				<td></td>
+			</tr>
+			<tr ng-repeat="game in games">
+				<td>{{ game.name }}</td>	
+				<td>{{ game.play_date | timestampToFormat:'dd.M.yyyy'  }}</td>
+				<td>{{ game.play_place }}</td>
+				<td>{{ game.season.name || 'нема сезона' }}</td>
+				<td>{{ game.is_locally_rated | booleanFormater }}</td>
+				<td>{{ game.is_globaly_rated | booleanFormater }}</td>
+				<td>{{ game.is_home | booleanFormater }}</td>
+				<td>{{ game.is_complete | booleanFormater }}</td>
+				<td>{{ game.age_category.name }}</td>
+				<td>{{ game.description }}</td>
+				<td><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></td>
+			</tr>
+		</table>
+	</body>
+</html>

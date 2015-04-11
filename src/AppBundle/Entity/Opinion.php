@@ -4,11 +4,12 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use AppBundle\Interfaces\UserCreatable;
 
 /**
  * @ORM\Entity
  */
-class Opinion
+class Opinion implements UserCreatable
 {
     /**
      * @ORM\Column(type="integer")
@@ -30,6 +31,12 @@ class Opinion
      * @JMS\Groups({"opinionFull"})
      */
     private $isPositive;
+
+    /**
+     * @JMS\Groups({"opinionFull"})
+     * @JMS\Type("boolean")
+     */
+    private $madeByCurrentUser;
 
     public function __construct()
     {
@@ -90,5 +97,17 @@ class Opinion
         $this->author = $author;
 
         return $this;
+    }
+
+    public function markAsMadeByCurrentUser()
+    {
+        $this->madeByCurrentUser = true;
+
+        return $this;
+    }
+
+    public function isMadeByCurrentUser()
+    {
+        return $this->madeByCurrentUser;
     }
 }

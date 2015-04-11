@@ -37,6 +37,11 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
      */
     private $image;
+	
+	/**
+	 * @JMS\Groups({"userFull"})
+	 */
+	protected $username;
 
     /**
      * Get id

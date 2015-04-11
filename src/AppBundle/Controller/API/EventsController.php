@@ -11,7 +11,7 @@ use FOS\RestBundle\Controller\Annotations as REST;
 class EventsController extends FOSRestController
 {
     /**
-     * @RestAnnotations\View(serializerGroups={"eventFull", "short"})
+     * @RestAnnotations\View(serializerGroups={"eventFull", "opinionFull", "userFull", "short"})
      * @REST\Get("events")
      * @REST\QueryParam(name="title", default="")
      * @REST\QueryParam(name="authorId", requirements="\d+", default="")
@@ -42,11 +42,17 @@ class EventsController extends FOSRestController
             $criteria['eventDate'] = $date;
         }
 
-        return $this->getDoctrine()->getRepository('AppBundle:Event')->findBy($criteria);
+        $events = $this->getDoctrine()->getRepository('AppBundle:Event')->findBy($criteria);
+
+        foreach ($events as $event) {
+            $this->get('user_creatable_marker')->mark($event->getOpinions()->toArray());
+        }
+
+        return $events;
     }
 
     /**
-     * @RestAnnotations\View(serializerGroups={"eventFull", "short"})
+     * @RestAnnotations\View(serializerGroups={"eventFull", "opinionFull", "userFull", "short"})
      * @REST\Get("events/{event}", requirements={
      * 		"event" = "\d+"
      * })
@@ -67,6 +73,8 @@ class EventsController extends FOSRestController
      */
     public function getEventAction(Event $event)
     {
+        $this->get('user_creatable_marker')->mark($event->getOpinions()->toArray());
+
         return $event;
     }
 }
