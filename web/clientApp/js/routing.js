@@ -4,7 +4,7 @@ angular.module('app')
 	.when('/teams', 
 	{
 		templateUrl: 'clientApp/templates/teams.html',
-		controller:  'TeamController'
+		controller:  'TeamsController'
 	})
 	.when('/news', 
 	{
@@ -25,6 +25,11 @@ angular.module('app')
 	{
 		templateUrl: 'clientApp/templates/gameResults.html',
 		controller:  'GameResultsController'	
+	})
+	.when('/team/:teamId',
+	{
+		templateUrl: 'clientApp/templates/team.html',
+		controller:  'TeamController'	
 	})
 	;
 });

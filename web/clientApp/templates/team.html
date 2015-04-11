@@ -2,18 +2,16 @@
 	<body>
 		<table>
 			<tr>
-				<td>место</td>
 				<td>название</td>
 				<td>рейтинг</td>	
-				<td>категория</td>			
-				<td></td>			
+				<td>категория</td>
+				<td>description</td>			
 			</tr>
-			<tr ng-repeat="team in teams">
-				<td>{{ $index + 1 }}</td>
+			<tr>
 				<td>{{ team.name }}</td>
 				<td>{{ team.rating }}</td>	
 				<td>{{ team.age_category.name }}</td>
-				<td><a href="#/team/{{ team.id }}" >click</a></td>			
+				<td>{{ team.description }}</td>
 			</tr>	
 		</table>	
 	</body>
