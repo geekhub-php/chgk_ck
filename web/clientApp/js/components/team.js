@@ -4,6 +4,7 @@ angular.module('team', [])
 }])
 .controller('TeamController', ['$scope', 'teamAPI', '$routeParams', function($scope, teamAPI, $routeParams){
 	$scope.team = teamAPI.getTeam($routeParams.teamId);
+	$scope.players = teamAPI.getPlayers($routeParams.teamId);
 }])
 .factory('teamAPI', ['$resource', function ($resource) {
 	var teamRes = $resource('/api/teams/:teamId');
@@ -15,6 +16,10 @@ angular.module('team', [])
 		
 		getTeam: function(teamId){
 			return teamRes.get({teamId: teamId});		
+		},
+		
+		getPlayers: function(teamId){
+			return $resource('api/teams/:teamId/players', {teamId: teamId}).query();		
 		}
 	};
 }]);
