@@ -15,19 +15,6 @@ angular.module('event', [])
 	var eventResUrl = '/api/events/:eventId';
 	var eventRes = $resource(eventResUrl);
 	
-	function fillOpinionableStats(opinionable){
-		opinionable.dislikesCount = 0;
-		opinionable.likesCount = 0;
-		for(var i = 0; i < opinionable.opinions.length; i++) {
-			var opinion = opinionable.opinions[i];
-			opinion.is_positive ? opinionable.likesCount++ : opinionable.dislikesCount++;
-			
-			if (opinion.made_by_current_user) {
-				opinionable.currentUserOpinion = opinion;	
-			}				
-		}	
-	}
-	
 	var eventModel = {
 		getEvents: function(){
 			var events = eventRes.query();
@@ -35,7 +22,7 @@ angular.module('event', [])
 				events.forEach(function(event){
 					event.opinions = eventModel.getOpinions(event.id);
 					event.opinions.$promise.then(function(){
-						fillOpinionableStats(event);					
+						opinionAPI.fillOpinionableStats(event);					
 					});
 					
 				});			
@@ -49,7 +36,7 @@ angular.module('event', [])
 			event.$promise.then(function(){
 				event.opinions = eventModel.getOpinions(event.id);
 				event.opinions.$promise.then(function(){
-					fillOpinionableStats(event);					
+					opinionAPI.fillOpinionableStats(event);					
 				});
 			});
 			event.$promise.then(function(){
@@ -62,7 +49,7 @@ angular.module('event', [])
 				comments.forEach(function(comment){
 					comment.opinions = commentAPI.getCommentOpinions(comment.id);
 					comment.opinions.$promise.then(function(opinions){
-						fillOpinionableStats(comment);							
+						opinionAPI.fillOpinionableStats(comment);							
 					});
 				});
 			});

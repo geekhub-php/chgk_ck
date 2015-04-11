@@ -25,6 +25,19 @@ angular.module('opinion', [])
 			.then(function(){
 				opinionRes.save({}, {is_positive: is_positive});			
 			});		
+		},
+		
+		fillOpinionableStats: function(opinionable){
+			opinionable.dislikesCount = 0;
+			opinionable.likesCount = 0;
+			for(var i = 0; i < opinionable.opinions.length; i++) {
+				var opinion = opinionable.opinions[i];
+				opinion.is_positive ? opinionable.likesCount++ : opinionable.dislikesCount++;
+				
+				if (opinion.made_by_current_user) {
+					opinionable.currentUserOpinion = opinion;	
+				}				
+			}		
 		}
 	};
 
