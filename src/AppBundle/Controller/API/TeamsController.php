@@ -6,6 +6,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use AppBundle\Entity\Team;
 use FOS\RestBundle\Controller\Annotations as REST;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use AppBundle\Entity\Player;
 
 class TeamsController extends FOSRestController
 {
@@ -76,5 +77,33 @@ class TeamsController extends FOSRestController
     public function getTeamAction(Team $team)
     {
         return $team;
+    }
+
+    /**
+     * @REST\Get("teams/{team}/players")
+     * @REST\View(serializerGroups={"playerFull", "associationFull", "membershipTypesFull", "teamRoleFull", "short"})
+     * @ApiDoc(
+     * 	description="returns team's players",
+     * 	parameters={
+     * 		{"name"="team", "dataType"="integer", "required"="true", "description"="team's id"},
+     * 	},
+     * 	requirements={
+     *      {"name"="team","dataType"="integer","requirement"="\d+", "description"="team's id"},
+     *  },
+     * 	statusCodes={
+     * 		200="ok",
+     * 		404="team was not found"
+     * 	},
+     * 	output="array<AppBundle\Entity\Player>"
+     * )
+     */
+    public function getPlayersAction(Team $team)
+    {
+        $query = $this->getDoctrine()->getManager()->createQuery('SELECT p, ta
+		FROM AppBundle:Player p
+		JOIN p.teamPlayerAssociations ta WITH ta.team = :teamId');
+        $query->setParameter('teamId', $team->getId());
+
+        return $query->getResult();
     }
 }
