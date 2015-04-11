@@ -16,5 +16,10 @@ angular.module('app')
 		templateUrl: 'clientApp/templates/event.html',
 		controller:  'EventController'	
 	})
+	.when('/games',
+	{
+		templateUrl: 'clientApp/templates/games.html',
+		controller:  'GamesController'	
+	})
 	;
 });

@@ -10,7 +10,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class GamesController extends FOSRestController
 {
     /**
-     * @REST\View(serializerGroups={"gameFull", "short"})
+     * @REST\View(serializerGroups={"gameFull", "ageCategoryFull", "seasonFull", "short"})
      * @REST\QueryParam(name="name", default="")
      * @REST\QueryParam(name="date", requirements="\d+", default="")
      * @REST\QueryParam(name="place", default="")

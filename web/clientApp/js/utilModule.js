@@ -5,4 +5,8 @@ angular.module('util', [])
 			return dateFilter(date, format);
 	}
 }])
-;
+.filter('booleanFormater', [function(){
+	return function(value){
+		return value ? 'да' : 'не';
+	} 
+}]);
