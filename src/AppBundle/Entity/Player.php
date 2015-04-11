@@ -23,7 +23,7 @@ class Player
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
-     * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/")
+     * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/u")
      * @Assert\NotBlank()
      * @JMS\Groups({"playerFull"})
      */
@@ -31,7 +31,7 @@ class Player
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
-     * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/")
+     * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/u")
      * @Assert\NotBlank()
      * @JMS\Groups({"playerFull"})
      */
@@ -39,7 +39,7 @@ class Player
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
-     * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/")
+     * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/u")
      * @Assert\NotBlank()
      * @JMS\Groups({"playerFull"})
      */
