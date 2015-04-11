@@ -1,1 +1,1 @@
-angular.module('app', ['ngRoute', 'ngResource', 'team', 'util', 'event', 'opinion', 'comment', 'game']);
+angular.module('app', ['ngRoute', 'ngResource', 'team', 'util', 'event', 'opinion', 'comment', 'game', 'gameResult']);

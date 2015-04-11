@@ -20,6 +20,7 @@
 				<td>is complete</td>
 				<td>age category</td>
 				<td>description</td>
+				<td></td>
 			</tr>
 			<tr ng-repeat="game in games">
 				<td>{{ game.name }}</td>	
@@ -32,6 +33,7 @@
 				<td>{{ game.is_complete | booleanFormater }}</td>
 				<td>{{ game.age_category.name }}</td>
 				<td>{{ game.description }}</td>
+				<td><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></td>
 			</tr>
 		</table>
 	</body>

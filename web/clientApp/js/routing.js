@@ -21,5 +21,10 @@ angular.module('app')
 		templateUrl: 'clientApp/templates/games.html',
 		controller:  'GamesController'	
 	})
+	.when('/games/:gameId/gameResults',
+	{
+		templateUrl: 'clientApp/templates/gameResults.html',
+		controller:  'GameResultsController'	
+	})
 	;
 });
