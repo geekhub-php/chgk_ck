@@ -40,7 +40,6 @@ class Comment implements Opinionable, UserCreatable
 
     /**
      * @ORM\ManyToMany(targetEntity="Opinion")
-     * @JMS\Groups({"commentFull"})
      */
     private $opinions;
 

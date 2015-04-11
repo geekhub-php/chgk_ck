@@ -29,7 +29,11 @@
 			<table>
 				<tr>
 					<td>author</td>
-					<td>text</td>				
+					<td>text</td>
+					<td>likes/dislikes</td>
+					<td>оцінка залогіненого</td>
+					<td>like</td>
+					<td>dislike</td>				
 				</tr>	
 				<tr ng-repeat="comment in event.comments">
 					<td>{{ comment.author.username }}</td>
@@ -38,7 +42,11 @@
 						<input ng-model="comment.text"/>
 						<button ng-click="putComment(comment)">ok</button>
 						<button ng-click="deleteComment(comment.id)">del</button>
-					</td>				
+					</td>
+					<td>{{ comment.likesCount }} / {{ comment.dislikesCount }}</td>	
+					<td>{{ comment.currentUserOpinion.is_positive }}</td>
+					<td><button ng-click="makeCommentOpinion(event.id, comment.id, true)">like</button></td>
+					<td><button ng-click="makeCommentOpinion(event.id, comment.id, false)">dislike</button></td>			
 				</tr>
 				<tr>
 					<td colspan="2">
