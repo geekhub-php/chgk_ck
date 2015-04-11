@@ -80,7 +80,7 @@ class TeamsController extends FOSRestController
     }
 
     /**
-     * @REST\Get("teams/{team}/players")
+     * @REST\Get("teams/{team}/players", name="_teams")
      * @REST\View(serializerGroups={"playerFull", "associationFull", "membershipTypesFull", "teamRoleFull", "short"})
      * @ApiDoc(
      * 	description="returns team's players",
