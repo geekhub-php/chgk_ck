@@ -13,7 +13,7 @@ angular.module('opinion', [])
 		},
 		
 		makeOpinion: function(is_positive){
-			opinionRes.query().$promise
+			return opinionRes.query().$promise
 			.then(function(opinions){
 				for(var i = 0; i < opinions.length; i++) {
 					var opinion = opinions[i];
@@ -23,10 +23,15 @@ angular.module('opinion', [])
 				}			
 			})
 			.then(function(){
-				opinionRes.save({}, {is_positive: is_positive});			
+				return opinionRes.save({}, {is_positive: is_positive}).$promise;			
 			});		
-		},
-		
+		}
+			
+	};
+}])
+.factory('opinionableModel', [function(){
+	
+	var opinionableModel = {
 		fillOpinionableStats: function(opinionable){
 			opinionable.dislikesCount = 0;
 			opinionable.likesCount = 0;
@@ -38,7 +43,20 @@ angular.module('opinion', [])
 					opinionable.currentUserOpinion = opinion;	
 				}				
 			}		
-		}
+		},
+		
+		addNewOpinion: function(opinionable, opinion){
+			for (var i = 0; i < opinionable.opinions.length; i++) {
+				if (opinionable.opinions[i].made_by_current_user) {
+					opinionable.opinions.splice(i, 1);				
+				}			
+			}
+			opinion.made_by_current_user = true;
+			opinionable.opinions.push(opinion);	
+					
+			opinionableModel.fillOpinionableStats(opinionable);		
+		}	
 	};
-
+	
+	return opinionableModel;
 }]);

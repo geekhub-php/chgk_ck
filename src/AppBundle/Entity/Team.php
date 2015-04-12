@@ -75,6 +75,7 @@ class Team
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+	 * @JMS\Groups({"teamFull"})
      */
     private $image;
 

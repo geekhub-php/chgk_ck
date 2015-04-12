@@ -23,10 +23,10 @@ angular.module('comment', [])
 			}).put({commentId: comment.id}, comment);
 		},
 		
-		deleteComment: function(commentId){
+		deleteComment: function(commentId, defer){
 			return $resource(commentResUrlShort, null, {
 				'delete': {method: 'DELETE'}			
-			}).delete({commentId: commentId});
+			}).delete({commentId: commentId}, function(){defer.resolve();});
 		},
 		
 		getCommentOpinions: function(commentId){
@@ -37,6 +37,25 @@ angular.module('comment', [])
 		makeCommentOpinion: function(commentId, is_positive){
 			opinionAPI.setParentUrl(commentResUrl, angular.extend({commentId: commentId}, parentUrlParams));
 			return opinionAPI.makeOpinion(is_positive);
+		}	
+	};
+}])
+.factory('commentableModel', ['opinionableModel', function(opinionableModel){
+	return {
+		addComment: function(commentable, comment){
+			comment.made_by_current_user = true;
+			comment.opinions = [];
+			opinionableModel.fillOpinionableStats(comment);
+			commentable.comments.push(comment);	
+		},
+		
+		deleteComment: function(commentable, commentId){
+			for (var i = 0; i < commentable.comments.length; i++) {
+				if (commentable.comments[i].id == commentId) {
+					commentable.comments.splice(i, 1);
+					return;				
+				}
+			}		
 		}	
 	};
 }]);

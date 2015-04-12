@@ -27,8 +27,8 @@
 				<td>{{ gameResult.likesCount }}</td>		
 				<td>{{ gameResult.dislikesCount }}</td>
 				<td>{{ gameResult.currentUserOpinion.is_positive }}</td>
-				<td><button ng-click="makeResultOpinion(gameResult.id, true)">like</button></td>	
-				<td><button ng-click="makeResultOpinion(gameResult.id, false)">dislike</button></td>	
+				<td><button ng-show="isLoggedIn" ng-click="makeResultOpinion(gameResult, true)">like</button></td>	
+				<td><button ng-show="isLoggedIn" ng-click="makeResultOpinion(gameResult, false)">dislike</button></td>	
 			</tr>
 		</table>
 	</body>

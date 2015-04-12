@@ -10,11 +10,13 @@
 	<body>
 		<table>
 			<tr>
+				<td>img</td>
 				<td>name</td>
 				<td>teams</td>	
 				<td>dob</td>		
 			</tr>
 			<tr>
+				<td><img ng-show="player.image" style="height: 70px; width: 70px;" src="{{ player.image }}" /></td>
 				<td>{{ player.last_name }} {{ player.middle_name }} {{ player.first_name }}</td>
 				<td>
 					<span ng-repeat="pa in player.team_player_associations">
