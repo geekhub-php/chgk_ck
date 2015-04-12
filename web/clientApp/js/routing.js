@@ -45,5 +45,15 @@ angular.module('app')
 	{
 		templateUrl: 'clientApp/templates/about.html'
 	})
+	.when('/galleries',
+	{
+		templateUrl: 'clientApp/templates/galleries.html',
+		controller:  'GalleriesController'	
+	})
+	.when('/galleries/:galleryId',
+	{
+		templateUrl: 'clientApp/templates/gallery.html',
+		controller:  'GalleryController'	
+	})
 	;
 });

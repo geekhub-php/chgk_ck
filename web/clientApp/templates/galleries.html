@@ -1,0 +1,18 @@
+<head>
+	<style>
+		table td {
+			border:solid 1px;		
+		}
+		table {border-collapse: collapse;}
+	</style>
+</head>
+<table summary="" >
+	<tr>
+		<td>name</td>
+		<td></td>	
+	</tr>
+	<tr ng-repeat="gallery in galleries">
+		<td>{{ gallery.name }}</td>
+		<td><a href="#/galleries/{{ gallery.id }}">click</a></td>	
+	</tr>
+</table>
