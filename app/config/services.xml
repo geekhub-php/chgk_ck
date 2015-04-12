@@ -139,5 +139,11 @@
 	        <argument type="service" id="security.token_storage"/>
     	</service>
 
+    	<service id="app.serializer.media.handler" class="AppBundle\Serializer\MediaHandler" public="true">
+    		 <tag name="jms_serializer.subscribing_handler" />
+    		 <argument type="service" id="service_container" />
+    		 <argument>default_big</argument>
+    	</service>
+
     </services>
 </container>
