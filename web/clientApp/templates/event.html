@@ -31,8 +31,8 @@
 		<td>{{ event.likesCount }}</td>
 		<td>{{ event.dislikesCount }}</td>
 		<td>{{ event.currentUserOpinion.is_positive }}</td>
-		<td><button ng-click="makeOpinion(event, true)" >like</button></td>
-		<td><button ng-click="makeOpinion(event, false)" >dislike</button></td>
+		<td><button ng-show="isLoggedIn" ng-click="makeOpinion(event, true)" >like</button></td>
+		<td><button ng-show="isLoggedIn" ng-click="makeOpinion(event, false)" >dislike</button></td>
 		<td>
 			<table>
 				<tr>
@@ -47,16 +47,16 @@
 					<td>{{ comment.author.username }}</td>
 					<td ng-hide="comment.made_by_current_user">{{ comment.text }}</td>
 					<td ng-show="comment.made_by_current_user">
-						<input ng-model="comment.text"/>
-						<button ng-click="putComment(comment)">ok</button>
-						<button ng-click="deleteComment(event, comment.id)">del</button>
+						<input ng-show="isLoggedIn" ng-model="comment.text"/>
+						<button ng-show="isLoggedIn" ng-click="putComment(comment)">ok</button>
+						<button ng-show="isLoggedIn" ng-click="deleteComment(event, comment.id)">del</button>
 					</td>
 					<td>{{ comment.likesCount }} / {{ comment.dislikesCount }}</td>	
 					<td>{{ comment.currentUserOpinion.is_positive }}</td>
-					<td><button ng-click="makeCommentOpinion(event, comment, true)">like</button></td>
-					<td><button ng-click="makeCommentOpinion(event, comment, false)">dislike</button></td>			
+					<td><button ng-show="isLoggedIn" ng-click="makeCommentOpinion(event, comment, true)">like</button></td>
+					<td><button ng-show="isLoggedIn" ng-click="makeCommentOpinion(event, comment, false)">dislike</button></td>			
 				</tr>
-				<tr>
+				<tr ng-show="isLoggedIn">
 					<td colspan="2">
 						<input ng-model="text"/>
 						<button ng-click="postComment(event, text)">ok</button>					

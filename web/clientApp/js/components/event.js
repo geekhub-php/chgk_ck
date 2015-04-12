@@ -1,10 +1,13 @@
 angular.module('event', [])
-.controller('EventsController', ['$scope', 'eventAPI', 'eventModel', function ($scope, eventAPI, eventModel) {
+.controller('EventsController', ['$scope', 'eventAPI', 'eventModel', 'userAPI', function ($scope, eventAPI, eventModel, userAPI) {
 	eventModel.setData(eventAPI.getEvents(), true);
 	$scope.events = eventModel.getData();
 	$scope.makeOpinion = eventAPI.makeOpinion;
+	userAPI.isLoggedIn().then(function(isLoggedIn){
+		$scope.isLoggedIn	= isLoggedIn;
+	});
 }])
-.controller('EventController', ['$scope', 'eventAPI', '$routeParams', 'eventModel', function ($scope, eventAPI, $routeParams, eventModel) {
+.controller('EventController', ['$scope', 'eventAPI', '$routeParams', 'eventModel', 'userAPI', function ($scope, eventAPI, $routeParams, eventModel, userAPI) {
 	eventModel.setData(eventAPI.getEvent($routeParams.newsId));	
 	$scope.event = eventModel.getFirst();
 	$scope.makeOpinion = eventAPI.makeOpinion;
@@ -12,6 +15,9 @@ angular.module('event', [])
 	$scope.deleteComment = eventAPI.deleteComment;
 	$scope.postComment = eventAPI.postComment;
 	$scope.makeCommentOpinion = eventAPI.makeCommentOpinion;
+	userAPI.isLoggedIn().then(function(isLoggedIn){
+		$scope.isLoggedIn	= isLoggedIn;
+	});
 }])
 .factory('eventAPI', ['$resource', 'opinionAPI', '$q', 'commentAPI', 'opinionableModel', 'eventModel', 'commentableModel', function ($resource, opinionAPI, $q, commentAPI, opinionableModel, eventModel, commentableModel) {
 	var eventResUrl = '/api/events/:eventId';

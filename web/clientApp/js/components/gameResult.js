@@ -1,7 +1,10 @@
 angular.module('gameResult', [])
-.controller('GameResultsController', ['gameResultAPI', '$routeParams', '$scope', function(gameResultAPI, $routeParams, $scope){
+.controller('GameResultsController', ['gameResultAPI', '$routeParams', '$scope', 'userAPI', function(gameResultAPI, $routeParams, $scope, userAPI){
 	$scope.gameResults = gameResultAPI.getGameResults($routeParams.gameId);
 	$scope.makeResultOpinion = gameResultAPI.makeResultOpinion;
+	userAPI.isLoggedIn().then(function(isLoggedIn){
+		$scope.isLoggedIn	= isLoggedIn;
+	});
 }])
 .factory('gameResultAPI', ['$resource', 'opinionAPI', '$routeParams', 'opinionableModel', function($resource, opinionAPI, $routeParams, opinionableModel){
 	var gameResultUrl = '/api/games/:gameId/gameResults/:gameResultId';
