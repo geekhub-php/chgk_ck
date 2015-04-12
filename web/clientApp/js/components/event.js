@@ -1,28 +1,30 @@
 angular.module('event', [])
-.controller('EventsController', ['$scope', 'eventModel', function ($scope, eventModel) {
-	$scope.events = eventModel.getEvents();
-	$scope.makeOpinion = eventModel.makeOpinion;
+.controller('EventsController', ['$scope', 'eventAPI', 'eventModel', function ($scope, eventAPI, eventModel) {
+	eventModel.setData(eventAPI.getEvents(), true);
+	$scope.events = eventModel.getData();
+	$scope.makeOpinion = eventAPI.makeOpinion;
 }])
-.controller('EventController', ['$scope', 'eventModel', '$routeParams', function ($scope, eventModel, $routeParams) {
-	$scope.event = eventModel.getEvent($routeParams.newsId);
-	$scope.makeOpinion = eventModel.makeOpinion;
-	$scope.putComment = eventModel.putComment;
-	$scope.deleteComment = eventModel.deleteComment;
-	$scope.postComment = eventModel.postComment;
-	$scope.makeCommentOpinion = eventModel.makeCommentOpinion;
+.controller('EventController', ['$scope', 'eventAPI', '$routeParams', 'eventModel', function ($scope, eventAPI, $routeParams, eventModel) {
+	eventModel.setData(eventAPI.getEvent($routeParams.newsId));	
+	$scope.event = eventModel.getFirst();
+	$scope.makeOpinion = eventAPI.makeOpinion;
+	$scope.putComment = eventAPI.putComment;
+	$scope.deleteComment = eventAPI.deleteComment;
+	$scope.postComment = eventAPI.postComment;
+	$scope.makeCommentOpinion = eventAPI.makeCommentOpinion;
 }])
-.factory('eventModel', ['$resource', 'opinionAPI', '$q', 'commentAPI', function ($resource, opinionAPI, $q, commentAPI) {
+.factory('eventAPI', ['$resource', 'opinionAPI', '$q', 'commentAPI', 'opinionableModel', 'eventModel', function ($resource, opinionAPI, $q, commentAPI, opinionableModel, eventModel) {
 	var eventResUrl = '/api/events/:eventId';
 	var eventRes = $resource(eventResUrl);
 	
-	var eventModel = {
+	var eventAPI = {
 		getEvents: function(){
 			var events = eventRes.query();
 			events.$promise.then(function(){
 				events.forEach(function(event){
-					event.opinions = eventModel.getOpinions(event.id);
+					event.opinions = eventAPI.getOpinions(event.id);
 					event.opinions.$promise.then(function(){
-						opinionAPI.fillOpinionableStats(event);					
+						opinionableModel.fillOpinionableStats(event);					
 					});
 					
 				});			
@@ -34,9 +36,9 @@ angular.module('event', [])
 		getEvent: function(eventId){
 			var event = eventRes.get({eventId: eventId});	
 			event.$promise.then(function(){
-				event.opinions = eventModel.getOpinions(event.id);
+				event.opinions = eventAPI.getOpinions(event.id);
 				event.opinions.$promise.then(function(){
-					opinionAPI.fillOpinionableStats(event);					
+					opinionableModel.fillOpinionableStats(event);					
 				});
 			});
 			event.$promise.then(function(){
@@ -49,7 +51,7 @@ angular.module('event', [])
 				comments.forEach(function(comment){
 					comment.opinions = commentAPI.getCommentOpinions(comment.id);
 					comment.opinions.$promise.then(function(opinions){
-						opinionAPI.fillOpinionableStats(comment);							
+						opinionableModel.fillOpinionableStats(comment);							
 					});
 				});
 			});
@@ -62,9 +64,11 @@ angular.module('event', [])
 			return opinionAPI.getOpinions();
 		},
 		
-		makeOpinion: function(eventId, is_positive){
-			opinionAPI.setParentUrl(eventResUrl, {eventId: eventId});
-			return opinionAPI.makeOpinion(is_positive);
+		makeOpinion: function(event, is_positive){
+			opinionAPI.setParentUrl(eventResUrl, {eventId: event.id});
+			opinionAPI.makeOpinion(is_positive).then(function(addedOpinion){
+				opinionableModel.addNewOpinion(event, addedOpinion);	
+			});
 		},
 		
 		putComment: function(comment){
@@ -86,5 +90,34 @@ angular.module('event', [])
 		}
 	};
 	
+	return eventAPI;
+}])
+.factory('eventModel', [function(){
+	var events = null;	
+	
+	eventModel = {
+		setData: function(modelData, isArray){
+			events = isArray ? modelData : [modelData];
+		},
+		
+		getData: function(){
+			return events;		
+		},
+		
+		getFirst: function(){
+			return events[0];		
+		},
+		
+		getEvent: function(eventId){
+			for(var i = 0; i < events.length; i++) {	
+				if (events[i].id == eventId) {
+					return events[i];				
+				}			
+			}
+			
+			return null;	
+		}		
+	};
+
 	return eventModel;
 }]);
