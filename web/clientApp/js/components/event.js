@@ -84,9 +84,12 @@ angular.module('event', [])
 			return commentAPI.postComment(text);	
 		},
 		
-		makeCommentOpinion: function(eventId, commentId, is_positive){
-			commentAPI.setParentUrl(eventResUrl, {eventId: eventId});
-			commentAPI.makeCommentOpinion(commentId, is_positive);		
+		makeCommentOpinion: function(event, comment, is_positive){
+			commentAPI.setParentUrl(eventResUrl, {eventId: event.id});
+			commentAPI.makeCommentOpinion(comment.id, is_positive)
+			.then(function(addedOpinion){
+				opinionableModel.addNewOpinion(comment, addedOpinion);			
+			});		
 		}
 	};
 	

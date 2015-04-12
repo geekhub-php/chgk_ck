@@ -53,8 +53,8 @@
 					</td>
 					<td>{{ comment.likesCount }} / {{ comment.dislikesCount }}</td>	
 					<td>{{ comment.currentUserOpinion.is_positive }}</td>
-					<td><button ng-click="makeCommentOpinion(event.id, comment.id, true)">like</button></td>
-					<td><button ng-click="makeCommentOpinion(event.id, comment.id, false)">dislike</button></td>			
+					<td><button ng-click="makeCommentOpinion(event, comment, true)">like</button></td>
+					<td><button ng-click="makeCommentOpinion(event, comment, false)">dislike</button></td>			
 				</tr>
 				<tr>
 					<td colspan="2">
