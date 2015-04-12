@@ -115,7 +115,7 @@ class CommentsController extends FOSRestController
 
             $view->setStatusCode(201);
             $view->setData($comment);
-            $view->setSerializationContext(SerializationContext::create()->setGroups(array('commentFull', 'short')));
+            $view->setSerializationContext(SerializationContext::create()->setGroups(array('commentFull', 'userFull', 'short')));
         }
 
         return $view;

@@ -13,7 +13,7 @@ angular.module('event', [])
 	$scope.postComment = eventAPI.postComment;
 	$scope.makeCommentOpinion = eventAPI.makeCommentOpinion;
 }])
-.factory('eventAPI', ['$resource', 'opinionAPI', '$q', 'commentAPI', 'opinionableModel', 'eventModel', function ($resource, opinionAPI, $q, commentAPI, opinionableModel, eventModel) {
+.factory('eventAPI', ['$resource', 'opinionAPI', '$q', 'commentAPI', 'opinionableModel', 'eventModel', 'commentableModel', function ($resource, opinionAPI, $q, commentAPI, opinionableModel, eventModel, commentableModel) {
 	var eventResUrl = '/api/events/:eventId';
 	var eventRes = $resource(eventResUrl);
 	
@@ -75,13 +75,20 @@ angular.module('event', [])
 			return commentAPI.putComment(comment);
 		},
 		
-		deleteComment: function(commentId){
-			return commentAPI.deleteComment(commentId);			
+		deleteComment: function(event, commentId){
+			var defer = $q.defer();
+			defer.promise.then(function(){
+				commentableModel.deleteComment(event, commentId);			
+			});
+			commentAPI.deleteComment(commentId, defer);			
 		},
 		
-		postComment: function(eventId, text){
-			commentAPI.setParentUrl(eventResUrl, {eventId: eventId});
-			return commentAPI.postComment(text);	
+		postComment: function(event, text){
+			commentAPI.setParentUrl(eventResUrl, {eventId: event.id});
+			commentAPI.postComment(text).$promise
+			.then(function(addedComment){
+				commentableModel.addComment(event, addedComment);		
+			});	
 		},
 		
 		makeCommentOpinion: function(event, comment, is_positive){
