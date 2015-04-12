@@ -54,3 +54,12 @@ teams:
 team_role:
     type:     rest
     resource: AppBundle\Controller\API\TeamRolesController
+
+galleries:
+    type:     rest
+    resource: AppBundle\Controller\API\GallerysController
+
+medias:
+    type:     rest
+    parent:   galleries
+    resource: AppBundle\Controller\API\MediasController
