@@ -10,6 +10,7 @@
 <body>
 <table>
 	<tr>
+		<td>img</td>
 		<td>title</td>	
 		<td>text</td>
 		<td>login</td>
@@ -23,6 +24,7 @@
 		<td>link to event</td>
 	</tr>
 	<tr ng-repeat=" event in events">
+		<td><img style="height: 70px; width: 70px;" src="{{ event.image }}" /></td>
 		<td>{{ event.title }}</td>	
 		<td>{{ event.text }}</td>
 		<td>{{ event.author.username }}</td>
