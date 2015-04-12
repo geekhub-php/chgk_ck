@@ -68,6 +68,7 @@ class Player
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+	 * @JMS\Groups({"playerFull"})
      */
     private $image;
 
