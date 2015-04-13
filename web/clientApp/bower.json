@@ -1,0 +1,22 @@
+{
+  "name": "clientApp",
+  "version": "1.0.0",
+  "directory": "public/",
+  "authors": [
+    "adevianin <remba93@gmail.com>",
+    "Andriy Chernienko <Chernienko_1988@mail.ru>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.15",
+    "angular-route": "~1.3.15",
+    "angular-resource": "~1.3.15"
+  }
+}

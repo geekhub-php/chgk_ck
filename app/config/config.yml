@@ -5,7 +5,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -29,6 +29,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+            fos_csrf_provider: "@form.csrf_provider"
 
 # Assetic Configuration
 assetic:
@@ -53,6 +55,8 @@ doctrine:
         user:     "%database_user%"
         password: "%database_password%"
         charset:  UTF8
+        types:
+            json: Sonata\Doctrine\Types\JsonType
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
@@ -109,3 +113,72 @@ sonata_media:
         local:
             directory:  %kernel.root_dir%/../web/uploads/media
             create:     false
+
+sonata_admin:
+    templates:
+        layout: AppBundle:Sonata:layout.html.twig
+    security:
+        handler: sonata.admin.security.handler.role
+
+sensio_framework_extra:
+    request: { converters: true }
+
+fos_rest:
+    param_fetcher_listener: force
+    view:
+        formats:
+            json: true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+        view_response_listener: force
+    body_listener:
+        decoders:
+            json: fos_rest.decoder.json
+    body_converter:
+        enabled: true
+        validate: true
+        validation_errors_argument: validationErrors
+    access_denied_listener:
+        json: true
+    exception:
+        enabled: true
+    routing_loader:
+        include_format: false
+    format_listener:
+        rules:
+          - { path: '^/api', priorities: ['json'], fallback_format: json, prefer_extension: false }
+          - { path: '^/', priorities: ['html'], fallback_format: html, prefer_extension: false }
+
+nelmio_api_doc: ~
+
+hwi_oauth:
+    connect:
+        account_connector: chgk.oauth.user_provider
+        confirmation: false
+    firewall_name: main
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebook_id
+            google: google_id
+            vkontakte: vkontakte_id
+    resource_owners:
+        facebook:
+            type: facebook
+            client_id: 799515710133554
+            client_secret: 3e07081ecb403f3370c671c805a73eb1
+            scope: "email, public_profile"
+##        google:
+##            type:                google
+##            client_id:           <client_id>
+##            client_secret:       <client_secret>
+##            scope:               "email profile"
+        vkontakte:
+            type:                vkontakte
+            client_id:           4853545
+            client_secret:       AvGmhSgWATEMBgeqERtA
+#            scope:
