@@ -3,6 +3,16 @@ angular.module('gameResult', [])
 	$scope.gameResults = gameResultAPI.getGameResults($routeParams.gameId);
 	$scope.makeResultOpinion = gameResultAPI.makeResultOpinion;
 	$scope.userInfo = userAPI.getUserInfo();
+  	$scope.predicate = '';
+  	$scope.reverse = false;
+  	$scope.search = function(result){
+		if(!$scope.query || (result.team && result.team.name.indexOf($scope.query)!=-1) 
+			|| (result.player && result.player.last_name.indexOf($scope.query)!=-1) ){
+			return true;		
+		} else {
+			return false;		
+		}	
+  	}
 }])
 .factory('gameResultAPI', ['$resource', 'opinionAPI', '$routeParams', 'opinionableModel', function($resource, opinionAPI, $routeParams, opinionableModel){
 	var gameResultUrl = '/api/games/:gameId/gameResults/:gameResultId';
