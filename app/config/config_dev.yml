@@ -44,5 +44,16 @@ monolog:
 assetic:
     use_controller: true
 
+#hwi_oauth:
+#    firewall_name: main
+#    resource_owners:
+#    facebook:
+#                type:                facebook
+#                client_id:           799516086800183
+#                client_secret:       c6332ddb6c4a8a441f1943b6afd95471
+#                scope:
+#                options:
+#                    display: popup #dialog is optimized for popup window
+
 #swiftmailer:
 #    delivery_address: me@example.com

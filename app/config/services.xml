@@ -10,99 +10,99 @@
             <tag name="validator.constraint_validator" alias="entities_exist_validator" />
         </service>
 
-        <service id="sonata.admin.player.event" class="AppBundle\Admin\PlayerEventAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Events" label="PlayerEvent"/>
+        <service id="sonata.admin.player.events" class="AppBundle\Admin\PlayerEventAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="PlayerEvent"/>
             <argument/>
             <argument>AppBundle\Entity\PlayerEvent</argument>
             <argument/>
 		</service>
 
-        <service id="sonata.admin.game.event" class="AppBundle\Admin\GameEventAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Events" label="GameEvent"/>
+        <service id="sonata.admin.game.events" class="AppBundle\Admin\GameEventAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="GameEvent"/>
             <argument/>
             <argument>AppBundle\Entity\GameEvent</argument>
             <argument/>
         </service>
 
         <service id="sonata.admin.comment" class="AppBundle\Admin\CommentAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Other" label="Comment"/>
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Comment"/>
             <argument/>
             <argument>AppBundle\Entity\Comment</argument>
             <argument/>
         </service>
 
         <service id="sonata.admin.game" class="AppBundle\Admin\GameAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Game" label="Game"/>
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Game"/>
             <argument/>
             <argument>AppBundle\Entity\Game</argument>
             <argument/>
         </service>
 
         <service id="sonata.admin.player.game.result" class="AppBundle\Admin\PlayerGameResultAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Game" label="PlayerGameResult"/>
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="PlayerGameResult"/>
             <argument/>
             <argument>AppBundle\Entity\PlayerGameResult</argument>
             <argument/>
         </service>
 
         <service id="sonata.admin.team.game.result" class="AppBundle\Admin\TeamGameResultAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Game" label="TeamGameResult"/>
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamGameResult"/>
             <argument/>
             <argument>AppBundle\Entity\TeamGameResult</argument>
             <argument/>
         </service>
 
-        <service id="sonata.admin.user" class="AppBundle\Admin\UserAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Other" label="User"/>
+        <service id="sonata.admin.users" class="AppBundle\Admin\UserAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="User"/>
             <argument/>
             <argument>AppBundle\Entity\User</argument>
             <argument>AppBundle:Admin\UserCRUD</argument>
         </service>
 
         <service id="sonata.admin.age.category" class="AppBundle\Admin\AgeCategoryAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Categories and types" label="AgeCategory"/>
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="AgeCategory"/>
             <argument/>
             <argument>AppBundle\Entity\AgeCategory</argument>
             <argument/>
         </service>
 
         <service id="sonata.admin.membership.type" class="AppBundle\Admin\MembershipTypeAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Categories and types" label="MembershipType"/>
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="MembershipType"/>
             <argument/>
             <argument>AppBundle\Entity\MembershipType</argument>
             <argument/>
         </service>
 
-        <service id="sonata.admin.player" class="AppBundle\Admin\PlayerAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Players" label="Player"/>
+        <service id="sonata.admin.players" class="AppBundle\Admin\PlayerAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Player"/>
             <argument/>
             <argument>AppBundle\Entity\Player</argument>
             <argument/>
         </service>
 
-        <service id="sonata.admin.season" class="AppBundle\Admin\SeasonAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Categories and types" label="Season"/>
+        <service id="sonata.admin.seasons" class="AppBundle\Admin\SeasonAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Season"/>
             <argument/>
             <argument>AppBundle\Entity\Season</argument>
             <argument/>
         </service>
 
-        <service id="sonata.admin.team" class="AppBundle\Admin\TeamAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Players" label="Team"/>
+        <service id="sonata.admin.teams" class="AppBundle\Admin\TeamAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="Team"/>
             <argument/>
             <argument>AppBundle\Entity\Team</argument>
             <argument/>
         </service>
 
         <service id="sonata.admin.team.role" class="AppBundle\Admin\TeamRoleAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Categories and types" label="TeamRole"/>
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamRole"/>
             <argument/>
             <argument>AppBundle\Entity\TeamRole</argument>
             <argument/>
         </service>
 
         <service id="sonata.admin.team.player.association" class="AppBundle\Admin\TeamPlayerAssociationAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Players" label="TeamPlayerAssociation"/>
+            <tag name="sonata.admin" manager_type="orm" group="Entities" label="TeamPlayerAssociation"/>
             <argument/>
             <argument>AppBundle\Entity\TeamPlayerAssociation</argument>
             <argument/>
@@ -115,35 +115,26 @@
 		<service id="security.access.comment_voter" class="AppBundle\Security\Authorization\Voter\CommentVoter" public="false">
             <tag name="security.voter" />
         </service>
-
+        
         <service id="security.access.opinion_voter" class="AppBundle\Security\Authorization\Voter\OpinionVoter" public="false">
             <tag name="security.voter" />
         </service>
 
-        <service id="sonata.admin.event" class="AppBundle\Admin\EventAdmin">
-            <tag name="sonata.admin" manager_type="orm" group="Events" label="Event"/>
-            <argument/>
-            <argument>AppBundle\Entity\Event</argument>
-            <argument/>
-		</service>
+        <!--<service id="chgk.oauth.user_provider" class="AppBundle\Security\User\ChgkOAuthUserProvider">-->
+            <!--<tag name="user.provider" />-->
+            <!--<argument>%fos_user.model_manager_name%</argument>-->
+        <!--</service>-->
 
-		<service id="app.form.type.tags" class="AppBundle\Form\Type\TagsType">
-		    <tag name="form.type" alias="tags" />
-		</service>
-
-		<service id="app.registration.form.type" class="AppBundle\Form\Type\ProfileFormType">
-            <tag name="form.type" alias="user_profile" />
+        <service id="chgk.oauth.user_provider" class="AppBundle\Security\User\ChgkOAuthUserProvider" >
+            <tag name="user.provider" />
+            <argument type="service" id="fos_user.user_manager"/>
+            <argument type="collection">
+                <argument key="facebook">facebook_id</argument>
+                <argument key="google">google_id</argument>
+                <argument key="vkontakte">vkontakte_id</argument>
+            </argument>
         </service>
 
-        <service id="user_creatable_marker" class="AppBundle\Services\UserCreatableMarker">
-	        <argument type="service" id="security.token_storage"/>
-    	</service>
-
-    	<service id="app.serializer.media.handler" class="AppBundle\Serializer\MediaHandler" public="true">
-    		 <tag name="jms_serializer.subscribing_handler" />
-    		 <argument type="service" id="service_container" />
-    		 <argument>default_big</argument>
-    	</service>
 
     </services>
 </container>

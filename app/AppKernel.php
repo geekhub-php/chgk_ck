@@ -34,6 +34,7 @@ class AppKernel extends Kernel
             new FOS\RestBundle\FOSRestBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Application\Sonata\MediaBundle\ApplicationSonataMediaBundle(),
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -3,12 +3,18 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use FOS\UserBundle\Model\User as BaseUser;
-use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable=true)),
+ *      @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
+ *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true)),
+ * })
  */
 class User extends BaseUser
 {
@@ -16,32 +22,33 @@ class User extends BaseUser
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @JMS\Groups({"userFull", "short"})
      */
     protected $id;
 
+    /** @ORM\Column(name="facebook_id", type="string", length=255, nullable=true) */
+    protected $facebook_id;
+
+    /** @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) */
+    protected $facebook_access_token;
+
+    /** @ORM\Column(name="vkontakte_id", type="string", length=255, nullable=true) */
+    protected $vkontakte_id;
+
+    /** @ORM\Column(name="vkontakte_access_token", type="string", length=255, nullable=true) */
+    protected $vkontakte_access_token;
+
+
+
     /**
      * @ORM\OneToOne(targetEntity="Player")
-     * @JMS\Groups({"userFull"})
      */
     private $assignedPlayer;
 
     /**
      * @Gedmo\Slug(fields={"email"})
-     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-     * @JMS\Groups({"userFull"})
+	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
-     */
-    private $image;
-
-    /**
-     * @JMS\Groups({"userFull", "userInfo"})
-     */
-    protected $username;
 
     /**
      * Get id
@@ -100,25 +107,80 @@ class User extends BaseUser
     }
 
     /**
-     * Set image
+     * Set facebook_id
      *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @param string $facebookId
      * @return User
      */
-    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    public function setFacebookId($facebookId)
     {
-        $this->image = $image;
+        $this->facebook_id = $facebookId;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get facebook_id
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
+     * @return string 
      */
-    public function getImage()
+    public function getFacebookId()
     {
-        return $this->image;
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set facebook_access_token
+     *
+     * @param string $facebookAccessToken
+     * @return User
+     */
+    public function setFacebookAccessToken($facebookAccessToken)
+    {
+        $this->facebook_access_token = $facebookAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get facebook_access_token
+     *
+     * @return string 
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVkontakteAccessToken()
+    {
+        return $this->vkontakte_access_token;
+    }
+
+    /**
+     * @param mixed $vkontakte_access_token
+     */
+    public function setVkontakteAccessToken($vkontakte_access_token)
+    {
+        $this->vkontakte_access_token = $vkontakte_access_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVkontakteId()
+    {
+        return $this->vkontakte_id;
+    }
+
+    /**
+     * @param mixed $vkontakte_id
+     */
+    public function setVkontakteId($vkontakte_id)
+    {
+        $this->vkontakte_id = $vkontakte_id;
     }
 }

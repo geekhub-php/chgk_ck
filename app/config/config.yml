@@ -29,9 +29,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
-    form:
-        resources:
-            - 'AppBundle:Sonata:media_widgets.html.twig'
+    globals:
+            fos_csrf_provider: "@form.csrf_provider"
 
 # Assetic Configuration
 assetic:
@@ -86,11 +85,6 @@ fos_user:
     db_driver: orm
     firewall_name: main
     user_class: AppBundle\Entity\User
-    profile:
-        form:
-            type:               user_profile
-            name:               user_profile_form
-            validation_groups:  [Profile, Default]
 
 sonata_block:
     default_contexts: [cms]
@@ -104,8 +98,10 @@ sonata_media:
     contexts:
        default:
            providers:
+               - sonata.media.provider.dailymotion
                - sonata.media.provider.youtube
                - sonata.media.provider.image
+               - sonata.media.provider.file
 
            formats:
                small: { width: 100 , quality: 70}
@@ -158,3 +154,31 @@ fos_rest:
           - { path: '^/', priorities: ['html'], fallback_format: html, prefer_extension: false }
 
 nelmio_api_doc: ~
+
+hwi_oauth:
+    connect:
+        account_connector: chgk.oauth.user_provider
+        confirmation: false
+    firewall_name: main
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebook_id
+            google: google_id
+            vkontakte: vkontakte_id
+    resource_owners:
+        facebook:
+            type: facebook
+            client_id: 799515710133554
+            client_secret: 3e07081ecb403f3370c671c805a73eb1
+            scope: "email, public_profile"
+##        google:
+##            type:                google
+##            client_id:           <client_id>
+##            client_secret:       <client_secret>
+##            scope:               "email profile"
+        vkontakte:
+            type:                vkontakte
+            client_id:           4853545
+            client_secret:       AvGmhSgWATEMBgeqERtA
+#            scope:
