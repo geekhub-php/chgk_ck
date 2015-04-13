@@ -1,11 +1,20 @@
 angular.module('event', [])
-.controller('EventsController', ['$scope', 'eventAPI', 'eventModel', 'userAPI', function ($scope, eventAPI, eventModel, userAPI) {
+.controller('EventsController', ['$scope', 'eventAPI', 'eventModel', 'userAPI', 'filterHelper', function ($scope, eventAPI, eventModel, userAPI, filterHelper) {
 	eventModel.setData(eventAPI.getEvents(), true);
 	$scope.events = eventModel.getData();
 	$scope.makeOpinion = eventAPI.makeOpinion;
-	userAPI.isLoggedIn().then(function(isLoggedIn){
-		$scope.isLoggedIn	= isLoggedIn;
-	});
+	$scope.userInfo = userAPI.getUserInfo();
+	$scope.search = function (event){
+		if(!$scope.query || event.title.indexOf($scope.query)!=-1
+			|| event.text.indexOf($scope.query)!=-1 || filterHelper.likeIsInArray($scope.query, event.tags)	
+			|| event.author.username.indexOf($scope.query)!=-1
+		){
+   		return true;
+  		}
+   	return false;
+  };
+  $scope.predicate = '-event_date';
+  $scope.eventDateReverse = false;
 }])
 .controller('EventController', ['$scope', 'eventAPI', '$routeParams', 'eventModel', 'userAPI', function ($scope, eventAPI, $routeParams, eventModel, userAPI) {
 	eventModel.setData(eventAPI.getEvent($routeParams.newsId));	
@@ -15,9 +24,7 @@ angular.module('event', [])
 	$scope.deleteComment = eventAPI.deleteComment;
 	$scope.postComment = eventAPI.postComment;
 	$scope.makeCommentOpinion = eventAPI.makeCommentOpinion;
-	userAPI.isLoggedIn().then(function(isLoggedIn){
-		$scope.isLoggedIn	= isLoggedIn;
-	});
+	$scope.userInfo = userAPI.getUserInfo();
 }])
 .factory('eventAPI', ['$resource', 'opinionAPI', '$q', 'commentAPI', 'opinionableModel', 'eventModel', 'commentableModel', function ($resource, opinionAPI, $q, commentAPI, opinionableModel, eventModel, commentableModel) {
 	var eventResUrl = '/api/events/:eventId';

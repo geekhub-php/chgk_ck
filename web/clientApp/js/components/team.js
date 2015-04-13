@@ -1,6 +1,16 @@
 angular.module('team', [])
 .controller('TeamsController', ['$scope', 'teamAPI', function ($scope, teamAPI) {
 	$scope.teams = teamAPI.getTeams();
+	$scope.search = function(team){
+		if(!$scope.query || team.name.indexOf($scope.query)!=-1 || (team.rating+'').indexOf($scope.query)!=-1
+			|| team.age_category.name.indexOf($scope.query)!=-1){
+			return true;		
+		} else {
+			return false;		
+		}
+	}
+	$scope.predicate = '-rating';
+  	$scope.reverse = false;
 }])
 .controller('TeamController', ['$scope', 'teamAPI', '$routeParams', function($scope, teamAPI, $routeParams){
 	$scope.team = teamAPI.getTeam($routeParams.teamId);

@@ -21,4 +21,16 @@ angular.module('util', [])
 		}
 		return result;	
 	}
+}])
+.factory('filterHelper', [function(){
+	return {
+		likeIsInArray: function(value, array){
+			for (var i = 0; i < array.length; i++) {
+				if (array[i].indexOf(value) != -1) {
+					return true;				
+				}
+			}
+			return false;		
+		}	
+	};
 }]);
