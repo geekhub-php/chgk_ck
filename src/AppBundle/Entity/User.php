@@ -46,7 +46,7 @@ class User extends BaseUser
 
     /**
      * @Gedmo\Slug(fields={"email"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
 
@@ -107,6 +107,16 @@ class User extends BaseUser
     }
 
     /**
+     * Get facebook_id
+     *
+     * @return string
+     */
+    public function getFacebookId()
+    {
+        return $this->facebook_id;
+    }
+
+    /**
      * Set facebook_id
      *
      * @param string $facebookId
@@ -120,13 +130,13 @@ class User extends BaseUser
     }
 
     /**
-     * Get facebook_id
+     * Get facebook_access_token
      *
-     * @return string 
+     * @return string
      */
-    public function getFacebookId()
+    public function getFacebookAccessToken()
     {
-        return $this->facebook_id;
+        return $this->facebook_access_token;
     }
 
     /**
@@ -140,16 +150,6 @@ class User extends BaseUser
         $this->facebook_access_token = $facebookAccessToken;
 
         return $this;
-    }
-
-    /**
-     * Get facebook_access_token
-     *
-     * @return string 
-     */
-    public function getFacebookAccessToken()
-    {
-        return $this->facebook_access_token;
     }
 
     /**
