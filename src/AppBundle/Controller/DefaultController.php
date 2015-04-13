@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use JMS\Serializer\SerializerBuilder;
 use Symfony\Component\HttpFoundation\Response;
 use JMS\Serializer\SerializationContext;
+use JMS\Serializer\Handler\HandlerRegistry;
 
 class DefaultController extends Controller
 {
@@ -20,7 +21,12 @@ class DefaultController extends Controller
         try {
             $user = $this->get('security.token_storage')->getToken()->getUser();
 
-            $serializer = SerializerBuilder::create()->build();
+            $builder = SerializerBuilder::create();
+            $handler = $this->get('app.serializer.media.handler');
+            $builder->configureHandlers(function (HandlerRegistry $registry) use ($handler) {
+                $registry->registerSubscribingHandler($handler);
+            });
+            $serializer = $builder->build();
             $serializationContext = SerializationContext::create()->setGroups(array('userInfo'));
             $response->setContent($serializer->serialize($user, 'json', $serializationContext));
             $response->headers->set('Content-Type', 'application/json');
