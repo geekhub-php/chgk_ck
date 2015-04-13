@@ -46,7 +46,7 @@ class Team
     /**
      * @ORM\Column(type="string", length=100, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Regex("/^[A-zА-я іїє\-]{2,255}$/", message="city is not valid")
+     * @Assert\Regex("/^[A-zА-я ІіЇїЄє'\-]{2,255}$/u", message="city is not valid")
      * @JMS\Groups({"teamFull"})
      */
     private $city;
@@ -75,6 +75,7 @@ class Team
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+	 * @JMS\Groups({"teamFull"})
      */
     private $image;
 

@@ -12,7 +12,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class GameResultsController extends FOSRestController
 {
     /**
-     * @REST\View(serializerGroups={"gameResultFull", "short"})
+     * @REST\View(serializerGroups={"gameResultFull", "teamFull", "playerFull", "short"})
      * @REST\Get("games/{game}/gameResults", requirements={
      * 		"game" = "\d+"
      * })
@@ -65,7 +65,7 @@ class GameResultsController extends FOSRestController
     }
 
     /**
-     * @REST\View(serializerGroups={"gameResultFull", "short"})
+     * @REST\View(serializerGroups={"gameResultFull", "teamFull", "playerFull", "short"})
      * @REST\Get("games/{game}/gameResults/{gameResultId}", requirements={
      * 		"game" = "\d+",
      * 		"gameResultId" = "\d+"

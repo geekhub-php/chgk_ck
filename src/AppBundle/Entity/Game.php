@@ -40,7 +40,7 @@ class Game
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Regex("/^[A-zА-я іїє\-]{2,255}$/", message="playe place is not valid")
+     * @Assert\Regex("/^[A-zА-я ІіЇїЄє'\-]{2,255}$/u", message="playe place is not valid")
      * @JMS\Groups({"gameFull"})
      */
     private $playPlace;

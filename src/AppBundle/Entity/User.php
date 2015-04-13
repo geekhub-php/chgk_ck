@@ -39,6 +39,11 @@ class User extends BaseUser
     private $image;
 
     /**
+     * @JMS\Groups({"userFull", "userInfo"})
+     */
+    protected $username;
+
+    /**
      * Get id
      *
      * @return integer

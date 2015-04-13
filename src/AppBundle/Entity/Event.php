@@ -68,7 +68,6 @@ class Event implements Opinionable
 
     /**
      * @ORM\ManyToMany(targetEntity="Comment")
-     * @JMS\Groups({"eventFull"})
      * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     private $comments;
@@ -89,6 +88,7 @@ class Event implements Opinionable
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     * @JMS\Groups({"eventFull"})
      */
     private $image;
 

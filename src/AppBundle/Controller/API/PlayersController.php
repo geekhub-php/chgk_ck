@@ -10,7 +10,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 class PlayersController extends FOSRestController
 {
     /**
-     * @REST\View(serializerGroups={"playerFull", "short"})
+     * @REST\View(serializerGroups={"playerFull", "associationFull", "teamFull", "short"})
      * @REST\QueryParam(name="lastName", default="")
      * @REST\QueryParam(name="dob", requirements="\d+", default="")
      * @ApiDoc(
@@ -39,7 +39,7 @@ class PlayersController extends FOSRestController
     }
 
     /**
-     * @REST\View(serializerGroups={"playerFull", "short"})
+     * @REST\View(serializerGroups={"playerFull", "associationFull", "teamFull", "short"})
      * @REST\Get("players/{player}", requirements={
      * 		"player" = "\d+"
      * })
