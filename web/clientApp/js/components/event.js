@@ -3,9 +3,7 @@ angular.module('event', [])
 	eventModel.setData(eventAPI.getEvents(), true);
 	$scope.events = eventModel.getData();
 	$scope.makeOpinion = eventAPI.makeOpinion;
-	userAPI.isLoggedIn().then(function(isLoggedIn){
-		$scope.isLoggedIn	= isLoggedIn;
-	});
+	$scope.userInfo = userAPI.getUserInfo();
 }])
 .controller('EventController', ['$scope', 'eventAPI', '$routeParams', 'eventModel', 'userAPI', function ($scope, eventAPI, $routeParams, eventModel, userAPI) {
 	eventModel.setData(eventAPI.getEvent($routeParams.newsId));	
@@ -15,9 +13,7 @@ angular.module('event', [])
 	$scope.deleteComment = eventAPI.deleteComment;
 	$scope.postComment = eventAPI.postComment;
 	$scope.makeCommentOpinion = eventAPI.makeCommentOpinion;
-	userAPI.isLoggedIn().then(function(isLoggedIn){
-		$scope.isLoggedIn	= isLoggedIn;
-	});
+	$scope.userInfo = userAPI.getUserInfo();
 }])
 .factory('eventAPI', ['$resource', 'opinionAPI', '$q', 'commentAPI', 'opinionableModel', 'eventModel', 'commentableModel', function ($resource, opinionAPI, $q, commentAPI, opinionableModel, eventModel, commentableModel) {
 	var eventResUrl = '/api/events/:eventId';

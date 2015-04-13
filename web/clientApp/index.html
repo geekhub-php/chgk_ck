@@ -20,6 +20,13 @@
 		<script type="text/javascript" src="clientApp/js/components/media.js"></script>
 	</head>
 	<body>
+		<div ng-controller="UserPanelController" style="text-align: right">
+			<span ng-show="userInfo.isLoggedIn">привет, {{ userInfo.username }}. </span>
+			<a ng-hide="userInfo.isLoggedIn" href="/register">register</a>	
+			<a ng-hide="userInfo.isLoggedIn" href="/login">login</a>	
+			<a ng-show="userInfo.isLoggedIn" href="/profile/edit">profile edit</a>
+			<a ng-show="userInfo.isLoggedIn" href="/logout">logout</a>
+		</div>
 		<a href="#/teams">команди</a>
 		<a href="#/news">новости</a>
 		<a href="#/games">games</a>

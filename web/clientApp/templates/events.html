@@ -33,8 +33,8 @@
 		<td>{{ event.likesCount }}</td>
 		<td>{{ event.dislikesCount }}</td>
 		<td>{{ event.currentUserOpinion.is_positive }}</td>
-		<td><button ng-show="isLoggedIn" ng-click="makeOpinion(event, true)" >like</button></td>
-		<td><button ng-show="isLoggedIn" ng-click="makeOpinion(event, false)" >dislike</button></td>
+		<td><button ng-show="userInfo.isLoggedIn" ng-click="makeOpinion(event, true)" >like</button></td>
+		<td><button ng-show="userInfo.isLoggedIn" ng-click="makeOpinion(event, false)" >dislike</button></td>
 		<td><a href="#/news/{{ event.id }}">click</a></td>
 	</tr>
 </table>
