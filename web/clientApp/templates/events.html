@@ -8,13 +8,14 @@
 	</style>
 </head>
 <body>
+<input placeholder="поиск" ng-model="query" />
 <table>
 	<tr>
 		<td>img</td>
 		<td>title</td>	
 		<td>text</td>
 		<td>login</td>
-		<td>event_date</td>
+		<td>дата <a style="cursor: pointer; color: red" ng-click="eventDateReverse=!eventDateReverse">sort</a></td>
 		<td>tags</td>
 		<td>likes</td>
 		<td>dislikes</td>
@@ -23,12 +24,12 @@
 		<td>dislike</td>
 		<td>link to event</td>
 	</tr>
-	<tr ng-repeat=" event in events">
+	<tr ng-repeat=" event in events | filter: search | orderBy:predicate:eventDateReverse">
 		<td><img style="height: 70px; width: 70px;" src="{{ event.image }}" /></td>
 		<td>{{ event.title }}</td>	
 		<td>{{ event.text }}</td>
 		<td>{{ event.author.username }}</td>
-		<td>{{ event.event_date | timestampToFormat:'dd M yyyy' }}</td>
+		<td>{{ event.event_date | timestampToFormat:'dd.M.yyyy' }}</td>
 		<td>{{ event.tags.join(', ') }}</td>
 		<td>{{ event.likesCount }}</td>
 		<td>{{ event.dislikesCount }}</td>
