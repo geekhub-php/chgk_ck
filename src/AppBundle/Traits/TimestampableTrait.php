@@ -67,4 +67,5 @@ trait TimestampableTrait
 
         return $this;
     }
+
 }

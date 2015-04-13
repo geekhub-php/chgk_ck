@@ -15,9 +15,9 @@ class ChgkOAuthUserProvider extends BaseClass
 
         $service = $response->getResourceOwner()->getName();
 
-        $setter = 'set'.ucfirst($service);
-        $setter_id = $setter.'Id';
-        $setter_token = $setter.'AccessToken';
+        $setter = 'set' . ucfirst($service);
+        $setter_id = $setter . 'Id';
+        $setter_token = $setter . 'AccessToken';
 
         if (null !== $previousUser = $this->userManager->findUserBy(array($property => $username))) {
             $previousUser->$setter_id(null);
@@ -39,9 +39,9 @@ class ChgkOAuthUserProvider extends BaseClass
 
         if (null === $user) {
             $service = $response->getResourceOwner()->getName();
-            $setter = 'set'.ucfirst($service);
-            $setter_id = $setter.'Id';
-            $setter_token = $setter.'AccessToken';
+            $setter = 'set' . ucfirst($service);
+            $setter_id = $setter . 'Id';
+            $setter_token = $setter . 'AccessToken';
             // create new user here
             $user = $this->userManager->createUser();
             $user->$setter_id($username);
@@ -57,7 +57,7 @@ class ChgkOAuthUserProvider extends BaseClass
         $user = parent::loadUserByOAuthUserResponse($response);
 
         $serviceName = $response->getResourceOwner()->getName();
-        $setter = 'set'.ucfirst($serviceName).'AccessToken';
+        $setter = 'set' . ucfirst($serviceName) . 'AccessToken';
 
         $user->$setter($response->getAccessToken());
 
