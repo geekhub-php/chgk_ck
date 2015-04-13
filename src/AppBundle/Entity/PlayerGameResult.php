@@ -16,7 +16,7 @@ class PlayerGameResult extends GameResult
      * @ORM\ManyToOne(targetEntity="Player")
      * @Assert\NotNull()
      * @CustomAssert\EntitiesExist(associatedEntity="Player", message="player with id %ids% is non-exist")
-	 * @JMS\Groups({"gameResultFull"})
+     * @JMS\Groups({"gameResultFull"})
      */
     private $player;
 

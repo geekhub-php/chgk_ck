@@ -1,0 +1,72 @@
+<html>
+<body>
+<head>
+	<style>
+		table td {
+			border:solid 1px;		
+		}
+		table {border-collapse: collapse;}
+	</style>
+</head>
+<table>
+	<tr>
+		<td>img</td>
+		<td>title</td>	
+		<td>text</td>
+		<td>login</td>
+		<td>event_date</td>
+		<td>tags</td>
+		<td>likes</td>
+		<td>dislikes</td>
+		<td>current user opinion</td>
+		<td>like</td>
+		<td>dislike</td>
+		<td>comments</td>
+	</tr>
+	<tr>
+		<td><img style="height: 70px; width: 70px;" ng-src="{{ event.image }}" /></td>
+		<td>{{ event.title }}</td>	
+		<td>{{ event.text }}</td>
+		<td>{{ event.author.username }}</td>
+		<td>{{ event.event_date | timestampToFormat:'dd M yyyy' }}</td>
+		<td>{{ event.tags.join(', ') }}</td>
+		<td>{{ event.likesCount }}</td>
+		<td>{{ event.dislikesCount }}</td>
+		<td>{{ event.currentUserOpinion.is_positive }}</td>
+		<td><button ng-show="userInfo.isLoggedIn" ng-click="makeOpinion(event, true)" >like</button></td>
+		<td><button ng-show="userInfo.isLoggedIn" ng-click="makeOpinion(event, false)" >dislike</button></td>
+		<td>
+			<table>
+				<tr>
+					<td>author</td>
+					<td>text</td>
+					<td>likes/dislikes</td>
+					<td>оцінка залогіненого</td>
+					<td>like</td>
+					<td>dislike</td>				
+				</tr>	
+				<tr ng-repeat="comment in event.comments">
+					<td>{{ comment.author.username }}</td>
+					<td ng-hide="comment.made_by_current_user">{{ comment.text }}</td>
+					<td ng-show="comment.made_by_current_user">
+						<input ng-show="userInfo.isLoggedIn" ng-model="comment.text"/>
+						<button ng-show="userInfo.isLoggedIn" ng-click="putComment(comment)">ok</button>
+						<button ng-show="userInfo.isLoggedIn" ng-click="deleteComment(event, comment.id)">del</button>
+					</td>
+					<td>{{ comment.likesCount }} / {{ comment.dislikesCount }}</td>	
+					<td>{{ comment.currentUserOpinion.is_positive }}</td>
+					<td><button ng-show="userInfo.isLoggedIn" ng-click="makeCommentOpinion(event, comment, true)">like</button></td>
+					<td><button ng-show="userInfo.isLoggedIn" ng-click="makeCommentOpinion(event, comment, false)">dislike</button></td>			
+				</tr>
+				<tr ng-show="userInfo.isLoggedIn">
+					<td colspan="2">
+						<input ng-model="text"/>
+						<button ng-click="postComment(event, text)">ok</button>					
+					</td>				
+				</tr>	
+			</table>		
+		</td>
+	</tr>
+</table>
+</body>
+</html>

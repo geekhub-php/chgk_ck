@@ -23,7 +23,7 @@ abstract class GameResult implements Opinionable
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"gameResultFull", "short"})
+     * @JMS\Groups({"gameResultFull", "short"})
      */
     private $id;
 
@@ -32,7 +32,7 @@ abstract class GameResult implements Opinionable
      * @ORM\JoinColumn(name="game_id", referencedColumnName="id", nullable=false)
      * @Assert\NotNull(message="game result should have game")
      * @CustomAssert\EntitiesExist(associatedEntity="Game", message="game with id %ids% is non-exist")
-	 * @JMS\Groups({"gameResultFull"})
+     * @JMS\Groups({"gameResultFull"})
      */
     private $game;
 
@@ -40,7 +40,7 @@ abstract class GameResult implements Opinionable
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
      * @Assert\Range(min=1)
-	 * @JMS\Groups({"gameResultFull"})
+     * @JMS\Groups({"gameResultFull"})
      */
     private $place;
 
@@ -48,14 +48,13 @@ abstract class GameResult implements Opinionable
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
      * @Assert\Range(min=0)
-	 * @JMS\Groups({"gameResultFull"})
+     * @JMS\Groups({"gameResultFull"})
      */
     private $score;
-	
-	/**
-	 * @ORM\ManyToMany(targetEntity="Opinion")
-	 * @JMS\Groups({"gameResultFull"})
-	 */
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Opinion")
+     */
     private $opinions;
 
     /**
@@ -142,13 +141,13 @@ abstract class GameResult implements Opinionable
     public function __construct()
     {
         $this->opinions = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->createdAt = time();
+        $this->createdAt = time();
     }
 
     /**
      * Add opinions
      *
-     * @param \AppBundle\Entity\Opinion $opinions
+     * @param  \AppBundle\Entity\Opinion $opinions
      * @return GameResult
      */
     public function addOpinion(\AppBundle\Entity\Opinion $opinions)
@@ -171,17 +170,17 @@ abstract class GameResult implements Opinionable
     /**
      * Get opinions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOpinions()
     {
         return $this->opinions;
     }
-	
-	public function getOpinion($id)
-	{
-		return $this->opinions->filter(function ($opinion) use ($id) {
-			return $opinion->getId() == $id; 
-		})->first();
-	}
+
+    public function getOpinion($id)
+    {
+        return $this->opinions->filter(function ($opinion) use ($id) {
+            return $opinion->getId() == $id;
+        })->first();
+    }
 }

@@ -17,13 +17,13 @@ class TeamGameResultAdmin extends Admin
         $formMapper
             ->add('game', 'entity', array(
                 'class' => 'AppBundle:Game',
-                'property' => 'name'
+                'property' => 'name',
             ))
             ->add('place', 'integer')
             ->add('score', 'integer')
             ->add('team', 'entity', array(
                 'class' => 'AppBundle:Team',
-                'property' => 'name'
+                'property' => 'name',
             ));
     }
 

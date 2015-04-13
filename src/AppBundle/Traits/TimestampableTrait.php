@@ -1,5 +1,6 @@
 <?php
 namespace AppBundle\Traits;
+
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Expose;
@@ -40,6 +41,7 @@ trait TimestampableTrait
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
         return $this;
     }
 

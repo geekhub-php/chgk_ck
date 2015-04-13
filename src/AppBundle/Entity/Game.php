@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
 use JMS\Serializer\Annotation as JMS;
 
 /**
@@ -18,7 +17,7 @@ class Game
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"gameFull", "short"})
+     * @JMS\Groups({"gameFull", "short"})
      */
     private $id;
 
@@ -26,7 +25,7 @@ class Game
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 2, max = 255)
-	 * @JMS\Groups({"gameFull"})
+     * @JMS\Groups({"gameFull"})
      */
     private $name;
 
@@ -34,46 +33,46 @@ class Game
      * @ORM\Column(type="integer", nullable=false)
      * @CustomAssert\FutureTimestamp(groups={"creating"})
      * @Assert\NotNull()
-	 * @JMS\Groups({"gameFull"})
+     * @JMS\Groups({"gameFull"})
      */
     private $playDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(min = 2, max = 255)
-	 * @JMS\Groups({"gameFull"})
+     * @Assert\Regex("/^[A-zА-я ІіЇїЄє'\-]{2,255}$/u", message="playe place is not valid")
+     * @JMS\Groups({"gameFull"})
      */
     private $playPlace;
 
     /**
      * @ORM\ManyToOne(targetEntity="Season")
      * @CustomAssert\EntitiesExist(associatedEntity="Season", message="season with id %ids% is non-exist")
-	 * @JMS\Groups({"gameFull"})
+     * @JMS\Groups({"gameFull"})
      */
     private $season;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-	 * @JMS\Groups({"gameFull"})
+     * @JMS\Groups({"gameFull"})
      */
     private $isLocallyRated;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-	 * @JMS\Groups({"gameFull"})
+     * @JMS\Groups({"gameFull"})
      */
     private $isGloballyRated;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-	 * @JMS\Groups({"gameFull"})
+     * @JMS\Groups({"gameFull"})
      */
     private $isHome;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
-	 * @JMS\Groups({"gameFull"})
+     * @JMS\Groups({"gameFull"})
      */
     private $isComplete;
 
@@ -81,38 +80,37 @@ class Game
      * @ORM\ManyToOne(targetEntity="AgeCategory")
      * @ORM\JoinColumn(name="age_category_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
-	 * @Assert\NotNull()
-	 * @JMS\Groups({"gameFull"})
+     * @Assert\NotNull()
+     * @JMS\Groups({"gameFull"})
      */
     private $ageCategory;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
-	 * @JMS\Groups({"gameFull"})
+     * @JMS\Groups({"gameFull"})
      */
     private $description;
 
     /**
      * @Gedmo\Slug(fields={"name"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-	 * @JMS\Groups({"gameFull"})
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"gameFull"})
      */
     private $slug;
-	
-	/**
-	 * @ORM\OneToMany(targetEntity="GameResult", mappedBy="game")
-	 */
-	private $gameResults;
-	
-	/**
+
+    /**
+     * @ORM\OneToMany(targetEntity="GameResult", mappedBy="game")
+     */
+    private $gameResults;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->gameResults = new \Doctrine\Common\Collections\ArrayCollection();
     }
-	
 
     /**
      * Get id
@@ -376,11 +374,11 @@ class Game
     {
         return $this->ageCategory;
     }
-	
+
     /**
      * Add gameResults
      *
-     * @param \AppBundle\Entity\GameResult $gameResults
+     * @param  \AppBundle\Entity\GameResult $gameResults
      * @return Game
      */
     public function addGameResult(\AppBundle\Entity\GameResult $gameResults)
@@ -403,17 +401,17 @@ class Game
     /**
      * Get gameResults
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getGameResults()
     {
         return $this->gameResults;
     }
-	
-	public function getGameResult($id)
-	{
-		return $this->gameResults->filter(function ($res) use ($id) {
-			return $res->getId() == $id; 
-		})->first();
-	}
+
+    public function getGameResult($id)
+    {
+        return $this->gameResults->filter(function ($res) use ($id) {
+            return $res->getId() == $id;
+        })->first();
+    }
 }

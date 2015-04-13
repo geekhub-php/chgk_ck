@@ -18,13 +18,13 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class Event implements Opinionable
 {
-	use TimestampableTrait;
-	
+    use TimestampableTrait;
+
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-	 * @JMS\Groups({"eventFull", "short"})
+     * @JMS\Groups({"eventFull", "short"})
      */
     private $id;
 
@@ -32,14 +32,14 @@ class Event implements Opinionable
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 2, max = 255)
-	 * @JMS\Groups({"eventFull"})
+     * @JMS\Groups({"eventFull"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
-	 * @JMS\Groups({"eventFull"})
+     * @JMS\Groups({"eventFull"})
      */
     private $text;
 
@@ -47,29 +47,28 @@ class Event implements Opinionable
      * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
-	 * @Assert\NotNull()
-	 * @JMS\Groups({"eventFull"})
+     * @Assert\NotNull()
+     * @JMS\Groups({"eventFull"})
      */
     private $author;
 
     /**
      * @Gedmo\Slug(fields={"title"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
-	 * @JMS\Groups({"eventFull"})
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"eventFull"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
-	 * @JMS\Groups({"eventFull"})
+     * @JMS\Groups({"eventFull"})
      */
     private $eventDate;
 
     /**
      * @ORM\ManyToMany(targetEntity="Comment")
-	 * @JMS\Groups({"eventFull"})
-	 * @ORM\OrderBy({"createdAt" = "ASC"})
+     * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     private $comments;
 
@@ -78,14 +77,20 @@ class Event implements Opinionable
      * @Assert\All({
      *     @Assert\Regex("/^[A-zА-яіїє']+$/")
      * })
-	 * @JMS\Groups({"eventFull"})
-	 */
-	private $tags;
-	
-	/**
-	 * @ORM\ManyToMany(targetEntity="Opinion")
-	 */
+     * @JMS\Groups({"eventFull"})
+     */
+    private $tags;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Opinion")
+     */
     private $opinions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     * @JMS\Groups({"eventFull"})
+     */
+    private $image;
 
     /**
      * Constructor
@@ -254,13 +259,13 @@ class Event implements Opinionable
     {
         return $this->comments;
     }
-	
-	public function getComment($id)
-	{
-		return $this->comments->filter(function ($comment) use ($id) {
-			return $comment->getId() == $id; 
-		})->first();
-	}
+
+    public function getComment($id)
+    {
+        return $this->comments->filter(function ($comment) use ($id) {
+            return $comment->getId() == $id;
+        })->first();
+    }
 
     public function getTags()
     {
@@ -277,7 +282,7 @@ class Event implements Opinionable
     /**
      * Add opinions
      *
-     * @param \AppBundle\Entity\Opinion $opinions
+     * @param  \AppBundle\Entity\Opinion $opinions
      * @return Event
      */
     public function addOpinion(\AppBundle\Entity\Opinion $opinions)
@@ -300,18 +305,86 @@ class Event implements Opinionable
     /**
      * Get opinions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getOpinions()
     {
         return $this->opinions;
     }
-	
-	public function getOpinion($id)
-	{
-		return $this->opinions->filter(function ($opinion) use ($id) {
-			return $opinion->getId() == $id; 
-		})->first();
-	}
 
+    public function getOpinion($id)
+    {
+        return $this->opinions->filter(function ($opinion) use ($id) {
+            return $opinion->getId() == $id;
+        })->first();
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param  integer $createdAt
+     * @return Event
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return integer
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param  integer $updatedAt
+     * @return Event
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return integer
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Set image
+     *
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return Event
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 }

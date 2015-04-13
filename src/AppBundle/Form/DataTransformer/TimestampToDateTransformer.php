@@ -9,7 +9,7 @@ class TimestampToDateTransformer implements DataTransformerInterface
     public function transform($timestamp)
     {
         if (null === $timestamp) {
-            return null;
+            return;
         }
 
         $date = new \DateTime();
@@ -21,7 +21,7 @@ class TimestampToDateTransformer implements DataTransformerInterface
     public function reverseTransform($date)
     {
         if (null === $date) {
-            return null;
+            return;
         }
 
         return $date->getTimestamp();

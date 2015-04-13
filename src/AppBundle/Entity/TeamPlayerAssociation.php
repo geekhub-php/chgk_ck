@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
-use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -16,6 +16,7 @@ class TeamPlayerAssociation
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"associationFull", "short"})
      */
     private $id;
 
@@ -24,6 +25,7 @@ class TeamPlayerAssociation
      * @ORM\JoinColumn(name="player_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="Player", message="player with id %ids% is non-exist")
      * @Assert\NotNull()
+     * @JMS\Groups({"associationFull"})
      */
     private $player;
 
@@ -32,6 +34,7 @@ class TeamPlayerAssociation
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="Team", message="team with id %ids% is non-exist")
      * @Assert\NotNull()
+     * @JMS\Groups({"associationFull"})
      */
     private $team;
 
@@ -40,6 +43,7 @@ class TeamPlayerAssociation
      * @ORM\JoinColumn(name="membershipType_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="MembershipType", message="membership type with id %ids% is non-exist")
      * @Assert\NotNull()
+     * @JMS\Groups({"associationFull"})
      */
     private $membershipType;
 
@@ -47,6 +51,7 @@ class TeamPlayerAssociation
      * @ORM\ManyToMany(targetEntity="TeamRole")
      * @CustomAssert\EntitiesExist(associatedEntity="TeamRole", message="team roles with ids %ids% are non-exist")
      * @Assert\Count(min=1)
+     * @JMS\Groups({"associationFull"})
      */
     private $roles;
 
