@@ -21,9 +21,20 @@ class PlayerGameResult extends GameResult
     private $player;
 
     /**
-     * Set player
+     * Get player.
      *
-     * @param  \AppBundle\Entity\Player $player
+     * @return \AppBundle\Entity\Player
+     */
+    public function getPlayer()
+    {
+        return $this->player;
+    }
+
+    /**
+     * Set player.
+     *
+     * @param \AppBundle\Entity\Player $player
+     *
      * @return PlayerGameResult
      */
     public function setPlayer(\AppBundle\Entity\Player $player = null)
@@ -31,15 +42,5 @@ class PlayerGameResult extends GameResult
         $this->player = $player;
 
         return $this;
-    }
-
-    /**
-     * Get player
-     *
-     * @return \AppBundle\Entity\Player
-     */
-    public function getPlayer()
-    {
-        return $this->player;
     }
 }

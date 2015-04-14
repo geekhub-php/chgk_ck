@@ -1,35 +1,32 @@
 <?php
+
 namespace AppBundle\Tests\Controller;
 
-class AgeCategoriesControllerTest extends AbstractController
+class SeasonControllerTest extends AbstractController
 {
-    public function testGetAgeCategories()
+    public function testGetSeason()
     {
-        $this->request('/api/ageCategories');
-    }
-
-    public function testGetAgeCategory()
-    {
-        $id = $this->getEm()->getRepository('AppBundle:AgeCategory')->findAll();
-        $this->request('/ageCategories/' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
+        $id = $this->getEm()->getRepository('AppBundle:Season')->findAll();
+        $this->request('/seasons/{season}/' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
     }
 
     /**
-     * @dataProvider providerAgeCategoriesResponseFields
+     * @dataProvider providerSeasonsResponseFields
      */
-    public function testAgeCategoriesResponseFields($field)
+    public function testSeasonsResponseFields($field)
     {
         $client = $this->getClient();
-        $crawler = $client->request('GET', '/ageCategories');
+        $crawler = $client->request('GET', '/seasons');
         $this->assertContains($field, $client->getResponse()->getContent());
     }
 
-    public function providerAgeCategoriesResponseFields()
+    public function providerSeasonsResponseFields()
     {
         return [
-            ['ageCategories'],
+            ['seasons'],
             ['name'],
-            ['description'],
+            ['startDate'],
+            ['endDate'],
             ['url'],
             ['properties'],
             ['alt'],

@@ -23,7 +23,7 @@ trait TimestampableTrait
     protected $updatedAt;
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return integer Created at
      */
@@ -33,9 +33,10 @@ trait TimestampableTrait
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
-     * @param  integer $createdAt Created at
+     * @param integer $createdAt Created at
+     *
      * @return $this
      */
     public function setCreatedAt($createdAt)
@@ -46,7 +47,7 @@ trait TimestampableTrait
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return integer Updated at
      */
@@ -56,9 +57,10 @@ trait TimestampableTrait
     }
 
     /**
-     * Set updated At
+     * Set updated At.
      *
-     * @param  integer $updatedAt Updated at
+     * @param integer $updatedAt Updated at
+     *
      * @return $this
      */
     public function setUpdatedAt($updatedAt)
@@ -67,5 +69,4 @@ trait TimestampableTrait
 
         return $this;
     }
-
 }

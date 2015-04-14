@@ -19,7 +19,7 @@ class PlayerEvent extends Event
     private $players;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -28,9 +28,10 @@ class PlayerEvent extends Event
     }
 
     /**
-     * Add players
+     * Add players.
      *
-     * @param  \AppBundle\Entity\Player $players
+     * @param \AppBundle\Entity\Player $players
+     *
      * @return PlayerEvent
      */
     public function addPlayer(\AppBundle\Entity\Player $players)
@@ -41,7 +42,7 @@ class PlayerEvent extends Event
     }
 
     /**
-     * Remove players
+     * Remove players.
      *
      * @param \AppBundle\Entity\Player $players
      */
@@ -51,7 +52,7 @@ class PlayerEvent extends Event
     }
 
     /**
-     * Get players
+     * Get players.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

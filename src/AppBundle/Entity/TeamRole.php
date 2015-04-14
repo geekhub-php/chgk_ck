@@ -30,7 +30,7 @@ class TeamRole
     private $name;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -40,7 +40,7 @@ class TeamRole
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -50,9 +50,10 @@ class TeamRole
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string   $name
+     * @param string $name
+     *
      * @return TeamRole
      */
     public function setName($name)

@@ -30,7 +30,7 @@ class MembershipType
     private $name;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -40,7 +40,7 @@ class MembershipType
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -50,9 +50,10 @@ class MembershipType
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string         $name
+     * @param string $name
+     *
      * @return MembershipType
      */
     public function setName($name)

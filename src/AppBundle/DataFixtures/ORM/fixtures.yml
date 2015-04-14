@@ -28,15 +28,15 @@ AppBundle\Entity\TeamRole:
      name: 'Душа команды'
    teamRole9:
      name: 'Совок'
-     
+
 AppBundle\Entity\MembershipType:
   membershipType1:
-    name: 'type1' 
+    name: 'type1'
   membershipType2:
-    name: 'type2' 
+    name: 'type2'
   membershipType3:
-    name: 'type3' 
-     
+    name: 'type3'
+
 AppBundle\Entity\User:
   admin:
     username: admin
@@ -52,7 +52,7 @@ AppBundle\Entity\User:
     enabled: true
     assignedPlayer: @players*
     image: <getMedia('avatar.jpg')>
- 
+
 AppBundle\Entity\Comment:
   comments{1..40}:
     author: @user*
@@ -60,7 +60,7 @@ AppBundle\Entity\Comment:
     opinions: 3x @opinions*
     createdAt: <numberBetween(1, 9999999999)>
     updatedAt: <numberBetween(1, 9999999999)>
-    
+
 AppBundle\Entity\Player:
   players{1..60}:
     firstName:  <firstName()>
@@ -74,7 +74,7 @@ AppBundle\Entity\Season:
     name: <word()>
     startDate: <numberBetween(1, 9999999000)>
     endDate: <numberBetween(9999999001, 9999999999)>
-    
+
 AppBundle\Entity\Team:
   teams{1..10}:
     name: <word()>
@@ -83,7 +83,7 @@ AppBundle\Entity\Team:
     city: <city()>
 #    teamPlayerAssociations: @teamPlayerAssociations*
     ageCategory: @ageCategory*
- 
+
 AppBundle\Entity\Event:
   events{1..10}:
     title: <word()>
@@ -96,7 +96,7 @@ AppBundle\Entity\Event:
     image: <getMedia('event.jpg')>
     createdAt: <numberBetween(1, 9999999999)>
     updatedAt: <numberBetween(1, 9999999999)>
- 
+
 AppBundle\Entity\Game:
   games{1..9}:
     name: <word()>
@@ -110,7 +110,7 @@ AppBundle\Entity\Game:
     ageCategory: @ageCategory*
     description: <realText()>
     # gameResults: @teamGameResults*, @playerGameResults*
-# 
+#
 AppBundle\Entity\GameEvent:
   gameEvents{1..3}:
     title: <word()>
@@ -170,5 +170,3 @@ AppBundle\Entity\TeamGameResult:
     createdAt: <numberBetween(1, 9999999999)>
     updatedAt: <numberBetween(1, 9999999999)>
     team: @teams*
-
-

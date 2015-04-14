@@ -58,7 +58,16 @@ abstract class GameResult implements Opinionable
     private $opinions;
 
     /**
-     * Get id
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->opinions = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = time();
+    }
+
+    /**
+     * Get id.
      *
      * @return integer
      */
@@ -68,9 +77,20 @@ abstract class GameResult implements Opinionable
     }
 
     /**
-     * Set place
+     * Get place.
      *
-     * @param  integer    $place
+     * @return integer
+     */
+    public function getPlace()
+    {
+        return $this->place;
+    }
+
+    /**
+     * Set place.
+     *
+     * @param integer $place
+     *
      * @return GameResult
      */
     public function setPlace($place)
@@ -81,19 +101,20 @@ abstract class GameResult implements Opinionable
     }
 
     /**
-     * Get place
+     * Get score.
      *
      * @return integer
      */
-    public function getPlace()
+    public function getScore()
     {
-        return $this->place;
+        return $this->score;
     }
 
     /**
-     * Set score
+     * Set score.
      *
-     * @param  integer    $score
+     * @param integer $score
+     *
      * @return GameResult
      */
     public function setScore($score)
@@ -104,19 +125,20 @@ abstract class GameResult implements Opinionable
     }
 
     /**
-     * Get score
+     * Get game.
      *
-     * @return integer
+     * @return \AppBundle\Entity\Game
      */
-    public function getScore()
+    public function getGame()
     {
-        return $this->score;
+        return $this->game;
     }
 
     /**
-     * Set game
+     * Set game.
      *
-     * @param  \AppBundle\Entity\Game $game
+     * @param \AppBundle\Entity\Game $game
+     *
      * @return GameResult
      */
     public function setGame(\AppBundle\Entity\Game $game)
@@ -127,27 +149,10 @@ abstract class GameResult implements Opinionable
     }
 
     /**
-     * Get game
+     * Add opinions.
      *
-     * @return \AppBundle\Entity\Game
-     */
-    public function getGame()
-    {
-        return $this->game;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->opinions = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->createdAt = time();
-    }
-
-    /**
-     * Add opinions
+     * @param \AppBundle\Entity\Opinion $opinions
      *
-     * @param  \AppBundle\Entity\Opinion $opinions
      * @return GameResult
      */
     public function addOpinion(\AppBundle\Entity\Opinion $opinions)
@@ -158,7 +163,7 @@ abstract class GameResult implements Opinionable
     }
 
     /**
-     * Remove opinions
+     * Remove opinions.
      *
      * @param \AppBundle\Entity\Opinion $opinions
      */
@@ -168,7 +173,7 @@ abstract class GameResult implements Opinionable
     }
 
     /**
-     * Get opinions
+     * Get opinions.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

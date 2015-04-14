@@ -21,9 +21,20 @@ class TeamGameResult extends GameResult
     private $team;
 
     /**
-     * Set team
+     * Get team.
      *
-     * @param  \AppBundle\Entity\Team $team
+     * @return \AppBundle\Entity\Team
+     */
+    public function getTeam()
+    {
+        return $this->team;
+    }
+
+    /**
+     * Set team.
+     *
+     * @param \AppBundle\Entity\Team $team
+     *
      * @return TeamGameResult
      */
     public function setTeam(\AppBundle\Entity\Team $team = null)
@@ -31,15 +42,5 @@ class TeamGameResult extends GameResult
         $this->team = $team;
 
         return $this;
-    }
-
-    /**
-     * Get team
-     *
-     * @return \AppBundle\Entity\Team
-     */
-    public function getTeam()
-    {
-        return $this->team;
     }
 }

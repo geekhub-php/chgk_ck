@@ -19,7 +19,7 @@ class GameEvent extends Event
     private $games;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -28,9 +28,10 @@ class GameEvent extends Event
     }
 
     /**
-     * Add games
+     * Add games.
      *
-     * @param  \AppBundle\Entity\Game $games
+     * @param \AppBundle\Entity\Game $games
+     *
      * @return GameEvent
      */
     public function addGame(\AppBundle\Entity\Game $games)
@@ -41,7 +42,7 @@ class GameEvent extends Event
     }
 
     /**
-     * Remove games
+     * Remove games.
      *
      * @param \AppBundle\Entity\Game $games
      */
@@ -51,7 +52,7 @@ class GameEvent extends Event
     }
 
     /**
-     * Get games
+     * Get games.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

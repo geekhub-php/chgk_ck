@@ -1,35 +1,40 @@
 <?php
+
 namespace AppBundle\Tests\Controller;
 
-class AgeCategoriesControllerTest extends AbstractController
+class EventsControllerTest extends AbstractController
 {
-    public function testGetAgeCategories()
+    public function testGetEvents()
     {
-        $this->request('/api/ageCategories');
+        $this->request('/api/events');
     }
 
-    public function testGetAgeCategory()
+    public function testGetEvent()
     {
-        $id = $this->getEm()->getRepository('AppBundle:AgeCategory')->findAll();
-        $this->request('/ageCategories/' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
+        $id = $this->getEm()->getRepository('AppBundle:Event')->findAll();
+        $this->request('/events /' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
     }
 
     /**
-     * @dataProvider providerAgeCategoriesResponseFields
+     * @dataProvider providerEventsResponseFields
      */
-    public function testAgeCategoriesResponseFields($field)
+    public function testEventsResponseFields($field)
     {
         $client = $this->getClient();
-        $crawler = $client->request('GET', '/ageCategories');
+        $crawler = $client->request('GET', '/events');
         $this->assertContains($field, $client->getResponse()->getContent());
     }
 
-    public function providerAgeCategoriesResponseFields()
+    public function providerEventsResponseFields()
     {
         return [
-            ['ageCategories'],
-            ['name'],
-            ['description'],
+            ['events'],
+            ['title'],
+            ['text'],
+            ['author'],
+            ['image'],
+            ['eventDate'],
+            ['tags'],
             ['url'],
             ['properties'],
             ['alt'],

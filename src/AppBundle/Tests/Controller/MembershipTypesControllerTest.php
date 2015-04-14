@@ -1,35 +1,34 @@
 <?php
 namespace AppBundle\Tests\Controller;
 
-class AgeCategoriesControllerTest extends AbstractController
+class MembershipTypesControllerTest extends AbstractController
 {
-    public function testGetAgeCategories()
+    public function testGetMembershipTypes()
     {
-        $this->request('/api/ageCategories');
+        $this->request('/api/membershipTypes');
     }
 
-    public function testGetAgeCategory()
+    public function testGetMembershipType()
     {
-        $id = $this->getEm()->getRepository('AppBundle:AgeCategory')->findAll();
-        $this->request('/ageCategories/' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
+        $id = $this->getEm()->getRepository('AppBundle:MembershipType')->findAll();
+        $this->request('/membershipTypes /' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
     }
 
     /**
-     * @dataProvider providerAgeCategoriesResponseFields
+     * @dataProvider providerMembershipTypesResponseFields
      */
-    public function testAgeCategoriesResponseFields($field)
+    public function testMembershipTypesResponseFields($field)
     {
         $client = $this->getClient();
-        $crawler = $client->request('GET', '/ageCategories');
+        $crawler = $client->request('GET', '/membershipTypes');
         $this->assertContains($field, $client->getResponse()->getContent());
     }
 
-    public function providerAgeCategoriesResponseFields()
+    public function providerMembershipTypesResponseFields()
     {
         return [
-            ['ageCategories'],
+            [' membershipTypes '],
             ['name'],
-            ['description'],
             ['url'],
             ['properties'],
             ['alt'],

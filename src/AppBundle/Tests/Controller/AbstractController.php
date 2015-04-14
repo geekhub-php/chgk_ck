@@ -30,13 +30,27 @@ abstract class AbstractController extends WebTestCase
         if (!$this->em) {
             $this->em = $this->getContainer()->get('doctrine')->getManager();
         }
+
         return $this->em;
     }
 
     /**
-     * @param  string $path
-     * @param  string $method
-     * @param  int $expectedStatusCode
+     * @return \Symfony\Component\DependencyInjection\ContainerInterface
+     */
+    public function getContainer()
+    {
+        if (!$this->container) {
+            $this->container = static::$kernel->getContainer();
+        }
+
+        return $this->container;
+    }
+
+    /**
+     * @param string $path
+     * @param string $method
+     * @param int $expectedStatusCode
+     *
      * @return \Symfony\Component\DomCrawler\Crawler
      */
     protected function request($path, $method = 'GET', $expectedStatusCode = 200)
@@ -48,6 +62,7 @@ abstract class AbstractController extends WebTestCase
             $client->getResponse()->getStatusCode(),
             sprintf('We expected that uri "%s" will return %s status code, but had received %d', $path, $expectedStatusCode, $client->getResponse()->getStatusCode())
         );
+
         return $crawler;
     }
 
@@ -55,18 +70,8 @@ abstract class AbstractController extends WebTestCase
     {
         $client = $this->getContainer()->get('test.client');
         $client->setServerParameters($server);
-        return $client;
-    }
 
-    /**
-     * @return \Symfony\Component\DependencyInjection\ContainerInterface
-     */
-    public function getContainer()
-    {
-        if (!$this->container) {
-            $this->container = static::$kernel->getContainer();
-        }
-        return $this->container;
+        return $client;
     }
 
     protected function getHttpHost()

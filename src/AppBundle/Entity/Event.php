@@ -93,7 +93,7 @@ class Event implements Opinionable
     private $image;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -103,7 +103,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -113,7 +113,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -123,9 +123,10 @@ class Event implements Opinionable
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return Event
      */
     public function setTitle($title)
@@ -136,7 +137,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
@@ -146,9 +147,10 @@ class Event implements Opinionable
     }
 
     /**
-     * Set text
+     * Set text.
      *
-     * @param  string $text
+     * @param string $text
+     *
      * @return Event
      */
     public function setText($text)
@@ -159,7 +161,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -169,9 +171,10 @@ class Event implements Opinionable
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return Event
      */
     public function setSlug($slug)
@@ -182,7 +185,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get eventDate
+     * Get eventDate.
      *
      * @return integer
      */
@@ -192,9 +195,10 @@ class Event implements Opinionable
     }
 
     /**
-     * Set eventDate
+     * Set eventDate.
      *
-     * @param  integer $eventDate
+     * @param integer $eventDate
+     *
      * @return Event
      */
     public function setEventDate($eventDate)
@@ -205,7 +209,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return \AppBundle\Entity\User
      */
@@ -215,9 +219,10 @@ class Event implements Opinionable
     }
 
     /**
-     * Set author
+     * Set author.
      *
-     * @param  \AppBundle\Entity\User $author
+     * @param \AppBundle\Entity\User $author
+     *
      * @return Event
      */
     public function setAuthor(\AppBundle\Entity\User $author)
@@ -228,9 +233,10 @@ class Event implements Opinionable
     }
 
     /**
-     * Add comments
+     * Add comments.
      *
-     * @param  \AppBundle\Entity\Comment $comments
+     * @param \AppBundle\Entity\Comment $comments
+     *
      * @return Event
      */
     public function addComment(\AppBundle\Entity\Comment $comments)
@@ -241,7 +247,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Remove comments
+     * Remove comments.
      *
      * @param \AppBundle\Entity\Comment $comments
      */
@@ -251,7 +257,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get comments
+     * Get comments.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -280,9 +286,10 @@ class Event implements Opinionable
     }
 
     /**
-     * Add opinions
+     * Add opinions.
      *
-     * @param  \AppBundle\Entity\Opinion $opinions
+     * @param \AppBundle\Entity\Opinion $opinions
+     *
      * @return Event
      */
     public function addOpinion(\AppBundle\Entity\Opinion $opinions)
@@ -293,7 +300,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Remove opinions
+     * Remove opinions.
      *
      * @param \AppBundle\Entity\Opinion $opinions
      */
@@ -303,7 +310,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get opinions
+     * Get opinions.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -320,9 +327,10 @@ class Event implements Opinionable
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
-     * @param  integer $createdAt
+     * @param integer $createdAt
+     *
      * @return Event
      */
     public function setCreatedAt($createdAt)
@@ -333,7 +341,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return integer
      */
@@ -343,9 +351,10 @@ class Event implements Opinionable
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
-     * @param  integer $updatedAt
+     * @param integer $updatedAt
+     *
      * @return Event
      */
     public function setUpdatedAt($updatedAt)
@@ -356,7 +365,7 @@ class Event implements Opinionable
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return integer
      */
@@ -366,9 +375,20 @@ class Event implements Opinionable
     }
 
     /**
-     * Set image
+     * Get image.
      *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     *
      * @return Event
      */
     public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
@@ -376,15 +396,5 @@ class Event implements Opinionable
         $this->image = $image;
 
         return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 }

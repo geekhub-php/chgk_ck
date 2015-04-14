@@ -3,8 +3,6 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -37,8 +35,6 @@ class User extends BaseUser
     /** @ORM\Column(name="vkontakte_access_token", type="string", length=255, nullable=true) */
     protected $vkontakte_access_token;
 
-
-
     /**
      * @ORM\OneToOne(targetEntity="Player")
      */
@@ -51,7 +47,7 @@ class User extends BaseUser
     private $slug;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -61,7 +57,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -71,9 +67,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return User
      */
     public function setSlug($slug)
@@ -84,7 +81,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get assignedPlayer
+     * Get assignedPlayer.
      *
      * @return \AppBundle\Entity\Player
      */
@@ -94,9 +91,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set assignedPlayer
+     * Set assignedPlayer.
      *
-     * @param  \AppBundle\Entity\Player $assignedPlayer
+     * @param \AppBundle\Entity\Player $assignedPlayer
+     *
      * @return User
      */
     public function setAssignedPlayer(\AppBundle\Entity\Player $assignedPlayer = null)
@@ -107,7 +105,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get facebook_id
+     * Get facebook_id.
      *
      * @return string
      */
@@ -117,9 +115,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set facebook_id
+     * Set facebook_id.
      *
      * @param string $facebookId
+     *
      * @return User
      */
     public function setFacebookId($facebookId)
@@ -130,7 +129,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get facebook_access_token
+     * Get facebook_access_token.
      *
      * @return string
      */
@@ -140,9 +139,10 @@ class User extends BaseUser
     }
 
     /**
-     * Set facebook_access_token
+     * Set facebook_access_token.
      *
      * @param string $facebookAccessToken
+     *
      * @return User
      */
     public function setFacebookAccessToken($facebookAccessToken)

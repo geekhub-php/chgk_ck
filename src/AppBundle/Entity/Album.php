@@ -34,7 +34,7 @@ class Album
     private $medias;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -42,7 +42,7 @@ class Album
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -52,9 +52,20 @@ class Album
     }
 
     /**
-     * Set name
+     * Get name.
      *
-     * @param  string $name
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
      * @return Album
      */
     public function setName($name)
@@ -65,19 +76,10 @@ class Album
     }
 
     /**
-     * Get name
+     * Add medias.
      *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Add medias
+     * @param \Application\Sonata\MediaBundle\Entity\Media $medias
      *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $medias
      * @return Album
      */
     public function addMedia(\Application\Sonata\MediaBundle\Entity\Media $medias)
@@ -88,7 +90,7 @@ class Album
     }
 
     /**
-     * Remove medias
+     * Remove medias.
      *
      * @param \Application\Sonata\MediaBundle\Entity\Media $medias
      */
@@ -98,7 +100,7 @@ class Album
     }
 
     /**
-     * Get medias
+     * Get medias.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

@@ -68,12 +68,12 @@ class Player
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
-	 * @JMS\Groups({"playerFull"})
+     * @JMS\Groups({"playerFull"})
      */
     private $image;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -81,7 +81,7 @@ class Player
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -91,9 +91,20 @@ class Player
     }
 
     /**
-     * Set firstName
+     * Get firstName.
      *
-     * @param  string $firstName
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set firstName.
+     *
+     * @param string $firstName
+     *
      * @return Player
      */
     public function setFirstName($firstName)
@@ -104,19 +115,20 @@ class Player
     }
 
     /**
-     * Get firstName
+     * Get lastName.
      *
      * @return string
      */
-    public function getFirstName()
+    public function getLastName()
     {
-        return $this->firstName;
+        return $this->lastName;
     }
 
     /**
-     * Set lastName
+     * Set lastName.
      *
-     * @param  string $lastName
+     * @param string $lastName
+     *
      * @return Player
      */
     public function setLastName($lastName)
@@ -127,19 +139,20 @@ class Player
     }
 
     /**
-     * Get lastName
+     * Get middleName.
      *
      * @return string
      */
-    public function getLastName()
+    public function getMiddleName()
     {
-        return $this->lastName;
+        return $this->middleName;
     }
 
     /**
-     * Set middleName
+     * Set middleName.
      *
-     * @param  string $middleName
+     * @param string $middleName
+     *
      * @return Player
      */
     public function setMiddleName($middleName)
@@ -150,19 +163,20 @@ class Player
     }
 
     /**
-     * Get middleName
+     * Get dob.
      *
-     * @return string
+     * @return integer
      */
-    public function getMiddleName()
+    public function getDob()
     {
-        return $this->middleName;
+        return $this->dob;
     }
 
     /**
-     * Set dob
+     * Set dob.
      *
-     * @param  integer $dob
+     * @param integer $dob
+     *
      * @return Player
      */
     public function setDob($dob)
@@ -173,19 +187,20 @@ class Player
     }
 
     /**
-     * Get dob
+     * Get slug.
      *
-     * @return integer
+     * @return string
      */
-    public function getDob()
+    public function getSlug()
     {
-        return $this->dob;
+        return $this->slug;
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return Player
      */
     public function setSlug($slug)
@@ -196,19 +211,10 @@ class Player
     }
 
     /**
-     * Get slug
+     * Add teamPlayerAssociations.
      *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Add teamPlayerAssociations
+     * @param \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      *
-     * @param  \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      * @return Player
      */
     public function addTeamPlayerAssociation(\AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations)
@@ -219,7 +225,7 @@ class Player
     }
 
     /**
-     * Remove teamPlayerAssociations
+     * Remove teamPlayerAssociations.
      *
      * @param \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      */
@@ -229,7 +235,7 @@ class Player
     }
 
     /**
-     * Get teamPlayerAssociations
+     * Get teamPlayerAssociations.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -239,9 +245,20 @@ class Player
     }
 
     /**
-     * Set image
+     * Get image.
      *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     *
      * @return Player
      */
     public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
@@ -249,15 +266,5 @@ class Player
         $this->image = $image;
 
         return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 }

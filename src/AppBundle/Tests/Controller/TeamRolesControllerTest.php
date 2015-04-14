@@ -1,35 +1,35 @@
 <?php
+
 namespace AppBundle\Tests\Controller;
 
-class AgeCategoriesControllerTest extends AbstractController
+class TeamRolesControllerTest extends AbstractController
 {
-    public function testGetAgeCategories()
+    public function testGetTeamRoles()
     {
-        $this->request('/api/ageCategories');
+        $this->request('/api/teamRoles');
     }
 
-    public function testGetAgeCategory()
+    public function testGetMembershipType()
     {
-        $id = $this->getEm()->getRepository('AppBundle:AgeCategory')->findAll();
-        $this->request('/ageCategories/' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
+        $id = $this->getEm()->getRepository('AppBundle:TeamRole')->findAll();
+        $this->request('/teamRoles /' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
     }
 
     /**
-     * @dataProvider providerAgeCategoriesResponseFields
+     * @dataProvider providerTeamRolesResponseFields
      */
-    public function testAgeCategoriesResponseFields($field)
+    public function testTeamRolesResponseFields($field)
     {
         $client = $this->getClient();
-        $crawler = $client->request('GET', '/ageCategories');
+        $crawler = $client->request('GET', '/teamRoles');
         $this->assertContains($field, $client->getResponse()->getContent());
     }
 
-    public function providerAgeCategoriesResponseFields()
+    public function providerTeamRolesResponseFields()
     {
         return [
-            ['ageCategories'],
+            ['teamRoles '],
             ['name'],
-            ['description'],
             ['url'],
             ['properties'],
             ['alt'],

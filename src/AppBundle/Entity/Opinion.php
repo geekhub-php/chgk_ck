@@ -44,7 +44,7 @@ class Opinion implements UserCreatable
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -54,7 +54,7 @@ class Opinion implements UserCreatable
     }
 
     /**
-     * Get isPositive
+     * Get isPositive.
      *
      * @return boolean
      */
@@ -64,9 +64,10 @@ class Opinion implements UserCreatable
     }
 
     /**
-     * Set isPositive
+     * Set isPositive.
      *
-     * @param  boolean $isPositive
+     * @param boolean $isPositive
+     *
      * @return Opinion
      */
     public function setIsPositive($isPositive)
@@ -77,7 +78,7 @@ class Opinion implements UserCreatable
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return \AppBundle\Entity\User
      */
@@ -87,9 +88,10 @@ class Opinion implements UserCreatable
     }
 
     /**
-     * Set author
+     * Set author.
      *
-     * @param  \AppBundle\Entity\User $author
+     * @param \AppBundle\Entity\User $author
+     *
      * @return Opinion
      */
     public function setAuthor(\AppBundle\Entity\User $author)

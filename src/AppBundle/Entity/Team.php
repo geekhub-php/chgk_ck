@@ -75,12 +75,12 @@ class Team
 
     /**
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
-	 * @JMS\Groups({"teamFull"})
+     * @JMS\Groups({"teamFull"})
      */
     private $image;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -88,7 +88,7 @@ class Team
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -98,7 +98,7 @@ class Team
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -108,9 +108,10 @@ class Team
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Team
      */
     public function setName($name)
@@ -121,7 +122,7 @@ class Team
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -131,9 +132,10 @@ class Team
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return Team
      */
     public function setDescription($description)
@@ -144,7 +146,7 @@ class Team
     }
 
     /**
-     * Get rating
+     * Get rating.
      *
      * @return integer
      */
@@ -154,9 +156,10 @@ class Team
     }
 
     /**
-     * Set rating
+     * Set rating.
      *
-     * @param  integer $rating
+     * @param integer $rating
+     *
      * @return Team
      */
     public function setRating($rating)
@@ -167,7 +170,7 @@ class Team
     }
 
     /**
-     * Get city
+     * Get city.
      *
      * @return string
      */
@@ -177,9 +180,10 @@ class Team
     }
 
     /**
-     * Set city
+     * Set city.
      *
-     * @param  string $city
+     * @param string $city
+     *
      * @return Team
      */
     public function setCity($city)
@@ -190,7 +194,7 @@ class Team
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -200,9 +204,10 @@ class Team
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return Team
      */
     public function setSlug($slug)
@@ -213,9 +218,10 @@ class Team
     }
 
     /**
-     * Add teamPlayerAssociations
+     * Add teamPlayerAssociations.
      *
-     * @param  \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
+     * @param \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
+     *
      * @return Team
      */
     public function addTeamPlayerAssociation(\AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations)
@@ -226,7 +232,7 @@ class Team
     }
 
     /**
-     * Remove teamPlayerAssociations
+     * Remove teamPlayerAssociations.
      *
      * @param \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      */
@@ -236,7 +242,7 @@ class Team
     }
 
     /**
-     * Get teamPlayerAssociations
+     * Get teamPlayerAssociations.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
@@ -246,7 +252,7 @@ class Team
     }
 
     /**
-     * Get ageCategory
+     * Get ageCategory.
      *
      * @return \AppBundle\Entity\AgeCategory
      */
@@ -256,9 +262,10 @@ class Team
     }
 
     /**
-     * Set ageCategory
+     * Set ageCategory.
      *
-     * @param  \AppBundle\Entity\AgeCategory $ageCategory
+     * @param \AppBundle\Entity\AgeCategory $ageCategory
+     *
      * @return Team
      */
     public function setAgeCategory(\AppBundle\Entity\AgeCategory $ageCategory)
@@ -269,9 +276,20 @@ class Team
     }
 
     /**
-     * Set image
+     * Get image.
      *
-     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     *
      * @return Team
      */
     public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
@@ -279,15 +297,5 @@ class Team
         $this->image = $image;
 
         return $this;
-    }
-
-    /**
-     * Get image
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getImage()
-    {
-        return $this->image;
     }
 }

@@ -105,7 +105,7 @@ class Game
     private $gameResults;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -113,7 +113,7 @@ class Game
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -123,7 +123,7 @@ class Game
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -133,9 +133,10 @@ class Game
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Game
      */
     public function setName($name)
@@ -146,7 +147,7 @@ class Game
     }
 
     /**
-     * Get playDate
+     * Get playDate.
      *
      * @return integer
      */
@@ -156,9 +157,10 @@ class Game
     }
 
     /**
-     * Set playDate
+     * Set playDate.
      *
-     * @param  integer $playDate
+     * @param integer $playDate
+     *
      * @return Game
      */
     public function setPlayDate($playDate)
@@ -169,7 +171,7 @@ class Game
     }
 
     /**
-     * Get playPlace
+     * Get playPlace.
      *
      * @return string
      */
@@ -179,9 +181,10 @@ class Game
     }
 
     /**
-     * Set playPlace
+     * Set playPlace.
      *
-     * @param  string $playPlace
+     * @param string $playPlace
+     *
      * @return Game
      */
     public function setPlayPlace($playPlace)
@@ -192,7 +195,7 @@ class Game
     }
 
     /**
-     * Get isLocallyRated
+     * Get isLocallyRated.
      *
      * @return boolean
      */
@@ -202,9 +205,10 @@ class Game
     }
 
     /**
-     * Set isLocallyRated
+     * Set isLocallyRated.
      *
-     * @param  boolean $isLocallyRated
+     * @param boolean $isLocallyRated
+     *
      * @return Game
      */
     public function setIsLocallyRated($isLocallyRated)
@@ -215,7 +219,7 @@ class Game
     }
 
     /**
-     * Get isGloballyRated
+     * Get isGloballyRated.
      *
      * @return boolean
      */
@@ -225,9 +229,10 @@ class Game
     }
 
     /**
-     * Set isGloballyRated
+     * Set isGloballyRated.
      *
-     * @param  boolean $isGloballyRated
+     * @param boolean $isGloballyRated
+     *
      * @return Game
      */
     public function setIsGloballyRated($isGloballyRated)
@@ -238,7 +243,7 @@ class Game
     }
 
     /**
-     * Get isHome
+     * Get isHome.
      *
      * @return boolean
      */
@@ -248,9 +253,10 @@ class Game
     }
 
     /**
-     * Set isHome
+     * Set isHome.
      *
-     * @param  boolean $isHome
+     * @param boolean $isHome
+     *
      * @return Game
      */
     public function setIsHome($isHome)
@@ -261,7 +267,7 @@ class Game
     }
 
     /**
-     * Get isComplete
+     * Get isComplete.
      *
      * @return boolean
      */
@@ -271,9 +277,10 @@ class Game
     }
 
     /**
-     * Set isComplete
+     * Set isComplete.
      *
-     * @param  boolean $isComplete
+     * @param boolean $isComplete
+     *
      * @return Game
      */
     public function setIsComplete($isComplete)
@@ -284,7 +291,7 @@ class Game
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -294,9 +301,10 @@ class Game
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return Game
      */
     public function setDescription($description)
@@ -307,7 +315,7 @@ class Game
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -317,9 +325,10 @@ class Game
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return Game
      */
     public function setSlug($slug)
@@ -330,7 +339,7 @@ class Game
     }
 
     /**
-     * Get season
+     * Get season.
      *
      * @return \AppBundle\Entity\Season
      */
@@ -340,9 +349,10 @@ class Game
     }
 
     /**
-     * Set season
+     * Set season.
      *
-     * @param  \AppBundle\Entity\Season $season
+     * @param \AppBundle\Entity\Season $season
+     *
      * @return Game
      */
     public function setSeason(\AppBundle\Entity\Season $season = null)
@@ -353,9 +363,20 @@ class Game
     }
 
     /**
-     * Set ageCategory
+     * Get ageCategory.
      *
-     * @param  \AppBundle\Entity\AgeCategory $ageCategory
+     * @return \AppBundle\Entity\AgeCategory
+     */
+    public function getAgeCategory()
+    {
+        return $this->ageCategory;
+    }
+
+    /**
+     * Set ageCategory.
+     *
+     * @param \AppBundle\Entity\AgeCategory $ageCategory
+     *
      * @return Game
      */
     public function setAgeCategory(\AppBundle\Entity\AgeCategory $ageCategory)
@@ -366,19 +387,10 @@ class Game
     }
 
     /**
-     * Get ageCategory
+     * Add gameResults.
      *
-     * @return \AppBundle\Entity\AgeCategory
-     */
-    public function getAgeCategory()
-    {
-        return $this->ageCategory;
-    }
-
-    /**
-     * Add gameResults
+     * @param \AppBundle\Entity\GameResult $gameResults
      *
-     * @param  \AppBundle\Entity\GameResult $gameResults
      * @return Game
      */
     public function addGameResult(\AppBundle\Entity\GameResult $gameResults)
@@ -389,7 +401,7 @@ class Game
     }
 
     /**
-     * Remove gameResults
+     * Remove gameResults.
      *
      * @param \AppBundle\Entity\GameResult $gameResults
      */
@@ -399,7 +411,7 @@ class Game
     }
 
     /**
-     * Get gameResults
+     * Get gameResults.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

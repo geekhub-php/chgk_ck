@@ -49,15 +49,8 @@ class Comment implements Opinionable, UserCreatable
      */
     private $madeByCurrentUser;
 
-    public function setId($id)
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -66,8 +59,15 @@ class Comment implements Opinionable, UserCreatable
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
@@ -77,9 +77,10 @@ class Comment implements Opinionable, UserCreatable
     }
 
     /**
-     * Set text
+     * Set text.
      *
-     * @param  string  $text
+     * @param string $text
+     *
      * @return Comment
      */
     public function setText($text)
@@ -90,7 +91,7 @@ class Comment implements Opinionable, UserCreatable
     }
 
     /**
-     * Get event
+     * Get event.
      *
      * @return \AppBundle\Entity\Event
      */
@@ -100,9 +101,20 @@ class Comment implements Opinionable, UserCreatable
     }
 
     /**
-     * Set author
+     * Get author.
      *
-     * @param  \AppBundle\Entity\User $author
+     * @return \AppBundle\Entity\User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set author.
+     *
+     * @param \AppBundle\Entity\User $author
+     *
      * @return Comment
      */
     public function setAuthor(\AppBundle\Entity\User $author)
@@ -113,19 +125,10 @@ class Comment implements Opinionable, UserCreatable
     }
 
     /**
-     * Get author
+     * Add opinions.
      *
-     * @return \AppBundle\Entity\User
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * Add opinions
+     * @param \AppBundle\Entity\Opinion $opinions
      *
-     * @param  \AppBundle\Entity\Opinion $opinions
      * @return Comment
      */
     public function addOpinion(\AppBundle\Entity\Opinion $opinions)
@@ -136,7 +139,7 @@ class Comment implements Opinionable, UserCreatable
     }
 
     /**
-     * Remove opinions
+     * Remove opinions.
      *
      * @param \AppBundle\Entity\Opinion $opinions
      */
@@ -146,7 +149,7 @@ class Comment implements Opinionable, UserCreatable
     }
 
     /**
-     * Get opinions
+     * Get opinions.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

@@ -45,7 +45,7 @@ class AgeCategory
     private $slug;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -55,7 +55,7 @@ class AgeCategory
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -65,9 +65,10 @@ class AgeCategory
     }
 
     /**
-     * Set name
+     * Set name.
      *
-     * @param  string      $name
+     * @param string $name
+     *
      * @return AgeCategory
      */
     public function setName($name)
@@ -78,7 +79,7 @@ class AgeCategory
     }
 
     /**
-     * Get description
+     * Get description.
      *
      * @return string
      */
@@ -88,9 +89,10 @@ class AgeCategory
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string      $description
+     * @param string $description
+     *
      * @return AgeCategory
      */
     public function setDescription($description)
@@ -101,7 +103,7 @@ class AgeCategory
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -111,9 +113,10 @@ class AgeCategory
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string      $slug
+     * @param string $slug
+     *
      * @return AgeCategory
      */
     public function setSlug($slug)

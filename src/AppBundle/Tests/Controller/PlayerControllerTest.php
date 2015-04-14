@@ -1,35 +1,33 @@
 <?php
+
 namespace AppBundle\Tests\Controller;
 
-class AgeCategoriesControllerTest extends AbstractController
+class PlayerControllerTest extends AbstractController
 {
-    public function testGetAgeCategories()
+    public function testGetPlayer()
     {
-        $this->request('/api/ageCategories');
-    }
-
-    public function testGetAgeCategory()
-    {
-        $id = $this->getEm()->getRepository('AppBundle:AgeCategory')->findAll();
-        $this->request('/ageCategories/' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
+        $id = $this->getEm()->getRepository('AppBundle:Player')->findAll();
+        $this->request('/players/{player}/' . base_convert(md5(uniqid()), 11, 10), 'GET', 404);
     }
 
     /**
-     * @dataProvider providerAgeCategoriesResponseFields
+     * @dataProvider providerPlayersResponseFields
      */
-    public function testAgeCategoriesResponseFields($field)
+    public function testPlayersResponseFields($field)
     {
         $client = $this->getClient();
-        $crawler = $client->request('GET', '/ageCategories');
+        $crawler = $client->request('GET', '/players');
         $this->assertContains($field, $client->getResponse()->getContent());
     }
 
-    public function providerAgeCategoriesResponseFields()
+    public function providerPlayersResponseFields()
     {
         return [
-            ['ageCategories'],
-            ['name'],
-            ['description'],
+            ['players'],
+            ['firstName'],
+            ['lastName'],
+            ['dob'],
+            ['image'],
             ['url'],
             ['properties'],
             ['alt'],
