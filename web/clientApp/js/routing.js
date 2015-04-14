@@ -1,6 +1,14 @@
 angular.module('app')
 .config(function ($routeProvider, $locationProvider) {
 	$routeProvider
+	.when('/', 
+	{
+		templateUrl: 'clientApp/templates/home.html'
+	})
+	.when('/home', 
+	{
+		templateUrl: 'clientApp/templates/home.html'
+	})
 	.when('/teams', 
 	{
 		templateUrl: 'clientApp/templates/teams.html',
@@ -14,32 +22,32 @@ angular.module('app')
 	.when('/news/:newsId',
 	{
 		templateUrl: 'clientApp/templates/event.html',
-		controller:  'EventController'	
+		controller:  'EventController'
 	})
 	.when('/games',
 	{
 		templateUrl: 'clientApp/templates/games.html',
-		controller:  'GamesController'	
+		controller:  'GamesController'
 	})
 	.when('/games/:gameId/gameResults',
 	{
 		templateUrl: 'clientApp/templates/gameResults.html',
-		controller:  'GameResultsController'	
+		controller:  'GameResultsController'
 	})
 	.when('/team/:teamId',
 	{
 		templateUrl: 'clientApp/templates/team.html',
-		controller:  'TeamController'	
+		controller:  'TeamController'
 	})
 	.when('/players',
 	{
 		templateUrl: 'clientApp/templates/players.html',
-		controller:  'PlayersController'	
+		controller:  'PlayersController'
 	})
 	.when('/players/:playerId',
 	{
 		templateUrl: 'clientApp/templates/player.html',
-		controller:  'PlayerController'	
+		controller:  'PlayerController'
 	})
 	.when('/about',
 	{
@@ -48,12 +56,12 @@ angular.module('app')
 	.when('/galleries',
 	{
 		templateUrl: 'clientApp/templates/galleries.html',
-		controller:  'GalleriesController'	
+		controller:  'GalleriesController'
 	})
 	.when('/galleries/:galleryId',
 	{
 		templateUrl: 'clientApp/templates/gallery.html',
-		controller:  'GalleryController'	
+		controller:  'GalleryController'
 	})
 	;
 });

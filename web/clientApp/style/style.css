@@ -528,6 +528,7 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .galleryContent li a{
 	display: block;
 	height: 100%;
+	color: #000;
 }
 .galleryContent li:nth-child(4n){
 	margin-right: 0;
@@ -588,3 +589,104 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	-o-transition: all ease-out 0.3s;
 	transition: all ease-out 0.3s;
 }
+
+
+/*===================classGAMES=============*/
+.postGame {
+	height: 426px;
+	overflow: hidden;
+	margin: 20px 0;
+	font-size: 12px;
+	line-height: 14px;
+}
+.postGame h3 a{
+	font-size: 16px;
+}
+.games li:not(:first-child) {
+	height: 75px;
+	margin-top: 20px;
+	width: 338px;
+	float: right;
+	margin-right: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	border-bottom: 1px solid #ccc;
+}
+.games li:first-child {
+	width: 360px;
+	height: 360px;
+	float: left;
+	margin-top: 0;
+	margin-top: 20px;
+	background-color: #EEF5E8;
+	border: 1px solid #ccc;
+}
+.games li p{
+	padding: 15px;
+}
+.games li img {
+	display: none;
+	width: 360px;
+	height: 250px;
+}
+.games li:first-child img {
+	display: block;
+}
+.games h3 {
+	padding: 5px 10px;
+}
+
+/*==========================================*/
+
+/*===============classNEWS==================*/
+.postNews {
+	overflow: hidden;
+	margin-bottom: 20px;
+	font-size: 12px;
+	line-height: 14px;
+}
+.postNews h3 a{
+	font-size: 16px;
+}
+.news li:not(:first-child) {
+	height: 90px;
+	margin-top: 20px;
+	width: 338px;
+	float: right;
+	margin-right: 1px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+	border-bottom: 1px solid #ccc;
+}
+.news li:first-child {
+	width: 360px;
+	height: 420px;
+	float: left;
+	margin-top: 0;
+	margin-top: 20px;
+	background-color: #EAF0F7;
+	border: 1px solid #ccc;
+}
+.news li{
+	overflow: hidden;
+}
+.news li p{
+	padding: 15px;
+}
+.news li img {
+	display: none;
+	width: 360px;
+	height: 250px;
+}
+.news li:first-child img {
+	display: block;
+}
+.news h3 {
+	padding: 5px 10px;
+}
+
+/*==========================================*/

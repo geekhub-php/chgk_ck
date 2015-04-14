@@ -25,7 +25,7 @@
 		<div class="content pad0_30px">
 			<header class="header">
 				<h1 class="logo float-l">
-					<img src="clientApp/images/logo.png" alt="img">
+					<a href="#/home"><img src="clientApp/images/logo.png" alt="img"></a>
 				</h1>
 				<nav class="nav h27_lh27">
 					<a href="#/games">Игры</a>
@@ -58,7 +58,7 @@
 			<div class="blockTopNews">
 				<h3 class="align-c">Топ новостей</h3>
 				<ul ng-controller="EventsController">
-					<li ng-repeat=" event in events"><a href="#/news/{{ event.id }}">{{event.title}}</a></li>
+					<li ng-repeat=" event in events | limitTo:5"><a href="#/news/{{ event.id }}">{{event.title}}</a></li>
 				</ul>
 			</div>
 		</aside>
