@@ -42,7 +42,9 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .wrapper{
 	width: 1023px;
 	margin: 0 auto 20px;
-	height: calc(100% - 120px);
+	height: 100%;
+	height: calc(100% - 100px);
+	border: 1px solid transparent;
 }
 .wrapper:after{
 	content: ".";
@@ -132,25 +134,30 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .userTeam a:first-child{
 	margin-top: 0;
 }
+.blockTopNews,
 .blockTopTeams{
 	box-sizing: border-box;
 	padding: 10px 20px 20px;
 	color: #fff;
 }
+.blockTopNews a,
 .blockTopTeams a{
 	color: #fff;
 	overflow: hidden;
 	height: 30px;
 }
+.blockTopNews h3,
 .blockTopTeams h3{
 	height: 27px;
 	line-height: 27px;
 	font-size: 16px;
 	text-transform: uppercase;
 }
+.blockTopNews ul,
 .blockTopTeams ul{
 	margin: 10px 0;
 }
+.blockTopNews li,
 .blockTopTeams li{
 	height: 32px;
 	line-height: 32px;
@@ -368,6 +375,16 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .nextGame li{
 	padding: 10px;
 }
+.blockFilters{
+	border-bottom: 2px solid #00B29C;
+}
+.blockFilters li{
+	width: 50%;
+	float: left;
+	font-size: 14px;
+	height: 30px;
+	line-height: 30px;
+}
 /*=======================================*/
 
 /*=============PLAYERS==================*/
@@ -471,6 +488,7 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	background-color: #4D4D4D;
 	height: 100px;
 	clear: both;
+	margin-top: 20px;
 }
 .footerInner{
 	width: 1023px;
@@ -496,6 +514,29 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .copy{
 	font-size: 18px;
 }
+
+
+/*===============GALLERY==============*/
+.galleryContent li{
+	width: 172px;
+	height: 180px;
+	float: left;
+	background-color: #eee;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+.galleryContent li a{
+	display: block;
+	height: 100%;
+}
+.galleryContent li:nth-child(4n){
+	margin-right: 0;
+}
+.galleryContent li:hover{
+	box-shadow: 0 0 7px #444;
+}
+
+
 /*====================================*/
 /*=================STYLE==============*/
 .row{
@@ -538,4 +579,12 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 
 .bb2px{
 	border-bottom: 2px solid #B9B9B9;
+}
+
+
+*{
+	-webkit-transition: all ease-out 0.3s;
+	-moz-transition: all ease-out 0.3s;
+	-o-transition: all ease-out 0.3s;
+	transition: all ease-out 0.3s;
 }

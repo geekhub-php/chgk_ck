@@ -10,9 +10,8 @@
 		</tr>
 		<tr class="tablePlayersList" ng-repeat="player in players | filter: search">
 			<td><a href="#/players/{{ player.id }}" >{{ player.last_name }} {{ player.middle_name }} {{ player.first_name }}</a></td>
-			<td>
-			<!-- ng-repeat="pa in player.team_player_associations" -->
-					{{ pa.team.name }}{{ player.last_name }}
+			<td ng-repeat="pa in player.team_player_associations">
+					{{ pa.team.name }}
 			</td>
 		</tr>
 	</table>

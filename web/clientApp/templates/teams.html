@@ -7,11 +7,11 @@
 		<tr class="tableTeamsHead">
 			<th class="tableTeamsPlace">Место</th>
 			<th class="tableTeamsName">Название</th>
-			<th class="tableTeamsRating">Локальный рейтинг</th>
+			<th class="tableTeamsRating">Локальный рейтинг <a ng-click="reverse=!reverse" style="cursor: pointer; color: red" class="sort">sort</a></th>
 			<th class="tableTeamsCategory">Категория</th>
 			<th class="tableTeamsLink"></th>
 		</tr>
-		<tr ng-repeat="team in teams| filter: search">
+		<tr ng-repeat="team in teams| filter: search | orderBy:predicate:reverse">
 			<td>{{ $index + 1 }}</td>
 			<td><a href="#/team/{{ team.id }}" >{{ team.name }}</a></td>
 			<td>{{ team.rating }}</td>

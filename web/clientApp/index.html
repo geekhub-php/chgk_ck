@@ -51,12 +51,14 @@
 			</div>
 			<div class="blockTopTeams">
 				<h3 class="align-c">Топ команд</h3>
-				<ul>
-					<li><a href="#">Пунктуальность</a></li>
-					<li><a href="#">Черкасское ФИДО</a></li>
-					<li><a href="#">Победители по жизни</a></li>
-					<li><a href="#">Внимание вопрос</a></li>
-					<li><a href="#">Капитан Джек Дениелс</a></li>
+				<ul ng-controller="TeamsController">
+					<li ng-repeat="team in teams"><a href="#/team/{{ team.id }}" >{{ team.name }}</a></li>
+				</ul>
+			</div>
+			<div class="blockTopNews">
+				<h3 class="align-c">Топ новостей</h3>
+				<ul ng-controller="EventsController">
+					<li ng-repeat=" event in events"><a href="#/news/{{ event.id }}">{{event.title}}</a></li>
 				</ul>
 			</div>
 		</aside>

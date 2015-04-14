@@ -11,12 +11,28 @@
 			</select>
 		</span>
 		<span class="filtersGames float-r">
-			<a href="#"> Фильтры </a>
+			<a href> Фильтры </a>
 		</span>
+	</div>
+	<div class="row blockFilters">
+		<ul>
+			<li>
+				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_home"><span>is home</span>
+			</li>
+			<li>
+				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_locally_rated"><span>is_locally_rated</span>
+			</li>
+			<li>
+				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_globally_rated"><span>is_globaly_rated</span>
+			</li>
+			<li>
+				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_complete"><span>is_complete</span>
+			</li>
+		</ul>
 	</div>
 	<div class="tableGames row">
 		<ul class="nextGame">
-			<li class="" ng-repeat="game in games">
+			<li class="" ng-repeat="game in games | filter: search | orderBy:predicate:playDateReverse">
 				<p class="dataGame">
 					<span ng-show="true" class="gameDate">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
 					<span ng-hide class="gamePlace">{{ game.play_place }}</span>
