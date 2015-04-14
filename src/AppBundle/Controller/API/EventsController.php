@@ -16,6 +16,8 @@ class EventsController extends FOSRestController
      * @REST\QueryParam(name="title", default="")
      * @REST\QueryParam(name="authorId", requirements="\d+", default="")
      * @REST\QueryParam(name="date", requirements="\d+", default="")
+     * @REST\QueryParam(name="maxCount", requirements="\d+", default="")
+     * @REST\QueryParam(name="offset", requirements="\d+", default="")
      * @ApiDoc(
      * 	description="returns events",
      * 	statusCodes={
@@ -24,12 +26,14 @@ class EventsController extends FOSRestController
      * 	filters={
      *      {"name"="title", "dataType"="string"},
      * 		{"name"="authorId", "dataType"="integer"},
-     * 		{"name"="date", "dataType"="integer"}
+     * 		{"name"="date", "dataType"="integer"},
+     * 		{"name"="maxCount", "dataType"="integer"},
+     * 		{"name"="offset", "dataType"="integer"}
      *  },
      * 	output="array<AppBundle\Entity\Event>"
      * )
      */
-    public function getEventsAction($title, $authorId, $date)
+    public function getEventsAction($title, $authorId, $date, $maxCount, $offset)
     {
         $criteria = [];
         if ($title) {
@@ -42,7 +46,14 @@ class EventsController extends FOSRestController
             $criteria['eventDate'] = $date;
         }
 
-        $events = $this->getDoctrine()->getRepository('AppBundle:Event')->findBy($criteria);
+        $query = $this->getDoctrine()->getManager()->createQuery('SELECT e FROM AppBundle:Event e ORDER BY e.eventDate ASC');
+
+        if ($maxCount !== '' && $offset !== '') {
+            $query->setFirstResult($offset);
+            $query->setMaxResults($maxCount);
+        }
+
+        $events = $query->execute();
 
         foreach ($events as $event) {
             $this->get('user_creatable_marker')->mark($event->getOpinions()->toArray());

@@ -1,6 +1,5 @@
 angular.module('event', [])
 .controller('EventsController', ['$scope', 'eventAPI', 'eventModel', 'userAPI', 'filterHelper', function ($scope, eventAPI, eventModel, userAPI, filterHelper) {
-	eventModel.setData(eventAPI.getEvents(), true);
 	$scope.events = eventModel.getData();
 	$scope.makeOpinion = eventAPI.makeOpinion;
 	$scope.userInfo = userAPI.getUserInfo();
@@ -13,8 +12,23 @@ angular.module('event', [])
   		}
    	return false;
   };
-  $scope.predicate = '-event_date';
+  $scope.predicate = '+event_date';
   $scope.eventDateReverse = false;
+  $scope.fetchNewEvents = function(){
+  		var events = eventAPI.getEvents($scope.defaultEventsPortionSize, $scope.offset);
+  		events.$promise.then(function(){
+  			if(events.length < $scope.defaultEventsPortionSize) {
+				 $scope.canLoadMoreEvents = false;
+  			}
+			eventModel.addPortionOfEvents(events);
+			$scope.offset += $scope.defaultEventsPortionSize; 		
+  		});
+  };
+  $scope.defaultEventsPortionSize = 6;
+  $scope.offset = 0;
+  eventModel.reset();
+  $scope.fetchNewEvents();
+  $scope.canLoadMoreEvents = true;
 }])
 .controller('EventController', ['$scope', 'eventAPI', '$routeParams', 'eventModel', 'userAPI', function ($scope, eventAPI, $routeParams, eventModel, userAPI) {
 	eventModel.setData(eventAPI.getEvent($routeParams.newsId));	
@@ -31,8 +45,8 @@ angular.module('event', [])
 	var eventRes = $resource(eventResUrl);
 	
 	var eventAPI = {
-		getEvents: function(){
-			var events = eventRes.query();
+		getEvents: function(maxCount, offset){
+			var events = eventRes.query({maxCount: maxCount, offset: offset});
 			events.$promise.then(function(){
 				events.forEach(function(event){
 					event.opinions = eventAPI.getOpinions(event.id);
@@ -42,8 +56,8 @@ angular.module('event', [])
 					
 				});			
 			});
-
-			return events;
+			
+			return events;		
 		},
 		
 		getEvent: function(eventId){
@@ -116,13 +130,23 @@ angular.module('event', [])
 	return eventAPI;
 }])
 .factory('eventModel', [function(){
-	var events = null;	
+	var events = [];	
 	
 	eventModel = {
 		setData: function(modelData, isArray){
 			events = isArray ? modelData : [modelData];
 		},
 		
+		addPortionOfEvents: function(newEvents){
+			for (var i = 0; i < newEvents.length; i++) {
+				events.push(newEvents[i]);			
+			}
+		},
+		
+		reset: function(){
+			events.splice(0, events.length)		
+		},
+	
 		getData: function(){
 			return events;		
 		},

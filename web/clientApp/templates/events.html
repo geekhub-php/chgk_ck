@@ -39,5 +39,6 @@
 		<td><a href="#/news/{{ event.id }}">click</a></td>
 	</tr>
 </table>
+<button ng-click="fetchNewEvents()" ng-disabled="!canLoadMoreEvents">load events</button>
 </body>
 </html>
