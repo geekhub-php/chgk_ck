@@ -4,13 +4,15 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Validator\Constraints as CustomAssert;
 use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
+use AppBundle\Interfaces\Opinionable;
+use AppBundle\Interfaces\UserCreatable;
 
 /**
  * @ORM\Entity
  */
-class Comment
+class Comment implements Opinionable, UserCreatable
 {
     use TimestampableTrait;
 
@@ -18,33 +20,37 @@ class Comment
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"commentFull", "short"})
      */
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Event", inversedBy="comments")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", nullable=false)
-     * @CustomAssert\EntitiesExist(associatedEntity="Event", message="event with id %ids% is non-exist")
-     * @Assert\NotNull(message="comment should have author")
-     */
-    private $event;
-
-    /**
-     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
-     * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
-     * @Assert\NotNull(message="comment should have author")
+     * @JMS\Groups({"commentFull"})
      */
     private $author;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
+     * @JMS\Groups({"commentFull"})
      */
     private $text;
 
     /**
-     * Get id
+     * @ORM\ManyToMany(targetEntity="Opinion")
+     */
+    private $opinions;
+
+    /**
+     * @JMS\Groups({"commentFull"})
+     * @JMS\Type("boolean")
+     */
+    private $madeByCurrentUser;
+
+    /**
+     * Get id.
      *
      * @return integer
      */
@@ -53,8 +59,15 @@ class Comment
         return $this->id;
     }
 
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
@@ -64,9 +77,10 @@ class Comment
     }
 
     /**
-     * Set text
+     * Set text.
      *
-     * @param  string $text
+     * @param string $text
+     *
      * @return Comment
      */
     public function setText($text)
@@ -77,7 +91,7 @@ class Comment
     }
 
     /**
-     * Get event
+     * Get event.
      *
      * @return \AppBundle\Entity\Event
      */
@@ -87,20 +101,7 @@ class Comment
     }
 
     /**
-     * Set event
-     *
-     * @param  \AppBundle\Entity\Event $event
-     * @return Comment
-     */
-    public function setEvent(\AppBundle\Entity\Event $event)
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * Get author
+     * Get author.
      *
      * @return \AppBundle\Entity\User
      */
@@ -110,9 +111,10 @@ class Comment
     }
 
     /**
-     * Set author
+     * Set author.
      *
-     * @param  \AppBundle\Entity\User $author
+     * @param \AppBundle\Entity\User $author
+     *
      * @return Comment
      */
     public function setAuthor(\AppBundle\Entity\User $author)
@@ -120,5 +122,58 @@ class Comment
         $this->author = $author;
 
         return $this;
+    }
+
+    /**
+     * Add opinions.
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     *
+     * @return Comment
+     */
+    public function addOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions[] = $opinions;
+
+        return $this;
+    }
+
+    /**
+     * Remove opinions.
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     */
+    public function removeOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions->removeElement($opinions);
+    }
+
+    /**
+     * Get opinions.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOpinions()
+    {
+        return $this->opinions;
+    }
+
+    public function getOpinion($id)
+    {
+        return $this->opinions->filter(function ($opinion) use ($id) {
+            return $opinion->getId() == $id;
+        })->first();
+    }
+
+    public function markAsMadeByCurrentUser()
+    {
+        $this->madeByCurrentUser = true;
+
+        return $this;
+    }
+
+    public function isMadeByCurrentUser()
+    {
+        return $this->madeByCurrentUser;
     }
 }

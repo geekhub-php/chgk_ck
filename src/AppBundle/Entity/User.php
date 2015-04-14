@@ -3,37 +3,37 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
+use FOS\UserBundle\Model\User as BaseUser;
 
 /**
  * @ORM\Entity
- * @UniqueEntity("email", message="email is already used")
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="password", column=@ORM\Column(nullable=true)),
+ *      @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
+ *      @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true)),
+ * })
  */
-class User
+class User extends BaseUser
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
-    /**
-     * @ORM\Column(type="string", length=32, nullable=false)
-     */
-    private $passwordHash; //TODO: add validation
+    /** @ORM\Column(name="facebook_id", type="string", length=255, nullable=true) */
+    protected $facebook_id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=false, unique=true)
-     * @Assert\Email()
-     * @Assert\NotBlank()
-     */
-    private $email;
+    /** @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true) */
+    protected $facebook_access_token;
+
+    /** @ORM\Column(name="vkontakte_id", type="string", length=255, nullable=true) */
+    protected $vkontakte_id;
+
+    /** @ORM\Column(name="vkontakte_access_token", type="string", length=255, nullable=true) */
+    protected $vkontakte_access_token;
 
     /**
      * @ORM\OneToOne(targetEntity="Player")
@@ -42,12 +42,12 @@ class User
 
     /**
      * @Gedmo\Slug(fields={"email"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
      */
     private $slug;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -57,55 +57,20 @@ class User
     }
 
     /**
-     * Set passwordHash
-     *
-     * @param  string $passwordHash
-     * @return User
-     */
-    public function setPasswordHash($passwordHash)
-    {
-        $this->passwordHash = $passwordHash;
-
-        return $this;
-    }
-
-    /**
-     * Get passwordHash
+     * Get slug.
      *
      * @return string
      */
-    public function getPasswordHash()
+    public function getSlug()
     {
-        return $this->passwordHash;
+        return $this->slug;
     }
 
     /**
-     * Set email
+     * Set slug.
      *
-     * @param  string $email
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
+     * @param string $slug
      *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param  string $slug
      * @return User
      */
     public function setSlug($slug)
@@ -116,19 +81,20 @@ class User
     }
 
     /**
-     * Get slug
+     * Get assignedPlayer.
      *
-     * @return string
+     * @return \AppBundle\Entity\Player
      */
-    public function getSlug()
+    public function getAssignedPlayer()
     {
-        return $this->slug;
+        return $this->assignedPlayer;
     }
 
     /**
-     * Set assignedPlayer
+     * Set assignedPlayer.
      *
-     * @param  \AppBundle\Entity\Player $assignedPlayer
+     * @param \AppBundle\Entity\Player $assignedPlayer
+     *
      * @return User
      */
     public function setAssignedPlayer(\AppBundle\Entity\Player $assignedPlayer = null)
@@ -139,12 +105,82 @@ class User
     }
 
     /**
-     * Get assignedPlayer
+     * Get facebook_id.
      *
-     * @return \AppBundle\Entity\Player
+     * @return string
      */
-    public function getAssignedPlayer()
+    public function getFacebookId()
     {
-        return $this->assignedPlayer;
+        return $this->facebook_id;
+    }
+
+    /**
+     * Set facebook_id.
+     *
+     * @param string $facebookId
+     *
+     * @return User
+     */
+    public function setFacebookId($facebookId)
+    {
+        $this->facebook_id = $facebookId;
+
+        return $this;
+    }
+
+    /**
+     * Get facebook_access_token.
+     *
+     * @return string
+     */
+    public function getFacebookAccessToken()
+    {
+        return $this->facebook_access_token;
+    }
+
+    /**
+     * Set facebook_access_token.
+     *
+     * @param string $facebookAccessToken
+     *
+     * @return User
+     */
+    public function setFacebookAccessToken($facebookAccessToken)
+    {
+        $this->facebook_access_token = $facebookAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVkontakteAccessToken()
+    {
+        return $this->vkontakte_access_token;
+    }
+
+    /**
+     * @param mixed $vkontakte_access_token
+     */
+    public function setVkontakteAccessToken($vkontakte_access_token)
+    {
+        $this->vkontakte_access_token = $vkontakte_access_token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getVkontakteId()
+    {
+        return $this->vkontakte_id;
+    }
+
+    /**
+     * @param mixed $vkontakte_id
+     */
+    public function setVkontakteId($vkontakte_id)
+    {
+        $this->vkontakte_id = $vkontakte_id;
     }
 }

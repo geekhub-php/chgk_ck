@@ -1,0 +1,31 @@
+<html>
+<head>
+	<style>
+		table td {
+			border:solid 1px;		
+		}
+		table {border-collapse: collapse;}
+	</style>
+</head>
+	<body>
+		<input placeholder="имя" ng-model="query" />
+		<table>
+			<tr>
+				<td>name</td>
+				<td>teams</td>
+				<td>dob</td>
+				<td></td>			
+			</tr>
+			<tr ng-repeat="player in players | filter: search" >
+				<td>{{ player.last_name }} {{ player.middle_name }} {{ player.first_name }}</td>
+				<td>
+					<span ng-repeat="pa in player.team_player_associations">
+						{{ pa.team.name }}, 				
+					</span>
+				</td>	
+				<td>{{ player.dob | timestampToFormat:'dd.M.yyyy' }}</td>	
+				<td><a href="#/players/{{ player.id }}" >click</a></td>	
+			</tr>
+		</table>
+	</body>
+</html>

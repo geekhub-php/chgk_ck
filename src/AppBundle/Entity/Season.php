@@ -6,19 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
  */
 class Season
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"seasonFull", "short"})
      */
     private $id;
 
@@ -26,6 +25,7 @@ class Season
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 2, max = 255)
+     * @JMS\Groups({"seasonFull"})
      */
     private $name;
 
@@ -34,6 +34,7 @@ class Season
      * @Assert\NotNull()
      * @Assert\Expression("this.getEndDate() > value", message="start date must be earlier than end date")
      * @CustomAssert\FutureTimestamp(groups={"creating"})
+     * @JMS\Groups({"seasonFull"})
      */
     private $startDate;
 
@@ -41,17 +42,19 @@ class Season
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
      * @CustomAssert\FutureTimestamp(groups={"creating"})
+     * @JMS\Groups({"seasonFull"})
      */
     private $endDate;
 
     /**
      * @Gedmo\Slug(fields={"name"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"seasonFull"})
      */
     private $slug;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -61,9 +64,20 @@ class Season
     }
 
     /**
-     * Set name
+     * Get name.
      *
-     * @param  string $name
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
      * @return Season
      */
     public function setName($name)
@@ -74,19 +88,20 @@ class Season
     }
 
     /**
-     * Get name
+     * Get startDate.
      *
-     * @return string
+     * @return integer
      */
-    public function getName()
+    public function getStartDate()
     {
-        return $this->name;
+        return $this->startDate;
     }
 
     /**
-     * Set startDate
+     * Set startDate.
      *
-     * @param  integer $startDate
+     * @param integer $startDate
+     *
      * @return Season
      */
     public function setStartDate($startDate)
@@ -97,19 +112,20 @@ class Season
     }
 
     /**
-     * Get startDate
+     * Get endDate.
      *
      * @return integer
      */
-    public function getStartDate()
+    public function getEndDate()
     {
-        return $this->startDate;
+        return $this->endDate;
     }
 
     /**
-     * Set endDate
+     * Set endDate.
      *
-     * @param  integer $endDate
+     * @param integer $endDate
+     *
      * @return Season
      */
     public function setEndDate($endDate)
@@ -120,19 +136,20 @@ class Season
     }
 
     /**
-     * Get endDate
+     * Get slug.
      *
-     * @return integer
+     * @return string
      */
-    public function getEndDate()
+    public function getSlug()
     {
-        return $this->endDate;
+        return $this->slug;
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return Season
      */
     public function setSlug($slug)
@@ -140,15 +157,5 @@ class Season
         $this->slug = $slug;
 
         return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

@@ -1,0 +1,30 @@
+<html>
+<head>
+	<style>
+		table td {
+			border:solid 1px;		
+		}
+		table {border-collapse: collapse;}
+	</style>
+</head>
+	<body>
+		<table>
+			<tr>
+				<td>img</td>
+				<td>name</td>
+				<td>teams</td>	
+				<td>dob</td>		
+			</tr>
+			<tr>
+				<td><img ng-show="player.image" style="height: 70px; width: 70px;" ng-src="{{ player.image }}" /></td>
+				<td>{{ player.last_name }} {{ player.middle_name }} {{ player.first_name }}</td>
+				<td>
+					<span ng-repeat="pa in player.team_player_associations">
+						{{ pa.team.name }}, 				
+					</span>
+				</td>	
+				<td>{{ player.dob | timestampToFormat:'dd.M.yyyy' }}</td>		
+			</tr>
+		</table>
+	</body>
+</html>

@@ -5,19 +5,18 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
-use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
  */
 class TeamPlayerAssociation
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"associationFull", "short"})
      */
     private $id;
 
@@ -26,6 +25,7 @@ class TeamPlayerAssociation
      * @ORM\JoinColumn(name="player_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="Player", message="player with id %ids% is non-exist")
      * @Assert\NotNull()
+     * @JMS\Groups({"associationFull"})
      */
     private $player;
 
@@ -34,6 +34,7 @@ class TeamPlayerAssociation
      * @ORM\JoinColumn(name="team_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="Team", message="team with id %ids% is non-exist")
      * @Assert\NotNull()
+     * @JMS\Groups({"associationFull"})
      */
     private $team;
 
@@ -42,6 +43,7 @@ class TeamPlayerAssociation
      * @ORM\JoinColumn(name="membershipType_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="MembershipType", message="membership type with id %ids% is non-exist")
      * @Assert\NotNull()
+     * @JMS\Groups({"associationFull"})
      */
     private $membershipType;
 
@@ -49,11 +51,12 @@ class TeamPlayerAssociation
      * @ORM\ManyToMany(targetEntity="TeamRole")
      * @CustomAssert\EntitiesExist(associatedEntity="TeamRole", message="team roles with ids %ids% are non-exist")
      * @Assert\Count(min=1)
+     * @JMS\Groups({"associationFull"})
      */
     private $roles;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -61,7 +64,7 @@ class TeamPlayerAssociation
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -71,9 +74,20 @@ class TeamPlayerAssociation
     }
 
     /**
-     * Set player
+     * Get player.
      *
-     * @param  \AppBundle\Entity\Player $player
+     * @return \AppBundle\Entity\Player
+     */
+    public function getPlayer()
+    {
+        return $this->player;
+    }
+
+    /**
+     * Set player.
+     *
+     * @param \AppBundle\Entity\Player $player
+     *
      * @return TeamPlayerAssociation
      */
     public function setPlayer(\AppBundle\Entity\Player $player)
@@ -84,19 +98,20 @@ class TeamPlayerAssociation
     }
 
     /**
-     * Get player
+     * Get team.
      *
-     * @return \AppBundle\Entity\Player
+     * @return \AppBundle\Entity\Team
      */
-    public function getPlayer()
+    public function getTeam()
     {
-        return $this->player;
+        return $this->team;
     }
 
     /**
-     * Set team
+     * Set team.
      *
-     * @param  \AppBundle\Entity\Team $team
+     * @param \AppBundle\Entity\Team $team
+     *
      * @return TeamPlayerAssociation
      */
     public function setTeam(\AppBundle\Entity\Team $team)
@@ -107,19 +122,20 @@ class TeamPlayerAssociation
     }
 
     /**
-     * Get team
+     * Get membershipType.
      *
-     * @return \AppBundle\Entity\Team
+     * @return \AppBundle\Entity\MembershipType
      */
-    public function getTeam()
+    public function getMembershipType()
     {
-        return $this->team;
+        return $this->membershipType;
     }
 
     /**
-     * Set membershipType
+     * Set membershipType.
      *
-     * @param  \AppBundle\Entity\MembershipType $membershipType
+     * @param \AppBundle\Entity\MembershipType $membershipType
+     *
      * @return TeamPlayerAssociation
      */
     public function setMembershipType(\AppBundle\Entity\MembershipType $membershipType)
@@ -130,19 +146,10 @@ class TeamPlayerAssociation
     }
 
     /**
-     * Get membershipType
+     * Add roles.
      *
-     * @return \AppBundle\Entity\MembershipType
-     */
-    public function getMembershipType()
-    {
-        return $this->membershipType;
-    }
-
-    /**
-     * Add roles
+     * @param \AppBundle\Entity\TeamRole $roles
      *
-     * @param  \AppBundle\Entity\TeamRole $roles
      * @return TeamPlayerAssociation
      */
     public function addRole(\AppBundle\Entity\TeamRole $roles)
@@ -153,7 +160,7 @@ class TeamPlayerAssociation
     }
 
     /**
-     * Remove roles
+     * Remove roles.
      *
      * @param \AppBundle\Entity\TeamRole $roles
      */
@@ -163,7 +170,7 @@ class TeamPlayerAssociation
     }
 
     /**
-     * Get roles
+     * Get roles.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

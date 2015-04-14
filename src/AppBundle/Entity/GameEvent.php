@@ -4,7 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Validator\Constraints as CustomAssert;
-use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -14,11 +14,12 @@ class GameEvent extends Event
     /**
      * @ORM\ManyToMany(targetEntity="Game")
      * @CustomAssert\EntitiesExist(associatedEntity="Game", message="games with ids %ids% are non-exist")
+     * @JMS\Groups({"eventFull"})
      */
     private $games;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -27,9 +28,10 @@ class GameEvent extends Event
     }
 
     /**
-     * Add games
+     * Add games.
      *
-     * @param  \AppBundle\Entity\Game $games
+     * @param \AppBundle\Entity\Game $games
+     *
      * @return GameEvent
      */
     public function addGame(\AppBundle\Entity\Game $games)
@@ -40,7 +42,7 @@ class GameEvent extends Event
     }
 
     /**
-     * Remove games
+     * Remove games.
      *
      * @param \AppBundle\Entity\Game $games
      */
@@ -50,7 +52,7 @@ class GameEvent extends Event
     }
 
     /**
-     * Get games
+     * Get games.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

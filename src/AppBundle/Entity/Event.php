@@ -6,6 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation as JMS;
+use AppBundle\Interfaces\Opinionable;
 use AppBundle\Traits\TimestampableTrait;
 
 /**
@@ -14,7 +16,7 @@ use AppBundle\Traits\TimestampableTrait;
  * @ORM\DiscriminatorColumn(name="eventType", type="string")
  * @ORM\DiscriminatorMap({"event" = "Event", "gameEvent" = "GameEvent", "playerEvent" = "PlayerEvent"})
  */
-class Event
+class Event implements Opinionable
 {
     use TimestampableTrait;
 
@@ -22,6 +24,7 @@ class Event
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"eventFull", "short"})
      */
     private $id;
 
@@ -29,12 +32,14 @@ class Event
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 2, max = 255)
+     * @JMS\Groups({"eventFull"})
      */
     private $title;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank()
+     * @JMS\Groups({"eventFull"})
      */
     private $text;
 
@@ -42,36 +47,63 @@ class Event
      * @ORM\OneToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="User", message="user with id %ids% is non-exist")
+     * @Assert\NotNull()
+     * @JMS\Groups({"eventFull"})
      */
     private $author;
 
     /**
      * @Gedmo\Slug(fields={"title"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"eventFull"})
      */
     private $slug;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @Assert\NotNull()
+     * @JMS\Groups({"eventFull"})
      */
     private $eventDate;
 
     /**
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="event")
+     * @ORM\ManyToMany(targetEntity="Comment")
+     * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     private $comments;
 
     /**
-     * Constructor
+     * @ORM\Column(type="array")
+     * @Assert\All({
+     *     @Assert\Regex("/^[A-zА-яіїє']+$/")
+     * })
+     * @JMS\Groups({"eventFull"})
+     */
+    private $tags;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Opinion")
+     */
+    private $opinions;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     * @JMS\Groups({"eventFull"})
+     */
+    private $image;
+
+    /**
+     * Constructor.
      */
     public function __construct()
     {
         $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->createdAt = time();
+        $this->tags = array();
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -81,7 +113,7 @@ class Event
     }
 
     /**
-     * Get title
+     * Get title.
      *
      * @return string
      */
@@ -91,9 +123,10 @@ class Event
     }
 
     /**
-     * Set title
+     * Set title.
      *
-     * @param  string $title
+     * @param string $title
+     *
      * @return Event
      */
     public function setTitle($title)
@@ -104,7 +137,7 @@ class Event
     }
 
     /**
-     * Get text
+     * Get text.
      *
      * @return string
      */
@@ -114,9 +147,10 @@ class Event
     }
 
     /**
-     * Set text
+     * Set text.
      *
-     * @param  string $text
+     * @param string $text
+     *
      * @return Event
      */
     public function setText($text)
@@ -127,7 +161,7 @@ class Event
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -137,9 +171,10 @@ class Event
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return Event
      */
     public function setSlug($slug)
@@ -150,7 +185,7 @@ class Event
     }
 
     /**
-     * Get eventDate
+     * Get eventDate.
      *
      * @return integer
      */
@@ -160,9 +195,10 @@ class Event
     }
 
     /**
-     * Set eventDate
+     * Set eventDate.
      *
-     * @param  integer $eventDate
+     * @param integer $eventDate
+     *
      * @return Event
      */
     public function setEventDate($eventDate)
@@ -173,7 +209,7 @@ class Event
     }
 
     /**
-     * Get author
+     * Get author.
      *
      * @return \AppBundle\Entity\User
      */
@@ -183,9 +219,10 @@ class Event
     }
 
     /**
-     * Set author
+     * Set author.
      *
-     * @param  \AppBundle\Entity\User $author
+     * @param \AppBundle\Entity\User $author
+     *
      * @return Event
      */
     public function setAuthor(\AppBundle\Entity\User $author)
@@ -196,9 +233,10 @@ class Event
     }
 
     /**
-     * Add comments
+     * Add comments.
      *
-     * @param  \AppBundle\Entity\Comment $comments
+     * @param \AppBundle\Entity\Comment $comments
+     *
      * @return Event
      */
     public function addComment(\AppBundle\Entity\Comment $comments)
@@ -209,7 +247,7 @@ class Event
     }
 
     /**
-     * Remove comments
+     * Remove comments.
      *
      * @param \AppBundle\Entity\Comment $comments
      */
@@ -219,12 +257,144 @@ class Event
     }
 
     /**
-     * Get comments
+     * Get comments.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
         return $this->comments;
+    }
+
+    public function getComment($id)
+    {
+        return $this->comments->filter(function ($comment) use ($id) {
+            return $comment->getId() == $id;
+        })->first();
+    }
+
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    public function setTags(array $tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Add opinions.
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     *
+     * @return Event
+     */
+    public function addOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions[] = $opinions;
+
+        return $this;
+    }
+
+    /**
+     * Remove opinions.
+     *
+     * @param \AppBundle\Entity\Opinion $opinions
+     */
+    public function removeOpinion(\AppBundle\Entity\Opinion $opinions)
+    {
+        $this->opinions->removeElement($opinions);
+    }
+
+    /**
+     * Get opinions.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOpinions()
+    {
+        return $this->opinions;
+    }
+
+    public function getOpinion($id)
+    {
+        return $this->opinions->filter(function ($opinion) use ($id) {
+            return $opinion->getId() == $id;
+        })->first();
+    }
+
+    /**
+     * Set createdAt.
+     *
+     * @param integer $createdAt
+     *
+     * @return Event
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt.
+     *
+     * @return integer
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt.
+     *
+     * @param integer $updatedAt
+     *
+     * @return Event
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt.
+     *
+     * @return integer
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Get image.
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     *
+     * @return Event
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }
