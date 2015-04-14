@@ -1,45 +1,39 @@
-<html>
-<head>
-	<style>
-		table td {
-			border:solid 1px;		
-		}
-		table {border-collapse: collapse;}
-	</style>
-</head>
-	<body>
-		<div><span>is home</span> <input type="checkbox" ng-model="search.is_home" /></div>
-		<div><span>is_locally_rated</span> <input type="checkbox" ng-model="search.is_locally_rated" /></div>
-		<div><span>is_globaly_rated</span> <input type="checkbox" ng-model="search.is_globally_rated" /></div>
-		<div><span>is_complete</span> <input type="checkbox" ng-model="search.is_complete" /></div>
-		<input placeholder="поиск" ng-model="query"/>
-		<table summary="" >
-			<tr>
-				<td>name</td>	
-				<td>play date <a style="cursor: pointer; color: red" ng-click="playDateReverse=!playDateReverse">sort</a></td>
-				<td>place</td>
-				<td>season</td>
-				<td>is localy rated</td>
-				<td>is globaly rated</td>
-				<td>is home</td>
-				<td>is complete</td>
-				<td>age category</td>
-				<td>description</td>
-				<td></td>
-			</tr>
-			<tr ng-repeat="game in games | filter: search | orderBy:predicate:playDateReverse">
-				<td>{{ game.name }}</td>	
-				<td>{{ game.play_date | timestampToFormat:'dd.M.yyyy' }}</td>
-				<td>{{ game.play_place }}</td>
-				<td>{{ game.season.name || 'нема сезона' }}</td>
-				<td>{{ game.is_locally_rated | booleanFormater }}</td>
-				<td>{{ game.is_globally_rated | booleanFormater }}</td>
-				<td>{{ game.is_home | booleanFormater }}</td>
-				<td>{{ game.is_complete | booleanFormater }}</td>
-				<td>{{ game.age_category.name }}</td>
-				<td>{{ game.description }}</td>
-				<td><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></td>
-			</tr>
-		</table>
-	</body>
-</html>
+<div class="contentGames">
+	<div class="contentGamesHeader row mar13_0px">
+		<h2 class="gamesName float-l w230px h27_lh27 pad0_7px">Игры клуба</h2>
+		<span class="sezonGames">
+			Сезон
+			<select name="" id="">
+				<option value="">2012 - 2018</option>
+				<option value="">2013 - 2018</option>
+				<option value="">2014 - 2018</option>
+				<option value="">2015 - 2018</option>
+			</select>
+		</span>
+		<span class="filtersGames float-r">
+			<a href="#"> Фильтры </a>
+		</span>
+	</div>
+	<div class="tableGames row">
+		<ul class="nextGame">
+			<li class="" ng-repeat="game in games">
+				<p class="dataGame">
+					<span ng-show="true" class="gameDate">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
+					<span ng-hide class="gamePlace">{{ game.play_place }}</span>
+				</p>
+				<img src="#" alt="" class="gamesLogo float-l">
+				<div class="gameInfo">
+					<h3 class="gamesTitle"><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></h3>
+					<p class="gameDesriptions">
+						{{ game.description }}
+					</p>
+				</div>
+			</li>
+			<li></li>
+		</ul>
+		<ul class="isComplitedGames">
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+</div>

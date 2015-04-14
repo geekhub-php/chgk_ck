@@ -2,6 +2,7 @@
 <html ng-app="app">
 	<head>
 		<meta charset="utf-8">
+		<link rel="stylesheet" href="clientApp/style/style.css">
 		<script type="text/javascript" src="clientApp/js/deps/angular/angular.min.js"></script>
 		<script type="text/javascript" src="clientApp/js/deps/angular-route/angular-route.min.js"></script>
 		<script type="text/javascript" src="clientApp/js/deps/angular-resource/angular-resource.min.js"></script>
@@ -20,19 +21,57 @@
 		<script type="text/javascript" src="clientApp/js/components/media.js"></script>
 	</head>
 	<body>
-		<div ng-controller="UserPanelController" style="text-align: right">
-			<span ng-show="userInfo.isLoggedIn">привет, {{ userInfo.username }}. </span>
-			<a ng-hide="userInfo.isLoggedIn" href="/register">register</a>	
-			<a ng-hide="userInfo.isLoggedIn" href="/login">login</a>	
-			<a ng-show="userInfo.isLoggedIn" href="/profile/edit">profile edit</a>
-			<a ng-show="userInfo.isLoggedIn" href="/logout">logout</a>
+		<div class="wrapper">
+		<div class="content pad0_30px">
+			<header class="header">
+				<h1 class="logo float-l">
+					<img src="clientApp/images/logo.png" alt="img">
+				</h1>
+				<nav class="nav h27_lh27">
+					<a href="#/games">Игры</a>
+					<a href="#/news">Новости</a>
+					<a href="#/teams">Команди</a>
+					<a href="#/players">Игроки</a>
+					<a href="#">Галереи</a>
+					<a href="#">Календарь</a>
+					<a href="#/about">О клубе</a>
+				</nav>
+			</header>
+			<div ng-view></div>
 		</div>
-		<a href="#/teams">команди</a>
-		<a href="#/news">новости</a>
-		<a href="#/games">games</a>
-		<a href="#/players">players</a>
-		<a href="#/about">about</a>
-		<a href="#/galleries">galleries</a>
-		<div ng-view></div>
+		<aside class="aside">
+			<div class="userBlock" ng-controller="UserPanelController">
+				<div class="userTeam userLogin bb2px">
+					<img src="clientApp/images/userLogoDefault.png" alt="" class="userLogo">
+					<p class="userFirstName" ng-show="userInfo.isLoggedIn">{{ userInfo.username }}</p>
+					<a ng-hide="userInfo.isLoggedIn" href="/register">Регистация</a>
+					<a ng-hide="userInfo.isLoggedIn" href="/login">Войти</a>
+					<a ng-show="userInfo.isLoggedIn" href="/profile/edit">Редактировать</a>
+					<a ng-show="userInfo.isLoggedIn" href="/logout">Выход</a>
+				</div>
+			</div>
+			<div class="blockTopTeams">
+				<h3 class="align-c">Топ команд</h3>
+				<ul>
+					<li><a href="#">Пунктуальность</a></li>
+					<li><a href="#">Черкасское ФИДО</a></li>
+					<li><a href="#">Победители по жизни</a></li>
+					<li><a href="#">Внимание вопрос</a></li>
+					<li><a href="#">Капитан Джек Дениелс</a></li>
+				</ul>
+			</div>
+		</aside>
+	</div>
+	<footer class="footer row">
+		<div class="footerInner">
+			<ul class="social">
+				<li class="float-l">B</li>
+				<li class="float-l">f</li>
+				<li class="float-l">in</li>
+				<li class="float-l">t</li>
+			</ul>
+			<div class="copy">&copy;GeekHub team</div>
+		</div>
+	</footer>
 	</body>
 </html>

@@ -1,44 +1,21 @@
-<html>
-<head>
-	<style>
-		table td {
-			border:solid 1px;		
-		}
-		table {border-collapse: collapse;}
-	</style>
-</head>
-<body>
-<input placeholder="поиск" ng-model="query" />
-<table>
-	<tr>
-		<td>img</td>
-		<td>title</td>	
-		<td>text</td>
-		<td>login</td>
-		<td>дата <a style="cursor: pointer; color: red" ng-click="eventDateReverse=!eventDateReverse">sort</a></td>
-		<td>tags</td>
-		<td>likes</td>
-		<td>dislikes</td>
-		<td>current user opinion</td>
-		<td>like</td>
-		<td>dislike</td>
-		<td>link to event</td>
-	</tr>
-	<tr ng-repeat=" event in events | filter: search | orderBy:predicate:eventDateReverse">
-		<td><img style="height: 70px; width: 70px;" ng-src="{{ event.image }}" /></td>
-		<td>{{ event.title }}</td>	
-		<td>{{ event.text }}</td>
-		<td>{{ event.author.username }}</td>
-		<td>{{ event.event_date | timestampToFormat:'dd.M.yyyy' }}</td>
-		<td>{{ event.tags.join(', ') }}</td>
-		<td>{{ event.likesCount }}</td>
-		<td>{{ event.dislikesCount }}</td>
-		<td>{{ event.currentUserOpinion.is_positive }}</td>
-		<td><button ng-show="userInfo.isLoggedIn" ng-click="makeOpinion(event, true)" >like</button></td>
-		<td><button ng-show="userInfo.isLoggedIn" ng-click="makeOpinion(event, false)" >dislike</button></td>
-		<td><a href="#/news/{{ event.id }}">click</a></td>
-	</tr>
-</table>
-<button ng-click="fetchNewEvents()" ng-disabled="!canLoadMoreEvents">load events</button>
-</body>
-</html>
+<div class="contentNews">
+	<div class="contentNewsHeader row mar13_0px">
+		<h2 class="newsName float-l w230px h27_lh27 pad0_7px">Новости клуба</h2>
+		<a href="#" class="archiveNews">Архив</a>
+	</div>
+	<ul class="newsList row">
+		<li ng-repeat=" event in events">
+			<img style="" ng-src="{{ event.image }}"/>
+			<div class="description">
+				<h3><a href="#/news/{{ event.id }}">{{event.title}}</a></h3>
+				<p>{{event.text}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit odio, omnis voluptatum quod expedita nihil ipsum voluptate repellendus excepturi ut molestias ex nisi odit blanditiis saepe veniam fugit consequuntur non.</p>
+			</div>
+			<div class="dateNews">
+				{{ event.event_date | timestampToFormat:'dd.MM.yyyy' }}
+			</div>
+		</li>
+	</ul>
+	<div class="row">
+		<button class="loadNews ng-scope" ng-disabled="!canLoadMoreEvents" ng-click="fetchNewEvents()" disabled="disabled">Загрузить еще</button>
+	</div>
+</div>
