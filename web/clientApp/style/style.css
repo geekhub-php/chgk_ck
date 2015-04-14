@@ -41,8 +41,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 
 .wrapper{
 	width: 1023px;
-	/*background-color: #5B5B59;*/
-	/*margin-bottom: 20px;*/
 	margin: 0 auto 20px;
 	height: calc(100% - 120px);
 }
@@ -361,9 +359,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .tableGames li img{
 	margin: 0 10px 0 0;
 }
-.nextGame li:first-child *{
-	display: block;
-}
 .gamesTitle{
 	line-height: 27px;
 }
@@ -372,27 +367,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 }
 .nextGame li{
 	padding: 10px;
-}
-.nextGame li:first-child{
-	height: 130px;
-	overflow: hidden;
-	background-color: #D8EAFF;
-}
-.tableGames li:first-child .dataGame{
-	display: block;
-	float: none;
-	width: 100%;
-}
-.tableGames li:first-child .gamesDate{
-	font-size: 14px;
-}
-.tableGames li:first-child .gamesLogo{
-	display: inline-block;
-	height: 100px;
-	width: 150px;
-}
-.tableGames li:first-child .gameInfo{
-	height: 100px;
 }
 /*=======================================*/
 
