@@ -2,7 +2,7 @@
 /*------------------------------RESET DEFAULT STYLES--------------------------------*/
 /*----------------------------------------------------------------------------------*/
 html,body                       { width:100%; height:100%; }
-body                            { padding:0; margin:0; font:12px Arial, sans-serif; background:#fbfbfb; color:#4a4a4a; line-height: 14px;}
+body                            { padding:0; margin:0; font:12px Arial, sans-serif; background:#fbfbfb; color:#4a4a4a; line-height: 16px;}
 div,p,a,span,em,strong,img,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,td,tr,form,fieldset,label,select,checkbox,input,textarea {
 	padding:0;
 	margin:0;
@@ -31,26 +31,26 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .no-display                    { display:none !important; }
 .display                       { display:block !important; }
 .inline                        { display:inline !important; }
+.inline-block                  { display: inline-block !important; }
 .overflow                      { overflow:hidden !important; }
 .align-r                       { text-align:right !important; }
 .align-l                       { text-align:left !important; }
 .align-c                       { text-align:center !important; }
 .clear                         { clear:both; }
-.inline-block                  { display: inline-block !important;}
+.inline-block                  { display: inline-block !important; }
+.pos-a                         { position: absolute !important; }
+.pos-r                         { position: relative !important; }
 /*------------------------------WRAPPER-----------------------------*/
 
 .wrapper{
 	width: 1023px;
 	margin: 0 auto 20px;
-	height: 100%;
-	height: calc(100% - 100px);
-	border: 1px solid transparent;
+	min-height: calc(100% - 100px);
 }
+.aside:after,
 .wrapper:after{
-	content: ".";
+	content: "";
 	display: block;
-	height: 0;
-	visibility: hidden;
 	clear: both;
 }
 .content{
@@ -95,7 +95,7 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 }
 .userBlockInfo{
 	color: #fff;
-	padding: 0 20px 0 20px;
+	padding: 0 20px;
 }
 .userLogo{
 	width: 77%;
@@ -303,6 +303,7 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	padding: 2px 40px;
 	border: 2px solid #A4C1DF;
 	background-color: #fff;
+	cursor: pointer;
 }
 /*=========END NEWS=================*/
 /*==================================*/
@@ -318,7 +319,7 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	background-color: #00B29C;
 	text-transform: uppercase;
 	color: #fff;
-	font-size: 20px;
+	font-size: 24px;
 	height: 34px;
 	line-height: 34px;
 }
@@ -375,8 +376,11 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .nextGame li{
 	padding: 10px;
 }
-.blockFilters{
+/*.blockFilters{
 	border-bottom: 2px solid #00B29C;
+}*/
+.blockFilters ul{
+	padding: 0 0 20px 0;
 }
 .blockFilters li{
 	width: 50%;
@@ -486,7 +490,7 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 
 .footer{
 	background-color: #4D4D4D;
-	height: 100px;
+	height: 110px;
 	clear: both;
 	margin-top: 20px;
 }
@@ -517,6 +521,15 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 
 
 /*===============GALLERY==============*/
+.contentGalleryHeader{
+	border-bottom: 2px solid #3381B5;
+}
+.galleryName{
+	background-color: #3381B5;
+	color: #fff;
+	font-size: 22px;
+	text-transform: uppercase;
+}
 .galleryContent li{
 	width: 172px;
 	height: 180px;
@@ -557,8 +570,14 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .pad0_30px{
 	padding: 0px 30px;
 }
+.padding0_10{
+	padding: 0 10px;
+}
 .pad0_7px{
 	padding: 0 7px;
+}
+.m10px{
+	margin: 10px;
 }
 .mar13_0px{
 	margin: 13px 0;
@@ -577,12 +596,24 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .h130px{
 	height: 130px;
 }
-
+.h50px{
+	height: 50px;
+}
+.w100proc{
+	width: 100%;
+}
+.b1px{
+	border: 1px solid #B9B9B9;
+}
 .bb2px{
 	border-bottom: 2px solid #B9B9B9;
 }
-
-
+.fz16px{
+	font-size: 16px;
+}
+.fz20px{
+	font-size: 20px;
+}
 *{
 	-webkit-transition: all ease-out 0.3s;
 	-moz-transition: all ease-out 0.3s;
@@ -598,6 +629,10 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	margin: 20px 0;
 	font-size: 12px;
 	line-height: 14px;
+}
+.gameHeader{
+	line-height: 24px;
+	font-weight: normal;
 }
 .postGame h3 a{
 	font-size: 16px;
@@ -674,9 +709,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .news li{
 	overflow: hidden;
 }
-.news li p{
-	padding: 15px;
-}
 .news li img {
 	display: none;
 	width: 360px;
@@ -690,3 +722,145 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 }
 
 /*==========================================*/
+
+/*===================EVENT==================*/
+/*==========================================*/
+
+.contentNews .eventPost img{
+	display: block;
+	width: 100%;
+	height: auto;
+	max-height: 300px;
+}
+.textArea{
+	border: 2px solid #A4C1DF;
+	padding: 10px;
+	box-sizing: border-box;
+}
+.textArea:focus{
+	border: 2px solid #A4C1DF;
+}
+.commentList{
+	width: 70%;
+	margin: 0 auto;
+	padding: 20px 0;
+	box-shadow: inset 0 2px 0 #A4C1DF;
+}
+.commentList:last-child{
+	border-bottom: 2px solid #A4C1DF;
+}
+.commentList *:not(button){
+	margin: 5px 0;
+}
+.commentList button{
+	margin: 3px 0;
+	margin-top: inherit;
+}
+.dellComments{
+	border: 0;
+	background-color: transparent;
+	border-radius: 5px;
+	vertical-align: middle;
+}
+.dellComments:hover{
+	font-weight: bold;
+	background-color: rgba(0,0,0,.1);
+}
+.likes_dislikes button{
+	text-indent: -9999px;
+}
+.likes{
+	width: 20px;
+	height: 20px;
+	background: url(../images/like.png) 50% 50% no-repeat;
+	border: 0;
+	cursor: pointer;
+}
+.dislikes{
+	width: 20px;
+	height: 20px;
+	background: url(../images/dislike.png) 50% 50% no-repeat;
+	border: 0;
+	cursor: pointer;
+}
+.addComment{
+	background-color: #fff;
+	border: 2px solid #A4C1DF;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+.eventImage{
+	margin-top: 30px;
+}
+.eventTitle{
+	font-size: 18px;
+	margin: 15px 0;
+}
+.eventPost{
+	margin-bottom:30px;
+}
+
+/*=========================gameResult=======*/
+.thisGame{
+	background-color: #EAF0F7;
+	padding: 10px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.tableGame table{
+	border-collapse: inherit;
+}
+
+/*===========team===================*/
+.teamImage{
+	width: 250px;
+	height: 170px;
+	margin: 0 10px 10px 0;
+}
+.playersTeamList{
+	width: 80%;
+	margin: 20px auto;
+}
+.teamDescription {
+	width: 50%;
+	margin-left: 270px;
+}
+.teamDescription dt,
+.teamDescription dd{
+	height: 27px;
+	line-height: 27px;
+	display: inline-block;
+	width: 50%;
+}
+.teamDescription dt{
+	float: left;
+}
+.playersTeamList li{
+	width: calc(96%/3);
+	margin-right: 2%;
+	float: left;
+	height: 300px;
+	margin-top: 10px;
+}
+.playersTeamList li:nth-child(3n){
+	margin-right: 0;
+}
+.playersTeamList li img{
+	width: 100%;
+	height: 100%;
+	top: 50%;
+	left: 50%;
+}
+.playersDesc{
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0,0,0,.6);
+	color: #fff;
+	padding: 10px;
+	overflow: hidden;
+}
+.playersDesc span{
+	text-transform: lowercase;
+}

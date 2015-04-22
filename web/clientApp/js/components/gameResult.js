@@ -5,6 +5,7 @@ angular.module('gameResult', [])
 	$scope.userInfo = userAPI.getUserInfo();
   	$scope.predicate = '';
   	$scope.reverse = false;
+  	$scope.goFilters = false;
   	$scope.search = function(result){
 		if(!$scope.query || (result.team && result.team.name.indexOf($scope.query)!=-1) 
 			|| (result.player && result.player.last_name.indexOf($scope.query)!=-1) ){

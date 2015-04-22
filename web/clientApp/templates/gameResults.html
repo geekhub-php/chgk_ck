@@ -1,36 +1,70 @@
-<html>
-<head>
-	<style>
-		table td {
-			border:solid 1px;		
-		}
-		table {border-collapse: collapse;}
-	</style>
-</head>
-	<body>
-		<input placeholder="поиск" ng-model="query" />
-		<table summary="" >
-			<tr>
-				<td>place <a style="cursor: pointer; color: red" ng-click="predicate='-place'; reverse=!reverse">sort</a></td>
-				<td>score <a style="cursor: pointer; color: red" ng-click="predicate='-score'; reverse=!reverse">sort</a> </td>
-				<td>team/player</td>
-				<td>likes</td>	
-				<td>dislikes</td>
-				<td>current user opinion</td>	
-				<td>like</td>
-				<td>dislike</td>	
+<div class="contentGames">
+	<div class="contentGamesHeader row mar13_0px">
+		<h2 class="gamesName float-l h27_lh27 pad0_7px">Игры клуба</h2>
+		<span class="sezonGames">
+			Сезон
+			<select name="" id="">
+				<option value="">2012 - 2018</option>
+				<option value="">2013 - 2018</option>
+				<option value="">2014 - 2018</option>
+				<option value="">2015 - 2018</option>
+			</select>
+		</span>
+		<span class="filtersGames float-r">
+			<a href ng-click="goFilters = !goFilters"> Фильтры </a>
+		</span>
+	</div>
+	<div class="row blockFilters">
+		<ul class="row" ng-show="goFilters">
+			<li>
+				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_home"><span>Домашние</span>
+			</li>
+			<li>
+				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_locally_rated"><span>Локальный рейтинг</span>
+			</li>
+			<li>
+				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_globally_rated"><span>Глобальный рейтинг</span>
+			</li>
+			<li>
+				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_complete"><span>Прошедшие</span>
+			</li>
+		</ul>
+	</div>
+	<div class="thisGame row">
+		<div class="blockDateGame row h27_lh27 fz16px">
+			<span class="float-l pad0_7px">Воскресенье, 28 февраля, 2015 </span>
+			<span class="gameTime float-l pad0_7px">12.25</span>
+			<span class="float-r pad0_7px">&copy;Черкасская обласная детская библиотека</span>
+		</div>
+		<img src="#" alt="" class="float-l m10px" width="150" height="150">
+		<h3 class="gameHeader mar13_0px fz20px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, fugit.</h3>
+		<p class="gameDescription">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A officia quis quidem deleniti repudiandae laudantium qui eaque consequatur magni dolore, atque aperiam odio, magnam accusamus. Facere dolorem iste quia tenetur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id praesentium, cumque in sunt nihil facilis iste, hic numquam nesciunt porro sint harum earum culpa iusto repellat aliquid consectetur soluta ipsam. Est impedit molestias, repellendus, incidunt quasi voluptas tenetur provident id corporis aliquid vero eos nulla mollitia fugiat, assumenda dolores, praesentium?</p>
+
+	</div>
+	<div class="tableGame row">
+		<table class="row m20_0px">
+			<tr class=" h27_lh27">
+				<th class="b1px" >place <a style="cursor: pointer; color: red" ng-click="predicate='-place'; reverse=!reverse">sort</a></th>
+				<th class="b1px" >score <a style="cursor: pointer; color: red" ng-click="predicate='-score'; reverse=!reverse">sort</a> </th>
+				<th class="b1px" >team/player</th>
+				<th class="b1px" >likes</th>
+				<th class="b1px" >dislikes</th>
+				<th class="b1px" >like</th>
+				<th class="b1px" >dislike</th>
 			</tr>
-			<tr ng-repeat="gameResult in gameResults | orderBy:predicate:reverse | filter: search">
-				<td>{{ gameResult.place }}</td>
-				<td>{{ gameResult.score }}</td>
-				<td ng-show="gameResult.player.last_name">игрок {{ gameResult.player.last_name }}</td>
-				<td ng-show="gameResult.team.name">команда {{ gameResult.team.name }}</td>
-				<td>{{ gameResult.likesCount }}</td>		
-				<td>{{ gameResult.dislikesCount }}</td>
-				<td>{{ gameResult.currentUserOpinion.is_positive }}</td>
-				<td><button ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, true)">like</button></td>	
-				<td><button ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, false)">dislike</button></td>	
+			<tr class=" h27_lh27" ng-repeat="gameResult in gameResults">
+				<td class="b1px">{{ gameResult.place }}</td>
+				<td class="b1px">{{ gameResult.score }}</td>
+				<td class="b1px">
+					<span ng-show="gameResult.team.name">команда {{ gameResult.team.name }}</span>
+					/
+					<span ng-show="gameResult.player.last_name">игрок{{ gameResult.player.last_name }}</span>
+				</td>
+				<td class="b1px">{{ gameResult.likesCount }}</td>
+				<td class="b1px">{{ gameResult.dislikesCount }}</td>
+				<td class="b1px"><button ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, true)">like</button> </td>
+				<td  class="b1px"><button ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, false)">dislike</button></td>
 			</tr>
 		</table>
-	</body>
-</html>
+	</div>
+</div>
