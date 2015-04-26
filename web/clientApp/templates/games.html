@@ -35,14 +35,9 @@
 			<li class="" ng-repeat="game in games | filter: search | orderBy:predicate:playDateReverse">
 				<p class="dataGame">
 					<span ng-show="true" class="gameDate">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
-					<span ng-hide class="gamePlace">{{ game.play_place }}</span>
 				</p>
-				<img src="#" alt="" class="gamesLogo float-l">
 				<div class="gameInfo">
 					<h3 class="gamesTitle"><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></h3>
-					<p class="gameDesriptions">
-						{{ game.description }}
-					</p>
 				</div>
 			</li>
 		</ul>
