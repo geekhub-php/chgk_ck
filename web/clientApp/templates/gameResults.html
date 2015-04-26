@@ -17,16 +17,16 @@
 	<div class="row blockFilters">
 		<ul class="row" ng-show="goFilters">
 			<li>
-				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_home"><span>Домашние</span>
+				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_home"><span class="pad0_7px inline-block">Домашние</span>
 			</li>
 			<li>
-				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_locally_rated"><span>Локальный рейтинг</span>
+				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_locally_rated"><span class="pad0_7px">Локальный рейтинг</span>
 			</li>
 			<li>
-				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_globally_rated"><span>Глобальный рейтинг</span>
+				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_globally_rated"><span class="pad0_7px">Глобальный рейтинг</span>
 			</li>
 			<li>
-				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_complete"><span>Прошедшие</span>
+				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_complete"><span class="pad0_7px">Прошедшие</span>
 			</li>
 		</ul>
 	</div>
@@ -52,7 +52,7 @@
 				<th class="b1px" >like</th>
 				<th class="b1px" >dislike</th>
 			</tr>
-			<tr class=" h27_lh27" ng-repeat="gameResult in gameResults">
+			<tr class=" h27_lh27" ng-repeat="gameResult in gameResults | orderBy:predicate:reverse | filter: search">
 				<td class="b1px">{{ gameResult.place }}</td>
 				<td class="b1px">{{ gameResult.score }}</td>
 				<td class="b1px">

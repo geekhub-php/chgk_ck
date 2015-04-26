@@ -1,20 +1,10 @@
-<head>
-	<style>
-		table td {
-			border:solid 1px;		
-		}
-		table {border-collapse: collapse;}
-	</style>
-</head>
-<table summary="" >
-	<tr>
-		<td>name</td>
-		<td></td>	
-	</tr>
-	<tr>
-		<td>{{ gallery.name }}</td>
-		<td ng-repeat="media in gallery.medias">
-			<img ng-src="{{ media }}" style="height: 70px; width: 70px;"/>		
-		</td>
-	</tr>
-</table>
+<div class="galleryContent">
+	<div class="contentGalleryHeader row mar13_0px">
+		<h2 class="galleryName float-l h27_lh27 pad0_7px">{{ gallery.name }}</h2>
+	</div>
+	<ul class="galleryList row">
+		<li ng-repeat="media in gallery.medias">
+			<img ng-src="{{ media }}" />
+		</li>
+	</ul>
+</div>
