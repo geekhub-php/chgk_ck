@@ -2,11 +2,11 @@
 	<img ng-show="player.image" ng-src="{{ player.image }}" class="float-l w120px_h170px" />
 	<div class="playerInfo">
 		<h3>{{ player.first_name }} {{ player.middle_name }} {{ player.last_name }}</h3>
-		<p>{{ player.dob | timestampToFormat:'dd.MM.yyyy' }}</p>
+		<p>День рождения: {{ player.dob | timestampToFormat:'dd.MM.yyyy' }}</p>
 		<table>
-			<tr>
-				<th>Сезон</th>
-				<th>Команда</th>
+			<tr class="playerTableRow">
+				<th class="seasonHead">Сезон</th>
+				<th class="playerTeamHead">Команда</th>
 			</tr>
 			<tr>
 				<td>

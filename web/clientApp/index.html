@@ -25,15 +25,15 @@
 		<div class="content pad0_30px">
 			<header class="header">
 				<h1 class="logo float-l">
-					<a href="#/home"><img src="clientApp/images/logo.png" alt="img"></a>
+					<a class="home" href="#/home" ng-click="active='home'"><img src="clientApp/images/logo.png" alt="img"></a>
 				</h1>
-				<nav class="nav h27_lh27">
-					<a href="#/games">Игры</a>
-					<a href="#/news">Новости</a>
-					<a href="#/teams">Команди</a>
-					<a href="#/players">Игроки</a>
-					<a href="#/galleries">Галереи</a>
-					<a href="#/about">О клубе</a>
+				<nav class="nav h27_lh27 {{active}}">
+					<a class="games" href="#/games" ng-click="active='games'">Игры</a>
+					<a class="news" href="#/news" ng-click="active='news'">Новости</a>
+					<a class="teams" href="#/teams" ng-click="active='teams'">Команди</a>
+					<a class="players" href="#/players" ng-click="active='players'">Игроки</a>
+					<a class="galleries" href="#/galleries" ng-click="active='galleries'">Галереи</a>
+					<a class="about" href="#/about" ng-click="active='about'">О клубе</a>
 				</nav>
 			</header>
 			<div ng-view></div>
@@ -49,14 +49,14 @@
 					<a ng-show="userInfo.isLoggedIn" href="/logout">Выход</a>
 				</div>
 			</div>
-			<div class="blockTopTeams">
-				<h3 class="align-c">Топ команд</h3>
+			<div class="blockTopTeams bb2px">
+				<h3 class="align-c h27_lh27">Топ команд</h3>
 				<ul ng-controller="TeamsController">
 					<li ng-repeat="team in teams"><a href="#/team/{{ team.id }}" >{{ team.name }}</a></li>
 				</ul>
 			</div>
 			<div class="blockTopNews">
-				<h3 class="align-c">Топ новостей</h3>
+				<h3 class="align-c h27_lh27">Топ новостей</h3>
 				<ul ng-controller="EventsController">
 					<li ng-repeat=" event in events | limitTo:5"><a href="#/news/{{ event.id }}">{{event.title}}</a></li>
 				</ul>

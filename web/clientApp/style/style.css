@@ -41,7 +41,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .pos-a                         { position: absolute !important; }
 .pos-r                         { position: relative !important; }
 /*------------------------------WRAPPER-----------------------------*/
-
 .wrapper{
 	width: 1023px;
 	margin: 0 auto 20px;
@@ -65,14 +64,12 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	width: 198px;
 	float: left;
 }
-
 /*------------------------------HEADER-----------------------------*/
 .header{
 	height: 100px;
 	overflow: hidden;
 }
 .header .logo{
-	width: 70px;
 	height: 100%;
 }
 .header .logo img{
@@ -90,10 +87,16 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	text-align: center;
 	font-size: 18px;
 }
+nav.games .games{ background-color: #00B29C; color: #fff;}
+nav.news .news{ background-color: #A4C1DF; color: #fff;}
+nav.teams .teams{ background-color: #00B39C; color: #fff;}
+nav.players .players{ background-color: #008DB1; color: #fff;}
+nav.galleries .galleries{ background-color: #3381B5; color: #fff;}
+nav.about .about{ background-color: #BAE788; color: #fff;}
+
 /*------------------------------ASIDE-----------------------------*/
 .aside{
 	background-color: #5B5B59;
-	box-sizing: border-box;
 }
 .userBlockInfo{
 	color: #fff;
@@ -105,7 +108,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	border-radius: 50%;
 	margin: 0px auto;
 	margin-bottom: 10px;
-	box-sizing: border-box;
 }
 .userFirstName,
 .userLastName{
@@ -115,17 +117,13 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	text-align: center;
 	color: #fff;
 }
-.blockUserTeams span{
-	display: block;
-	margin: 5px 0;
-}
 .userTeam{
 	padding: 15px 0;
 }
 .userTeam a{
 	color: #fff;
 	display: block;
-	width: 114px;
+	width: 70%;
 	height: 24px;
 	line-height: 24px;
 	text-align: center;
@@ -138,7 +136,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 }
 .blockTopNews,
 .blockTopTeams{
-	box-sizing: border-box;
 	padding: 10px 20px 20px;
 	color: #fff;
 }
@@ -147,11 +144,10 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	color: #fff;
 	overflow: hidden;
 	height: 30px;
+	text-overflow: ellipsis;
 }
 .blockTopNews h3,
 .blockTopTeams h3{
-	height: 27px;
-	line-height: 27px;
 	font-size: 16px;
 	text-transform: uppercase;
 }
@@ -161,17 +157,16 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 }
 .blockTopNews li,
 .blockTopTeams li{
-	height: 32px;
-	line-height: 32px;
-	overflow: hidden;
+	line-height: 18px;
+	margin-top: 20px;
 }
 
 /*=================TEAMS==============*/
 .teamsName{
 	background-color: #00B39C;
 	text-transform: uppercase;
-	box-sizing: border-box;
 	color: #fff;
+	font-size: 24px;
 }
 .contentTeamsHeader{
 	border-bottom: 2px solid #00B39C;
@@ -210,12 +205,16 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .searchTeams:-ms-input-placeholder {
 	color: #00B39C;
 }
+.tableTeams{
+	margin-top: 20px;
+}
 .tableTeams tr td{
 	padding: 0 20px;
 }
-
 .tableTeams tr th{
 	text-align: left;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	padding-left: 20px;
 	height: 34px;
@@ -249,7 +248,7 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	background-color: #A4C1DF;
 	text-transform: uppercase;
 	color: #fff;
-	font-size: 20px;
+	font-size: 24px;
 	height: 34px;
 	line-height: 34px;
 }
@@ -288,7 +287,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .description{
 	padding: 0 10px;
 	text-overflow: ellipsis;
-
 }
 .description p{
 	height: 80px;
@@ -297,11 +295,10 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 }
 .description h3{
 	margin: 12px 0;
-	font-weight: normal;
 	line-height: 16px;
 }
 .description h3 a{
-	font-weight: bold;
+	font-weight: 500;
 	font-size: 16px;
 }
 .dateNews{
@@ -404,7 +401,7 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	background-color: #008DB1;
 	text-transform: uppercase;
 	color: #fff;
-	font-size: 20px;
+	font-size: 24px;
 	height: 34px;
 	line-height: 34px;
 }
@@ -413,6 +410,8 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	height: 18px;
 	width: 320px;
 	border: 2px solid #008DB1;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 8px 6px;
 	color: #008DB1;
@@ -422,18 +421,16 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 }
 .searchPlayers:-moz-placeholder {
 	color: #008DB1;
-	/*opacity: 1;*/
 }
 .searchPlayers::-moz-placeholder {
 	color: #008DB1;
-	/*opacity: 1;*/
 }
 .searchPlayers:-ms-input-placeholder {
 	color: #008DB1;
 }
 .tablePlayers{
 	width: 100%;
-	margin-top: 5px;
+	margin-top: 20px;
 }
 .tablePlayersHead{
 	background-color: #C6DDE3;
@@ -459,9 +456,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .tablePlayersList td:first-child{
 	width: 65% !important;
 }
-
-
-
 /*=================AboutClub==========*/
 /*====================================*/
 .clubFoto{
@@ -487,12 +481,14 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	background-color: #BAE788;
 	text-transform: uppercase;
 	color: #fff;
-	font-size: 20px;
+	font-size: 24px;
 	height: 34px;
 	line-height: 34px;
 }
 
-
+/*========================================*/
+/*========================================*/
+/*==================FOOTER================*/
 .footer{
 	background-color: #4D4D4D;
 	height: 110px;
@@ -500,10 +496,14 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	margin-top: 20px;
 }
 .footerInner{
+	height: 110px;
 	width: 1023px;
+	background-color: #4D4D4D;
 	margin: 0 auto;
 	color: #fff;
 	padding: 20px 30px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 .social{
@@ -524,7 +524,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	font-size: 18px;
 }
 
-
 /*===============GALLERY==============*/
 .contentGalleryHeader{
 	border-bottom: 2px solid #3381B5;
@@ -532,7 +531,7 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .galleryName{
 	background-color: #3381B5;
 	color: #fff;
-	font-size: 22px;
+	font-size: 24px;
 	text-transform: uppercase;
 }
 .galleryContent li{
@@ -554,8 +553,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .galleryContent li:hover{
 	box-shadow: 0 0 7px #444;
 }
-
-
 /*====================================*/
 /*=================STYLE==============*/
 .row{
@@ -589,9 +586,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 }
 .m20_0px{
 	margin: 20px 0;
-}
-.w230px{
-	width: 230px;
 }
 .w120px_h170px{
 	width: 120px;
@@ -629,13 +623,13 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	transition: all ease-out 0.3s;
 }
 
-
 /*===================classGAMES=============*/
 .postGame {
-	height: 426px;
+	height: 440px;
 	overflow: hidden;
 	font-size: 12px;
 	line-height: 14px;
+	padding-bottom: 20px;
 }
 .gameHeader{
 	line-height: 24px;
@@ -660,7 +654,6 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 	width: 360px;
 	height: 360px;
 	float: left;
-	margin-top: 0;
 	margin-top: 20px;
 	background-color: #EEF5E8;
 	border: 1px solid #ccc;
@@ -875,7 +868,26 @@ a:hover                        { text-decoration:none; color: #F09215; fill:#F09
 .playersDesc span{
 	text-transform: lowercase;
 }
-
+/*=====================================*/
+/*===============PLAYER==============*/
+.playerInfo{
+	margin-left: 130px;
+}
+.playerInfo table{
+	width: 100%;
+	margin: 20px 0;
+}
+.playerInfo h3{
+	font-size: 18px;
+	line-height: 22px;
+}
+.playerTableRow{
+	background-color: #dffacc;
+	height: 27px;
+}
+.seasonHead{
+	width: 250px;
+}
 
 /*=========================GALLERY========*/
 .playersTeamList,
