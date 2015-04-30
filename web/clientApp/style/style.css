@@ -121,7 +121,7 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	padding: 15px 0;
 }
 .userTeam a{
-	color: #fff;
+	color: #B9B9B9;
 	display: block;
 	width: 70%;
 	height: 24px;
@@ -130,6 +130,10 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	margin: 0 auto;
 	margin-top: 10px;
 	border: 2px solid #B9B9B9;
+}
+.userTeam a:hover{
+	color: #fff;
+	border-color: #fff;
 }
 .userTeam a:first-child{
 	margin-top: 0;
@@ -160,7 +164,26 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	line-height: 18px;
 	margin-top: 20px;
 }
-
+.blockTopNews li{
+	border-bottom: 1px solid #b9b9b9;
+	padding-bottom: 5px;
+}
+.eventLike,
+.eventDislike,
+.eventComment{
+	margin-left: 5px;
+}
+.eventLike:before,
+.eventDislike:before,
+.eventComment:before{
+	width: 15px;
+	height: 10px;
+	content: "";
+	display: inline-block;
+}
+.eventLike:before{ background: url(../images/like.png) 50% 50% no-repeat;}
+.eventDislike:before{ background: url(../images/dislike.png) 50% 50% no-repeat;}
+.eventComment:before{ background: url(../images/like.png) 50% 50% no-repeat;}
 /*=================TEAMS==============*/
 .teamsName{
 	background-color: #00B39C;
@@ -489,7 +512,7 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 /*==================FOOTER================*/
 .footer{
 	background-color: #4D4D4D;
-	height: 110px;
+	height: 125px;
 	clear: both;
 	margin-top: 20px;
 }
@@ -499,7 +522,7 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	background-color: #4D4D4D;
 	margin: 0 auto;
 	color: #fff;
-	padding: 20px 30px;
+	padding: 30px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -579,6 +602,9 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 .m10px{
 	margin: 10px;
 }
+.mt10px{
+	margin-top: 10px;
+}
 .mar13_0px{
 	margin: 13px 0;
 }
@@ -627,7 +653,6 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	overflow: hidden;
 	font-size: 12px;
 	line-height: 14px;
-	padding-bottom: 20px;
 }
 .gameHeader{
 	line-height: 24px;
@@ -647,12 +672,14 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	box-sizing: border-box;
 	border-bottom: 1px solid #ccc;
 }
+.games li:last-child {
+	border-bottom: 0;
+}
 .games li:first-child {
 	width: 360px;
 	height: 360px;
 	float: left;
 	background-color: #EEF5E8;
-	border: 1px solid #ccc;
 }
 .games li p{
 	padding: 15px;
@@ -676,7 +703,6 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 /*===============classNEWS==================*/
 .postNews {
 	overflow: hidden;
-	margin-bottom: 20px;
 	font-size: 12px;
 	line-height: 14px;
 }
@@ -684,7 +710,7 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	font-size: 16px;
 }
 .news li:not(:first-child) {
-	height: 105px;
+	height: 140px;
 	width: 338px;
 	float: right;
 	margin-right: 1px;
@@ -693,6 +719,9 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 	border-bottom: 1px solid #ccc;
+}
+.news li:last-child{
+	border-bottom: 0;
 }
 .news li:first-child {
 	width: 360px;
@@ -786,9 +815,6 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	padding: 5px 10px;
 	cursor: pointer;
 }
-.eventImage{
-	margin-top: 30px;
-}
 .eventTitle{
 	font-size: 18px;
 	margin: 15px 0;
@@ -819,9 +845,12 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	width: 80%;
 	display: -webkit-flex;
 	display: -moz-flex;
-	display: -ms-flex;
+	display: -ms-flexbox;
 	display: -o-flex;
 	display: flex;
+	-webkit-flex-flow: wrap;
+	flex-flow: wrap;
+	justify-content: flex-start;
 	margin: 20px auto;
 }
 .teamDescription {
@@ -889,11 +918,11 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 .galleryList{
 	display: -webkit-flex;
 	display: -moz-flex;
-	display: -ms-flex;
+	display: -ms-flexbox;
 	display: -o-flex;
 	display: flex;
-
 	-webkit-flex-flow: wrap;
+	flex-flow: wrap;
 	justify-content: flex-start;
 }
 .galleryList li{

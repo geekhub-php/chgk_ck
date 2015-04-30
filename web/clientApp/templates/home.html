@@ -6,7 +6,8 @@
 		<section class="games">
 			<ul>
 				<li class="" ng-repeat="game in games | limitTo:5">
-					<img src="clientApp/images/content.png" alt="">
+					<img ng-src="{{game.image}}" alt="" class="float-l mar13_0px">
+					<!-- <img src="clientApp/images/content.png" alt=""> -->
 					<h3><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></h3>
 					<div class="dateGame padding0_10">
 						<span class="date display">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
@@ -23,8 +24,9 @@
 	</div>
 		<section class="news mt_20">
 			<ul>
-				<li class="" ng-repeat="event in events | limitTo:5">
-					<img src="clientApp/images/content2.png" alt="">
+				<li class="" ng-repeat="event in events | limitTo:4">
+					<img class="eventImage mar13_0px" ng-src="{{ event.image }}"/>
+					<!-- <img src="clientApp/images/content2.png" alt=""> -->
 					<h3><a href="#/news/{{ event.id }}">{{event.title}}</a></h3>
 					<div class="preNews padding0_10">
 						<p>{{event.text}}</p>

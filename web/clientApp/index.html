@@ -59,7 +59,14 @@
 			<div class="blockTopNews">
 				<h3 class="align-c h27_lh27">Топ новостей</h3>
 				<ul ng-controller="EventsController">
-					<li ng-repeat=" event in events | limitTo:5"><a href="#/news/{{ event.id }}">{{event.title}}</a></li>
+					<li ng-repeat=" event in events | limitTo:5">
+						<a href="#/news/{{ event.id }}">{{event.title}}</a>
+						<div class="eventInfo mt10px">
+							<span class="eventLike">12</span>
+							<span class="eventDislike">34</span>
+							<span class="eventComment">5</span>
+						</div>
+					</li>
 				</ul>
 			</div>
 		</aside>
