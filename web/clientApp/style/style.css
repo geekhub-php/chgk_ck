@@ -141,14 +141,18 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 .blockTopNews,
 .blockTopTeams{
 	padding: 10px 20px 20px;
-	color: #fff;
+	color: #B9B9B9;
 }
 .blockTopNews a,
 .blockTopTeams a{
-	color: #fff;
+	color: #B9B9B9;
 	overflow: hidden;
 	height: 30px;
 	text-overflow: ellipsis;
+}
+.blockTopNews a:hover,
+.blockTopTeams a:hover{
+	color: #fff;
 }
 .blockTopNews h3,
 .blockTopTeams h3{
@@ -555,7 +559,7 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	font-size: 24px;
 	text-transform: uppercase;
 }
-.galleryContent li{
+.gallerysContent li{
 	width: 172px;
 	height: 180px;
 	float: left;
@@ -563,15 +567,15 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	margin-right: 20px;
 	margin-top: 20px;
 }
-.galleryContent li a{
+.gallerysContent li a{
 	display: block;
 	height: 100%;
 	color: #000;
 }
-.galleryContent li:nth-child(4n){
+.gallerysContent li:nth-child(4n){
 	margin-right: 0;
 }
-.galleryContent li:hover{
+.gallerysContent li:hover{
 	box-shadow: 0 0 7px #444;
 }
 /*====================================*/
@@ -848,8 +852,13 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	display: -ms-flexbox;
 	display: -o-flex;
 	display: flex;
+
 	-webkit-flex-flow: wrap;
+	-moz-flex-flow: wrap;
+	-ms-flex-flow: wrap;
+	-o-flex-flow: wrap;
 	flex-flow: wrap;
+
 	justify-content: flex-start;
 	margin: 20px auto;
 }
@@ -868,7 +877,7 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	float: left;
 }
 .playersTeamList li{
-	width: 32%;
+	width: 31%;
 	margin-right: 15px;
 	margin-top: 15px;
 	max-height: 270px;
@@ -921,8 +930,13 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	display: -ms-flexbox;
 	display: -o-flex;
 	display: flex;
+
 	-webkit-flex-flow: wrap;
+	-moz-flex-flow: wrap;
+	-ms-flex-flow: wrap;
+	-o-flex-flow: wrap;
 	flex-flow: wrap;
+
 	justify-content: flex-start;
 }
 .galleryList li{
@@ -932,4 +946,9 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 }
 .galleryList li:nth-child(4n){
 	margin-right: 0;
+}
+.galleryList li img{
+	width: 100%;
+	height: auto;
+	max-height: 200px;
 }
