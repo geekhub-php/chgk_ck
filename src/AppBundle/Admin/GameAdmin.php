@@ -31,7 +31,13 @@ class GameAdmin extends Admin
                 'class' => 'AppBundle:AgeCategory',
                 'property' => 'name',
             ))
-            ->add('description', 'text');
+            ->add('description', 'text')
+            ->add('image', 'sonata_media_type', array(
+                 'provider' => 'sonata.media.provider.image',
+                 'context'  => 'default',
+                 'required' => false,
+            ))
+            ;
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

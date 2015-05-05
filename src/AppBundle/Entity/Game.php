@@ -105,6 +105,12 @@ class Game
     private $gameResults;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     * @JMS\Groups({"gameFull"})
+     */
+    private $image;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -413,5 +419,28 @@ class Game
         return $this->gameResults->filter(function ($res) use ($id) {
             return $res->getId() == $id;
         })->first();
+    }
+
+    /**
+     * Set image
+     *
+     * @param  \Application\Sonata\MediaBundle\Entity\Media $image
+     * @return Game
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
