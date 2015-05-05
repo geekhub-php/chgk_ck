@@ -23,11 +23,15 @@ angular.module('game', [])
   	$scope.playDateReverse = false;
 }])
 .factory('gameAPI', ['$resource', function($resource){
-	var gameRes = $resource('/api/games');	
+	var gameRes = $resource('/api/games/:gameId');	
 	
 	return {
 		getGames: function(){
 			return gameRes.query();		
+		},
+		
+		getGame: function(gameId){
+			return gameRes.get({gameId: gameId});		
 		}	
 	};
 }]);

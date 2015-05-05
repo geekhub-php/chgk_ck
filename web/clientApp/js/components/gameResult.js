@@ -1,5 +1,5 @@
 angular.module('gameResult', [])
-.controller('GameResultsController', ['gameResultAPI', '$routeParams', '$scope', 'userAPI', function(gameResultAPI, $routeParams, $scope, userAPI){
+.controller('GameResultsController', ['gameResultAPI', '$routeParams', '$scope', 'userAPI', 'gameAPI', function(gameResultAPI, $routeParams, $scope, userAPI, gameAPI){
 	$scope.gameResults = gameResultAPI.getGameResults($routeParams.gameId);
 	$scope.makeResultOpinion = gameResultAPI.makeResultOpinion;
 	$scope.userInfo = userAPI.getUserInfo();
@@ -13,7 +13,8 @@ angular.module('gameResult', [])
 		} else {
 			return false;		
 		}	
-  	}
+  	};
+  	$scope.game = gameAPI.getGame($routeParams.gameId);
 }])
 .factory('gameResultAPI', ['$resource', 'opinionAPI', '$routeParams', 'opinionableModel', function($resource, opinionAPI, $routeParams, opinionableModel){
 	var gameResultUrl = '/api/games/:gameId/gameResults/:gameResultId';

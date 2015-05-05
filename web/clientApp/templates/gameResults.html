@@ -44,6 +44,34 @@
 	<div class="tableGame row">
 		<table class="row m20_0px">
 			<tr class=" h27_lh27">
+				<td class="b1px">name</td>	
+				<td class="b1px">date</td>
+				<td class="b1px">place</td>	
+				<td class="b1px">is_locally_rated</td>	
+				<td class="b1px">is_globally_rated</td>	
+				<td class="b1px">is_home</td>	
+				<td class="b1px">is_complete</td>	
+				<td class="b1px">age_category</td>	
+				<td class="b1px">season</td>
+				<td class="b1px">description</td>		
+				<td class="b1px">image</td>		
+			</tr>
+			<tr class=" h27_lh27">
+				<td class="b1px">{{ game.name }}</td>
+				<td class="b1px">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</td>
+				<td class="b1px">{{ game.play_place }}</td>
+				<td class="b1px">{{ game.is_locally_rated | booleanFormater }}</td>	
+				<td class="b1px">{{ game.is_globally_rated | booleanFormater }}</td>	
+				<td class="b1px">{{ game.is_home | booleanFormater }}</td>	
+				<td class="b1px">{{ game.is_complete | booleanFormater }}</td>	
+				<td class="b1px">{{ game.age_category.name }}</td>
+				<td class="b1px">{{ game.season ? game.season.name : "немає сезона" }}</td>	
+				<td class="b1px">{{ game.description }}</td>	
+				<td class="b1px"><img ng-src="{{ game.image }}" style="height:50px; width:50px;" /></td>	
+			</tr>		
+		</table>
+		<table class="row m20_0px">
+			<tr class=" h27_lh27">
 				<th class="b1px" >place <a style="cursor: pointer; color: red" ng-click="predicate='-place'; reverse=!reverse">sort</a></th>
 				<th class="b1px" >score <a style="cursor: pointer; color: red" ng-click="predicate='-score'; reverse=!reverse">sort</a> </th>
 				<th class="b1px" >team/player</th>

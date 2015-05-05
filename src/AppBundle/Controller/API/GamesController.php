@@ -74,7 +74,7 @@ class GamesController extends FOSRestController
     }
 
     /**
-     * @REST\View(serializerGroups={"gameFull", "short"})
+     * @REST\View(serializerGroups={"gameFull", "ageCategoryFull", "seasonFull", "short"})
      * @REST\Get("games/{game}", requirements={
      * 		"game" = "\d+"
      * })
