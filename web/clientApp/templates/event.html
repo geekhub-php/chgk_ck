@@ -24,10 +24,10 @@
 					{{ comment.author.username }}
 					<button class="dellComments float-r" ng-show="userInfo.isLoggedIn" title="Удалить комментарий" ng-click="deleteComment(event, comment.id)">х</button>
 				</span>
-				<span class="display" ng-hide="comment.made_by_current_user">{{ comment.text }}</span>
-				<div class="commentText" ng-show="comment.made_by_current_user">
-					<span ng-show="userInfo.isLoggedIn" ng-model="">{{comment.text}}</span>
-					<button ng-show="userInfo.isLoggedIn" ng-click="putComment(comment)">ok</button>
+				<div class="commentText">
+					<span class="display" ng-hide="comment.made_by_current_user">{{ comment.text }}</span>
+					<input ng-show="comment.made_by_current_user" ng-model="comment.text" />
+					<button ng-show="comment.made_by_current_user" ng-click="putComment(comment)">ok</button>
 				</div>
 				<span class="likes_dislikes">
 					<button class="likes" ng-show="userInfo.isLoggedIn" ng-click="makeCommentOpinion(event, comment, true)">like</button>
