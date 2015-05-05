@@ -9,6 +9,25 @@
 		<img class="eventImage" ng-src="{{ event.image }}"/>
 		<h3 class="eventTitle">{{ event.title }}</h3>
 		<p>{{event.text}}</p>
+		<div>
+		<table class="row m20_0px">
+			<tr class=" h27_lh27">
+				<td class="b1px">like</td>	
+				<td class="b1px">dislike</td>
+				<td class="b1px">likes</td>
+				<td class="b1px">dislikes</td>
+				<td class="b1px">current user opinion</td>		
+			</tr>
+			<tr class=" h27_lh27">
+				<td class="b1px"><button ng-show="userInfo.isLoggedIn" ng-click="makeOpinion(event, true)" >like</button></td>
+				<td class="b1px"><button ng-show="userInfo.isLoggedIn" ng-click="makeOpinion(event, false)" >dislike</button></td>	
+				<td class="b1px">{{ event.likesCount }}</td>
+				<td class="b1px">{{ event.dislikesCount }}</td>
+				<td class="b1px">{{ event.currentUserOpinion.is_positive }}</td>
+			</tr>
+		</table>
+				
+		</div>
 		<div class="contentNewsHeader row mar13_0px">
 			<h2 class="newsName float-l   h27_lh27 pad0_7px">
 				Комментарии
