@@ -45,7 +45,7 @@
 					<p class="userFirstName" ng-show="userInfo.isLoggedIn">{{ userInfo.username }}</p>
 					<a ng-hide="userInfo.isLoggedIn" href="/register">Регистация</a>
 					<!-- <a ng-hide="userInfo.isLoggedIn" href="/login">Войти</a> -->
-					<a ng-hide="userInfo.isLoggedIn" id="go" href="#">Войти</a>
+					<a ng-hide="userInfo.isLoggedIn" id="go" href="/login">Войти</a>
 					<a ng-show="userInfo.isLoggedIn" href="/profile/edit">Редактировать</a>
 					<a ng-show="userInfo.isLoggedIn" href="/logout">Выход</a>
 				</div>
