@@ -33,6 +33,7 @@ class MediasController extends FOSRestController
 			FROM Application\Sonata\MediaBundle\Entity\GalleryHasMedia ghm
 			JOIN Application\Sonata\MediaBundle\Entity\Media m WITH m.id = ghm.media
 			WHERE ghm.gallery = :galleryId
+			ORDER BY m.createdAt ASC
 		');
         $query->setParameter('galleryId', $gallery->getId());
 

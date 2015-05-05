@@ -9,7 +9,14 @@ angular.module('gallery', [])
 	var galleryRes = $resource('/api/gallerys/:galleryId');
 	return {
 		getGalleries: function(){
-			return galleryRes.query();		
+			var galleries = galleryRes.query();
+			galleries.$promise.then(function(){
+				galleries.forEach(function(gallery){
+					gallery.medias = mediaAPI.getMedias(gallery.id);				
+				});			
+			});	
+			
+			return galleries;	
 		},
 		
 		getGallery: function(galleryId){

@@ -4,7 +4,12 @@
 	</div>
 	<ul class="row">
 		<li ng-repeat="gallery in galleries">
-			<a href="#/galleries/{{ gallery.id }}">{{ gallery.name }}</a>
+			<div>
+				<a href="#/galleries/{{ gallery.id }}">{{ gallery.name }}</a>			
+			</div>
+			<div>
+				<a href="#/galleries/{{ gallery.id }}"><img style="height: 100%; width: 100%;" ng-src="{{ gallery.medias[0] }}"/></a>
+			</div>
 		</li>
 	</ul>
 </div>
