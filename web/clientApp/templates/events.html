@@ -5,7 +5,7 @@
 	</div>
 	<ul class="newsList row">
 		<li ng-repeat="event in events">
-			<table class="row m20_0px">
+<!-- 			<table class="row m20_0px">
 			<tr class=" h27_lh27">
 				<td class="b1px">like</td>	
 				<td class="b1px">dislike</td>
@@ -20,14 +20,25 @@
 				<td class="b1px">{{ event.dislikesCount }}</td>
 				<td class="b1px">{{ event.currentUserOpinion.is_positive }}</td>
 			</tr>
-		</table>
+		</table> -->
 			<img style="" ng-src="{{ event.image }}"/>
 			<div class="description">
 				<h3><a href="#/news/{{ event.id }}">{{event.title}}</a></h3>
 				<p>{{event.text}}</p>
 			</div>
 			<div class="dateNews">
-				{{ event.event_date | timestampToFormat:'dd.MM.yyyy' }}
+				<span>{{ event.event_date | timestampToFormat:'dd.MM.yyyy' }}</span>
+				<span class="likesButton stepLike2">
+					<a href="" class="stepLike" ng-click="makeOpinion(event, true)" disabled>
+						<svg class="icon icon-thumbs-up"><use xlink:href="#icon-thumbs-up"></use></svg>
+					</a>
+					{{ event.likesCount }}
+					 / 
+					{{ event.dislikesCount }}
+					<a href="" class="stepLike " ng-click="makeOpinion(event, false)" disabled>
+						<svg class="icon icon-thumbs-down"><use xlink:href="#icon-thumbs-down"></use></svg>
+					</a>
+				</span>
 			</div>
 		</li>
 	</ul>

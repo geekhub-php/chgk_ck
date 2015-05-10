@@ -7,7 +7,6 @@
 			<ul>
 				<li class="" ng-repeat="game in games | limitTo:5">
 					<img ng-src="{{game.image}}" alt="" class="float-l mar13_0px">
-					<!-- <img src="clientApp/images/content.png" alt=""> -->
 					<h3><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></h3>
 					<div class="dateGame padding0_10">
 						<span class="date display">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
@@ -20,13 +19,12 @@
 
 	<article class="postNews mt_20" ng-controller="EventsController">
 		<div class="contentNewsHeader row mar13_0px">
-		<h2 class="newsName float-l   h27_lh27 pad0_7px">Новости клуба</h2>
-	</div>
+			<h2 class="newsName float-l   h27_lh27 pad0_7px">Новости клуба</h2>
+		</div>
 		<section class="news mt_20">
 			<ul>
 				<li class="" ng-repeat="event in events | limitTo:4">
 					<img class="eventImage mar13_0px" ng-src="{{ event.image }}"/>
-					<!-- <img src="clientApp/images/content2.png" alt=""> -->
 					<h3><a href="#/news/{{ event.id }}">{{event.title}}</a></h3>
 					<div class="preNews padding0_10">
 						<p>{{event.text}}</p>

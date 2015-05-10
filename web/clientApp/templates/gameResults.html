@@ -32,17 +32,17 @@
 	</div>
 	<div class="thisGame row">
 		<div class="blockDateGame row h27_lh27 fz16px">
-			<span class="float-l pad0_7px">Воскресенье, 28 февраля, 2015 </span>
-			<span class="gameTime float-l pad0_7px">12.25</span>
-			<span class="float-r pad0_7px">&copy;Черкасская обласная детская библиотека</span>
+			<span class="float-l pad0_7px">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
+			<!-- <span class="gameTime float-l pad0_7px">12.25</span> -->
+			<span class="float-r pad0_7px">{{ game.play_place }}</span>
 		</div>
-		<img src="#" alt="" class="float-l m10px" width="150" height="150">
-		<h3 class="gameHeader mar13_0px fz20px">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam, fugit.</h3>
-		<p class="gameDescription">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A officia quis quidem deleniti repudiandae laudantium qui eaque consequatur magni dolore, atque aperiam odio, magnam accusamus. Facere dolorem iste quia tenetur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id praesentium, cumque in sunt nihil facilis iste, hic numquam nesciunt porro sint harum earum culpa iusto repellat aliquid consectetur soluta ipsam. Est impedit molestias, repellendus, incidunt quasi voluptas tenetur provident id corporis aliquid vero eos nulla mollitia fugiat, assumenda dolores, praesentium?</p>
+		<img ng-src="{{ game.image }}" alt="" class="float-l m10px" width="150" height="150">
+		<h3 class="gameHeader mar13_0px fz20px">{{ game.name }}</h3>
+		<p class="gameDescription">{{ game.description }}</p>
 
 	</div>
 	<div class="tableGame row">
-		<table class="row m20_0px">
+<!-- 		<table class="row m20_0px">
 			<tr class=" h27_lh27">
 				<td class="b1px">name</td>	
 				<td class="b1px">date</td>
@@ -69,29 +69,36 @@
 				<td class="b1px">{{ game.description }}</td>	
 				<td class="b1px"><img ng-src="{{ game.image }}" style="height:50px; width:50px;" /></td>	
 			</tr>		
-		</table>
+		</table> -->
 		<table class="row m20_0px">
-			<tr class=" h27_lh27">
-				<th class="b1px" >place <a style="cursor: pointer; color: red" ng-click="predicate='-place'; reverse=!reverse">sort</a></th>
-				<th class="b1px" >score <a style="cursor: pointer; color: red" ng-click="predicate='-score'; reverse=!reverse">sort</a> </th>
-				<th class="b1px" >team/player</th>
-				<th class="b1px" >likes</th>
-				<th class="b1px" >dislikes</th>
-				<th class="b1px" >like</th>
-				<th class="b1px" >dislike</th>
+			<tr class="resultTableHead h27_lh27">
+				<th class="b1px" >Место <a style="cursor: pointer; color: red" ng-click="predicate='-place'; reverse=!reverse">sort</a></th>
+				<th class="b1px" >Команда</th>
+				<th class="b1px" >Очки <a style="cursor: pointer; color: red" ng-click="predicate='-score'; reverse=!reverse">sort</a> </th>
+				
+				<th class="b1px" >Возростная категория</th>
+				<th class="b1px" >Лайки</th>
 			</tr>
 			<tr class=" h27_lh27" ng-repeat="gameResult in gameResults | orderBy:predicate:reverse | filter: search">
 				<td class="b1px">{{ gameResult.place }}</td>
-				<td class="b1px">{{ gameResult.score }}</td>
+
 				<td class="b1px">
-					<span ng-show="gameResult.team.name">команда {{ gameResult.team.name }}</span>
-					/
-					<span ng-show="gameResult.player.last_name">игрок{{ gameResult.player.last_name }}</span>
+					<span ng-show="gameResult.team.name">{{ gameResult.team.name }}</span>
 				</td>
-				<td class="b1px">{{ gameResult.likesCount }}</td>
-				<td class="b1px">{{ gameResult.dislikesCount }}</td>
-				<td class="b1px"><button ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, true)">like</button> </td>
-				<td  class="b1px"><button ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, false)">dislike</button></td>
+				<td class="b1px">{{ gameResult.score }}</td>
+				<td class="b1px">{{ game.age_category.name }}</td>
+				<td class="b1px align-c likesButton">
+					
+					<a href="" ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, true)">
+						<svg class="icon icon-thumbs-up"><use xlink:href="#icon-thumbs-up"></use></svg>
+					</a>
+					{{ gameResult.likesCount }}
+					 / 
+					{{ gameResult.dislikesCount }}
+					<a href="" ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, false)">
+						<svg class="icon icon-thumbs-down"><use xlink:href="#icon-thumbs-down"></use></svg>
+					</a>
+				</td>
 			</tr>
 		</table>
 	</div>

@@ -177,17 +177,16 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 .eventComment{
 	margin-left: 5px;
 }
-.eventLike:before,
-.eventDislike:before,
-.eventComment:before{
-	width: 15px;
-	height: 10px;
-	content: "";
-	display: inline-block;
+.eventLike a,
+.eventDislike a{
+	height: 14px;
 }
-.eventLike:before{ background: url(../images/like.png) 50% 50% no-repeat;}
-.eventDislike:before{ background: url(../images/dislike.png) 50% 50% no-repeat;}
-.eventComment:before{ background: url(../images/like.png) 50% 50% no-repeat;}
+.eventLike a svg,
+.eventDislike a svg{
+	width: 16px;
+	height: 16px;
+	color: #B9B9B9;
+}
 /*=================TEAMS==============*/
 .teamsName{
 	background-color: #00B39C;
@@ -297,7 +296,7 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	width: 32% !important;
 	margin-right: 15px;
 	margin-top: 15px;
-	padding-bottom: 30px;
+	padding-bottom: 40px;
 	background-color: #D0E2F6;
 	padding-top: 5px;
 	position: relative;
@@ -330,8 +329,14 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 .dateNews{
 	position: absolute;
 	padding: 0 10px;
-	bottom: 10px;
+	bottom: 5px;
 	left: 0;
+	width: 90%;
+	line-height: 30px;
+}
+.stepLike2{
+	margin-left: 80px;
+	display: inline-block;
 }
 .loadNews{
 	display: inline-block;
@@ -536,14 +541,27 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	margin-bottom: 10px;
 }
 .social li{
-	background-color: #fff;
 	color: #4D4D4D;
-	width: 30px;
-	height: 30px;
+	width: 31px;
+	height: 32px;
 	font-size: 24px;
 	line-height: 30px;
 	text-align: center;
 	margin-right: 10px;
+}
+.social li a{
+	width: 30px;
+	height: 32px;
+	overflow: hidden;
+	line-height: 32px;
+	background-color: #444;
+	display: block;
+	border-radius: 6px;
+}
+svg{
+	fill: #fff !important;
+	width: 32px;
+	height: 32px;
 }
 .copy{
 	font-size: 18px;
@@ -885,6 +903,9 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 .teamDescription dt{
 	float: left;
 }
+.teamDescription p{
+	margin-top: 20px;
+}
 .playersTeamList li{
 	width: 31%;
 	margin-right: 15px;
@@ -960,4 +981,37 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	width: 100%;
 	height: 100%;
 	max-height: 200px;
+}
+
+
+
+
+.likesButton a{
+	width: 16px;
+	height: 16px;
+	margin-top: 5px;
+	display: inline-block;
+	border: 0;
+	outline: 0;
+	background-color: #fff;
+}
+.likesButton svg{
+	fill: #444 !important;
+	width: 16px;
+	height: 16px;
+}
+
+.resultTableHead{
+	background-color: rgb(210, 232, 251);
+}
+
+a.stepLike{
+	display: inline-block !important;
+	background-color: transparent;
+}
+
+.eventDateNews{
+	line-height: 30px;
+	font-size: 16px;
+	margin-bottom: 20px;
 }

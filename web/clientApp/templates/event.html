@@ -8,8 +8,24 @@
 	<div class="eventPost row">
 		<img class="eventImage" ng-src="{{ event.image }}"/>
 		<h3 class="eventTitle">{{ event.title }}</h3>
+
+		<div class="eventDateNews">
+			<span>{{ event.event_date | timestampToFormat:'dd.MM.yyyy' }}</span>
+			<span class="likesButton stepLike2">
+				<a href="" class="stepLike" ng-click="makeOpinion(event, true)" ng-disabled="userInfo.isLoggedIn">
+					<svg class="icon icon-thumbs-up"><use xlink:href="#icon-thumbs-up"></use></svg>
+				</a>
+				{{ event.likesCount }}
+				 / 
+				{{ event.dislikesCount }}
+				<a href="" class="stepLike " ng-click="makeOpinion(event, false)" ng-disabled="userInfo.isLoggedIn">
+					<svg class="icon icon-thumbs-down"><use xlink:href="#icon-thumbs-down"></use></svg>
+				</a>
+			</span>
+		</div>
+
 		<p>{{event.text}}</p>
-		<div>
+<!-- 		<div>
 		<table class="row m20_0px">
 			<tr class=" h27_lh27">
 				<td class="b1px">like</td>	
@@ -27,7 +43,7 @@
 			</tr>
 		</table>
 				
-		</div>
+		</div> -->
 		<div class="contentNewsHeader row mar13_0px">
 			<h2 class="newsName float-l   h27_lh27 pad0_7px">
 				Комментарии
