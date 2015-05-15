@@ -16,8 +16,8 @@ input[type=submit]             { cursor:pointer;}
 button                         { color: #444;}
 img, fieldset                  { border: #8b8b8b; }
 table                          { border-collapse:collapse; border-spacing:0; }
-a:link, a:visited              { font:12px "Myriad Pro", sans-serif; color:#4d4d4d; fill:#777; text-decoration:none; }
-a:hover                        { text-decoration:none; color: #F09215; fill:#F09215;}
+a:link, a:visited              { font:12px "Myriad Pro", sans-serif; color:#4d4d4d; text-decoration:none; }
+a:hover                        { text-decoration:none; color: #F09215;}
 /*----------------------------------------------------------------------------------*/
 /*-------------------------------------DEFAULT CLASSES------------------------------*/
 /*----------------------------------------------------------------------------------*/
@@ -103,7 +103,8 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	padding: 0 20px;
 }
 .userLogo{
-	width: 77%;
+	width: 150px;
+	height: 150px;
 	display:block;
 	border-radius: 50%;
 	margin: 0px auto;
@@ -306,8 +307,7 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 }
 .newsList li img{
 	width: 100%;
-	height: auto;
-	max-height: 220px;
+	height: 150px;
 }
 .description{
 	padding: 0 10px;
@@ -486,6 +486,9 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 .tablePlayersList td:first-child{
 	width: 65% !important;
 }
+.tablePlayersList span{
+	display: block;
+}
 /*=================AboutClub==========*/
 /*====================================*/
 .clubFoto{
@@ -558,8 +561,8 @@ nav.about .about{ background-color: #BAE788; color: #fff;}
 	display: block;
 	border-radius: 6px;
 }
-svg{
-	fill: #fff !important;
+.social li a svg{
+	fill: #fff;
 	width: 32px;
 	height: 32px;
 }
@@ -571,29 +574,42 @@ svg{
 .contentGalleryHeader{
 	border-bottom: 2px solid #3381B5;
 }
+.gallerysList div{
+	position: absolute;
+	text-align: center;
+	bottom: 0;
+	left: 0;
+	padding: 5px;
+	background-color: rgba(200,200,200, .7);
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
 .galleryName{
 	background-color: #3381B5;
 	color: #fff;
 	font-size: 24px;
 	text-transform: uppercase;
 }
-.gallerysContent li{
+.gallerysList li{
 	width: 172px;
-	height: 180px;
+	height: auto;
+	position: relative;
 	float: left;
 	background-color: #eee;
 	margin-right: 20px;
 	margin-top: 20px;
 }
-.gallerysContent li a{
+.gallerysList li a{
 	display: block;
 	height: 100%;
 	color: #000;
 }
-.gallerysContent li:nth-child(4n){
+.gallerysList li:nth-child(4n){
 	margin-right: 0;
 }
-.gallerysContent li:hover{
+.gallerysList li:hover{
 	box-shadow: 0 0 7px #444;
 }
 /*====================================*/
@@ -671,7 +687,7 @@ svg{
 
 /*===================classGAMES=============*/
 .postGame {
-	height: 440px;
+	height: 340px;
 	overflow: hidden;
 	font-size: 12px;
 	line-height: 14px;
@@ -684,7 +700,7 @@ svg{
 	font-size: 16px;
 }
 .games li:not(:first-child) {
-	height: 90px;
+	height: 70px;
 	width: 338px;
 	float: right;
 	margin-right: 1px;
@@ -699,7 +715,7 @@ svg{
 }
 .games li:first-child {
 	width: 360px;
-	height: 360px;
+	height: 280px;
 	float: left;
 	background-color: #EEF5E8;
 }
@@ -708,11 +724,13 @@ svg{
 }
 .games li img {
 	display: none;
-	width: 360px;
-	height: 250px;
+	width: auto;
+	height: 185px;
 }
 .games li:first-child img {
 	display: block;
+	clear: both;
+	margin: 13px auto;
 }
 .games h3 {
 	padding: 5px 10px;
@@ -917,7 +935,7 @@ svg{
 }
 .playersTeamList li img{
 	width: 100%;
-	height: auto;
+	height: 200px;
 }
 .playersDesc{
 	bottom: 0;
@@ -940,13 +958,18 @@ svg{
 	width: 100%;
 	margin: 20px 0;
 }
+.playerInfo table tr{
+	height: 27px;
+	border-bottom: 1px solid #777;
+	-webkit-box-shadow: inset 0px 2px 0px #fff;
+	box-shadow: inset 0px 2px 0px #fff;
+
+}
 .playerInfo h3{
-	font-size: 18px;
 	line-height: 22px;
 }
 .playerTableRow{
 	background-color: #008DB1;
-	height: 27px;
 }
 .seasonHead{
 	width: 250px;
@@ -979,10 +1002,8 @@ svg{
 }
 .galleryList li img{
 	width: 100%;
-	height: 100%;
-	max-height: 200px;
+	height: 200px;
 }
-
 
 
 
@@ -996,7 +1017,7 @@ svg{
 	background-color: #fff;
 }
 .likesButton svg{
-	fill: #444 !important;
+	fill: #444;
 	width: 16px;
 	height: 16px;
 }
@@ -1008,10 +1029,14 @@ svg{
 a.stepLike{
 	display: inline-block !important;
 	background-color: transparent;
+	fill: #fff;
 }
 
 .eventDateNews{
 	line-height: 30px;
 	font-size: 16px;
 	margin-bottom: 20px;
+}
+.svgIcon{
+	display: none;
 }

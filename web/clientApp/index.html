@@ -21,7 +21,7 @@
 	<script type="text/javascript" src="clientApp/js/components/media.js"></script>
 </head>
 <body>
-<svg class="pos-a">
+<svg class="pos-a svgIcon">
 	<defs>
 		<symbol id="icon-blogger2" viewBox="0 0 1024 1024">
 			<title>blogger2</title>
@@ -70,11 +70,10 @@
 		<aside class="aside">
 			<div class="userBlock" ng-controller="UserPanelController">
 				<div class="userTeam userLogin bb2px">
-					<img ng-src="{{userInfo.image}}" alt="" class="userLogo">
-					<!-- <img src="clientApp/images/userLogoDefault.png" alt="" class="userLogo"> -->
-					<p class="userFirstName" ng-show="userInfo.isLoggedIn">{{ userInfo.username }}</p>
+					<img ng-show="userInfo.isLoggedIn" ng-src="{{userInfo.image}}" alt="" class="userLogo">
+					<img ng-hide="userInfo.isLoggedIn" src="clientApp/images/userLogoDefault.png" alt="" class="userLogo">
+					<p class="userFirstName" ng-show="userInfo.isLoggedIn">{{ userInfo.username }} </p>
 					<a ng-hide="userInfo.isLoggedIn" href="/register">Регистация</a>
-					<!-- <a ng-hide="userInfo.isLoggedIn" href="/login">Войти</a> -->
 					<a ng-hide="userInfo.isLoggedIn" id="go" href="/login">Войти</a>
 					<a ng-show="userInfo.isLoggedIn" href="/profile/edit">Редактировать</a>
 					<a ng-show="userInfo.isLoggedIn" href="/logout">Выход</a>
@@ -104,7 +103,6 @@
 								</a>
 								{{ event.dislikesCount }}
 							</span>
-							<!-- <span class="eventComment">5</span> -->
 						</div>
 					</li>
 				</ul>

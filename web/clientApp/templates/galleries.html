@@ -2,14 +2,12 @@
 	<div class="contentGalleryHeader row mar13_0px">
 		<h2 class="galleryName float-l h27_lh27 pad0_7px">Галерея клуба</h2>
 	</div>
-	<ul class="row">
+	<ul class="row gallerysList">
 		<li ng-repeat="gallery in galleries">
 			<div>
-				<a href="#/galleries/{{ gallery.id }}">{{ gallery.name }}</a>			
+				<a href="#/galleries/{{ gallery.id }}">{{ gallery.name }}</a>
 			</div>
-			<div>
-				<a href="#/galleries/{{ gallery.id }}"><img style="height: 100%; width: 100%;" ng-src="{{ gallery.medias[0] }}"/></a>
-			</div>
+			<a href="#/galleries/{{ gallery.id }}"><img style="height: 100%; width: 100%;" ng-src="{{ gallery.medias[0] }}"/></a>
 		</li>
 	</ul>
 </div>

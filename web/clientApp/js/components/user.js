@@ -9,10 +9,10 @@ angular.module('user', [])
 			var userInfo = $http.get(url);
 			userInfo.then(function(response){
 				 userInfo.username = response.data.username;
-				 userInfo.isLoggedIn = !!response.data.username;	
+				 userInfo.isLoggedIn = !!response.data.username;
+				 userInfo.image = response.data.image;
 			});
-			
-			return userInfo;	
-		}	
+			return userInfo;
+		}
 	};
 }]);

@@ -1,7 +1,7 @@
 <div class="playerContent">
 	<img ng-show="player.image" ng-src="{{ player.image }}" class="float-l w120px_h170px" />
 	<div class="playerInfo">
-		<h3>{{ player.first_name }} {{ player.middle_name }} {{ player.last_name }}</h3>
+		<h3 class="fz20px">{{ player.first_name }} {{ player.middle_name }} {{ player.last_name }}</h3>
 		<p>День рождения: {{ player.dob | timestampToFormat:'dd.MM.yyyy' }}</p>
 		<table>
 			<tr class="playerTableRow">
@@ -10,12 +10,12 @@
 			</tr>
 			<tr>
 				<td>
-					<span ng-repeat="pa in player.team_player_associations">
+					<span class="display fz16px" ng-repeat="pa in player.team_player_associations">
 						{{ pa.team.name }}
 					</span>
 				</td>
 				<td>
-					<span ng-repeat="pa in player.team_player_associations">
+					<span class="display fz16px" ng-repeat="pa in player.team_player_associations">
 						{{ pa.team.name }}
 					</span>
 				</td>
