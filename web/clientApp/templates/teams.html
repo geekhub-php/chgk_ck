@@ -1,0 +1,21 @@
+<html>
+	<body>
+		<input placeholder="поиск" ng-model="query" />
+		<table>
+			<tr>
+				<td>место</td>
+				<td>название</td>
+				<td>рейтинг <a style="cursor: pointer; color: red" ng-click="reverse=!reverse">sort</a></td>	
+				<td>категория</td>			
+				<td></td>			
+			</tr>
+			<tr ng-repeat="team in teams | filter: search | orderBy:predicate:reverse">
+				<td>{{ $index + 1 }}</td>
+				<td>{{ team.name }}</td>
+				<td>{{ team.rating }}</td>	
+				<td>{{ team.age_category.name }}</td>
+				<td><a href="#/team/{{ team.id }}" >click</a></td>			
+			</tr>	
+		</table>	
+	</body>
+</html>

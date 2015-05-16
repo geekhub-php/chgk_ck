@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Validator\Constraints as CustomAssert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -13,11 +14,12 @@ class PlayerEvent extends Event
     /**
      * @ORM\ManyToMany(targetEntity="Player")
      * @CustomAssert\EntitiesExist(associatedEntity="Player", message="players with ids %ids% are non-exist")
+     * @JMS\Groups({"eventFull"})
      */
     private $players;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -26,9 +28,10 @@ class PlayerEvent extends Event
     }
 
     /**
-     * Add players
+     * Add players.
      *
-     * @param  \AppBundle\Entity\Player $players
+     * @param \AppBundle\Entity\Player $players
+     *
      * @return PlayerEvent
      */
     public function addPlayer(\AppBundle\Entity\Player $players)
@@ -39,7 +42,7 @@ class PlayerEvent extends Event
     }
 
     /**
-     * Remove players
+     * Remove players.
      *
      * @param \AppBundle\Entity\Player $players
      */
@@ -49,7 +52,7 @@ class PlayerEvent extends Event
     }
 
     /**
-     * Get players
+     * Get players.
      *
      * @return \Doctrine\Common\Collections\Collection
      */

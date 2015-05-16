@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -13,24 +13,24 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class MembershipType
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"membershipTypesFull", "short"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50, unique=true, nullable=false)
-     * @Assert\Regex("/^[A-zА-я іїє]{2,50}$/", message="name is not valid")
+     * @Assert\Length(min = 2, max = 255)
      * @Assert\NotBlank()
+     * @JMS\Groups({"membershipTypesFull"})
      */
     private $name;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -40,9 +40,20 @@ class MembershipType
     }
 
     /**
-     * Set name
+     * Get name.
      *
-     * @param  string         $name
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
      * @return MembershipType
      */
     public function setName($name)
@@ -50,15 +61,5 @@ class MembershipType
         $this->name = $name;
 
         return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 }

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
@@ -14,36 +14,38 @@ use AppBundle\Traits\TimestampableTrait;
  */
 class AgeCategory
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"ageCategoryFull", "short"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\Regex("/^[A-zА-я іїє]{2,255}$/", message="name is not valid")
      * @Assert\NotBlank(message="should not be blank")
+     * @Assert\Length(min = 2, max = 255)
+     * @JMS\Groups({"ageCategoryFull"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="text", nullable=false)
      * @Assert\NotBlank(message="should not be blank")
+     * @JMS\Groups({"ageCategoryFull"})
      */
     private $description;
 
     /**
      * @Gedmo\Slug(fields={"name"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"ageCategoryFull"})
      */
     private $slug;
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -53,9 +55,20 @@ class AgeCategory
     }
 
     /**
-     * Set name
+     * Get name.
      *
-     * @param  string      $name
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
      * @return AgeCategory
      */
     public function setName($name)
@@ -66,19 +79,20 @@ class AgeCategory
     }
 
     /**
-     * Get name
+     * Get description.
      *
      * @return string
      */
-    public function getName()
+    public function getDescription()
     {
-        return $this->name;
+        return $this->description;
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string      $description
+     * @param string $description
+     *
      * @return AgeCategory
      */
     public function setDescription($description)
@@ -89,19 +103,20 @@ class AgeCategory
     }
 
     /**
-     * Get description
+     * Get slug.
      *
      * @return string
      */
-    public function getDescription()
+    public function getSlug()
     {
-        return $this->description;
+        return $this->slug;
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string      $slug
+     * @param string $slug
+     *
      * @return AgeCategory
      */
     public function setSlug($slug)
@@ -109,15 +124,5 @@ class AgeCategory
         $this->slug = $slug;
 
         return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

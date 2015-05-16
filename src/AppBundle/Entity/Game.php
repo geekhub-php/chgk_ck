@@ -6,19 +6,18 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
  */
 class Game
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"gameFull", "short"})
      */
     private $id;
 
@@ -26,6 +25,7 @@ class Game
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
      * @Assert\Length(min = 2, max = 255)
+     * @JMS\Groups({"gameFull"})
      */
     private $name;
 
@@ -33,39 +33,46 @@ class Game
      * @ORM\Column(type="integer", nullable=false)
      * @CustomAssert\FutureTimestamp(groups={"creating"})
      * @Assert\NotNull()
+     * @JMS\Groups({"gameFull"})
      */
     private $playDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Assert\NotBlank()
-     * @Assert\Length(min = 2, max = 255)
+     * @Assert\Regex("/^[A-zА-я ІіЇїЄє'\-]{2,255}$/u", message="playe place is not valid")
+     * @JMS\Groups({"gameFull"})
      */
     private $playPlace;
 
     /**
      * @ORM\ManyToOne(targetEntity="Season")
      * @CustomAssert\EntitiesExist(associatedEntity="Season", message="season with id %ids% is non-exist")
+     * @JMS\Groups({"gameFull"})
      */
     private $season;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @JMS\Groups({"gameFull"})
      */
     private $isLocallyRated;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @JMS\Groups({"gameFull"})
      */
     private $isGloballyRated;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @JMS\Groups({"gameFull"})
      */
     private $isHome;
 
     /**
      * @ORM\Column(type="boolean", nullable=false)
+     * @JMS\Groups({"gameFull"})
      */
     private $isComplete;
 
@@ -73,23 +80,40 @@ class Game
      * @ORM\ManyToOne(targetEntity="AgeCategory")
      * @ORM\JoinColumn(name="age_category_id", referencedColumnName="id", nullable=false)
      * @CustomAssert\EntitiesExist(associatedEntity="AgeCategory", message="age category with id %ids% is non-exist")
+     * @Assert\NotNull()
+     * @JMS\Groups({"gameFull"})
      */
     private $ageCategory;
 
     /**
      * @ORM\Column(type="text", nullable=false)
-     * @Assert\NotNull()
+     * @Assert\NotBlank()
+     * @JMS\Groups({"gameFull"})
      */
     private $description;
 
     /**
      * @Gedmo\Slug(fields={"name"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"gameFull"})
      */
     private $slug;
 
     /**
-     * Get id
+     * @ORM\OneToMany(targetEntity="GameResult", mappedBy="game")
+     */
+    private $gameResults;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->gameResults = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Get id.
      *
      * @return integer
      */
@@ -99,9 +123,20 @@ class Game
     }
 
     /**
-     * Set name
+     * Get name.
      *
-     * @param  string $name
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
      * @return Game
      */
     public function setName($name)
@@ -112,19 +147,20 @@ class Game
     }
 
     /**
-     * Get name
+     * Get playDate.
      *
-     * @return string
+     * @return integer
      */
-    public function getName()
+    public function getPlayDate()
     {
-        return $this->name;
+        return $this->playDate;
     }
 
     /**
-     * Set playDate
+     * Set playDate.
      *
-     * @param  integer $playDate
+     * @param integer $playDate
+     *
      * @return Game
      */
     public function setPlayDate($playDate)
@@ -135,19 +171,20 @@ class Game
     }
 
     /**
-     * Get playDate
+     * Get playPlace.
      *
-     * @return integer
+     * @return string
      */
-    public function getPlayDate()
+    public function getPlayPlace()
     {
-        return $this->playDate;
+        return $this->playPlace;
     }
 
     /**
-     * Set playPlace
+     * Set playPlace.
      *
-     * @param  string $playPlace
+     * @param string $playPlace
+     *
      * @return Game
      */
     public function setPlayPlace($playPlace)
@@ -158,19 +195,20 @@ class Game
     }
 
     /**
-     * Get playPlace
+     * Get isLocallyRated.
      *
-     * @return string
+     * @return boolean
      */
-    public function getPlayPlace()
+    public function getIsLocallyRated()
     {
-        return $this->playPlace;
+        return $this->isLocallyRated;
     }
 
     /**
-     * Set isLocallyRated
+     * Set isLocallyRated.
      *
-     * @param  boolean $isLocallyRated
+     * @param boolean $isLocallyRated
+     *
      * @return Game
      */
     public function setIsLocallyRated($isLocallyRated)
@@ -181,19 +219,20 @@ class Game
     }
 
     /**
-     * Get isLocallyRated
+     * Get isGloballyRated.
      *
      * @return boolean
      */
-    public function getIsLocallyRated()
+    public function getIsGloballyRated()
     {
-        return $this->isLocallyRated;
+        return $this->isGloballyRated;
     }
 
     /**
-     * Set isGloballyRated
+     * Set isGloballyRated.
      *
-     * @param  boolean $isGloballyRated
+     * @param boolean $isGloballyRated
+     *
      * @return Game
      */
     public function setIsGloballyRated($isGloballyRated)
@@ -204,19 +243,20 @@ class Game
     }
 
     /**
-     * Get isGloballyRated
+     * Get isHome.
      *
      * @return boolean
      */
-    public function getIsGloballyRated()
+    public function getIsHome()
     {
-        return $this->isGloballyRated;
+        return $this->isHome;
     }
 
     /**
-     * Set isHome
+     * Set isHome.
      *
-     * @param  boolean $isHome
+     * @param boolean $isHome
+     *
      * @return Game
      */
     public function setIsHome($isHome)
@@ -227,19 +267,20 @@ class Game
     }
 
     /**
-     * Get isHome
+     * Get isComplete.
      *
      * @return boolean
      */
-    public function getIsHome()
+    public function getIsComplete()
     {
-        return $this->isHome;
+        return $this->isComplete;
     }
 
     /**
-     * Set isComplete
+     * Set isComplete.
      *
-     * @param  boolean $isComplete
+     * @param boolean $isComplete
+     *
      * @return Game
      */
     public function setIsComplete($isComplete)
@@ -250,19 +291,20 @@ class Game
     }
 
     /**
-     * Get isComplete
+     * Get description.
      *
-     * @return boolean
+     * @return string
      */
-    public function getIsComplete()
+    public function getDescription()
     {
-        return $this->isComplete;
+        return $this->description;
     }
 
     /**
-     * Set description
+     * Set description.
      *
-     * @param  string $description
+     * @param string $description
+     *
      * @return Game
      */
     public function setDescription($description)
@@ -273,19 +315,20 @@ class Game
     }
 
     /**
-     * Get description
+     * Get slug.
      *
      * @return string
      */
-    public function getDescription()
+    public function getSlug()
     {
-        return $this->description;
+        return $this->slug;
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return Game
      */
     public function setSlug($slug)
@@ -296,19 +339,20 @@ class Game
     }
 
     /**
-     * Get slug
+     * Get season.
      *
-     * @return string
+     * @return \AppBundle\Entity\Season
      */
-    public function getSlug()
+    public function getSeason()
     {
-        return $this->slug;
+        return $this->season;
     }
 
     /**
-     * Set season
+     * Set season.
      *
-     * @param  \AppBundle\Entity\Season $season
+     * @param \AppBundle\Entity\Season $season
+     *
      * @return Game
      */
     public function setSeason(\AppBundle\Entity\Season $season = null)
@@ -319,19 +363,20 @@ class Game
     }
 
     /**
-     * Get season
+     * Get ageCategory.
      *
-     * @return \AppBundle\Entity\Season
+     * @return \AppBundle\Entity\AgeCategory
      */
-    public function getSeason()
+    public function getAgeCategory()
     {
-        return $this->season;
+        return $this->ageCategory;
     }
 
     /**
-     * Set ageCategory
+     * Set ageCategory.
      *
-     * @param  \AppBundle\Entity\AgeCategory $ageCategory
+     * @param \AppBundle\Entity\AgeCategory $ageCategory
+     *
      * @return Game
      */
     public function setAgeCategory(\AppBundle\Entity\AgeCategory $ageCategory)
@@ -342,12 +387,43 @@ class Game
     }
 
     /**
-     * Get ageCategory
+     * Add gameResults.
      *
-     * @return \AppBundle\Entity\AgeCategory
+     * @param \AppBundle\Entity\GameResult $gameResults
+     *
+     * @return Game
      */
-    public function getAgeCategory()
+    public function addGameResult(\AppBundle\Entity\GameResult $gameResults)
     {
-        return $this->ageCategory;
+        $this->gameResults[] = $gameResults;
+
+        return $this;
+    }
+
+    /**
+     * Remove gameResults.
+     *
+     * @param \AppBundle\Entity\GameResult $gameResults
+     */
+    public function removeGameResult(\AppBundle\Entity\GameResult $gameResults)
+    {
+        $this->gameResults->removeElement($gameResults);
+    }
+
+    /**
+     * Get gameResults.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGameResults()
+    {
+        return $this->gameResults;
+    }
+
+    public function getGameResult($id)
+    {
+        return $this->gameResults->filter(function ($res) use ($id) {
+            return $res->getId() == $id;
+        })->first();
     }
 }

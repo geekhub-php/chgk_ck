@@ -6,40 +6,42 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as CustomAssert;
 use Gedmo\Mapping\Annotation as Gedmo;
-use AppBundle\Traits\TimestampableTrait;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity
  */
 class Player
 {
-    use TimestampableTrait;
-
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @JMS\Groups({"playerFull", "short"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
-     * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/")
+     * @Assert\Regex("/^[A-zА-яІіЇїЄє']{1,50}$/u")
      * @Assert\NotBlank()
+     * @JMS\Groups({"playerFull"})
      */
     private $firstName;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
-     * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/")
+     * @Assert\Regex("/^[A-zА-яІіЇїЄє']{1,50}$/u")
      * @Assert\NotBlank()
+     * @JMS\Groups({"playerFull"})
      */
     private $lastName;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
-     * @Assert\Regex("/^[A-zА-яіїє']{1,50}$/")
+     * @Assert\Regex("/^[A-zА-яІіЇїЄє']{1,50}$/u")
      * @Assert\NotBlank()
+     * @JMS\Groups({"playerFull"})
      */
     private $middleName;
 
@@ -47,22 +49,31 @@ class Player
      * @ORM\Column(type="integer", nullable=false)
      * @CustomAssert\PastTimestamp()
      * @Assert\NotNull()
+     * @JMS\Groups({"playerFull"})
      */
     private $dob;
 
     /**
      * @ORM\OneToMany(targetEntity="TeamPlayerAssociation", mappedBy="player")
+     * @JMS\Groups({"playerFull"})
      */
     private $teamPlayerAssociations;
 
     /**
      * @Gedmo\Slug(fields={"lastName"})
-	 * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @ORM\Column(type="string", length=255, unique=true, nullable=false)
+     * @JMS\Groups({"playerFull"})
      */
     private $slug;
 
     /**
-     * Constructor
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", cascade={"all"})
+     * @JMS\Groups({"playerFull"})
+     */
+    private $image;
+
+    /**
+     * Constructor.
      */
     public function __construct()
     {
@@ -70,7 +81,7 @@ class Player
     }
 
     /**
-     * Get id
+     * Get id.
      *
      * @return integer
      */
@@ -80,9 +91,20 @@ class Player
     }
 
     /**
-     * Set firstName
+     * Get firstName.
      *
-     * @param  string $firstName
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set firstName.
+     *
+     * @param string $firstName
+     *
      * @return Player
      */
     public function setFirstName($firstName)
@@ -93,19 +115,20 @@ class Player
     }
 
     /**
-     * Get firstName
+     * Get lastName.
      *
      * @return string
      */
-    public function getFirstName()
+    public function getLastName()
     {
-        return $this->firstName;
+        return $this->lastName;
     }
 
     /**
-     * Set lastName
+     * Set lastName.
      *
-     * @param  string $lastName
+     * @param string $lastName
+     *
      * @return Player
      */
     public function setLastName($lastName)
@@ -116,19 +139,20 @@ class Player
     }
 
     /**
-     * Get lastName
+     * Get middleName.
      *
      * @return string
      */
-    public function getLastName()
+    public function getMiddleName()
     {
-        return $this->lastName;
+        return $this->middleName;
     }
 
     /**
-     * Set middleName
+     * Set middleName.
      *
-     * @param  string $middleName
+     * @param string $middleName
+     *
      * @return Player
      */
     public function setMiddleName($middleName)
@@ -139,19 +163,20 @@ class Player
     }
 
     /**
-     * Get middleName
+     * Get dob.
      *
-     * @return string
+     * @return integer
      */
-    public function getMiddleName()
+    public function getDob()
     {
-        return $this->middleName;
+        return $this->dob;
     }
 
     /**
-     * Set dob
+     * Set dob.
      *
-     * @param  integer $dob
+     * @param integer $dob
+     *
      * @return Player
      */
     public function setDob($dob)
@@ -162,19 +187,20 @@ class Player
     }
 
     /**
-     * Get dob
+     * Get slug.
      *
-     * @return integer
+     * @return string
      */
-    public function getDob()
+    public function getSlug()
     {
-        return $this->dob;
+        return $this->slug;
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
-     * @param  string $slug
+     * @param string $slug
+     *
      * @return Player
      */
     public function setSlug($slug)
@@ -185,19 +211,10 @@ class Player
     }
 
     /**
-     * Get slug
+     * Add teamPlayerAssociations.
      *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Add teamPlayerAssociations
+     * @param \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      *
-     * @param  \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      * @return Player
      */
     public function addTeamPlayerAssociation(\AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations)
@@ -208,7 +225,7 @@ class Player
     }
 
     /**
-     * Remove teamPlayerAssociations
+     * Remove teamPlayerAssociations.
      *
      * @param \AppBundle\Entity\TeamPlayerAssociation $teamPlayerAssociations
      */
@@ -218,12 +235,36 @@ class Player
     }
 
     /**
-     * Get teamPlayerAssociations
+     * Get teamPlayerAssociations.
      *
      * @return \Doctrine\Common\Collections\Collection
      */
     public function getTeamPlayerAssociations()
     {
         return $this->teamPlayerAssociations;
+    }
+
+    /**
+     * Get image.
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set image.
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     *
+     * @return Player
+     */
+    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
     }
 }

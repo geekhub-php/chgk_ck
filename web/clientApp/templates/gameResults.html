@@ -1,0 +1,36 @@
+<html>
+<head>
+	<style>
+		table td {
+			border:solid 1px;		
+		}
+		table {border-collapse: collapse;}
+	</style>
+</head>
+	<body>
+		<input placeholder="поиск" ng-model="query" />
+		<table summary="" >
+			<tr>
+				<td>place <a style="cursor: pointer; color: red" ng-click="predicate='-place'; reverse=!reverse">sort</a></td>
+				<td>score <a style="cursor: pointer; color: red" ng-click="predicate='-score'; reverse=!reverse">sort</a> </td>
+				<td>team/player</td>
+				<td>likes</td>	
+				<td>dislikes</td>
+				<td>current user opinion</td>	
+				<td>like</td>
+				<td>dislike</td>	
+			</tr>
+			<tr ng-repeat="gameResult in gameResults | orderBy:predicate:reverse | filter: search">
+				<td>{{ gameResult.place }}</td>
+				<td>{{ gameResult.score }}</td>
+				<td ng-show="gameResult.player.last_name">игрок {{ gameResult.player.last_name }}</td>
+				<td ng-show="gameResult.team.name">команда {{ gameResult.team.name }}</td>
+				<td>{{ gameResult.likesCount }}</td>		
+				<td>{{ gameResult.dislikesCount }}</td>
+				<td>{{ gameResult.currentUserOpinion.is_positive }}</td>
+				<td><button ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, true)">like</button></td>	
+				<td><button ng-show="userInfo.isLoggedIn" ng-click="makeResultOpinion(gameResult, false)">dislike</button></td>	
+			</tr>
+		</table>
+	</body>
+</html>
