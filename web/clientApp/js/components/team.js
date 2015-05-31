@@ -10,7 +10,7 @@ angular.module('team', [])
 		}
 	}
 	$scope.predicate = '-rating';
-  	$scope.reverse = false;
+	$scope.reverse = false;
 }])
 .controller('TeamController', ['$scope', 'teamAPI', '$routeParams', function($scope, teamAPI, $routeParams){
 	$scope.team = teamAPI.getTeam($routeParams.teamId);

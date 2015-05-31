@@ -1,0 +1,932 @@
+html,body                       { width:100%; height:100%; }
+body                            { padding:0; margin:0; font:12px Arial, sans-serif; background:#fbfbfb; color:#4a4a4a; line-height: 16px;}
+div,p,a,span,em,strong,img,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,td,tr,form,fieldset,label,select,checkbox,input,textarea {
+	padding:0;
+	margin:0;
+	outline:none;
+	list-style:none;
+}
+select, input, textarea        { font-size:12px; vertical-align:middle; }
+textarea                       { vertical-align:top; }
+:focus                         { outline:none; }
+input[type=submit]             { cursor:pointer;}
+button                         { color: #444;}
+img, fieldset                  { border: #8b8b8b; }
+table                          { border-collapse:collapse; border-spacing:0; }
+a:link, a:visited              { font:12px "Myriad Pro", sans-serif; color:#4d4d4d; text-decoration:none; }
+a:hover                        { text-decoration:none; color: #F09215;}
+/*----------------------------------------------------------------------------------*/
+/*-------------------------------------DEFAULT CLASSES------------------------------*/
+/*----------------------------------------------------------------------------------*/
+.float-r           	           { float:right !important; }
+.float-l                       { float:left !important; }
+.no-float                      { float:none !important; }
+.no-border                     { border:0 !important; }
+.no-bg                         { background:none !important; }
+.no-margin                     { margin:0 !important; }
+.no-padding                    { padding:0 !important; }
+.no-display                    { display:none !important; }
+.display                       { display:block !important; }
+.inline                        { display:inline !important; }
+.inline-block                  { display: inline-block !important; }
+.overflow                      { overflow:hidden !important; }
+.align-r                       { text-align:right !important; }
+.align-l                       { text-align:left !important; }
+.align-c                       { text-align:center !important; }
+.clear                         { clear:both; }
+.inline-block                  { display: inline-block !important; }
+.pos-a                         { position: absolute !important; }
+.pos-r                         { position: relative !important; }
+/*------------------------------WRAPPER-----------------------------*/
+svg{
+	width: 16px;
+	height: 16px;
+	fill: #eee;
+	color: #fff;
+}
+body{
+	background-color: #f9f9f9;
+}
+.wrapper{
+	max-width: 1024px;
+	background-color: #fff;
+	min-height: calc(100% - 140px);
+}
+header{
+	height: 180px;
+}
+nav{
+	margin-top: 85px;
+	display: table;
+}
+nav a{
+	display: table-cell;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 18px !important;
+}
+.logo{
+	width: 110px;
+}
+.logo img{
+	width: 110px;
+	height: 180px;
+}
+nav.games .games{ background-color: #81C159; color: #fff;}
+nav.news .news{ background-color: #A4C1DF; color: #fff;}
+nav.teams .teams{ background-color: #00B39C; color: #fff;}
+nav.players .players{ background-color: #008DB1; color: #fff;}
+nav.galleries .galleries{ background-color: #3381B5; color: #fff;}
+nav.kalendar .kalendar{ background-color: #DC818B; color: #fff;}
+nav.about .about{ background-color: #BAE788; color: #fff;}
+/*=======================================================*/
+/*=======================================================*/
+/*=======================================================*/
+aside{
+	background-color: #5B5B59;
+}
+aside a{
+	color: #d9d9d9 !important;
+}
+aside a:hover{
+	color: #fff !important;
+}
+aside h3{
+	color: #d9d9d9;
+}
+.userBlock{
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e9e9e9;
+}
+.userLogo{
+	width: 150px;
+	height: 150px;
+	margin: 20px auto;
+	display: block;
+	border-radius: 50%;
+}
+.userFirstName{
+	text-transform: uppercase;
+	color: #d9d9d9;
+	text-align: center;
+	margin: 0 0 20px;
+	font-size: 20px;
+	line-height: 22px;
+}
+a.loginBtn{
+	width: 170px;
+	text-align: center;
+	padding: 6px 0;
+	display: block;
+	margin: 10px auto;
+	border: 1px solid #d9d9d9;
+	color: #d9d9d9;
+	-webkit-box-shadow: inset 1px 1px 2px #d9d9d9;
+	box-shadow: inset 1px 1px 2px #d9d9d9;
+}
+a.loginBtn:hover{
+	color: #fff;
+	border: 1px solid #fff;
+	-webkit-box-shadow: inset -1px -1px 2px #fff;
+	box-shadow: inset -1px -1px 2px #fff;
+}
+.blockTopTeams,
+.blockTopNews{
+	padding: 10px 0;
+	border-bottom: 1px solid #e9e9e9;
+}
+.topNewsList,
+.topTeamsList{
+	padding: 10px 0;
+}
+.topNewsList li,
+.topTeamsList li{
+	margin-top: 10px;
+}
+
+
+
+/*=======================================================*/
+/*=======================================================*/
+/*=======================================================*/
+footer{
+	height: 120px;
+	background-color: #5B5B59;
+	margin-top: 20px;
+}
+.footerInner{
+	max-width: 1024px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 20px 0;
+	height: 120px;
+}
+.copy{
+	font-size: 24px;
+	color: #fff;
+}
+.socialList li{
+	
+}
+.socialList{
+	margin-bottom: 20px;
+}
+.socialList a{
+	display: block;
+	background-color: #fff;
+	width: 40px;
+	height: 40px;
+	margin-left: 20px;
+}
+
+
+/*=======================================================*/
+/*===HOME===============================================*/
+/*=======================================================*/
+.gamesName,
+.newsName{
+	font-size: 20px;
+	text-transform: uppercase;
+}
+.contentGamesHeader{
+	border-bottom: 2px solid #81C159;
+}
+.gamesName{
+	background-color: #81C159;
+	display: inline-block;
+	color: #fff;
+}
+.contentNewsHeader{
+	border-bottom: 2px solid #A4C1DF;
+}
+.newsName{
+	background-color: #A4C1DF;
+	display: inline-block;
+	color: #fff;
+}
+.gamesList li{
+	height: 70px;
+}
+.gamesList li img{
+	display: none;
+}
+.gamesList li:first-child{
+	height: 280px;
+	background-color: #EBFFDE;
+}
+.gamesList li:first-child img{
+	display: block;
+	margin: 10px auto;
+}
+
+.gamesList h3,
+.newsList h3{
+	line-height: 18px;
+	max-height: 45px;
+	overflow: hidden;
+}
+.gamesList h3 a,
+.newsList h3 a{
+	font-size: 16px;
+	line-height: 18px;
+}
+
+.newsList li{
+	height: 120px;
+	padding: 10px 15px;
+	overflow: hidden;
+	border-bottom: 1px solid #e9e9e9;
+}
+.newsList li img{
+	display: none;
+}
+.newsList li:first-child{
+	height: 360px;
+	border-bottom: none;
+	padding: 10px 0;
+	background-color: #EAF0F7;
+}
+.newsList li:first-child img{
+	display: block;
+	width: 100%;
+}
+.newsList li:last-child{
+	border-bottom: none;
+}
+.newsList li:first-child h3{
+	padding: 0 15px;
+}
+.preNews p{
+	height: 50px;
+	margin-top: 5px;
+	overflow: hidden;
+}
+
+			.textArea{
+				border: 2px solid #A4C1DF;
+				padding: 10px;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+			.textArea:focus{
+				border: 2px solid #A4C1DF;
+			}
+			.commentList{
+			}
+			.commentList:last-child{
+				border-bottom: 2px solid #A4C1DF;
+			}
+			.commentList *:not(button){
+				margin: 5px 0;
+			}
+			.commentList button{
+				margin: 3px 0;
+				margin-top: inherit;
+			}
+			.dellComments{
+				border: 0;
+				background-color: transparent;
+				border-radius: 5px;
+				vertical-align: middle;
+			}
+			.dellComments:hover{
+				font-weight: bold;
+				background-color: rgba(0,0,0,.1);
+			}
+			.likes_dislikes button{
+				text-indent: -9999px;
+			}
+			.likes{
+				width: 20px;
+				height: 20px;
+				background: url(../images/like.png) 50% 50% no-repeat;
+				border: 0;
+				cursor: pointer;
+			}
+			.dislikes{
+				width: 20px;
+				height: 20px;
+				background: url(../images/dislike.png) 50% 50% no-repeat;
+				border: 0;
+				cursor: pointer;
+			}
+			.addComment{
+				background-color: #fff;
+				border: 2px solid #A4C1DF;
+				padding: 5px 10px;
+				cursor: pointer;
+			}
+/*=======================================================*/
+/*=======================================================*/
+/*=======================================================*/
+.nextGame li{
+	border-bottom: 1px solid #d9d9d9;
+	font-size: 16px;
+	line-height: 40px;
+	height: 40px;
+}
+.gameIsComplitList li a,
+.nextGame li a{
+	font-size: 16px;
+}
+.gameIsComplit{
+	margin-top: 30px;
+}
+.gameIsComplit h4{
+	border-bottom: 1px solid #81C159;
+}
+.gameIsComplitList li{
+	border-bottom: 1px solid #d9d9d9;
+	font-size: 16px;
+	min-height: 40px;
+	line-height: 40px;
+}
+.showResultTable{
+	height: 40px;
+	display: inline-block;
+	line-height: 40px !important;
+}
+		.tableResultGame{
+			bottom: 1px solid #d9d9d9;
+		}
+		.ResultGame{
+			margin-bottom: 15px !important;
+		}
+		.ResultGame tr,
+		.ResultGame td,
+		.ResultGame th,
+		.tableResultGame tr,
+		.tableResultGame td,
+		.tableResultGame th{
+			border: 1px solid #d9d9d9 !important;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		.tableResultGame th{
+			position: relative !important;
+		}
+		.tableResultGame td{
+			padding: 0 15px;
+		}
+		tr.resultTableHead{
+			background-color: #81C159;
+		}
+		.resultTableHead a{
+			color: #fff;
+		}
+		
+
+		tr.placeCol th.placeCol:after{ 
+			width: 0;
+			position: absolute;
+			bottom: -8px;
+			left: 48%;
+			content: "";
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 8px solid #81C159;
+		}
+		tr.teamCol th.teamCol:after{ 
+			width: 0;
+			position: absolute;
+			bottom: -8px;
+			left: 48%;
+			content: "";
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 8px solid #81C159;
+		}
+		tr.scoreCol th.scoreCol:after{ 
+			width: 0;
+			position: absolute;
+			bottom: -8px;
+			left: 48%;
+			content: "";
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 8px solid #81C159;
+		}
+		tr.seasonCol th.seasonCol:after{ 
+			width: 0;
+			position: absolute;
+			bottom: -8px;
+			left: 48%;
+			content: "";
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 8px solid #81C159;
+		}
+		tr.ageCategoryCol th.ageCategoryCol:after{ 
+			width: 0;
+			position: absolute;
+			bottom: -8px;
+			left: 48%;
+			content: "";
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 8px solid #81C159;
+		}
+		tr.likesCountCol th.likesCountCol:after{ 
+			width: 0;
+			position: absolute;
+			bottom: -8px;
+			left: 48%;
+			content: "";
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 8px solid #81C159;
+		}
+
+		.sezonGames{
+			padding: 2px 0 0 5px;
+			border: 2px solid #81C159;
+			display: inline-block;
+			margin: 0 0 0 20px;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		.sezonGames select{
+			background: #fff;
+			border: 0;
+		}
+		.filtersGames{
+			padding: 2px 5px;
+			border: 2px solid #81C159;
+			display: inline-block;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		.blockFilters{
+			-webkit-box-shadow: inset 0 -2px 0 #81C159;
+			box-shadow: inset 0 -2px 0 #81C159;
+			min-height: 0;
+			padding-bottom: 20px;
+		}
+		.filtersGameType{
+			border: 2px solid #81C159;
+			padding: 3px 15px;
+		}
+		.filtersGameType select{
+			background: #fff;
+			border: 0;
+			outline: 0;
+		}
+		#gameIsComplete:hover,
+		#gameIsHome:hover,
+		#globalRating:hover{
+			cursor: pointer;
+			text-decoration: underline;
+			color: #81C159
+		}
+/*=======================================================*/
+/*=======================================================*/
+/*=======================================================*/
+.newsPage{
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-flow: wrap;
+	flex-flow: wrap;
+	justify-content: flex-start;
+}
+.newsPage li{
+	width: 32%;
+	margin-right: 14px;
+	margin-top: 14px;
+	padding-bottom: 40px !important;
+	background-color: #D0E2F6;
+	padding-top: 5px;
+	position: relative !important;
+}
+.newsPage li:nth-child(3n){
+	margin-right: 0;
+}
+.newsPage li img{
+	width: 100%;
+	height: 150px;
+	margin-top: 5px;
+}
+.description{
+	padding: 0 10px;
+	text-overflow: ellipsis;
+}
+.description p{
+	height: 80px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.description h3{
+	margin: 12px 0;
+	line-height: 16px;
+}
+.description h3 a{
+	font-weight: 500;
+	font-size: 16px;
+}
+.dateNews{
+	position: absolute;
+	padding: 0 10px;
+	bottom: 5px;
+	left: 0;
+	right: 0;
+	line-height: 30px;
+}
+.stepLike2{
+	margin-left: 75px;
+	display: inline-block;
+}
+.loadNews{
+	display: inline-block;
+	float: right;
+	margin: 20px 0;
+	padding: 2px 40px;
+	border: 2px solid #A4C1DF;
+	background-color: #fff;
+	cursor: pointer;
+}
+.archiveNews{
+	float: right;
+	display: inline-block;
+	border: 2px solid #A4C1DF;
+	padding: 1px 30px;
+}
+			.eventImage{
+				width: 100%;
+				margin-bottom: 20px;
+				max-height: 350px;
+			}
+			.eventDateNews{
+				text-align: right;
+			}
+			.eventDateNews .likesButton{
+				margin-left: 20px;
+			}
+			.likesButtonEvent{
+				background-color: #A4C1DF;
+				color: #fff;
+			}
+/*=======================================================*/
+/*=======================================================*/
+/*=======================================================*/
+
+.contentTeamsHeader{
+	border-bottom: 2px solid #00B39C;
+}
+.teamsName{
+	background-color: #00B39C;
+	color: #fff;
+	text-transform: uppercase;
+	float: left;
+	font-size: 20px;
+}
+.searchTeams{
+	margin-left: 60px;
+	height: 18px;
+	width: 320px;
+	border: 2px solid #00B39C;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 8px 6px;
+	color: #00B39C;
+}
+.searchTeams::-webkit-input-placeholder {
+	color: #00B39C;
+}
+.searchTeams:-moz-placeholder {
+	color: #00B39C;
+}
+.searchTeams::-moz-placeholder {
+	color: #00B39C;
+}
+.searchTeams:-ms-input-placeholder {
+	color: #00B39C;
+}
+.tableTeams tr,
+.tableTeams td,
+.tableTeams th{
+	border: 1px solid #d9d9d9;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.tableTeams td{
+	padding: 0 15px;
+}
+.tableTeamsHead{
+	background-color: #00B39C;
+	color: #fff;
+}
+.tableTeamsHead a{
+	color: #fff;
+}
+
+			.teamImage{
+				height: auto;
+			}
+			.teamDescription li{
+				clear: both;
+			}
+			.playersTeamList{
+				width: 80%;
+				display: -webkit-flex;
+				display: -moz-flex;
+				display: -ms-flexbox;
+				display: -o-flex;
+				display: flex;
+
+				-webkit-flex-flow: wrap;
+				-moz-flex-flow: wrap;
+				-ms-flex-flow: wrap;
+				-o-flex-flow: wrap;
+				flex-flow: wrap;
+
+				justify-content: flex-start;
+				margin: 20px auto;
+			}
+			.playersTeamList li{
+				width: 31%;
+				margin-right: 15px;
+				margin-top: 15px;
+				max-height: 270px;
+			}
+			.playersTeamList li:nth-child(3n){
+				margin-right: 0;
+			}
+			.playersTeamList li img{
+				width: 100%;
+				height: 200px;
+			}
+			.playersDesc{
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background: rgba(0,0,0,.6);
+				color: #fff;
+				padding: 10px;
+				overflow: hidden;
+			}
+			.playersDesc span{
+				text-transform: lowercase;
+			}
+			.desc{
+				margin: 20px 0;
+			}
+/*=======================================================*/
+/*=======================================================*/
+/*=======================================================*/
+
+.contentPlayersHeader{
+	border-bottom: 2px solid #008DB1;
+}
+.playersName{
+	background-color: #008DB1;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 20px;
+}
+.searchPlayers{
+	margin-left: 60px;
+	height: 18px;
+	width: 320px;
+	border: 2px solid #008DB1;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 8px 6px;
+	color: #008DB1;
+}
+.searchPlayers::-webkit-input-placeholder {
+	color: #008DB1;
+}
+.searchPlayers:-moz-placeholder {
+	color: #008DB1;
+}
+.searchPlayers::-moz-placeholder {
+	color: #008DB1;
+}
+.searchPlayers:-ms-input-placeholder {
+	color: #008DB1;
+}
+.tablePlayers tr,
+.tablePlayers th,
+.tablePlayers td{
+	border: 1px solid #d9d9d9;
+}
+			.playerTableInfo tr,
+			.playerTableInfo th,
+			.playerTableInfo td{
+				border: 1px solid #d9d9d9;
+			}
+			.tablePlayersHead,
+			.playerTableRow{
+				background-color: #008DB1;
+				color: #fff;
+			}
+/*=======================================================*/
+/*=======================================================*/
+/*=======================================================*/
+
+.contentGalleryHeader{
+	border-bottom: 2px solid #3381B5;
+}
+.gallerysList div{
+	position: absolute;
+	text-align: center;
+	bottom: 0;
+	left: 0;
+	padding: 5px;
+	background-color: rgba(200,200,200, .7);
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.gallerysList {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: -o-flex;
+	display: flex;
+	-webkit-flex-flow: wrap;
+	flex-flow: wrap;
+	justify-content: flex-start;
+}
+.galleryName{
+	background-color: #3381B5;
+	color: #fff;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+.gallerysList li{
+	width: 23%;
+	height: auto;
+	position: relative;
+	float: left;
+	background-color: #eee;
+	margin-right: 18px;
+	margin-top: 18px;
+}
+.gallerysList li a{
+	display: block;
+	height: 100%;
+	color: #000;
+}
+.gallerysList li:nth-child(4n){
+	margin-right: 0;
+}
+.gallerysList li:hover{
+	box-shadow: 0 0 7px #3381B5;
+}
+					.galleryList{
+						display: -webkit-flex;
+						display: -moz-flex;
+						display: -ms-flexbox;
+						display: -o-flex;
+						display: flex;
+
+						-webkit-flex-flow: wrap;
+						-moz-flex-flow: wrap;
+						-ms-flex-flow: wrap;
+						-o-flex-flow: wrap;
+						flex-flow: wrap;
+
+						justify-content: flex-start;
+					}
+					.galleryList li{
+						width: 23% !important;
+						margin-right: 18px;
+						margin-top: 18px;
+					}
+					.galleryList li:nth-child(4n){
+						margin-right: 0;
+					}
+					.galleryList li img{
+						width: 100%;
+						height: 200px;
+					}
+
+					.navTabs{
+						margin-top: -13px;
+						text-transform: uppercase;
+						background-color: #59B2ED;
+						border-top: 0;
+					}
+
+					.photoTabs a,
+					.videoTabs a{
+						border-radius: 0 !important;
+						cursor: pointer;
+						padding: 5px 20px !important;
+					}
+					.photoTabs a:hover,
+					.videoTabs a:hover{
+						background-color: #3381B5 !important;
+					}
+
+					.nav-pills li.active{
+						position: relative;
+						background-color: #3381B5 !important;
+					}
+					.nav-pills>li.active>a:hover {
+						background-color: #3381B5 !important;
+					}.nav-pills>li.active>a {
+						background-color: #3381B5 !important;
+					}
+					.nav-pills li.active a{
+						background-color: #3381B5 !important;
+					}
+					.nav-pills>li+li {
+						margin-left: 0;
+					}
+
+/*=======================================================*/
+/*=======================================================*/
+/*=======================================================*/
+
+.clubFoto{
+	width: 100%;
+	height: auto;
+}
+.contentAboutClubHeader{
+	border-bottom: 2px solid #BAE788;
+}
+.AboutClubName{
+	background-color: #BAE788;
+	text-transform: uppercase;
+	color: #fff;
+	font-size: 20px;
+}
+/*=======================================================*/
+/*=======================================================*/
+/*=======================================================*/
+.w100proc{
+	width: 100%;
+}
+.lh16px{
+	line-height: 16px;
+}
+.h28_lh28{
+	height: 28px;
+	line-height: 28px;
+}
+.h130px{
+	height: 130px;
+}
+.pad0_10px{
+	padding: 0 10px;
+}
+.pad0_15px{
+	padding: 0 15px;
+}
+
+.mar13_0px{
+	margin: 13px 0;
+}
+.m20_0px{
+	margin: 20px 0px;
+}
+.m5_0px{
+	margin: 5px 0px;
+}
+.m0_10_10_0{
+	margin: 0 10px 10px 0;
+}
+.fz16px{
+	font-size: 16px !important;
+}
+.fz14px{
+	font-size: 14px !important;
+}
+.fz20px{
+	font-size: 20px !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

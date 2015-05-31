@@ -1,18 +1,16 @@
-<div class="contentPlayers">
-	<div class="contentPlayersHeader row mar13_0px">
-		<h2 class="playersName float-l   h27_lh27 pad0_7px">Игроки клуба</h2>
-		<input type="text" name="" id="" ng-model="query" class="searchPlayers" placeholder="начните вводить имя / фамилию / название команды">
-	</div>
-	<table class="row tablePlayers">
-		<tr class="tablePlayersHead">
-			<th class="tablePlayersName">Фамилия Имя Отчество</th>
-			<th class="tablePlayersName">Название команды</th>
-		</tr>
-		<tr class="tablePlayersList" ng-repeat="player in players | filter: search">
-			<td><a href="#/players/{{ player.id }}" >{{ player.last_name }} {{ player.middle_name }} {{ player.first_name }}</a></td>
-			<td>
-				<span ng-repeat="pa in player.team_player_associations">{{ pa.team.name }}</span>
-			</td>
-		</tr>
-	</table>
+<div class="contentPlayersHeader col-md-12 no-padding mar13_0px">
+	<h2 class="playersName float-l   h28_lh28 pad0_10px">Игроки клуба</h2>
+	<input type="text" name="" id="" ng-model="query" class="searchPlayers" placeholder="начните вводить имя / фамилию / название команды">
 </div>
+<table class=" tablePlayers col-md-12 no-padding">
+	<tr class="tablePlayersHead h28_lh28">
+		<th class="tablePlayersName col-md-6">Фамилия Имя Отчество</th>
+		<th class="tablePlayersName col-md-6">Название команды</th>
+	</tr>
+	<tr class="tablePlayersList h28_lh28" ng-repeat="player in players | filter: search">
+		<td><a class="col-md-12 fz14px" href="#/players/{{ player.id }}" >{{ player.last_name }} {{ player.middle_name }} {{ player.first_name }}</a></td>
+		<td>
+			<span class="col-md-12" ng-repeat="pa in player.team_player_associations"> {{ pa.team.name }};</span>
+		</td>
+	</tr>
+</table>

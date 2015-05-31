@@ -1,10 +1,8 @@
-<div class="galleryContent">
-	<div class="contentGalleryHeader row mar13_0px">
-		<h2 class="galleryName float-l h27_lh27 pad0_7px">{{ gallery.name }}</h2>
-	</div>
-	<ul class="galleryList row">
-		<li ng-repeat="media in gallery.medias">
-			<img ng-src="{{ media }}" />
-		</li>
-	</ul>
+<div class="contentGalleryHeader col-md-12 no-padding mar13_0px">
+	<h2 class="galleryName float-l h28_lh28 pad0_10px">{{ gallery.name }}</h2>
 </div>
+<ul class="galleryList col-md-12 no-padding">
+	<li ng-repeat="media in gallery.medias">
+		<img ng-src="{{ media }}" />
+	</li>
+</ul>

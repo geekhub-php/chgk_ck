@@ -1,32 +1,37 @@
-<div class="thisTeam">
-	<div class="contentTeamsHeader row mar13_0px">
-			<h2 class="teamsName float-l   h27_lh27 pad0_7px">Команда клуба</h2>
+<div class="thisTeam col-md-12 no-padding">
+	<div class="contentTeamsHeader col-md-12 no-padding mar13_0px">
+			<h2 class="teamsName h28_lh28 pad0_10px">Команда клуба</h2>
 	</div>
-	<img ng-src="{{ team.image }}" alt="" class="teamImage float-l">
-	<h2 class="h27_lh27">{{team.name}}</h2>
-	<dl class="teamDescription">
+	<img ng-src="{{ team.image }}" alt="" class="teamImage col-md-5 no-padding float-l">
+	<h2 class="h28_lh28 col-md-7 fz20px">{{team.name}}</h2>
+	<ul class="col-md-7 teamDescription">
+		<li class="h28_lh28">
+			<span class="col-md-6">Место</span>
+			<span class="col-md-6">1</span>
+		</li>
 
-		<dt>Место</dt>
-		<dd>1</dd>
+		<li class="h28_lh28">
+			<span class="col-md-6">Локальный рейтинг</span>
+			<span class="col-md-6">{{ team.rating }}</span>
+		</li>
 
-		<dt>Локальный рейтинг</dt>
-		<dd>{{ team.rating }}</dd>
+		<li class="h28_lh28">
+			<span class="col-md-6">Рейтинг МАК</span>
+			<span class="col-md-6">65</span>
+		</li>
 
-		<dt>Рейтинг МАК</dt>
-		<dd>65</dd>
-
-		<dt>Возросная категория</dt>
-		<dd>{{ team.age_category.name }}</dd>
-
-	</dl>
-	<p class="desc">{{ team.description }}</p>
-
-<div class="contentTeamsHeader row mar13_0px">
-	<h2 class="teamsName float-l   h27_lh27 pad0_7px">Состав в сезоне</h2>
-</div>
-	<ul class="playersTeamList">
+		<li class="h28_lh28">
+			<span class="col-md-6">Возросная категория</span>
+			<span class="col-md-6">{{ team.age_category.name }}</span>
+		</li>
+	</ul>
+	<p class="desc col-md-12 pad0_10px">{{ team.description }}</p>
+	<div class="contentTeamsHeader col-md-12 no-padding mar13_0px">
+		<h2 class="teamsName float-l h28_lh28 pad0_10px">Состав в сезоне</h2>
+	</div>
+	<ul class="playersTeamList no-padding">
 		<li class="pos-r" ng-repeat="player in players">
-			<img ng-src="{{ player.image }}" alt="" ng-show="team.image">
+			<img ng-src="{{ player.image }}" class="" alt="" ng-show="team.image">
 			<p class="playersDesc pos-a">
 				{{ player.last_name }}
 				<span>

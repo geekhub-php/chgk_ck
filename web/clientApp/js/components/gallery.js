@@ -1,6 +1,7 @@
 angular.module('gallery', [])
 .controller('GalleriesController', ['galleryAPI', '$scope', function(galleryAPI, $scope){
 	$scope.galleries = galleryAPI.getGalleries();
+	$scope.tab = 1;
 }])
 .controller('GalleryController', ['galleryAPI', '$routeParams', '$scope', function(galleryAPI, $routeParams, $scope){
 	$scope.gallery = galleryAPI.getGallery($routeParams.galleryId);

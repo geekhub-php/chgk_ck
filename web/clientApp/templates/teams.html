@@ -1,22 +1,20 @@
 <div class="contentTeams">
-	<div class="contentTeamsHeader row mar13_0px">
-		<h2 class="teamsName float-l   h27_lh27 pad0_7px">Команды клуба</h2>
+	<div class="contentTeamsHeader col-md-12 no-padding mar13_0px">
+		<h2 class="teamsName h28_lh28 pad0_10px">Команды клуба</h2>
 		<input type="text" name="" id="" ng-model="query" class="searchTeams" placeholder="начните вводить имя / фамилию / название команды">
 	</div>
-	<table class="row tableTeams">
-		<tr class="tableTeamsHead">
-			<th class="tableTeamsPlace">Место</th>
-			<th class="tableTeamsName">Название</th>
-			<th class="tableTeamsRating">Локальный рейтинг <a ng-click="reverse=!reverse" style="cursor: pointer; color: red" class="sort">sort</a></th>
-			<th class="tableTeamsCategory">Категория</th>
-			<th class="tableTeamsLink"></th>
+	<table class="col-md-12 no-padding tableTeams">
+		<tr class="tableTeamsHead h28_lh28">
+			<th class="col-md-1 tableTeamsPlace"><a href ng-click="reverse=!reverse" class="sort">№</a></th>
+			<th class="col-md-5 tableTeamsName"><a href ng-click="reverse=!reverse" class="sort">Название команды</a></th>
+			<th class="col-md-3 tableTeamsRating"><a href ng-click="reverse=!reverse" class="sort">Локальный рейтинг</a></th>
+			<th class="col-md-3 tableTeamsCategory"><a href ng-click="reverse=!reverse" class="sort">Категория</a></th>
 		</tr>
-		<tr ng-repeat="team in teams| filter: search | orderBy:predicate:reverse">
+		<tr class="h28_lh28" ng-repeat="team in teams| filter: search | orderBy:predicate:reverse">
 			<td>{{ $index + 1 }}</td>
 			<td><a href="#/team/{{ team.id }}" >{{ team.name }}</a></td>
 			<td>{{ team.rating }}</td>
 			<td>{{ team.age_category.name }}</td>
-			<td></td>
 		</tr>
 	</table>
 </div>

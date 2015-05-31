@@ -1,21 +1,24 @@
-<div class="playerContent">
-	<img ng-show="player.image" ng-src="{{ player.image }}" class="float-l w120px_h170px" />
-	<div class="playerInfo">
+<div class="contentPlayersHeader col-md-12 no-padding mar13_0px">
+	<h2 class="playersName float-l   h28_lh28 pad0_10px">Игрок клуба</h2>
+</div>
+<div class="playerContent col-md-12 no-padding">
+	<img ng-show="player.image" ng-src="{{ player.image }}" class="col-md-4 no-padding" />
+	<div class="playerInfo col-md-8">
 		<h3 class="fz20px">{{ player.first_name }} {{ player.middle_name }} {{ player.last_name }}</h3>
-		<p>День рождения: {{ player.dob | timestampToFormat:'dd.MM.yyyy' }}</p>
-		<table>
-			<tr class="playerTableRow">
-				<th class="seasonHead">Сезон</th>
-				<th class="playerTeamHead">Команда</th>
+		<p class="fz14px mar13_0px">День рождения: {{ player.dob | timestampToFormat:'dd.MM.yyyy' }}</p>
+		<table class="playerTableInfo col-md-12 no-padding">
+			<tr class="playerTableRow h28_lh28">
+				<th class="seasonHead col-md-6">Сезон</th>
+				<th class="playerTeamHead col-md-6">Команда</th>
 			</tr>
-			<tr>
+			<tr ng-repeat="pa in player.team_player_associations">
 				<td>
-					<span class="display fz16px" ng-repeat="pa in player.team_player_associations">
+					<span class="display fz16px" >
 						{{ pa.team.name }}
 					</span>
 				</td>
 				<td>
-					<span class="display fz16px" ng-repeat="pa in player.team_player_associations">
+					<span class="m5_0px display fz16px" ng-repeat="pa in player.team_player_associations">
 						{{ pa.team.name }}
 					</span>
 				</td>

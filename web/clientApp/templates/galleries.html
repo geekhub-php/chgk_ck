@@ -1,13 +1,31 @@
-<div class="gallerysContent">
-	<div class="contentGalleryHeader row mar13_0px">
-		<h2 class="galleryName float-l h27_lh27 pad0_7px">Галерея клуба</h2>
-	</div>
-	<ul class="row gallerysList">
-		<li ng-repeat="gallery in galleries">
-			<div>
-				<a href="#/galleries/{{ gallery.id }}">{{ gallery.name }}</a>
-			</div>
-			<a href="#/galleries/{{ gallery.id }}"><img style="height: 100%; width: 100%;" ng-src="{{ gallery.medias[0] }}"/></a>
-		</li>
-	</ul>
+<div class="contentGalleryHeader col-md-12 no-padding mar13_0px">
+	<h2 class="galleryName float-l h28_lh28 pad0_10px">Галерея клуба</h2>
 </div>
+<ul class="nav nav-pills col-md-3 no-padding navTabs">
+	<li ng-class="activePhoto" class="photoTabs col-md-6 no-padding"><a data-toggle="pill" ng-click="tab=1; activeVideo=''; activePhoto='active'">Фото</a></li>
+	<li ng-class="activeVideo" class="videoTabs col-md-6 no-padding"><a data-toggle="pill" ng-click="tab=2; activeVideo='active'; activePhoto=''">Видео</a></li>
+</ul>
+<div class="tab-content col-md-12 no-padding">
+	<div id="photoTabs" class="tab-pane fade in active" ng-show="tab!==2">
+		<ul class="gallerysList col-md-12 no-padding">
+			<li ng-repeat="gallery in galleries">
+				<div>
+					<a href="#/galleries/{{ gallery.id }}">{{ gallery.name }}</a>
+				</div>
+				<a href="#/galleries/{{ gallery.id }}"><img style="height: 100%; width: 100%;" ng-src="{{ gallery.medias[0] }}"/></a>
+			</li>
+		</ul>
+	</div>
+	<div id="videoTabs" class="tab-pane fade in active" ng-show="tab===2">
+		<h3>Menu 1</h3>
+		<p>Some content in menu 1.</p>
+	</div>
+</div>
+<!-- <ul class="gallerysList col-md-12 no-padding">
+	<li ng-repeat="gallery in galleries">
+		<div>
+			<a href="#/galleries/{{ gallery.id }}">{{ gallery.name }}</a>
+		</div>
+		<a href="#/galleries/{{ gallery.id }}"><img style="height: 100%; width: 100%;" ng-src="{{ gallery.medias[0] }}"/></a>
+	</li>
+</ul> -->

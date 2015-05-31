@@ -1,10 +1,10 @@
 <div class="contentNews">
-	<div class="contentNewsHeader row mar13_0px">
-		<h2 class="newsName float-l   h27_lh27 pad0_7px">Новости клуба</h2>
+	<div class="contentNewsHeader col-md-12 no-padding mar13_0px">
+		<h2 class="newsName fz20px float-l h28_lh28 pad0_10px">Новости клуба</h2>
 		<a href="#" class="archiveNews">Архив</a>
 	</div>
-	<ul class="newsList row">
-		<li ng-repeat="event in events">
+	<ul class="newsPage col-md-12 no-padding">
+		<li class="col-md-4 no-padding" ng-repeat="event in events | orderBy:predicate:!playDateReverse">
 <!-- 			<table class="row m20_0px">
 			<tr class=" h27_lh27">
 				<td class="b1px">like</td>	
@@ -29,20 +29,20 @@
 			<div class="dateNews">
 				<span>{{ event.event_date | timestampToFormat:'dd.MM.yyyy' }}</span>
 				<span class="likesButton stepLike2">
-					<a href="" class="stepLike" ng-click="makeOpinion(event, true)" disabled>
+					<a href="" class="stepLike" ng-click="makeOpinion(event, true)">
 						<svg class="icon icon-thumbs-up"><use xlink:href="#icon-thumbs-up"></use></svg>
 					</a>
 					{{ event.likesCount }}
 					 / 
 					{{ event.dislikesCount }}
-					<a href="" class="stepLike " ng-click="makeOpinion(event, false)" disabled>
+					<a href="" class="stepLike " ng-click="makeOpinion(event, false)">
 						<svg class="icon icon-thumbs-down"><use xlink:href="#icon-thumbs-down"></use></svg>
 					</a>
 				</span>
 			</div>
 		</li>
 	</ul>
-	<div class="row">
+	<div class="col-md-12 no-padding">
 		<button class="loadNews ng-scope" ng-disabled="!canLoadMoreEvents" ng-click="fetchNewEvents()">Загрузить еще</button>
 	</div>
 </div>

@@ -1,44 +1,69 @@
-<div class="contentGames">
-	<div class="contentGamesHeader row mar13_0px">
-		<h2 class="gamesName float-l   h27_lh27 pad0_7px">Игры клуба</h2>
+<div class="contentGames col-md-12 no-padding">
+	<div class="contentGamesHeader col-md-12 no-padding mar13_0px">
+		<h2 class="gamesName float-l h28_lh28 pad0_10px">Игры клуба</h2>
 		<span class="sezonGames">
 			Сезон
 			<select name="" id="">
-				<option value="">2012 - 2018</option>
-				<option value="">2013 - 2018</option>
-				<option value="">2014 - 2018</option>
-				<option value="">2015 - 2018</option>
+				<option value="" ng-repeat="seasone in seasonsYear">{{seasone.start_date | timestampToFormat:'yyyy'}}-{{seasone.end_date | timestampToFormat:'yyyy'}}</option>
 			</select>
 		</span>
 		<span class="filtersGames float-r">
 			<a href ng-click="goFilters = !goFilters"> Фильтры </a>
 		</span>
 	</div>
-	<div class="row blockFilters">
-		<ul class="row" ng-show="goFilters">
-			<li>
-				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_home"><span>Домашние</span>
-			</li>
-			<li>
-				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_locally_rated"><span>Локальный рейтинг</span>
-			</li>
-			<li>
-				<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_globally_rated"><span>Глобальный рейтинг</span>
-			</li>
-			<li>
-				<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_complete"><span>Прошедшие</span>
-			</li>
-		</ul>
+	<div class="col-md-12 blockFilters" ng-show="goFilters">
+		<label for="filtersGameType" class="col-md-5 filtersGameType m5_0px">
+			Тип игры:
+			<select name="filtersGameType" class="float-r" id="filtersGameType">
+				<option value="">Что? Где? Когда?</option>
+				<option value="">Брейн Ринг</option>
+				<option value="">Своя Игра</option>
+			</select>
+		</label>
+		<label for="gameIsComplete" class="col-md-2 align-c h28_lh28 m5_0px"  ng-model="isComplete">
+			<input type="checkbox" name="" id="gameIsComplete" class="no-display ng-pristine ng-valid ng-touched" ng-model="search.is_complete">
+			<span id="gameIsComplete">Прошедшие, </span>
+		</label>
+		<label for="gameIsHome" class="col-md-2 align-c h28_lh28 m5_0px">
+			<input type="checkbox" name="" id="gameIsHome" class="no-display ng-pristine ng-valid ng-touched" ng-model="search.is_home">
+			<span id="gameIsHome"> Домашние</span>
+		</label>
+		<label for="globalRating" class="col-md-3 h28_lh28 m5_0px">
+			<input type="checkbox" name="" id="globalRating" class="no-display ng-pristine ng-valid ng-touched" ng-model="search.is_globally_rated">
+			<span id="globalRating"> Глобальный рейтинг</span>
+		</label>
 	</div>
-	<div class="tableGames row">
-		<ul class="nextGame">
-			<li class="" ng-repeat="game in games | filter: search | orderBy:predicate:playDateReverse">
-				<p class="dataGame">
-					<span ng-show="true" class="gameDate">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
-				</p>
-				<div class="gameInfo">
-					<h3 class="gamesTitle"><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></h3>
-				</div>
+	<ul class="nextGame col-md-12 no-padding">
+		<li class="col-md-12 no-padding" ng-repeat="game in games | filter: search">
+			<span class="gameDate float-l col-md-3 no-padding" ng-show="true">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
+			<p class="gamesTitle col-md-7 no-padding"><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></p>
+		</li>
+
+	</ul>
+	</div>
+	<div class="gameIsComplit col-md-12 no-padding">
+		<h4>Прошедшие</h4>
+		<ul class="gameIsComplitList">
+			<li class="col-md-12 no-padding" ng-repeat="game in games | filter: searchIsComplete | orderBy:predicate:playDateReverse">
+				<span class="gameDate col-md-3 no-padding" ng-show="true">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
+				<p class="gamesTitle col-md-7 no-padding"><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></p>
+				<a href class="showResultTable col-md-2" ng-click ="tableResultGame = !tableResultGame">Результаты</a>
+				<table ng-show="tableResultGame" class="ResultGame col-md-8 col-md-offset-2">
+					<tr class="resultTableHead h28_lh28">
+						<th class="col-md-3" ><a href ng-click="predicate='-place'; reverse=!reverse">Место</a></th>
+						<th class="col-md-7" ><a href ng-click="predicate='-team'; reverse=!reverse">Команда</th>
+						<th class="col-md-2" ><a href ng-click="predicate='-score'; reverse=!reverse">Очки</a> </th>
+					</tr>
+					<tr class=" h28_lh28" ng-repeat="gameRes in game.gameResults">
+						<td class="pad0_15px">{{ gameRes.place }}</td>
+
+						<td class="pad0_15px">
+							{{ gameRes.team.name }}
+						</td>
+						<td class="pad0_15px">{{ gameRes.score }}</td>
+					</tr>
+				</table>
+
 			</li>
 		</ul>
 	</div>

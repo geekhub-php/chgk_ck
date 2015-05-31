@@ -1,36 +1,31 @@
-<div class="mainContent">
-	<article class="postGame" ng-controller="GamesController">
-		<div class="contentGamesHeader row mar13_0px">
-			<h2 class="gamesName float-l   h27_lh27 pad0_7px">Игры клуба</h2>
+<div class="">
+	<div class="postGame no-padding col-md-12" ng-controller="GamesController">
+		<div class="contentGamesHeader  mar13_0px">
+			<h2 class="gamesName h28_lh28 pad0_10px">Игры клуба</h2>
 		</div>
-		<section class="games">
-			<ul class="row">
-				<li class="" ng-repeat="game in games | limitTo:5">
-					<img ng-src="{{game.image}}" alt="" class=" mar13_0px">
-					<h3><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></h3>
-					<div class="dateGame padding0_10">
-						<span class="date display">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
-						<span class="place display">{{ game.play_place }}</span>
-					</div>
-				</li>
-			</ul>
-		</section>
-	</article>
-
-	<article class="postNews mt_20" ng-controller="EventsController">
-		<div class="contentNewsHeader row mar13_0px">
-			<h2 class="newsName float-l   h27_lh27 pad0_7px">Новости клуба</h2>
+		<ul class="gamesList no-padding col-md-12">
+			<li class="col-md-6" ng-repeat="game in games | limitTo:5 | orderBy:predicate:playDateReverse">
+				<img ng-src="{{game.image}}" alt="" class=" mar13_0px">
+				<h3 class="pad0_10px"><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></h3>
+				<div class="dateGame pad0_10px">
+					<span class="date display">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
+					<span class="place display">{{ game.play_place }}</span>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="postNews no-padding col-md-12" ng-controller="EventsController">
+		<div class="contentNewsHeader mar13_0px">
+			<h2 class="newsName h28_lh28 pad0_10px">Новости клуба</h2>
 		</div>
-		<section class="news mt_20">
-			<ul class="row">
-				<li class="" ng-repeat="event in events | limitTo:4">
-					<img class="eventImage mar13_0px" ng-src="{{ event.image }}"/>
-					<h3><a href="#/news/{{ event.id }}">{{event.title}}</a></h3>
-					<div class="preNews padding0_10">
-						<p>{{event.text}}</p>
-					</div>
-				</li>
-			</ul>
-		</section>
-	</article>
+		<ul class="newsList col-md-12 no-padding">
+			<li class="col-md-6" ng-repeat="event in events | limitTo:4 | orderBy:predicate:!playDateReverse">
+				<img class="eventImage" ng-src="{{ event.image }}"/>
+				<h3 class="pad0_10px"><a href="#/news/{{ event.id }}" title="{{event.title}}">{{event.title}}</a></h3>
+				<div class="preNews pad0_10px">
+					<p>{{event.text}}</p>
+				</div>
+			</li>
+		</ul>
+	</div>
 </div>
