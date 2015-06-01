@@ -9,16 +9,16 @@ angular.module('gameResult', [])
 	$scope.search = function(result){
 		if(!$scope.query || (result.team && result.team.name.indexOf($scope.query)!=-1) 
 			|| (result.player && result.player.last_name.indexOf($scope.query)!=-1) ){
-			return true;		
+			return true;
 		} else {
-			return false;		
-		}	
+			return false;
+		}
   	};
   	$scope.game = gameAPI.getGame($routeParams.gameId);
 }])
 .factory('gameResultAPI', ['$resource', 'opinionAPI', '$routeParams', 'opinionableModel', function($resource, opinionAPI, $routeParams, opinionableModel){
 	var gameResultUrl = '/api/games/:gameId/gameResults/:gameResultId';
-	var gameId = $routeParams.gameId;	
+	var gameId = $routeParams.gameId;
 	
 	return {
 		getGameResults: function(gameId){
@@ -28,19 +28,19 @@ angular.module('gameResult', [])
 					opinionAPI.setParentUrl(gameResultUrl, {gameId: gameId, gameResultId: result.id});
 					result.opinions = opinionAPI.getOpinions();
 					result.opinions.$promise.then(function(){
-						opinionableModel.fillOpinionableStats(result);					
-					});		
-				});			
+						opinionableModel.fillOpinionableStats(result);
+					});
+				});
 			});
 
-			return results;		
+			return results;
 		},
 		
 		makeResultOpinion: function(gameResult, is_positive){
 			opinionAPI.setParentUrl(gameResultUrl, {gameId: gameId, gameResultId: gameResult.id});
 			opinionAPI.makeOpinion(is_positive).then(function(addedOpinion){
-				opinionableModel.addNewOpinion(gameResult, addedOpinion);		
-			});		
+				opinionableModel.addNewOpinion(gameResult, addedOpinion);
+			});
 		}	
 	};
 }]);

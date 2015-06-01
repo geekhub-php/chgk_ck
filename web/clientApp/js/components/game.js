@@ -1,26 +1,43 @@
 angular.module('game', [])
 .controller('GamesController', ['$scope','seasonsAPI', 'gameAPI', function($scope,seasonsAPI, gameAPI){
 	$scope.games = gameAPI.getGames();
-	$scope.resultTable = false;
 	$scope.seasonsYear = seasonsAPI.getSeasons();
 	$scope.search = function(game){
 		if($scope.search.is_home || $scope.search.is_locally_rated || $scope.search.is_globally_rated || $scope.search.is_complete){
 			if(($scope.search.is_home && game.is_home) || ($scope.search.is_locally_rated && game.is_locally_rated)
 				|| ($scope.search.is_globally_rated && game.is_globally_rated) || ($scope.search.is_complete && game.is_complete)
-				|| ($scope.search.id && game.season.id)
 			){
 				//return true;
 			} else {
 				return false;
 			}
 		}
-		
 		if(!$scope.query || game.name.indexOf($scope.query)!=-1 || game.play_place.indexOf($scope.query)!=-1 
 			|| game.age_category.name.indexOf($scope.query)!=-1){
 			return true;
 		} else {
 			return false;
 		}
+	};
+	$scope.searchSeasonGame = function(game){
+		if(game.season.id == $scope.search.seasone_id){
+				//return true;
+			} else {
+				return false;
+			}
+		if(!$scope.query || game.name.indexOf($scope.query)!=-1 || game.play_place.indexOf($scope.query)!=-1
+			|| game.age_category.name.indexOf($scope.query)!=-1){
+			return true;
+		} else {
+			return false;
+		}
+	};
+	$scope.selectSeasone = function(game){
+		var nowDate = new Date;
+		console.log(nowDate);
+		if (game.season.start_date < nowDate < game.season.end_date ) {
+			return game.season.id;
+		};
 	};
 	$scope.searchIsComplete = function(game){
 		if(game.is_complete){

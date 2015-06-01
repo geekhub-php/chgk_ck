@@ -1,56 +1,6 @@
 <div class="contentGamesHeader col-md-12 no-padding mar13_0px">
 	<h2 class="gamesName float-l h28_lh28 pad0_10px">Игры клуба</h2>
-	<span class="sezonGames">
-		Сезон
-		<select name="" id="">
-			<option value="">2012 - 2013</option>
-			<option value="">2013 - 2014</option>
-			<option value="">2014 - 2015</option>
-			<option value="">2015 - 2016</option>
-		</select>
-	</span>
-	<span class="filtersGames float-r">
-		<a href ng-click="goFilters = !goFilters"> Фильтры </a>
-	</span>
 </div>
-<!-- <div class=" blockFilters">
-	<ul class="" ng-show="goFilters">
-		<li>
-			<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_home"><span class="pad0_7px inline-block">Домашние</span>
-		</li>
-		<li>
-			<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_locally_rated"><span class="pad0_7px">Локальный рейтинг</span>
-		</li>
-		<li>
-			<input type="checkbox" name="" id="" class="ng-pristine ng-valid ng-touched" ng-model="search.is_globally_rated"><span class="pad0_7px">Глобальный рейтинг</span>
-		</li>
-		<li>
-			<input type="checkbox" name="" id="" class="ng-valid ng-dirty ng-valid-parse ng-touched" ng-model="search.is_complete"><span class="pad0_7px">Прошедшие</span>
-		</li>
-	</ul>
-</div> -->
-	<div class="col-md-12 blockFilters" ng-show="goFilters">
-		<label for="filtersGameType" class="col-md-5 filtersGameType m5_0px">
-			Тип игры:
-			<select name="filtersGameType" class="float-r" id="filtersGameType">
-				<option value="">Что? Где? Когда?</option>
-				<option value="">Брейн Ринг</option>
-				<option value="">Своя Игра</option>
-			</select>
-		</label>
-		<label for="gameIsComplete" class="col-md-2 align-c h28_lh28 m5_0px">
-			<input type="checkbox" name="" id="gameIsComplete" class="no-display ng-pristine ng-valid ng-touched" ng-model="search.is_complete">
-			<span id="gameIsComplete">Прошедшие, </span>
-		</label>
-		<label for="gameIsHome" class="col-md-2 align-c h28_lh28 m5_0px">
-			<input type="checkbox" name="" id="gameIsHome" class="no-display ng-pristine ng-valid ng-touched" ng-model="search.is_home">
-			<span id="gameIsHome"> Домашние</span>
-		</label>
-		<label for="globalRating" class="col-md-3 h28_lh28 m5_0px">
-			<input type="checkbox" name="" id="globalRating" class="no-display ng-pristine ng-valid ng-touched" ng-model="search.is_globally_rated">
-			<span id="globalRating"> Глобальный рейтинг</span>
-		</label>
-	</div>
 <div class="thisGame col-md-12 no-padding">
 	<div class="blockDateGame fz16px h28_lh28 col-md-12 no-padding">
 		<span class="float-l pad0_10px">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
@@ -60,34 +10,6 @@
 	<h3 class="gameHeader mar13_0px">{{ game.name }}</h3>
 	<p class="gameDescription">{{ game.description }} Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, quam blanditiis praesentium exercitationem reiciendis quae consequuntur illum ut suscipit nostrum cupiditate corporis, odit, id quaerat saepe autem vero? Sit quidem nemo consectetur adipisci mollitia nihil omnis aliquam vero eos ipsum magnam, aspernatur rem tempora, inventore odio! Autem excepturi, fugit consequatur qui ex, totam voluptatibus laudantium nam, est, ratione porro minima unde! Animi eius veritatis deserunt molestiae quisquam quidem ut optio illo totam distinctio quas reprehenderit quia, necessitatibus doloribus placeat odio laboriosam dicta sapiente impedit ratione. A odio cupiditate debitis molestiae aliquid laboriosam aut vero quas sit, sapiente, magnam eaque error.</p>
 </div>
-<!-- 		<table class=" m20_0px">
-		<tr class=" h27_lh27">
-			<td class="b1px">name</td>	
-			<td class="b1px">date</td>
-			<td class="b1px">place</td>	
-			<td class="b1px">is_locally_rated</td>	
-			<td class="b1px">is_globally_rated</td>	
-			<td class="b1px">is_home</td>	
-			<td class="b1px">is_complete</td>	
-			<td class="b1px">age_category</td>	
-			<td class="b1px">season</td>
-			<td class="b1px">description</td>		
-			<td class="b1px">image</td>		
-		</tr>
-		<tr class=" h27_lh27">
-			<td class="b1px">{{ game.name }}</td>
-			<td class="b1px">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</td>
-			<td class="b1px">{{ game.play_place }}</td>
-			<td class="b1px">{{ game.is_locally_rated | booleanFormater }}</td>	
-			<td class="b1px">{{ game.is_globally_rated | booleanFormater }}</td>	
-			<td class="b1px">{{ game.is_home | booleanFormater }}</td>	
-			<td class="b1px">{{ game.is_complete | booleanFormater }}</td>	
-			<td class="b1px">{{ game.age_category.name }}</td>
-			<td class="b1px">{{ game.season ? game.season.name : "немає сезона" }}</td>	
-			<td class="b1px">{{ game.description }}</td>	
-			<td class="b1px"><img ng-src="{{ game.image }}" style="height:50px; width:50px;" /></td>	
-		</tr>		
-	</table> -->
 <table class="tableResultGame col-md-12 no-padding m20_0px">
 	<tr class="resultTableHead {{activeCol}}">
 		<th class=" col-md-1 placeCol"><a href ng-click="predicate='-place'; reverse=!reverse; activeCol='placeCol'">Место</a></th>

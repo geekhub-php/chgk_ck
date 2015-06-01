@@ -3,8 +3,8 @@
 		<h2 class="gamesName float-l h28_lh28 pad0_10px">Игры клуба</h2>
 		<span class="sezonGames">
 			Сезон
-			<select name="" id="">
-				<option value="" ng-repeat="seasone in seasonsYear">{{seasone.start_date | timestampToFormat:'yyyy'}}-{{seasone.end_date | timestampToFormat:'yyyy'}}</option>
+			<select name="" id="" ng-model="search.seasone_id">
+				<option ng-value="{{seasone.id}}" ng-repeat="seasone in seasonsYear" ng-selected="selectSeasone">{{seasone.start_date | timestampToFormat:'yyyy'}}-{{seasone.end_date | timestampToFormat:'yyyy'}}</option>
 			</select>
 		</span>
 		<span class="filtersGames float-r">
@@ -33,15 +33,14 @@
 			<span id="globalRating"> Глобальный рейтинг</span>
 		</label>
 	</div>
-	<ul class="nextGame col-md-12 no-padding">
+	<ul class="nextGame col-md-12 no-padding" ng-hide="search.is_complete">
 		<li class="col-md-12 no-padding" ng-repeat="game in games | filter: search">
 			<span class="gameDate float-l col-md-3 no-padding" ng-show="true">{{ game.play_date | timestampToFormat:'dd.MM.yyyy' }}</span>
 			<p class="gamesTitle col-md-7 no-padding"><a href="#/games/{{ game.id }}/gameResults">{{ game.name }}</a></p>
 		</li>
-
 	</ul>
 	</div>
-	<div class="gameIsComplit col-md-12 no-padding">
+	<div class="gameIsComplit col-md-12 no-padding" ng-show="search.is_complete">
 		<h4>Прошедшие</h4>
 		<ul class="gameIsComplitList">
 			<li class="col-md-12 no-padding" ng-repeat="game in games | filter: searchIsComplete | orderBy:predicate:playDateReverse">
@@ -56,14 +55,12 @@
 					</tr>
 					<tr class=" h28_lh28" ng-repeat="gameRes in game.gameResults">
 						<td class="pad0_15px">{{ gameRes.place }}</td>
-
 						<td class="pad0_15px">
 							{{ gameRes.team.name }}
 						</td>
 						<td class="pad0_15px">{{ gameRes.score }}</td>
 					</tr>
 				</table>
-
 			</li>
 		</ul>
 	</div>

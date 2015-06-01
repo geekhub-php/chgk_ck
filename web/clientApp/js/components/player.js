@@ -6,8 +6,8 @@ angular.module('player', [])
 			|| player.middle_name.indexOf($scope.query)!=-1){
 			return true;
 		} else {
-			return false;		
-		}	
+			return false;
+		}
 	}
 }])
 .controller('PlayerController', ['$scope', 'playerAPI', '$routeParams', function($scope, playerAPI, $routeParams){
@@ -15,15 +15,12 @@ angular.module('player', [])
 }])
 .factory('playerAPI', ['$resource', function($resource){
 	var playerRes = $resource('/api/players/:playerId');
-
-
 	return {
 		getPlayer: function(playerId){
-			return playerRes.get({playerId: playerId});	
+			return playerRes.get({playerId: playerId});
 		},
-		
 		getPlayers: function(){
-			return playerRes.query();		
-		}	
+			return playerRes.query();
+		}
 	};
 }]);

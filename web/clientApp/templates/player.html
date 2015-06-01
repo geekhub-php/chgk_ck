@@ -4,7 +4,7 @@
 <div class="playerContent col-md-12 no-padding">
 	<img ng-show="player.image" ng-src="{{ player.image }}" class="col-md-4 no-padding" />
 	<div class="playerInfo col-md-8">
-		<h3 class="fz20px">{{ player.first_name }} {{ player.middle_name }} {{ player.last_name }}</h3>
+		<h3 class="fz20px">{{ player.age }}{{ player.first_name }} {{ player.middle_name }} {{ player.last_name }}</h3>
 		<p class="fz14px mar13_0px">День рождения: {{ player.dob | timestampToFormat:'dd.MM.yyyy' }}</p>
 		<table class="playerTableInfo col-md-12 no-padding">
 			<tr class="playerTableRow h28_lh28">
